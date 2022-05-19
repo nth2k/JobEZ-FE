@@ -1,20 +1,34 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <input class="btn btn-primary" value="hello" type="button"/>
+  <div>
+    <div class="container-fluid"></div>
+    <Header />
+    <!-- <Banner /> -->
+    <SearchHeader />
+    <Navigator />
+    <BoxTiki />
+    <JobContainer />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from "./components/views/candidate_views/Header.vue";
+// import Banner from "./components/views/candidate_views/Banner.vue";
+import SearchHeader from "./components/views/candidate_views/SearchHeader.vue";
+import Navigator from "./components/views/candidate_views/Navigator.vue";
+import BoxTiki from "./components/views/candidate_views/BoxTiki.vue";
+import JobContainer from "./components/views/candidate_views/job_details/JobContainer.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Header,
+    // Banner,
+    SearchHeader,
+    Navigator,
+    BoxTiki,
+    JobContainer,
+  },
+};
 </script>
 
 <style>
