@@ -96,17 +96,21 @@ export default {
   height: 65px;
   border-radius: 50px 2px 2px 50px;
   padding-left: 40px;
+  background-color: white;
+  border: 2px solid black;
 }
 
 .search-form select {
   width: 356px;
-  height: 63px;
+  height: 65px;
   padding-left: 40px;
+  background-color: white;
+  border: 2px solid black;
 }
 
 .search-form button {
   width: 120px;
-  height: 65px;
+  height: 62px;
   background-color: #fff600;
   border-radius: 2px 50px 50px 2px;
 }
