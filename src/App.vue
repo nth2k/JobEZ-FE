@@ -11,33 +11,17 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import Header from "./components/views/candidate_views/Header.vue";
 // import Banner from "./components/views/candidate_views/Banner.vue";
 import SearchHeader from "./components/views/candidate_views/SearchHeader.vue";
 import Navigator from "./components/views/candidate_views/Navigator.vue";
-import BoxTiki from "./components/views/candidate_views/BoxTiki.vue";
-import JobContainer from "./components/views/candidate_views/job_details/JobContainer.vue";
+>>>>>>> d4a7aeb900e8370d197710c00d0c02fe265f79ac
 
 export default {
-  name: "App",
-  components: {
     Header,
-    // Banner,
-    SearchHeader,
-    Navigator,
     BoxTiki,
-    JobContainer,
-  },
-};
-</script>
+>>>>>>> d4a7aeb900e8370d197710c00d0c02fe265f79ac
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
