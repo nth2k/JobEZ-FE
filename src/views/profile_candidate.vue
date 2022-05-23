@@ -14,7 +14,7 @@
         </div>
         <label for="bt1" class="item_slide_bar">
           <div class="item_slide_bar_selection">
-            Tin tuyển dụng
+            Bộ hồ sơ xin việc
             <svg class="icon_drop_up">
               <path
                 d="M5.6752 5.97746C5.75157 5.95669 5.81349 5.92293 5.85156 5.88126L10.9585 0.310053C11.0555 0.204199 10.9768 0.0754949 10.7827 0.0225995C10.7281 0.00772152 10.6679 -1.25356e-05 10.6069 1.97191e-08L0.393032 1.97191e-08C0.176064 -5.02014e-05 0.000115395 0.0958345 0 0.214181C-2.28882e-05 0.247465 0.0141554 0.280297 0.0414314 0.310065L5.14836 5.88126C5.24516 5.98717 5.48102 6.03024 5.6752 5.97746Z"
@@ -30,7 +30,7 @@
               class="item_slide_bar_selection"
               style="padding: 13px 0px 13px 50px"
             >
-              Đăng tin mới
+             Hồ sơ online
             </div>
           </li>
           <li class="item_slide_bar">
@@ -38,102 +38,18 @@
               class="item_slide_bar_selection"
               style="padding: 13px 0px 13px 50px"
             >
-              Tin đã đăng
-            </div>
-          </li>
-        </ul>
-        <label for="bt2" class="item_slide_bar">
-          <div class="item_slide_bar_selection">
-            Tìm kiếm ứng viên
-            <svg class="icon_drop_up">
-              <path
-                d="M5.6752 5.97746C5.75157 5.95669 5.81349 5.92293 5.85156 5.88126L10.9585 0.310053C11.0555 0.204199 10.9768 0.0754949 10.7827 0.0225995C10.7281 0.00772152 10.6679 -1.25356e-05 10.6069 1.97191e-08L0.393032 1.97191e-08C0.176064 -5.02014e-05 0.000115395 0.0958345 0 0.214181C-2.28882e-05 0.247465 0.0141554 0.280297 0.0414314 0.310065L5.14836 5.88126C5.24516 5.98717 5.48102 6.03024 5.6752 5.97746Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-        </label>
-        <input type="checkbox" id="bt2" />
-        <ul style="margin: 0px; padding: 0px">
-          <li class="item_slide_bar">
-            <div
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Tìm ứng viên mới nhất
-            </div>
-          </li>
-          <li class="item_slide_bar">
-            <label
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Tìm ứng viên quanh đây
-            </label>
-          </li>
-        </ul>
-        <label for="bt3" class="item_slide_bar">
-          <div class="item_slide_bar_selection">
-            Quản lý hồ sơ
-            <svg class="icon_drop_up">
-              <path
-                d="M5.6752 5.97746C5.75157 5.95669 5.81349 5.92293 5.85156 5.88126L10.9585 0.310053C11.0555 0.204199 10.9768 0.0754949 10.7827 0.0225995C10.7281 0.00772152 10.6679 -1.25356e-05 10.6069 1.97191e-08L0.393032 1.97191e-08C0.176064 -5.02014e-05 0.000115395 0.0958345 0 0.214181C-2.28882e-05 0.247465 0.0141554 0.280297 0.0414314 0.310065L5.14836 5.88126C5.24516 5.98717 5.48102 6.03024 5.6752 5.97746Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-        </label>
-        <input type="checkbox" id="bt3" />
-        <ul style="margin: 0px; padding: 0px">
-          <li class="item_slide_bar">
-            <div
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Ứng viên ứng tuyển
-            </div>
-          </li>
-          <li class="item_slide_bar">
-            <div
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Chuyên viên gửi UV
-            </div>
-          </li>
-          <li class="item_slide_bar">
-            <div
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Cộng tác viên gửi UV
-            </div>
-          </li>
-          <li class="item_slide_bar">
-            <div
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Ứng viên từ điểm lọc
-            </div>
-          </li>
-          <li class="item_slide_bar">
-            <div
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Hồ sơ ứng viên đã lưu
+              CV xin việc
             </div>
           </li>
         </ul>
         <li class="item_slide_bar">
-          <div class="item_slide_bar_selection">Gửi mail marketing</div>
+          <div class="item_slide_bar_selection">Việc làm</div>
         </li>
         <li class="item_slide_bar">
-          <div class="item_slide_bar_selection">Tin nhắn từ ứng viên</div>
+          <div class="item_slide_bar_selection">Việc làm đã ứng tuyển</div>
         </li>
         <li class="item_slide_bar">
-          <div class="item_slide_bar_selection">Quản lý dịch vụ</div>
+          <div class="item_slide_bar_selection">Việc làm đã lưu</div>
         </li>
         <label for="bt4" class="item_slide_bar">
           <div class="item_slide_bar_selection">
@@ -165,55 +81,6 @@
             </div>
           </li>
         </ul>
-        <label for="bt5" class="item_slide_bar">
-          <div class="item_slide_bar_selection">
-            Kinh nghiệm nhân sự
-            <svg class="icon_drop_up">
-              <path
-                d="M5.6752 5.97746C5.75157 5.95669 5.81349 5.92293 5.85156 5.88126L10.9585 0.310053C11.0555 0.204199 10.9768 0.0754949 10.7827 0.0225995C10.7281 0.00772152 10.6679 -1.25356e-05 10.6069 1.97191e-08L0.393032 1.97191e-08C0.176064 -5.02014e-05 0.000115395 0.0958345 0 0.214181C-2.28882e-05 0.247465 0.0141554 0.280297 0.0414314 0.310065L5.14836 5.88126C5.24516 5.98717 5.48102 6.03024 5.6752 5.97746Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-        </label>
-        <input type="checkbox" id="bt5" />
-        <ul style="margin: 0px; padding: 0px">
-          <li class="item_slide_bar">
-            <div
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Bộ đề tuyển dụng
-            </div>
-          </li>
-          <li class="item_slide_bar">
-            <div
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Mẫu văn bản hành chính nhân sự
-            </div>
-          </li>
-          <li class="item_slide_bar">
-            <div
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Tra cứu lương
-            </div>
-          </li>
-          <li class="item_slide_bar">
-            <div
-              class="item_slide_bar_selection"
-              style="padding: 13px 0px 13px 50px"
-            >
-              Góc công sở
-            </div>
-          </li>
-        </ul>
-        <li class="item_slide_bar">
-          <div class="item_slide_bar_selection">Đóng góp ý kiến</div>
-        </li>
       </nav>
       <div id="border_logout">
         <div id="text_logout">Đăng xuất</div>
