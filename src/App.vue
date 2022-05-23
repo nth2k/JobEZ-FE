@@ -10,7 +10,7 @@ import LandingPage from "./views/LandingPage.vue";
 export default {
   name: "App",
   components: {
-    LandingPage
+    LandingPage,
   },
 };
 </script>
