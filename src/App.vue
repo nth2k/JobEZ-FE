@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <LandingPage />
+    <Profile_candidate />
   </div>
 </template>
 
 <script>
-import LandingPage from "./views/LandingPage.vue";
+import Profile_candidate from "./views/profile_candidate.vue";
 
 export default {
   name: "App",
   components: {
-    LandingPage
-  },
+    Profile_candidate
+},
 };
 </script>
 
