@@ -8,6 +8,7 @@
         flex-column
         justify-content-center
         align-items-center
+        search-container
       "
     >
       <div class="search-area">
@@ -23,17 +24,12 @@
           </div>
 
           <div class="order-1 province-list">
-            <select id="province-list" class="text-center">
+            <select
+              id="province-list"
+              class="text-center"
+              @change="onChangeProvince()"
+            >
               <option value="0">Chọn tỉnh thành</option>
-              <option>
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    aria-label="Amount (to the nearest dollar)"
-                  />
-                </div>
-              </option>
               <option
                 v-for="province in provinces"
                 :key="province.code"
@@ -52,9 +48,196 @@
       </div>
       <!-- P2. Tìm kiếm nâng cao -->
       <div class="search_nc mb-3 mt-5">
+        <div
+          class="modal fade bd-example-modal-lg"
+          id="advanceSearch"
+          role="dialog"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered modal-lg"
+            role="document"
+          >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                  Tìm Kiếm Nâng Cao
+                </h5>
+              </div>
+              <div class="modal-body container-fluid">
+                <div class="search-content">
+                  <div class="row">
+                    <div class="col-sm">
+                      <div class="form-group">
+                        <select
+                          class="form-control"
+                          id="exampleFormControlSelect1"
+                        >
+                          <option>Chọn tỉnh thành</option>
+                          <option>5</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="form-group">
+                        <select
+                          class="form-control"
+                          id="exampleFormControlSelect1"
+                        >
+                          <option value="0">Không yêu cầu</option>
+                          <option value="7">Đại học trở lên</option>
+                          <option value="5">Cao đẳng trở lên</option>
+                          <option value="1">THPT trở lên</option>
+                          <option value="2">Trung học trở lên</option>
+                          <option value="3">Chứng chỉ</option>
+                          <option value="4">Trung cấp trở lên</option>
+                          <option value="6">Cử nhân trở lên</option>
+                          <option value="8">Thạc sĩ trở lên</option>
+                          <option value="9">Thạc sĩ Nghệ thuật</option>
+                          <option value="10">Thạc sĩ Thương mại</option>
+                          <option value="11">Thạc sĩ Khoa học</option>
+                          <option value="12">Thạc sĩ Kiến trúc</option>
+                          <option value="13">Thạc sĩ QTKD</option>
+                          <option value="14">Thạc sĩ Kỹ thuật ứng dụng</option>
+                          <option value="15">Thạc sĩ Luật</option>
+                          <option value="16">Thạc sĩ Y học</option>
+                          <option value="17">Thạc sĩ Dược phẩm</option>
+                          <option value="18">Tiến sĩ</option>
+                          <option value="19">Khác</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="form-group">
+                        <select
+                          class="form-control"
+                          id="exampleFormControlSelect1"
+                        >
+                          <option>Chọn quận huyện</option>
+                          <option>2</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm">
+                      <div class="form-group">
+                        <select
+                          class="form-control"
+                          id="exampleFormControlSelect1"
+                        >
+                          <option value="0">Chọn giới tính</option>
+                          <option value="1">Nam</option>
+                          <option value="2">Nữ</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="form-group">
+                        <select
+                          class="form-control"
+                          id="exampleFormControlSelect1"
+                        >
+                          <option value="0">Chọn mức lương</option>
+                          <option value="1">Thỏa thuận</option>
+                          <option value="2">1 - 3 triệu</option>
+                          <option value="3">3 - 5 triệu</option>
+                          <option value="4">5 - 7 triệu</option>
+                          <option value="5">7 - 10 triệu</option>
+                          <option value="6">10 - 15 triệu</option>
+                          <option value="7">15 - 20 triệu</option>
+                          <option value="8">20 - 30 triệu</option>
+                          <option value="9">Trên 30 triệu</option>
+                          <option value="10">Trên 50 triệu</option>
+                          <option value="11">Trên 100 triệu</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="form-group">
+                        <select
+                          class="form-control"
+                          id="exampleFormControlSelect1"
+                        >
+                          <option value="1">Toàn thời gian cố định</option>
+                          <option value="2">Toàn thời gian tạm thời</option>
+                          <option value="3">Bán thời gian</option>
+                          <option value="4">Bán thời gian tạm thời</option>
+                          <option value="5">Hợp đồng</option>
+                          <option value="7">Việc làm từ xa</option>
+                          <option value="6">Khác</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm">
+                      <div class="form-group">
+                        <select
+                          class="form-control"
+                          id="exampleFormControlSelect1"
+                        >
+                          <option value="0">Vui lòng chọn</option>
+                          <option value="1">Mới tốt nghiệp</option>
+                          <option value="6">Thực tập sinh</option>
+                          <option value="3">Nhân viên</option>
+                          <option value="5">Trưởng nhóm</option>
+                          <option value="10">Phó tổ trưởng</option>
+                          <option value="11">Tổ trưởng</option>
+                          <option value="7">Phó trưởng phòng</option>
+                          <option value="2">Trưởng phòng</option>
+                          <option value="12">Phó giám đốc</option>
+                          <option value="4">Giám đốc</option>
+                          <option value="13">Phó tổng giám đốc</option>
+                          <option value="14">Tổng giám đốc</option>
+                          <option value="8">Quản lý cấp trung</option>
+                          <option value="9">Quản lý cấp cao</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="form-group">
+                        <select
+                          class="form-control"
+                          id="exampleFormControlSelect1"
+                        >
+                          <option value="0">Chưa có kinh nghiệm</option>
+                          <option value="1">0 - 1 năm kinh nghiệm</option>
+                          <option value="2">Hơn 1 năm kinh nghiệm</option>
+                          <option value="3">Hơn 2 năm kinh nghiệm</option>
+                          <option value="4">Hơn 5 năm kinh nghiệm</option>
+                          <option value="5">Hơn 10 năm kinh nghiệm</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="form-group">
+                        <select
+                          class="form-control"
+                          id="exampleFormControlSelect1"
+                        >
+                          <option value="0">Hôm nay</option>
+                          <option value="1">1 tuần trở lại</option>
+                          <option value="2">1 tháng trở lại</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Tìm Kiếm</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <p class="mb-0 text-white">
           Cần thêm nhiều tùy chọn tìm kiếm?
-          <a class="nangcao" style="color: #fff600" href="javascript:void(0);"
+          <a
+            data-toggle="modal"
+            data-target="#advanceSearch"
+            class="nangcao"
+            style="color: #fff600"
             >Tìm kiếm nâng cao</a
           >
         </p>
@@ -69,6 +252,7 @@ export default {
     return {
       provinces: [],
       isClickProvince: false,
+      provinceId: 0,
     };
   },
   methods: {
@@ -77,16 +261,24 @@ export default {
       const data = await res.json();
       return data;
     },
+    async fetchDistrictByProvinceData() {
+      const res = await fetch(
+        `https://vapi.vnappmob.com/api/province/district/${this.provinceId}`
+      );
+      const data = await res.json();
+      return data;
+    },
+    advanceSearch() {
+      console.log("Hello World");
+    },
+    onChangeProvince() {
+      console.log("Hello");
+      // this.provinceId = event.target.value;
+    },
   },
   async created() {
-    const data = await this.fetProvinceData();
-
-    // this.provinces = data.map((el) => {
-    //   el.name, el.code;
-    // });
-
-    this.provinces = data;
-    console.log(this.provinces);
+    const provinces = await this.fetProvinceData();
+    this.provinces = provinces;
   },
 };
 </script>
@@ -96,9 +288,12 @@ export default {
   border: 0px solid;
 }
 
-div {
+.search-container {
   background-image: url("../../../assets/new_banner2.png");
-  font-size: 1rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
 }
 
 .search-area {
@@ -143,5 +338,17 @@ div {
 
 .search_nc p a:hover {
   text-decoration: none !important;
+}
+
+.nangcao {
+  cursor: pointer;
+}
+
+.search-content {
+  border-bottom: 1px solid gray;
+}
+
+select {
+  border: 1px solid gray;
 }
 </style>
