@@ -50,7 +50,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "CandidateNavigator",
+};
 </script>
 
 <style scoped>
