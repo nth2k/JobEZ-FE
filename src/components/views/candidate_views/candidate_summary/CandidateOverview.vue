@@ -1,100 +1,89 @@
 <template>
-  <div class="candidate-overview-container overflow-hidden" id="overview">
-    <div class="candidate-profile-online-title pt-4 pl-4 pr-4">
-      <p class="highlight-title m-0">Hồ sơ online</p>
-    </div>
-    <div class="candidate-profile-online-header pl-5 pt-5 row">
-      <div class="col-12 col-sm-3">
-        <img
-          src="../../../../assets/avatar213631.jpg"
-          alt="Hình Ảnh Ứng Viên"
-        />
+  <div class="candidate-overview-container">
+    <header>Tổng quan về ứng viên</header>
+    <div class="candidate-body row">
+      <div class="col-12 col-sm-2">
+        <img src="../../../../assets/prl_h.png" alt="Chỗ ở hiện tại" />
       </div>
-      <div class="col-12 col-sm-9 row">
-        <div class="col-12 candidate-name">Tên Ứng Viên</div>
-        <div class="col-12 candidate-position mb-2">Vị Trí Công Việc</div>
-        <div class="col-12 row">
-          <div class="col-12 col-sm-6 mb-2">Ngày tháng năm sinh</div>
-          <div class="col-12 col-sm-6 mb-2">Số điện thoại</div>
-          <div class="col-12 col-sm-6 mb-2">Giới tính</div>
-          <div class="col-12 col-sm-6 mb-2">Email</div>
-          <div class="col-12 col-sm-6 mb-2">Tình trạng kết hôn</div>
-          <div class="col-12 col-sm-6">Đại chỉ</div>
+      <div class="col-12 col-sm-10 row">
+        <div class="col-12">Chỗ ở hiện tại</div>
+        <div class="col-12 value">An Bình, Yên Hòa, Đồng Nai</div>
+      </div>
+
+      <div class="col-12 col-sm-2">
+        <img src="../../../../assets/prl_dd.png" alt="Nơi mong muốn làm việc" />
+      </div>
+      <div class="col-12 col-sm-10 row">
+        <div class="col-12">Nơi mong muốn làm việc</div>
+        <div class="col-12 value">Hồ Chí Minh, Bình Dương, Đồng Nai</div>
+      </div>
+
+      <div class="col-12 col-sm-2">
+        <img src="../../../../assets/prl_kn.png" alt="Kinh nghiệm làm việc" />
+      </div>
+      <div class="col-12 col-sm-10 row">
+        <div class="col-12">Kinh nghiệm làm việc</div>
+        <div class="col-12 value">Chưa có kinh nghiệm</div>
+      </div>
+
+      <div class="col-12 col-sm-2">
+        <img src="../../../../assets/prl_phone.png" alt="Số điện thoại" />
+      </div>
+      <div class="col-12 col-sm-10 row">
+        <div class="col-12">SĐT</div>
+        <div class="col-12 value d-none">0845684888</div>
+        <div
+          @click="requireLogin()"
+          class="col-12 require-login ml-3 mb-2 pr-0"
+        >
+          Đăng nhập để xem số điên thoại
         </div>
       </div>
+
+      <div class="col-12 col-sm-2">
+        <img src="../../../../assets/prl_mail.png" alt="Email" />
+      </div>
+      <div class="col-12 col-sm-10 row">
+        <div class="col-12">Email</div>
+        <div class="col-12 value">nguyenthetoan1606@gmail.com</div>
+        <div class="d-none">Đăng nhập để xem Mail</div>
+      </div>
     </div>
-    <div class="candidate-profile-online-body pl-5 pt-5">
-      <div class="basic-information">
-        <ul>
-          <h3 class="title">Thông Tin Cơ Bản</h3>
-          <li>Chỗ ở hiện tại :Quận Cầu Giấy, Hà Nội</li>
-          <li>Nơi làm việc mong muốn</li>
-          <li>Ngành nghề : <span>Back-end: Java</span></li>
-          <li>Kinh nghiệm làm việc: Chưa có kinh nghiệm làm việc</li>
-          <li>Mức lương mong muốn: 5-7 triệu</li>
-          <li>Hình thức làm việc: Toàn thời gian cố định</li>
-          <li>Cấp bậc mong muốn: Nhân viên</li>
-        </ul>
-      </div>
 
-      <div class="career-goals">
-        <ul>
-          <h3 class="title">Mục Tiêu Nghề Nghiệp</h3>
-          <li>Mong muốn tìm được việc làm trong môi trường chuyên nghiệp</li>
-          <li>Công việc ổn định để gắn bó lâu dài</li>
-          <li>
-            In publishing and graphic design, Lorem ipsum is a placeholder text
-            commonly used to demonstrate the
-          </li>
-        </ul>
-      </div>
-
-      <div class="personal-skills">
-        <ul>
-          <h3 class="title">Kỹ Năng Bản Thân</h3>
-          <li>Kỹ năng lắng nghe và giải quyết vấn đề hiệu quả</li>
-          <li>
-            Kỹ năng giao tiếp linh hoạt, có khả năng thuyết trình và trình bày
-          </li>
-          <li>Có khả năng thích nghi nhanh với môi trường làm việc</li>
-          <li>Có khả năng quản lý sắp xếp khối lượng công việc lớn</li>
-        </ul>
-      </div>
-
-      <div class="experiences">
-        <ul>
-          <h3 class="title">Nhân Viên Bán Hàng</h3>
-          <h3>01/2021 - Hiện tại</h3>
-          <h4>Công ty TNHH ABC</h4>
-          <li>In publishing and graphic design</li>
-          <li>In publishing and graphic design</li>
-          <li>In publishing and graphic design</li>
-        </ul>
-      </div>
-
-      <div class="degrees">
-        <ul>
-          <h3 class="title">Bằng Cấp Chứng Chỉ</h3>
-          <li class="title">Đại học FPT HN</li>
-          <li>Xếp loại tốt nghiệp : <strong>Giỏi</strong></li>
-        </ul>
-      </div>
-
-      <div class="language-informatics">
-        <ul>
-          <h3 class="title">Ngoại Ngữ Tin Học</h3>
-          <li>Tin học văn phòng: Excel, word, powerpoint</li>
-          <li>Toeic 650</li>
-          <li>Toeic 650</li>
-        </ul>
-      </div>
-
-      <div class="personal-reference">
-        <ul>
-          <h3 class="title">Người Tham Chiếu</h3>
-          <li>Nguyễn Thế Toàn - CTO</li>
-          <li>Số điện thoại: 0845684888</li>
-        </ul>
+    <div
+      ref="someName"
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -103,64 +92,75 @@
 <script>
 export default {
   name: "CandidateOverview",
+  methods: {
+    requireLogin() {
+      const modalElement = this.$refs.someName;
+      console.log(modalElement);
+      modalElement.modal('show');
+    },
+  },
 };
 </script>
 
 <style scoped>
 * {
-  background-clip: border-box;
-  font-family: "Open Sans";
-  font-style: normal;
+  font-family: "Roboto";
 }
 
 .candidate-overview-container {
-  box-shadow: 0px 0px 19px rgba(51, 51, 51, 0.25);
-  border-radius: 5px;
-  background-clip: content-box;
-  box-sizing: content-box;
+  border: 1px solid #e1e1e1;
+  border-radius: 0px 0px 5px 5px;
 }
 
-.candidate-profile-online-header {
-  margin: 0;
-  padding-bottom: 2rem;
-  border-bottom: 1rem solid #deb887;
-}
-
-.candidate-profile-online-title {
-  color: #4c5bd4;
+header {
+  background: #2d4e95;
+  color: #fff;
   font-weight: 400;
-
-  border-bottom: 2px solid gray;
 }
 
-.candidate-profile-online-title p {
-  width: 14%;
+header,
+.candidate-body {
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
-p.highlight-title {
-  margin-top: 5px;
-  border-bottom: 2px solid #4c5bd4;
+.value {
+  color: #959da8;
 }
 
-.candidate-profile-online-header {
-  background: #faebd7;
+.require-login {
+  border: 1px dashed red;
+  cursor: pointer;
 }
 
-.candidate-name {
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 2.5rem;
-  color: #deb887;
+#user_email {
+  border: none;
+  border-bottom: 1px solid #3d49aa;
+  border-radius: 0;
 }
 
-.candidate-position {
-  color: #666666;
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.2rem;
+#user_email:hover {
+  border: none;
+  border-bottom: 1px solid #3d49aa;
+  border-radius: 0;
 }
 
-.title {
-  color: #deb887;
+#user_email:active {
+  border: none;
+  border-bottom: 1px solid #3d49aa;
+  border-radius: 0;
+}
+
+#user_email:visited {
+  border: none;
+  border-bottom: 1px solid #3d49aa;
+  border-radius: 0;
+}
+
+#user_email:focus {
+  border: none;
+  border-bottom: 1px solid #3d49aa;
+  border-radius: 0;
 }
 </style>
