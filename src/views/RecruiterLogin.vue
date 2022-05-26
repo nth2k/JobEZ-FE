@@ -2,20 +2,20 @@
   <div>
     <TopHeaderComponent />
     <div class="row">     
-      <ChooseAccount />
+      <ChooseRecruiter />
       <div class="col-6 " style="padding: 150px">
         <div class="tab">
-          <div class="login"><button class="btn">Login</button></div>
-          <div class="register"><button class="btn">Register</button></div>
+          <div class="login"><button class="btn"><router-link to="/recruiterLogin">Đăng nhập</router-link></button></div>
+          <div class="register"><button class="btn"><router-link to="/recruiterRegister">Đăng kí</router-link></button></div>
         </div>
-        <h2>Welcome back!</h2>
+        <h2>Chào mừng trở lại!</h2>
         <form class="login-form" action="" method="">
-          <h5>Email address<span style="color: red">*</span></h5>
-          <input type="text" value="" placeholder="Enter email" />
-          <h5>Password<span style="color: red">*</span></h5>
-          <input type="password" value="" placeholder="Enter password" />
-          <p>Forget password?</p>
-          <button class="btn" type="submit">Login</button>
+          <h5>Email<span style="color: red">*</span></h5>
+          <input type="text" value="" placeholder="Nhập email" />
+          <h5>Mật khẩu<span style="color: red">*</span></h5>
+          <input type="password" value="" placeholder="Nhập mật khẩu" />
+          <p>Quên mật khẩu?</p>
+          <button class="btn" type="submit">Đăng nhập</button>
         </form>
       </div>
     </div>
@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import ChooseAccount from '@/components/ChooseAccount.vue'
+import ChooseRecruiter from '@/components/ChooseRecruiter.vue'
 import TopHeaderComponent from '@/components/TopHeaderComponent.vue'
 export default {
-  name: 'LoginPage',
+  name: 'RecruiterLogin',
   components:{
-    ChooseAccount,
+    ChooseRecruiter,
     TopHeaderComponent
   }
 };
@@ -43,10 +43,15 @@ export default {
 
 .tab button{
   color: #6874D7;
-  width: 100px;
+  width: 200px;
   height: 40px;
   background-color: rgba(76, 91, 212, 0.1);
   border-radius: 5px;
+}
+
+.tab button a{
+  text-decoration: none;
+  color: #6874D7;
 }
 
 h2 {

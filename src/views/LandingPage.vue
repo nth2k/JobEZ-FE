@@ -7,31 +7,31 @@
       </h1>
       <div class="search-form">
         <form action="" method="post">
-          <input type="text" placeholder="Enter job, position" />
+          <input type="text" placeholder="Nhập công việc, vị trí" />
           <select name="province" id="">
-            <option value="">Ha Noi</option>
+            <option value="">---Chọn tỉnh thành---</option>
           </select>
-          <button type="submit">Search</button>
+          <button type="submit">Tìm kiếm</button>
         </form>
       </div>
       <div class="row advance">
         <div class="col-4 text-center">
           <b-icon icon="newspaper" aria-hidden="true"></b-icon><br />
-          Post free news
+          Đăng tin miễn phí
         </div>
         <div class="col-4 text-center">
           <b-icon icon="search" aria-hidden="true"></b-icon><br />
-          Advanced search
+          Tìm kiếm nâng cao
         </div>
         <div class="col-4 text-center">
           <b-icon icon="globe" aria-hidden="true"></b-icon><br />
-          Remote work
+          Việc làm từ xa
         </div>
       </div>
     </div>
 
     <div class="hot-job m-5 mx-auto">
-      <h5>VIEC LAM HAP DAN</h5>
+      <h5>VIỆC LÀM HẤP DẪN</h5>
       <hr />
       <div class="job-container">
         <div class="job row p-3 m-3">
@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="brand-job mt-5 mx-auto">
-      <h5>VIEC LAM THUONG HIEU</h5>
+      <h5>VIỆC LÀM THƯƠNG HIỆU</h5>
       <hr>
     </div>
   </div>
@@ -79,6 +79,7 @@ export default {
 </script>
 
 <style scope>
+
 .search-container {
   background-image: url("@/assets/landingPage.png");
   height: 100vh;

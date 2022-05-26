@@ -2,22 +2,22 @@
   <div>
     <TopHeaderComponent />
     <div class="row">
-      <ChooseAccount />
+      <ChooseCandidate />
       <div class="col-6" style="padding-left: 150px; padding-top:50px;">
         <div class="tab">
-          <div class="login"><button class="btn">Login</button></div>
-          <div class="register"><button class="btn">Register</button></div>
+          <div class="login"><button class="btn"><router-link to="/candidateLogin">Đăng nhập</router-link></button></div>
+          <div class="register"><button class="btn"><router-link to="/candidateRegister">Đăng kí</router-link></button></div>
         </div>
-        <h2>You don't have any account?</h2>
+        <h2>Bạn chưa có tài khoản?</h2>
         <form class="login-form" action="" method="">
-          <h5>Full name<span style="color: red">*</span></h5>
-          <input type="text" value="" placeholder="Full name" />
-          <h5>Email address<span style="color: red">*</span></h5>
-          <input type="text" value="" placeholder="Enter email" />
-          <h5>Password<span style="color: red">*</span></h5>
-          <input type="password" value="" placeholder="Enter password" />
-          <h5>Confirm Password<span style="color: red">*</span></h5>
-          <input type="password" value="" placeholder="Confirm password" />
+          <h5>Tên đầy đủ<span style="color: red">*</span></h5>
+          <input type="text" value="" placeholder="Tên đầy đủ" />
+          <h5>Email<span style="color: red">*</span></h5>
+          <input type="text" value="" placeholder="Email" />
+          <h5>Mật khẩu<span style="color: red">*</span></h5>
+          <input type="password" value="" placeholder="Nhập mật khẩu" />
+          <h5>Xác nhận mật khẩu<span style="color: red">*</span></h5>
+          <input type="password" value="" placeholder="Xác nhận mật khẩu" />
           <button class="btn" type="submit">Regist</button>
         </form>
       </div>
@@ -26,12 +26,12 @@
 </template>
 
 <script>
-import ChooseAccount from "@/components/ChooseAccount.vue";
+import ChooseCandidate from "@/components/ChooseCandidate.vue";
 import TopHeaderComponent from "@/components/TopHeaderComponent.vue";
 export default {
-  name: "LoginPage",
+  name: "CandidateRegister",
   components: {
-    ChooseAccount,
+    ChooseCandidate,
     TopHeaderComponent,
   },
 };
@@ -46,10 +46,15 @@ export default {
 
 .tab button {
   color: #6874d7;
-  width: 100px;
+  width: 200px;
   height: 40px;
   background-color: rgba(76, 91, 212, 0.1);
   border-radius: 5px;
+}
+
+.tab button a{
+  text-decoration: none;
+  color: #6874D7;
 }
 
 h2 {

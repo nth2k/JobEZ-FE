@@ -1,6 +1,8 @@
 <template>
   <div class="header">
-    <h2>JobEZ</h2>
+    <router-link to="/">
+      <h2>JobEZ</h2>
+    </router-link>
   </div>
 </template>
 
