@@ -10,15 +10,15 @@
         </div>
         <h2>Bạn chưa có tài khoản?</h2>
         <form class="login-form" action="" method="">
-          <h5>Tên đầy đủ<span style="color: red">*</span></h5>
-          <input type="text" value="" placeholder="Tên đầy đủ" />
+          <h5>Tên công ty<span style="color: red">*</span></h5>
+          <input type="text" value="" placeholder="Tên công ty" />
           <h5>Email<span style="color: red">*</span></h5>
           <input type="text" value="" placeholder="Email" />
           <h5>Mật khẩu<span style="color: red">*</span></h5>
           <input type="password" value="" placeholder="Nhập mật khẩu" />
           <h5>Xác nhận mật khẩu<span style="color: red">*</span></h5>
           <input type="password" value="" placeholder="Xác nhận mật khẩu" />
-          <button class="btn" type="submit">Regist</button>
+          <button class="btn" type="submit">Đăng kí</button>
         </form>
       </div>
     </div>
