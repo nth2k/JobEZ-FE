@@ -2,21 +2,21 @@
   <div>
     <Header />
     <SearchHeader />
-    <CandidateHeader />
+    <CandidateSummary />
   </div>
 </template>
 
 <script>
 import Header from "./Header.vue";
 import SearchHeader from "./SearchHeader.vue";
-import CandidateHeader from "./CandidateHeader.vue";
+import CandidateSummary from "./candidate_summary/CandidateSummary.vue";
 
 export default {
   name: "CandidateProfile",
   components: {
     Header,
     SearchHeader,
-    CandidateHeader,
+    CandidateSummary,
   },
 };
 </script>
