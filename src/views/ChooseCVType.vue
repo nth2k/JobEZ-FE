@@ -2,7 +2,7 @@
   <div>
     <TopHeaderComponent />
     <div class="row">
-      <ChooseAccount />
+      <ChooseCandidate />
       <div class="col-6" style="padding-left: 100px; padding-top: 100px">
         <div class="back-page">
           <svg
@@ -65,12 +65,12 @@
 </template>
 
 <script>
-import ChooseAccount from "@/components/ChooseAccount.vue";
+import ChooseCandidate from "@/components/ChooseCandidate.vue";
 import TopHeaderComponent from "@/components/TopHeaderComponent.vue";
 export default {
   name: "ChooseCVType",
   components: {
-    ChooseAccount,
+    ChooseCandidate,
     TopHeaderComponent,
   },
 };
