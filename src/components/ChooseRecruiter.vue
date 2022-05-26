@@ -2,14 +2,14 @@
   <div class="col-6 intro">
     <div class="choose-account">
       <h3>JobEZ</h3>
-      <p>Choose the account you are using</p>
-      <button class="btn btn-light">YOU ARE A CANDIDATE</button><br />
-      <button class="btn btn-light">YOU ARE A RECRUITER</button><br />
+      <p>Chọn tài khoản bạn đang sử dụng</p>
+      <button class="btn btn-light candidate-btn"><router-link to="/candidateLogin">BẠN LÀ ỨNG VIÊN</router-link></button><br />
+      <button class="btn btn-light recruiter-btn">BẠN LÀ NHÀ TUYỂN DỤNG</button><br />
       <div class="descibe">
         <ul>
-          <li><p>100.000+ dream job</p></li>
-          <li><p>365+ professional cv template</p></li>
-          <li><p>22+ recruitment questionnaire</p></li>
+          <li><p>Đăng tin tuyển dụng miễn phí</p></li>
+          <li><p>Tặng điểm lọc hồ sơ mỗi ngày</p></li>
+          <li><p>Biểu mẫu nhân sự chuyên nghiệp</p></li>
         </ul>
       </div>
     </div>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-    name:"ChooseAccount"
+    name:"ChooseRecruiter"
 };
 </script>
 
@@ -54,12 +54,10 @@ export default {
 }
 
 button{
-  opacity: 0.5;
+  opacity: 0.2;
 }
 
-button:hover{
+.recruiter-btn{
   opacity: 1;
-  background-color: white;
-  transition: all 0.5s;
 }
 </style>
