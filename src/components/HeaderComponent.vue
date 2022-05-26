@@ -6,7 +6,7 @@
       />
     </div>
     <div class="login-regist">
-      <span>Login</span><span> / </span><span>Regist</span>
+      <router-link to="/login">Login</router-link> <span> / </span><router-link to="/regist">Regist</router-link>
     </div>
     <div v-if="isClicked" class="menu-container">
       <div>
