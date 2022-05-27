@@ -10,8 +10,8 @@ import Profile_candidate from "./views/profile_candidate.vue";
 export default {
   name: "App",
   components: {
-    Profile_candidate
-},
+    Profile_candidate,
+  },
 };
 </script>
 

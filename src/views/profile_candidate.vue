@@ -30,7 +30,7 @@
               class="item_slide_bar_selection"
               style="padding: 13px 0px 13px 50px"
             >
-             Hồ sơ online
+              Hồ sơ online
             </div>
           </li>
           <li class="item_slide_bar">
@@ -88,20 +88,20 @@
     </div>
     <div class="col-sm-10">
       <!-- <HelloWorld :msg="123"></HelloWorld> -->
-      ádasdasdasd
+      <ProfileOnline/>
     </div>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+import ProfileOnline from "../components/ProfileCandidate/profile_online.vue";
 
-// export default {
-//   name: 'App',
-//   components: {
-//     HelloWorld
-// }
-// }
+export default {
+  name: "Profile_candidate",
+  components: {
+    ProfileOnline,
+  },
+};
 </script>
 
 <style>
@@ -207,5 +207,4 @@ input {
 nav ul {
   display: none;
 }
-
 </style>
