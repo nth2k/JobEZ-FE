@@ -75,8 +75,8 @@ h2 {
   width: 500px;
   height: 50px;
   border-radius: 10px;
-  border-color: #f1eded;
   padding: 20px;
+  border: 1px solid black;
 }
 
 .login-form p {
@@ -88,5 +88,6 @@ h2 {
   height: 50px;
   background-color: #6874d7;
   color: white;
+  margin-top: 20px;
 }
 </style>

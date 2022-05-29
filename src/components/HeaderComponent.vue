@@ -4,7 +4,7 @@
         <b-icon icon="grid" aria-hidden="true"></b-icon>
     </div>
     <div class="login-regist">
-      <router-link to="/candidateLogin">Đăng nhập</router-link><span>/</span><router-link to="/candidateRegist">Đăng kí</router-link>
+      <router-link to="/candidateLogin">Đăng nhập</router-link><span>/</span><router-link to="/candidateRegister">Đăng kí</router-link>
     </div>
     <div v-if="isClicked" class="menu-container">
       <div>
