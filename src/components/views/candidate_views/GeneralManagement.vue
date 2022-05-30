@@ -1,5 +1,12 @@
 <template>
-  <CandidateManagementNavigatorVue />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3 p-0">
+        <CandidateManagementNavigatorVue />
+      </div>
+      <div class="col-9"></div>
+    </div>
+  </div>
 </template>
 
 <script>
