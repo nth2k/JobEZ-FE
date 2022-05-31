@@ -34,7 +34,12 @@ export const routes = [
         path: '/recruiterRegister',
         name: 'RecruiterRegister',
         component: RecruiterRegister
-    }
+    }, 
+    // {
+    //     path: '/profileCandidate',
+    //     name: 'ProfileCandidate',
+    //     component: ProfileCandidate
+    // }
 ]
 
 const router = new VueRouter({
