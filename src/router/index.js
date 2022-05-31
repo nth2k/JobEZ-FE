@@ -5,6 +5,7 @@ import LandingPage from '@/views/LandingPage.vue'
 import CandidateRegister from '@/views/CandidateRegister.vue'
 import RecruiterLogin from '@/views/RecruiterLogin.vue'
 import RecruiterRegister from '@/views/RecuiterRegister.vue'
+import ProfileCandidate from '@/views/profile_candidate.vue'
 
 
 Vue.use(VueRouter)
@@ -34,6 +35,11 @@ export const routes = [
         path: '/recruiterRegister',
         name: 'RecruiterRegister',
         component: RecruiterRegister
+    }, 
+    {
+        path: '/profileCandidate',
+        name: 'ProfileCandidate',
+        component: ProfileCandidate
     }
 ]
 
