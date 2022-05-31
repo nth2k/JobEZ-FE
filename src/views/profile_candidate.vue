@@ -200,4 +200,10 @@ input {
 nav ul {
   display: none;
 }
+#top_header {
+  height: 100px;
+  min-height: 123px;
+  background-color: #232f87;
+
+}
 </style>
