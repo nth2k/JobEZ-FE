@@ -86,22 +86,14 @@
         <div id="text_logout">Đăng xuất</div>
       </div>
     </div>
-    <div class="col-sm-10" style="padding: 0px;">
-      <!-- <HelloWorld :msg="123"></HelloWorld> -->
-      <div class="col-sm-12" id="top_header"></div>
-      <ProfileOnline/>
-    </div>
+    
   </div>
 </template>
 
 <script>
-import ProfileOnline from "../components/ProfileCandidate/profile_online.vue";
 
 export default {
-  name: "Profile_candidate",
-  components: {
-    ProfileOnline,
-  },
+  
 };
 </script>
 

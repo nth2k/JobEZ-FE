@@ -1,0 +1,71 @@
+<template>
+  <div>
+		<div><span>// Đổi mật khẩu</span></div>
+
+		<div>
+			<form>
+				<div>
+					<span>Mật khẩu hiện tại <span class="star">*</span></span>
+					<div class="right"><span>(</span><span class="star">*</span><span>)Thông tin bắt buộc</span></div>
+				</div>
+				<div>
+					
+					<input type="password" id="inputcurrentpassword" placeholder="Mật khẩu hiện tại">
+				</div>
+				<div>
+					<span>Mật khẩu mới <span class="star">*</span></span>
+				</div>
+				<div>
+					<input type="password" id="inputnewpassword" placeholder="Mật khẩu mới">
+				</div>
+				<div>
+					<span>Xác nhận lại mật khẩu<span class="star">*</span></span>
+				</div>
+				<div>
+					<input type="password" id="inputrepassword" placeholder="Xác nhận mật khẩu">
+				</div>
+				<div class="divbtnSave">
+					<button type="submit" class="btn btn-primary btnSave">Lưu</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style scoped>
+form{
+			width: fit-content;
+			margin: 0 auto;
+			font-size: 14px;
+		}
+		button{
+			margin-top: 10px;
+		}
+		input{
+			width: 385.4px;
+			height: 38.63px;
+			border-radius: 5px;
+			margin: 2px 0 10px 0;
+			padding-left: 5px;
+		}
+		.divbtnSave{
+			text-align: center;
+		}
+		.star{
+			color: red;
+		}
+		.btnSave{
+			padding: 8px 56px;
+		}
+		.right{
+			float: right;
+			font-size: 12px;
+			font-style: italic;
+		}
+</style>
