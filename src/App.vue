@@ -1,6 +1,6 @@
 <template>
   <div>
-    <profile_candidate />
+    <Profile_candidate />
     <saved-job />
   </div>
 </template>

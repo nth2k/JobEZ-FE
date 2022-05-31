@@ -86,21 +86,13 @@
         <div id="text_logout">Đăng xuất</div>
       </div>
     </div>
-    <div class="col-sm-10">
-      <!-- <HelloWorld :msg="123"></HelloWorld> -->
-      <ProfileOnline/>
-    </div>
   </div>
 </template>
 
 <script>
-import ProfileOnline from "../components/ProfileCandidate/profile_online.vue";
 
 export default {
-  name: "Profile_candidate",
-  components: {
-    ProfileOnline,
-  },
+  
 };
 </script>
 

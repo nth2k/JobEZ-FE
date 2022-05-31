@@ -1,13 +1,5 @@
 <template>
-<<<<<<< HEAD:src/components/TopHeaderComponent.vue
-  <div class="header">
-    <router-link to="/">
-      <h2>JobEZ</h2>
-    </router-link>
-  </div>
-=======
   <div class="header">ádasdasdsdádasdasd</div>
->>>>>>> 2bed7fbfc142b49a62fdadf1b04088657c8e78e8:src/components/ProfileCandidate/profile_online.vue
 </template>
 
 <script>
