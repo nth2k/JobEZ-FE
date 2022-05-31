@@ -86,8 +86,9 @@
         <div id="text_logout">Đăng xuất</div>
       </div>
     </div>
-    <div class="col-sm-10">
+    <div class="col-sm-10" style="padding: 0px;">
       <!-- <HelloWorld :msg="123"></HelloWorld> -->
+      <div class="col-sm-12" id="top_header"></div>
       <ProfileOnline/>
     </div>
   </div>
@@ -206,5 +207,11 @@ input {
 }
 nav ul {
   display: none;
+}
+#top_header {
+  height: 100px;
+  min-height: 123px;
+  background-color: #232f87;
+
 }
 </style>
