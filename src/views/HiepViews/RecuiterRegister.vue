@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import ChooseRecruiter from "@/components/ChooseRecruiter.vue";
-import TopHeaderComponent from "@/components/TopHeaderComponent.vue";
+import ChooseRecruiter from "@/components/HiepComponents/ChooseRecruiter.vue";
+import TopHeaderComponent from "@/components/HiepComponents/TopHeaderComponent.vue";
 export default {
   name: "RecuiterRegister",
   components: {
