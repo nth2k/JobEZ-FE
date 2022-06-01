@@ -1,6 +1,6 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
+  <div class="container-fluid navigator-bar">
+    <div class="row navigator-content">
       <div class="col-2 p-0">
         <CandidateManagementNavigatorVue />
       </div>
@@ -19,5 +19,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.navigator-bar {
+  height: 100vh;
+  overflow: auto;
+}
+
+.navigator-content {
+  height: 100vh;
+  overflow: auto;
+}
 </style>
