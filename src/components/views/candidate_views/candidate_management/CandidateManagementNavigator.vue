@@ -26,7 +26,7 @@
       <div class="body col-12 text-left">
         <div class="row">
           <div class="col-12 navigator-element">Quản lý chung</div>
-          <div class="col-12 navigator-element dropdown-items">
+          <div class="col-12  dropdown-items">
             <ul class="col-12 p-0 m-0">
               <div
                 @click="isDropdownProfileVisible = !isDropdownProfileVisible"
@@ -51,9 +51,10 @@
           <div class="col-12 navigator-element">Tin nhắn từ NTD</div>
           <div class="col-12 navigator-element">Biểu mẫu nhân viên</div>
           <div class="col-12 navigator-element">Cẩm nang tìm việc</div>
-          <div class="col-12 p-0 navigator-element last-element">
-            <ul class="col-12">
+          <div class="col-12 p-0">
+            <ul class="col-12 mt-1">
               <div
+              class="last-element"
                 @click="
                   isDropdownAccountManageable = !isDropdownAccountManageable
                 "
@@ -75,9 +76,9 @@
         </div>
       </div>
       <div
-        class="footer col-12 navigator-element logout-element text-center mw-50"
+        class="footer col-12 navigator-element  text-center mw-50"
       >
-        Đăng xuất
+        <div class="logout-element p-2 w-30">Đăng xuất</div>
       </div>
     </div>
   </div>
@@ -410,6 +411,8 @@ ul li {
   padding-left: 1rem;
 }
 
+.dropdown-items,
+.last-element,
 .navigator-element {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
@@ -420,10 +423,7 @@ ul li {
 .navigator-element:hover {
   background: #1b2467;
   border-radius: 20px 0px 0px 20px;
-}
-
-.last-element {
-  border-bottom: 1px solid #ffffff;
+  border-right: 4px solid #FFB229;
 }
 
 .logout-element {
