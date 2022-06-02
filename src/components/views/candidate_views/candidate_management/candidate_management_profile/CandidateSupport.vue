@@ -4,14 +4,14 @@
       <div class="col-1">
         <img class="rounded-circle" src="../../../../../assets/ns.jpg" />
       </div>
-      <div class="col-3 text-left p-0 my-4">
+      <div class="col-4 text-left p-0 my-4">
         Chuyên viên hỗ trợ tư vấn dành cho ứng viên
       </div>
-      <div class="col-3 text-left p-0 my-4">
+      <div class="col-4 text-left p-0 my-4">
         Ms Thu Hằng
         <span class="text-primary">- SĐT: 0359742858 - Zalo: 0814640858</span>
       </div>
-      <div class="col-2 text-left p-0 my-4 text-primary">
+      <div class="col-3 text-left p-0 my-4 text-primary">
         Email: rubyhhb17@gmail.com
       </div>
     </div>

@@ -4,7 +4,10 @@
       <SlideBar_candidate />
     </div>
     <div class="col-sm-10">
-      <Header />
+      <div>
+        <Header />
+      </div>
+      
       <div class="table-job">
         <div><span>// Việc làm đã ứng tuyển</span></div>
         <div>
