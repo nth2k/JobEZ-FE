@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 mb-2"><ProfileHeader /></div>
+      <div class="col-12"><ProfileHeader /></div>
       <div class="col-12"><CandidateSupport /></div>
     </div>
   </div>
