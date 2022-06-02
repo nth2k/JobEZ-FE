@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import ChooseCandidate from "@/components/ChooseCandidate.vue";
-import TopHeaderComponent from "@/components/TopHeaderComponent.vue";
+import ChooseCandidate from "@/components/HiepComponents/ChooseCandidate.vue";
+import TopHeaderComponent from "@/components/HiepComponents/TopHeaderComponent.vue";
 export default {
   name: "CandidateRegister",
   components: {

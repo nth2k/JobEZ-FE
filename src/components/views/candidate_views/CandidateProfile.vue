@@ -8,7 +8,7 @@
 
 <script>
 import Header from "./Header.vue";
-import SearchHeader from "./SearchHeader.vue";
+import SearchHeader from "../SearchHeader.vue";
 import CandidateSummary from "./candidate_summary/CandidateSummary.vue";
 
 export default {

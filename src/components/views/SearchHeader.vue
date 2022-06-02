@@ -26,7 +26,7 @@
           <div class="order-1 province-list">
             <select
               id="province-list"
-              class="text-center"
+              class="text-center bg-light"
               @change="onChangeProvince()"
             >
               <option value="0">Chọn tỉnh thành</option>
@@ -289,7 +289,7 @@ export default {
 }
 
 .search-container {
-  background-image: url("../../../assets/new_banner2.png");
+  background-image: url("../../assets/new_banner2.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

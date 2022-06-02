@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import CandidateLogin from '@/views/CandidateLogin.vue'
-import LandingPage from '@/views/LandingPage.vue'
-import CandidateRegister from '@/views/CandidateRegister.vue'
-import RecruiterLogin from '@/views/RecruiterLogin.vue'
-import RecruiterRegister from '@/views/RecuiterRegister.vue'
+import CandidateLogin from '@/views/HiepViews/CandidateLogin.vue'
+import LandingPage from '@/views/HiepViews//LandingPage.vue'
+import CandidateRegister from '@/views/HiepViews//CandidateRegister.vue'
+import RecruiterLogin from '@/views/HiepViews//RecruiterLogin.vue'
+import RecruiterRegister from '@/views/HiepViews//RecuiterRegister.vue'
 
 
 Vue.use(VueRouter)
@@ -34,7 +34,12 @@ export const routes = [
         path: '/recruiterRegister',
         name: 'RecruiterRegister',
         component: RecruiterRegister
-    }
+    }, 
+    // {
+    //     path: '/profileCandidate',
+    //     name: 'ProfileCandidate',
+    //     component: ProfileCandidate
+    // }
 ]
 
 const router = new VueRouter({
