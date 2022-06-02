@@ -11,11 +11,11 @@
 
 <script>
 import Header from "./Header.vue";
-import SearchHeader from "./../candidate_views/SearchHeader.vue";
-import RecruiterNavigator from "./RecruiterNavigator.vue";
-import RecruitorHeader from "./RecruitorHeader.vue";
-import RecruiterSummary from "./RecruiterSummary.vue";
-import RecruiterPostings from "./posting_views/RecruiterPostings.vue";
+import SearchHeader from "./SearchHeader.vue";
+import RecruiterNavigator from "./recruiter_views/RecruiterNavigator.vue";
+import RecruitorHeader from "./recruiter_views/RecruitorHeader.vue";
+import RecruiterSummary from "./recruiter_views/RecruiterSummary.vue";
+import RecruiterPostings from "./recruiter_views/posting_views/RecruiterPostings.vue";
 
 export default {
   name: "RecruiteProfile",

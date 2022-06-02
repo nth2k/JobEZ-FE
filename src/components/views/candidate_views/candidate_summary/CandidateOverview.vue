@@ -35,8 +35,96 @@
         <div
           @click="requireLogin()"
           class="col-12 require-login ml-3 mb-2 pr-0"
+          data-toggle="modal"
+          data-target="#requireLoginModal"
         >
           Đăng nhập để xem số điên thoại
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="requireLoginModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="requireLoginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content p-0 m-0">
+            <div
+              class="modal-header modal-title text-white text-center h4"
+              id="requireLoginModalLabel"
+            >
+              Đăng nhập Nhà Tuyển Dụng để xem thông tin và CHAT với ứng viên
+
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body row px-0">
+              <div class="col-12 post_info">
+                Đăng nhập bằng email và mật khẩu của bạn
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <form>
+                    <div class="col-12">
+                      <input
+                        type="text"
+                        id="email"
+                        placeholder="Nhập địa chỉ email của bạn"
+                      />
+                    </div>
+                    <div class="col-12">
+                      <input
+                        type="text"
+                        id="password"
+                        placeholder="Nhập mật khẩu"
+                      />
+                    </div>
+                    <div class="col-12">
+                      <button
+                        class="py-2 px-4 rounded text-white"
+                        type="submit"
+                        style="background: #232f87"
+                      >
+                        Đăng Nhập
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-6 row">
+                  <div class="col-12">Tải ứng dụng Timviec365.vn</div>
+                  <div class="col-12">Đã có trên IOS và Android</div>
+                  <div class="col-12 mb-2">
+                    <img
+                      src="../../../../assets/btn_androi.png"
+                      alt="Download Android"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <img
+                      src="../../../../assets/btn_ios.png"
+                      alt="Download IOS"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer row">
+              <div class="col-5"><a href="">Quên mật khẩu</a></div>
+              <div class="col-5">
+                Bạn chưa có tài khoản?<a href="#"> Đăng ký ngay!</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -49,56 +137,12 @@
         <div class="d-none">Đăng nhập để xem Mail</div>
       </div>
     </div>
-
-    <div
-      ref="someName"
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">...</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "CandidateOverview",
-  methods: {
-    requireLogin() {
-      const modalElement = this.$refs.someName;
-      console.log(modalElement);
-      modalElement.modal('show');
-    },
-  },
 };
 </script>
 
@@ -162,5 +206,25 @@ header,
   border: none;
   border-bottom: 1px solid #3d49aa;
   border-radius: 0;
+}
+
+.modal-title {
+  background: #232f87;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.post_info,
+form {
+  background-color: transparent;
+  padding: 1.3rem 2.6rem;
+}
+
+form div input {
+  border-bottom: 1px solid #4c5bd4;
+  margin-bottom: 1.5rem;
+}
+
+input:focus {
+  outline: none;
 }
 </style>
