@@ -14,11 +14,14 @@
   <!-- <AppliedJob /> -->
   <!-- <Header /> -->
   <!-- <SavedJob /> -->
-  <change-password />
+  <!-- <ChangePassword /> -->
+  <!-- <ContactInfo /> -->
+  <EditContactInfo />
 </template>
 
 <script>
-import ChangePassword from './views/ChangePassword.vue';
+// import ChangePassword from './views/TuanNV/ChangePassword.vue';
+// import ChangePassword from './views/ChangePassword.vue';
 // import CandidateProfile from "./components/views/candidate_views/CandidateProfile.vue";
 // import JobDetails from "./components/views/recruiter_views/JobDetails.vue";
 // import Header from "./components/views/Header.vue";
@@ -26,17 +29,21 @@ import ChangePassword from './views/ChangePassword.vue';
 // import ProfileHeader from "./components/views/candidate_views/candidate_management/candidate_management_profile/ProfileHeader.vue";
 // import Header from "./views/ToanNT16/candidate_management/Header.vue";
 // import SlideBar_candidate from "./components/ProfileCandidate/slideBar_candidate.vue";
-// import SavedJob from "./views/SavedJob.vue";
+// import SavedJob from "./views/TuanNV/SavedJob.vue";
 // import AppliedJob from "./views/AppliedJob.vue";
-
+// import ContactInfo from "./views/TuanNV/ContactInfo.vue"
+import EditContactInfo from "./views/TuanNV/EditContactInfo.vue"
 export default {
   name: "App",
-  components: { 
-      // SavedJob
-      // AppliedJob 
-      ChangePassword
-      // Header
-    },
+  components: {
+    // SavedJob
+    // AppliedJob 
+    // ChangePassword
+    // Header
+    // ChangePassword
+    // ContactInfo
+    EditContactInfo
+},
 };
 </script>
 

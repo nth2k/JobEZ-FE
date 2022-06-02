@@ -246,7 +246,7 @@
 
 <script>
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
-import Header from "./ToanNT16/candidate_management/Header.vue";
+import Header from "../ToanNT16/candidate_management/Header.vue";
 export default {
   components: {
     SlideBar_candidate,
