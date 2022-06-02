@@ -10,7 +10,7 @@
           alt="Hình Ảnh Ứng Viên"
         />
       </div>
-      <div class="col-12 col-sm-9 row">
+      <div class="col-12 col-sm-8 row">
         <div class="col-12 candidate-name">Tên Ứng Viên</div>
         <div class="col-12 candidate-position mb-2">Vị Trí Công Việc</div>
         <div class="col-12 row">
@@ -66,7 +66,9 @@
           <h4 class="title">Kinh Nghiệm Bản Thân</h4>
           <div class="row">
             <p class="title border-0 col-6">Nhân Viên Bán Hàng</p>
-            <p class="col-6 title  border-0 text-right pr-5">01/2021 - Hiện tại</p>
+            <p class="col-6 title border-0 text-right pr-5">
+              01/2021 - Hiện tại
+            </p>
           </div>
           <p>Công ty TNHH ABC</p>
           <li>In publishing and graphic design</li>
@@ -174,8 +176,8 @@ p.highlight-title {
 
 .download-profile {
   padding: 0.5rem 2rem;
-  color: #4C5BD4;
-  border: 1px solid #4C5BD4;
-  margin-bottom: 2rem
+  color: #4c5bd4;
+  border: 1px solid #4c5bd4;
+  margin-bottom: 2rem;
 }
 </style>
