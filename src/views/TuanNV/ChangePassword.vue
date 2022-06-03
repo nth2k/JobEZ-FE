@@ -9,9 +9,9 @@
       </div>
 
       <div>
-        <div><span>// Đổi mật khẩu</span></div>
+        <div class="py-3"><span>// Đổi mật khẩu</span></div>
 
-        <div>
+        <div class="formChangePass py-5 px-3">
           <form>
             <div>
               <span>Mật khẩu hiện tại <span class="star">*</span></span>
@@ -22,6 +22,8 @@
             </div>
             <div>
               <input
+                class="form-control"
+                name="email"
                 type="password"
                 id="inputcurrentpassword"
                 placeholder="Mật khẩu hiện tại"
@@ -32,6 +34,8 @@
             </div>
             <div>
               <input
+                class="form-control"
+                name="newpassword"
                 type="password"
                 id="inputnewpassword"
                 placeholder="Mật khẩu mới"
@@ -42,6 +46,8 @@
             </div>
             <div>
               <input
+                class="form-control"
+                name="repassword"
                 type="password"
                 id="inputrepassword"
                 placeholder="Xác nhận mật khẩu"
@@ -92,10 +98,16 @@ input {
 }
 .btnSave {
   padding: 8px 56px;
+  color: white;
 }
 .right {
   float: right;
   font-size: 12px;
   font-style: italic;
+}
+.formChangePass{
+  border: 1px solid blue;
+  border-radius: 5px;
+  box-shadow: 5px 5px lightgray;
 }
 </style>
