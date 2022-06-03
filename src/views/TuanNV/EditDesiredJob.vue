@@ -5,11 +5,11 @@
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="body mt-3 row">
+      <div class="mx-2 my-2 body mt-3 py-3 row">
         <div class="leftHoso">
           <Profile_menu />
         </div>
-        <div class="right col-9">
+        <div class="right  col-9">
           <div class="title titleRight">Công việc mong muốn</div>
           <div>
             <form>
@@ -129,11 +129,17 @@ export default {
 </script>
 
 <style scoped>
+.body{
+  border: 1px solid blue;
+  border-radius: 5px;
+  box-shadow: 5px 5px lightgray;
+}
 label {
   margin-bottom: 2px;
 }
 .right {
   border-left: 1px solid gray;
+
 }
 .titleBatBuoc {
   float: right;
