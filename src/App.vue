@@ -1,13 +1,23 @@
 <template>
-  <div>
-    <router-view></router-view>
-  </div>
+  <!-- <CandidateProfile /> -->
+  <!-- <JobDetails /> -->
+  <!-- <RecruiterProfile /> -->
+  <GeneralManagement />
 </template>
 
 <script>
+// import CandidateProfile from "./components/views/candidate_views/CandidateProfile.vue";
+// import JobDetails from "./components/views/recruiter_views/JobDetails.vue";
+// import Header from "./components/views/Header.vue";
+// import RecruiterProfile from "./components/views/RecruiterProfile.vue";
+// import ProfileHeader from "./components/views/candidate_views/candidate_management/candidate_management_profile/ProfileHeader.vue";
+import GeneralManagement from "./views/ToanNT16/GeneralManagement.vue";
+
 export default {
   name: "App",
-  components: {},
+  components: {
+    GeneralManagement,
+  },
 };
 </script>
 

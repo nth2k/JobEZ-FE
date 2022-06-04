@@ -1,13 +1,14 @@
 <template>
   <div class="d-flex flex-row banner">
     <div class="mr-auto p-2">
-      <a href="#"><img src="../../../assets/logo_w.png" alt="" /></a>
+      <a href="#"><img src="../../assets/logo_w.png" alt="" /></a>
+      <!-- ../../../assets/logo_w.png -->
     </div>
     <div class="menu_item p-2">
       <div class="dropdown">
         <img
           class="sub_domain_ul"
-          src="../../../assets/sub_icon2.png"
+          src="../../assets/sub_icon2.png"
           alt="Cẩm nang tìm việc"
           id="dropdownBoxSub"
           aria-expanded="false"
