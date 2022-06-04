@@ -37,7 +37,7 @@
           </select>
           <h5>Vị trí mong muốn<span style="color: red">*</span></h5>
           <input type="password" value="" placeholder="VD: Nhân viên" />
-          <button class="btn" type="submit">Đăng kí</button>
+          <button class="btn" type="submit">Đăng ký</button>
         </form>
       </div>
     </div>
