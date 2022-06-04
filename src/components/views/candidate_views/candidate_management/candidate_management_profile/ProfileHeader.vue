@@ -100,14 +100,14 @@
               <a class="dropdown-item" href="#"
                 ><img
                   class="mb-1 mr-2"
-                  src="../../../../../assets/icon_dx.png"
+                  src="../../../../../assets/icon_pp.png"
                   alt=""
                 />Thông tin cá nhân</a
               >
               <a class="dropdown-item" href="#"
                 ><img
                   class="mb-1 mr-2"
-                  src="../../../../../assets/icon_pp.png"
+                  src="../../../../../assets/icon_dx.png"
                   alt=""
                 />Đăng xuất</a
               >

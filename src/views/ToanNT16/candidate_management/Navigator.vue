@@ -25,8 +25,8 @@
       </div>
       <div class="body col-12 text-left border-bottom">
         <div class="row">
-          <div class="col-12 navigator-element">Quản lý chung</div>
-          <div class="col-12 dropdown-items">
+          <div class="col-12 navigator-element active">Quản lý chung</div>
+          <div class="col-12 dropdown-items pr-0">
             <ul class="col-12 p-0 m-0">
               <div
                 @click="isDropdownProfileVisible = !isDropdownProfileVisible"
@@ -76,7 +76,15 @@
         </div>
       </div>
       <div class="footer col-12 navigator-element text-center mw-50">
-        <div class="logout-element p-2 w-30">Đăng xuất</div>
+        <div class="logout-element p-2 w-30">
+          <img
+            style="height: 1rem"
+            class="img-fluid"
+            src="../../../assets/ic_dx.png"
+            alt="Đăng xuất"
+          />
+          Đăng xuất
+        </div>
       </div>
     </div>
   </div>
@@ -416,6 +424,12 @@ ul li {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   cursor: pointer;
+}
+
+.active {
+  background: #1b2467;
+  border-radius: 20px 0px 0px 20px;
+  border-right: 4px solid #ffb229;
 }
 
 .navigator-element:hover {
