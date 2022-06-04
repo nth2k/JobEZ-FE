@@ -1,6 +1,6 @@
 <template>
   <div class="row mx-auto">
-    <div class="col-5 px-5 cv-container ml-4">
+    <div class="col-5 px-4 cv-container mr-5">
       <header class="py-3"><strong>// Mẫu CV đề xuất</strong></header>
       <div id="mycvs" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -84,7 +84,7 @@
         </a>
       </div>
     </div>
-    <div class="col-5 px-5 cv-container ml-4">
+    <div class="col-5 px-4 cv-container">
       <header class="py-3"><strong>// Mẫu CV đề xuất</strong></header>
       <div id="samplecv" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">

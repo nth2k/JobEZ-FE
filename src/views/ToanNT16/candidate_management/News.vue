@@ -1,16 +1,27 @@
 <template>
-  <div class="container-fluid">
-    <header><strong>// Kinh Nghiệm Xin Việc IT Phần Mềm</strong></header>
-    <div class="container">
-      <div class="row">
-        <div v-for="news in newss" :key="news.title" class="col-3">
-          <div class="card mb-4 box-shadow">
-            <img class="card-img-top" :src="news.img" alt="Hình ảnh bài viết" />
-            <div class="card-body">
-              <p class="card-title">{{ news.title }}</p>
-            </div>
+  <div class="container-fluid news-container pb-5">
+    <header class="mb-5">
+      <strong>// Kinh Nghiệm Xin Việc IT Phần Mềm</strong>
+    </header>
+    <div class="row">
+      <div
+        v-for="news in newss"
+        :key="news.title"
+        class="col-3 title-container"
+      >
+        <div class="mr-3">
+          <img class="card-img-top" :src="news.img" alt="Hình ảnh bài viết" />
+          <div class="">
+            <p class="card-title pt-2 pl-2 pb-5">
+              <strong>{{ news.title }}</strong>
+            </p>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-right">
+        <strong><a class="text-dark" href="">Xem tất cả</a></strong>
       </div>
     </div>
   </div>
@@ -35,11 +46,25 @@ export default {
           title:
             "Data center là gì? Tại sao Data Center cần thiết với người dùng?",
         },
+        {
+          img: require("@/assets/gti1617614347.jpg"),
+          title:
+            "Data center là gì? Tại sao Data Center cần thiết với người dùng?",
+        },
       ],
     };
   },
 };
 </script>
 
-<style>
+<style scoped>
+.news-container {
+  background: #ffffff;
+  box-shadow: 4px 1px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 1.2rem;
+}
+
+.title-container {
+  background: #f7f7f7;
+}
 </style>

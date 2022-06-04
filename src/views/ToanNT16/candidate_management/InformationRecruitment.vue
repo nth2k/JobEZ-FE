@@ -1,45 +1,49 @@
 <template>
-  <div class="container-fluid information-recruitment-container">
-    <div class="row">
-      <div class="col-3">
-        <div class="row">
-          <div class="col-12">
-            <img class="img-fluid" src="../../../assets/cc1.png" alt="" />
-          </div>
-          <div class="col-12 text-left h5 mt-3">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Đã ứng tuyển:
-            {{ numberOfApplied }}&nbsp;&nbsp;&nbsp;&nbsp;
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="row">
-          <div class="col-12">
-            <img class="img-fluid" src="../../../assets/cc2.png" alt="" />
-          </div>
-          <div class="col-12 text-left h5 mt-3">
-            &nbsp;&nbsp;Việc làm phù hợp: {{ suitableJobs }}
+  <div class="container-fluid information-recruitment-container mb-5">
+    <div class="py-3">
+      <div class="row">
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <img class="img-fluid" src="../../../assets/cc1.png" alt="" />
+            </div>
+            <div class="col-12 text-left h5 mt-3">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Đã ứng tuyển:
+              {{ numberOfApplied }}&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-3">
-        <div class="row">
-          <div class="col-12">
-            <img class="img-fluid" src="../../../assets/cc3.png" alt="" />
-          </div>
-          <div class="col-12 text-left h5 mt-3">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mẫu CV
-            đã tạo
+        <div class="col-1"></div>
+        <div class="col-3">
+          <div class="row">
+            <div class="col-12">
+              <img class="img-fluid" src="../../../assets/cc2.png" alt="" />
+            </div>
+            <div class="col-12 text-left h5 mt-3">
+              &nbsp;&nbsp;Việc làm phù hợp: {{ suitableJobs }}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-3">
-        <div class="row">
-          <div class="col-12">
-            <img class="img-fluid" src="../../../assets/cc4.png" alt="" />
+        <div class="col-2">
+          <div class="row">
+            <div class="col-12">
+              <img class="img-fluid" src="../../../assets/cc3.png" alt="" />
+            </div>
+            <div class="col-12 text-left h5 mt-3">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mẫu CV
+              đã tạo
+            </div>
           </div>
-          <div class="col-12 text-left h5 mt-3">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NTD xem hồ sơ: {{ seen }}
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+          <div class="row">
+            <div class="col-12">
+              <img class="img-fluid" src="../../../assets/cc4.png" alt="" />
+            </div>
+            <div class="col-12 text-left h5 mt-3">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NTD xem hồ sơ: {{ seen }}
+            </div>
           </div>
         </div>
       </div>

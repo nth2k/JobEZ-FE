@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import CandidateManagementNavigatorVue from "./candidate_management/CandidateManagementNavigator.vue";
+import CandidateManagementNavigatorVue from "../../../views/ToanNT16/candidate_management/Navigator.vue";
 export default {
   name: "GeneralManagement",
   components: {

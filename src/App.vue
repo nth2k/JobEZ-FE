@@ -2,7 +2,7 @@
   <!-- <CandidateProfile /> -->
   <!-- <JobDetails /> -->
   <!-- <RecruiterProfile /> -->
-  <News />
+  <GeneralManagement />
 </template>
 
 <script>
@@ -11,11 +11,13 @@
 // import Header from "./components/views/Header.vue";
 // import RecruiterProfile from "./components/views/RecruiterProfile.vue";
 // import ProfileHeader from "./components/views/candidate_views/candidate_management/candidate_management_profile/ProfileHeader.vue";
-import News from "./views/ToanNT16/candidate_management/News.vue";
+import GeneralManagement from "./views/ToanNT16/GeneralManagement.vue";
 
 export default {
   name: "App",
-  components: { News },
+  components: {
+    GeneralManagement,
+  },
 };
 </script>
 

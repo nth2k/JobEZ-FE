@@ -1,5 +1,5 @@
 <template>
-  <div class="p-2 suggestion-container">
+  <div class="p-2 suggestion-container text-center">
     Hãy cập nhật ngoại ngữ của bạn (nếu có) để tăng chất lượng hồ sơ và thu hút
     nhà tuyển dụng <span class="text-danger"> >> Cập nhật ngay </span>
   </div>

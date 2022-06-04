@@ -23,7 +23,7 @@
           <button class="refresh-profile">Làm mới hồ sơ</button>
         </div>
       </div>
-      <div class="body col-12 text-left">
+      <div class="body col-12 text-left border-bottom">
         <div class="row">
           <div class="col-12 navigator-element">Quản lý chung</div>
           <div class="col-12 dropdown-items">
@@ -32,12 +32,9 @@
                 @click="isDropdownProfileVisible = !isDropdownProfileVisible"
               >
                 Bộ hồ sơ xin việc
-                <span class="ml-5 icon-items"
-                  ><img
-                    src="../../../../assets/ic_uv.png"
-                    alt=""
-                    class="img-thumbnail"
-                /></span>
+                <span class="ml-5 icon-items">
+                  <img src="../../../assets/ic_uv.png" />
+                </span>
               </div>
               <li :class="{ 'd-none': isDropdownProfileVisible }">
                 <div class="navigator-element">Hồ sơ online</div>
@@ -64,7 +61,7 @@
               >
                 Quản lý tài khoản
                 <span class="ml-5"
-                  ><img src="../../../../assets/ic_uv.png" alt=""
+                  ><img src="../../../assets/ic_uv.png" alt=""
                 /></span>
               </div>
 
@@ -430,5 +427,9 @@ ul li {
 .logout-element {
   background: linear-gradient(180deg, #ffb229 60.98%, #ffb229 123.17%);
   border-radius: 20px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid white;
 }
 </style>
