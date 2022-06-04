@@ -1,19 +1,15 @@
 <template>
   <div>
-    <Profile_candidate />
-    <saved-job />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import SavedJob from './views/SavedJob.vue'
-import Profile_candidate from './views/profile_candidate.vue'
 export default {
-  components: { SavedJob, Profile_candidate },
-
-}
+  name: "App",
+  components: {},
+};
 </script>
 
 <style>
-
 </style>
