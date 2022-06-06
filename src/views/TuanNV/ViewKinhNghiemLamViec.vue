@@ -1,0 +1,149 @@
+<template>
+  <div id="app" class="row">
+    <div class="col-sm-2" id="slide_bar">
+      <SlideBar_candidate />
+    </div>
+    <div class="col-sm-10">
+      <Header />
+      <div class="mx-2 my-2 body mt-3 py-3 row">
+        <div class="leftHoso">
+          <Profile_menu />
+        </div>
+        <div class="blockright col-9">
+          <div class="titleRight">Kinh nghiệm làm việc</div>
+          <div class="container">
+            <div class="mb-3">
+              <button class="btnAdd py-1 px-3">+ Thêm</button>
+            </div>
+            <div>
+              <a href="#" id="show" @click="showDetail()">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-arrow-down-circle-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"
+                  />
+                </svg>
+                Công ty TNHH máy lọc nước CV365
+              </a>
+              <button class="btnDelete">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-trash"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                  />
+                </svg>
+              </button>
+              <div class="detail container p-3" id="detailInfo">
+                <div>
+                  <span>Thời gian từ: </span><span>15/03/2019</span
+                  ><span> Đến </span><span>20/02/2020</span>
+                </div>
+                <div><span>Chức danh: </span><span> Designer</span></div>
+                <div>
+                  <span
+                    >- Gặp gỡ, tư vấn cho các khách hàng đã được công ty phân
+                    công. - Trực tiếp khảo sát và đo đạc ô chờ cho các công
+                    trình chưa được sản xuất, chốt các kích thước ô chờ đã đo
+                    đạc, bản vẽ thiết kế,... - Lập biên bản làm việc với khách
+                    hàng. - Gửi kết quả đo đạc và các thay đổi so với thiết kế
+                    ban đầu cho phòng kinh doanh.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
+import Header from "../ToanNT16/candidate_management/Header.vue";
+import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
+export default {
+  components: {
+    SlideBar_candidate,
+    Header,
+    Profile_menu,
+  },
+  methods: {
+    showDetail() {
+      const detail = document.getElementById("detailInfo");
+      // if (detail.style.display == "none") {
+      //   detail.style.display = "block";
+      // } else {
+      //   detail.style.display = "none";
+      // }
+      console.log(detail.style.display);
+    },
+  },
+};
+</script>
+
+<style scoped>
+.btnDelete {
+  background: red;
+  color: white;
+  border-radius: 50%;
+  border: none;
+  float: right;
+  width: 25px;
+  height: 25px;
+}
+.detail {
+  display: none;
+  background-color: #f2f2f2;
+}
+a {
+  text-decoration: none;
+  font-size: 18px;
+}
+.btnAdd {
+  background-color: #eceefa;
+  color: #333333;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.tbody {
+  padding-top: 10px;
+}
+.title {
+  font-weight: bold;
+  font-size: 16px;
+}
+.titleRight {
+  margin-bottom: 20px;
+  margin-left: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid gray;
+  width: 163px;
+  color: #2a3563;
+  font-weight: bold;
+}
+.blockright {
+  border-left: 1px solid gray;
+}
+.body {
+  border: 1px solid blue;
+  border-radius: 5px;
+  box-shadow: 5px 5px lightgray;
+}
+</style>
