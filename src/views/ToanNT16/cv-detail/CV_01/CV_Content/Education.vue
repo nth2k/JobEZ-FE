@@ -1,8 +1,8 @@
-<template></template>
+<template><h1>Education</h1></template>
 
 <script>
 export default {
-  name: "CV-01",
+  name: "Education",
 };
 </script>
 

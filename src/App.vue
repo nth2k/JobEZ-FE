@@ -2,7 +2,7 @@
   <!-- <CandidateProfile /> -->
   <!-- <JobDetails /> -->
   <!-- <RecruiterProfile /> -->
-  <Header />
+  <CV_01 />
 </template>
 
 <script>
@@ -12,12 +12,12 @@
 // import RecruiterProfile from "./components/views/RecruiterProfile.vue";
 // import ProfileHeader from "./components/views/candidate_views/candidate_management/candidate_management_profile/ProfileHeader.vue";
 // import ListOfCv from "./views/ToanNT16/cv_menu/CVs.vue";
-import Header from "./views/ToanNT16/cv-detail/Header.vue";
+import CV_01 from "./views/ToanNT16/cv-detail/CV_01.vue";
 
 export default {
   name: "App",
   components: {
-    Header,
+    CV_01,
   },
 };
 </script>
