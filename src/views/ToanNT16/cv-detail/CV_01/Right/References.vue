@@ -1,7 +1,9 @@
 <template>
   <div class="row reference">
     <div class="col-12 text-left px-0">
-      <div class="header h4 font-weight-bold pl-3">GIẢI THƯỞNG</div>
+      <div class="header h4 font-weight-bold pl-3 text-uppercase">
+        GIẢI THƯỞNG
+      </div>
     </div>
     <div class="col-12 text-left">
       <div class="row">
@@ -23,7 +25,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .header {
   border-left: 4px solid gray;
   color: #fcb617;

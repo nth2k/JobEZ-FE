@@ -1,18 +1,14 @@
 <template>
   <div class="row skills">
     <div class="col-12 text-left px-0">
-      <div class="header h4 font-weight-bold pl-3">KỸ NĂNG</div>
+      <div class="header h4 font-weight-bold pl-3 text-uppercase">KỸ NĂNG</div>
     </div>
     <div class="col-12 text-left">
       <div class="row">
         <div class="col-10">
-          <div
-            v-for="skill in skills"
-            :key="skill.skillName"
-            contenteditable="true"
-          >
+          <div v-for="skill in skills" :key="skill.skillName">
             <div class="row">
-              <div class="col-12">
+              <div class="col-12" contenteditable="true">
                 <strong style="font-size: 1.1rem">
                   {{ skill.skillName }}
                 </strong>

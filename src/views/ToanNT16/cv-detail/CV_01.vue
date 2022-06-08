@@ -8,7 +8,7 @@
           <!-- Right -->
           <div class="col-5"><Right /></div>
           <!-- Content -->
-          <div class="col-7"><CvContent /></div>
+          <div class="col-7 content-container"><CvContent /></div>
         </div>
       </div>
       <!-- CV liên quan -->
@@ -36,5 +36,9 @@ export default {
 .cv-container {
   margin-left: 12rem;
   margin-right: 12rem;
+}
+
+.content-container {
+  margin-top: -2rem;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="row">
-    <div class="col-12"><Education /></div>
-    <div class="col-12"><WorkExperience /></div>
-    <div class="col-12"><Activities /></div>
-    <div class="col-12"><ParticipantProjects /></div>
+    <div class="col-12 mb-4"><Education /></div>
+    <div class="col-12 mb-4"><WorkExperience /></div>
+    <div class="col-12 mb-4"><Activities /></div>
+    <div class="col-12 mb-4"><ParticipantProjects /></div>
     <div class="col-12"><MoreInformation /></div>
   </div>
 </template>

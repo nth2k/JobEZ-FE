@@ -41,7 +41,10 @@
           >
             Lập trình viên android
           </div>
-          <div class="w-100 bg-primary" style="width: 2rem; height: 2rem"></div>
+          <div
+            class="w-100 bg-primary"
+            style="width: 2rem; height: 2rem; margin-left: -1.6rem"
+          ></div>
         </div>
       </div>
     </div>

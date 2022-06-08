@@ -1,7 +1,9 @@
 <template>
   <div class="row certificate">
     <div class="col-12 text-left px-0">
-      <div class="header h4 font-weight-bold pl-3">CHỨNG CHỈ</div>
+      <div class="header h4 font-weight-bold pl-3 text-uppercase">
+        CHỨNG CHỈ
+      </div>
     </div>
     <div class="col-12 text-left">
       <div class="row">
@@ -22,7 +24,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .header {
   border-left: 4px solid gray;
   color: #fcb617;

@@ -1,7 +1,9 @@
 <template>
   <div class="row basic-information">
     <div class="col-12 text-left px-0">
-      <div class="header h4 font-weight-bold pl-3">Thông tin cơ bản</div>
+      <div class="header h4 font-weight-bold pl-3 text-uppercase">
+        Thông tin cơ bản
+      </div>
     </div>
     <div class="col-12">
       <div class="row">
