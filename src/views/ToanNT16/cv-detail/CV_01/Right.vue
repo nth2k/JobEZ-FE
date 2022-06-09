@@ -1,14 +1,14 @@
 <template>
   <div class="row">
     <div class="col-12 mt-4">
-      <div class="mb-4"><BasicInfomation /></div>
+      <div><BasicInfomation /></div>
     </div>
-    <div class="col-12 mt-4"><CareerGoal /></div>
-    <div class="col-12 mt-4"><Skills /></div>
-    <div class="col-12 mt-4"><Award /></div>
-    <div class="col-12 mt-4"><Certificate /></div>
-    <div class="col-12 mt-4"><Favorites /></div>
-    <div class="col-12 mt-4 mb-5"><References /></div>
+    <div class="col-12"><CareerGoal /></div>
+    <div class="col-12"><Skills /></div>
+    <div class="col-12"><Award /></div>
+    <div class="col-12"><Certificate /></div>
+    <div class="col-12"><Favorites /></div>
+    <div class="col-12 mb-5"><References /></div>
   </div>
 </template>
 

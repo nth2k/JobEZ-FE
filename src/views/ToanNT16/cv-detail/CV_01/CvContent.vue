@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row view-content-container">
     <div class="col-12"><Education /></div>
     <div class="col-12"><WorkExperience /></div>
     <div class="col-12"><Activities /></div>
@@ -27,5 +27,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.view-content-container {
+  background-color: #f9f0e0;
+}
 </style>
