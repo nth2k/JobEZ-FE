@@ -1,9 +1,9 @@
 <template>
-  <div class="row">
-    <div class="col-12 mb-4"><Education /></div>
-    <div class="col-12 mb-4"><WorkExperience /></div>
-    <div class="col-12 mb-4"><Activities /></div>
-    <div class="col-12 mb-4"><ParticipantProjects /></div>
+  <div class="row view-content-container">
+    <div class="col-12"><Education /></div>
+    <div class="col-12"><WorkExperience /></div>
+    <div class="col-12"><Activities /></div>
+    <div class="col-12"><ParticipantProjects /></div>
     <div class="col-12"><MoreInformation /></div>
   </div>
 </template>
@@ -27,5 +27,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.view-content-container {
+  background-color: #f9f0e0;
+}
 </style>

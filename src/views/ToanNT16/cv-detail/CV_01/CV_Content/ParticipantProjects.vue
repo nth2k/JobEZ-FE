@@ -1,23 +1,69 @@
 <template>
-  <div class="education-container">
-    <header
-      class="header h4 font-weight-bold pb-2 text-uppercase border-bottom"
-    >
-      dự án tham gia
-    </header>
-    <div class="participant-projects-content">
-      <div v-for="project in projects" :key="project.projectName">
-        <div class="projects-name custom-outline">
-          <strong contenteditable="true">{{ project.projectName }}</strong>
-        </div>
-        <div
-          class="project-description custom-outline py-1"
-          contenteditable="true"
+  <div :class="{ 'd-none': isHidden }">
+    <div class="row">
+      <div
+        class="col-12 bg-secondary p-2 option-container"
+        :class="{ invisible: isHiddenOptions }"
+        @mouseover="isHiddenOptions = false"
+        @mouseleave="isHiddenOptions = true"
+      >
+        <i
+          class="fa fa-bars py-1 px-2 bg-white rounded mr-1"
+          id="move"
+          ref="move"
+        ></i
+        ><i
+          class="fa fa-arrow-up py-1 px-2 bg-white rounded mr-1"
+          aria-hidden="true"
+          id="moveUp"
+          ref="moveUp"
+        ></i>
+        <i
+          class="fa fa-arrow-down py-1 px-2 bg-white rounded mr-1"
+          aria-hidden="true"
+          id="moveDown"
+          ref="moveDown"
+        ></i>
+        <i
+          class="fa fa-minus py-1 px-5 bg-danger rounded mr-1"
+          aria-hidden="true"
+          id="hidden"
+          ref="hidden"
+          @click="hidden"
+          >Ẩn</i
         >
-          {{ project.projectDescription }}
+      </div>
+    </div>
+    <div
+      class="row education-container"
+      @mouseover="isHiddenOptions = false"
+      @mouseleave="isHiddenOptions = true"
+    >
+      <div class="col-12 text-left px-0 border-bottom">
+        <div class="header h4 font-weight-bold pl-3 text-uppercase">
+          dự án tham gia
         </div>
-        <div class="skill custom-outline" contenteditable="true">
-          {{ project.skill }}
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-10">
+            <div v-for="project in projects" :key="project.projectName">
+              <div class="projects-name custom-outline">
+                <strong contenteditable="true">{{
+                  project.projectName
+                }}</strong>
+              </div>
+              <div
+                class="project-description custom-outline py-1"
+                contenteditable="true"
+              >
+                {{ project.projectDescription }}
+              </div>
+              <div class="skill custom-outline" contenteditable="true">
+                {{ project.skill }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -45,7 +91,14 @@ export default {
             "Ngôn ngữ sử dụng: Java Android Link app: https://play.google.com/store/apps/details?id=com.something.windows10now.muathe24h",
         },
       ],
+      isHidden: false,
+      isHiddenOptions: true,
     };
+  },
+  methods: {
+    hidden() {
+      this.isHidden = !this.isHidden;
+    },
   },
 };
 </script>

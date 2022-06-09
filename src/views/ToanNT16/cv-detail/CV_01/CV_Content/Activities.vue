@@ -1,29 +1,48 @@
 <template>
-  <div class="activities-container">
-    <header
-      class="header h4 font-weight-bold pb-2 text-uppercase border-bottom"
-    >
-      hoạt động
-    </header>
+  <div :class="{ 'd-none': isHidden }">
+    <div class="row">
+      <Options />
+    </div>
     <div
-      v-for="activity in activities"
-      :key="activity.activityName"
-      class="work-experience-content"
+      class="row activities-container"
+      @mouseover="isHiddenOptions = false"
+      @mouseleave="isHiddenOptions = true"
     >
-      <div class="activities-name custom-outline py-1" contenteditable="true">
-        <strong>{{ activity.activityName }}</strong>
+      <div class="col-12 text-left px-0 border-bottom">
+        <div class="header h4 font-weight-bold pl-3 text-uppercase">
+          hoạt động
+        </div>
       </div>
-      <div class="position custom-outline" contenteditable="true">
-        {{ activity.position }}
-      </div>
-      <div class="description custom-outline" contenteditable="true">
-        {{ activity.description }}
+      <div class="col-12">
+        <div class="row">
+          <div class="col-10">
+            <div
+              v-for="activity in activities"
+              :key="activity.activityName"
+              class="work-experience-content"
+            >
+              <div
+                class="activities-name custom-outline py-1"
+                contenteditable="true"
+              >
+                <strong>{{ activity.activityName }}</strong>
+              </div>
+              <div class="position custom-outline" contenteditable="true">
+                {{ activity.position }}
+              </div>
+              <div class="description custom-outline" contenteditable="true">
+                {{ activity.description }}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Options from "../../Options.vue";
 export default {
   name: "Activities",
   data() {
@@ -43,7 +62,17 @@ export default {
             " Nằm trong chuỗi sự kiện công nghệ lớn nhất năm dành cho cộng đồng công nghệ Việt Nam do tập đoàn FPT tổ chức.",
         },
       ],
+      isHidden: false,
+      isHiddenOptions: true,
     };
+  },
+  methods: {
+    hidden() {
+      this.isHidden = !this.isHidden;
+    },
+  },
+  components: {
+    Options,
   },
 };
 </script>
