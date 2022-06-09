@@ -4,7 +4,9 @@
       <div class="pt-5">
         <div class="col-12">
           <div class="candidate-name font-weight-bold text-uppercase">
-            <div contenteditable="true">Nguyễn Thế Toàn</div>
+            <div contenteditable="true" class="custom-outline">
+              Nguyễn Thế Toàn
+            </div>
           </div>
         </div>
       </div>
@@ -14,9 +16,9 @@
         <div class="col-1 px-0" style="padding-top: 1.8rem">
           <div class="w-100 bg-primary" style="width: 2rem; height: 2rem"></div>
         </div>
-        <div class="col-2 px-0">
+        <div class="col-2 px-0 text-center">
           <div
-            class="imagePreviewWrapper img-responsive img-thumbnail"
+            class="imagePreviewWrapper img-responsive mx-auto img-fluid"
             :style="{ 'background-image': `url(${previewImage})` }"
             style="background-position: center; background-size: cover"
             @click="selectImage"
@@ -36,15 +38,13 @@
               text-uppercase
               pl-5
               pr-5
+              custom-outline
             "
             contenteditable="true"
           >
             Lập trình viên android
           </div>
-          <div
-            class="w-100 bg-primary"
-            style="width: 2rem; height: 2rem; margin-left: -1.6rem"
-          ></div>
+          <div class="w-100 bg-primary" style="width: 2rem; height: 2rem"></div>
         </div>
       </div>
     </div>
@@ -83,6 +83,12 @@ export default {
 .imagePreviewWrapper {
   width: 8.75rem;
   height: 9.25rem;
+  border: 0.2rem solid #fcb617;
+  padding: 0.5rem;
+}
+
+.imagePreviewWrapper:hover {
+  box-shadow: 0 0 0 2px #ccc inset;
 }
 
 .candidate-name {
@@ -92,5 +98,13 @@ export default {
 .candidate-position {
   font-size: 1.3rem;
   line-height: 1.8rem;
+}
+
+.custom-outline:focus {
+  outline: none;
+}
+
+.custom-outline:hover {
+  outline: #77a5cc dashed 1pt;
 }
 </style>

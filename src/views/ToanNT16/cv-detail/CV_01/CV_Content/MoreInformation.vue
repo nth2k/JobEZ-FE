@@ -5,9 +5,13 @@
     >
       thông tin thêm
     </header>
-    <div class="more-information-content">
-      <div class="text-uppercase"><strong>thông tin thêm</strong></div>
-      <div contenteditable="true">Những thông tin khác (nếu cần)</div>
+    <div>
+      <div class="text-uppercase more-information-content py-1">
+        <strong>thông tin thêm</strong>
+      </div>
+      <div contenteditable="true" class="custom-outline">
+        Những thông tin khác (nếu cần)
+      </div>
     </div>
   </div>
 </template>
@@ -26,5 +30,17 @@ export default {
   color: #fcb617;
   line-height: 1.2rem;
   font-weight: 1.2rem;
+}
+
+.more-information-content {
+  line-height: 1.5rem;
+  font-size: 1.4rem;
+}
+.more-information-container {
+  padding: 0.5rem;
+}
+
+.more-information-container:hover {
+  box-shadow: 0 0 0 2px #ccc inset;
 }
 </style>

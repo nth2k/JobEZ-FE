@@ -10,13 +10,13 @@
       :key="experience.companyName"
       class="work-experience-content"
     >
-      <div class="company-name" contenteditable="true">
+      <div class="company-name custom-outline py-1" contenteditable="true">
         <strong>{{ experience.companyName }}</strong>
       </div>
-      <div class="position" contenteditable="true">
+      <div class="position custom-outline" contenteditable="true">
         Ngành học: {{ experience.position }}
       </div>
-      <div class="skills" contenteditable="true">
+      <div class="skills custom-outline" contenteditable="true">
         {{ experience.skills }}
       </div>
     </div>
@@ -54,12 +54,19 @@ export default {
 <style scoped>
 .header {
   color: #fcb617;
-  line-height: 1.2rem;
-  font-weight: 1.2rem;
+  line-height: 1.4rem;
+  font-weight: 1.3rem;
 }
 
-.work-experience-content {
-  font-size: 1.2rem;
-  line-height: 1.8rem;
+.company-name {
+  line-height: 1.5rem;
+  font-size: 1.4rem;
+}
+.work-experience-container {
+  padding: 0.5rem;
+}
+
+.work-experience-container:hover {
+  box-shadow: 0 0 0 2px #ccc inset;
 }
 </style>

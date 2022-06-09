@@ -1,21 +1,21 @@
 <template>
   <div class="education-container">
     <header
-      class="header h4 font-weight-bold pb-4 text-uppercase border-bottom"
+      class="header h4 font-weight-bold pb-2 text-uppercase border-bottom"
     >
       học vấn
     </header>
     <div class="education-content">
-      <div class="school-name" contenteditable="true">
+      <div class="school-name custom-outline py-1" contenteditable="true">
         <strong>{{ education.school }}</strong>
       </div>
-      <div class="school-major" contenteditable="true">
+      <div class="school-major custom-outline" contenteditable="true">
         Ngành học: {{ education.major }}
       </div>
-      <div class="school-narrow-major" contenteditable="true">
+      <div class="school-narrow-major custom-outline" contenteditable="true">
         Chuyên ngành: {{ education.narrowMajors }}
       </div>
-      <div class="school-classification" contenteditable="true">
+      <div class="school-classification custom-outline" contenteditable="true">
         Xếp loại: {{ education.classification }}
       </div>
     </div>
@@ -45,8 +45,16 @@ export default {
   font-weight: 1.2rem;
 }
 
-.education-content {
-  font-size: 1.2rem;
-  line-height: 1.8rem;
+.school-name {
+  line-height: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.education-container {
+  padding: 0.5rem;
+}
+
+.education-container:hover {
+  box-shadow: 0 0 0 2px #ccc inset;
 }
 </style>

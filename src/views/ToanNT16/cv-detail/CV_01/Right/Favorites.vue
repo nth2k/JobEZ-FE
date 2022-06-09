@@ -6,7 +6,7 @@
     <div class="col-12 text-left">
       <div class="row">
         <div class="col-10">
-          <div contenteditable="true">
+          <div contenteditable="true" class="custom-outline">
             - CODE là đam mê
             <br />- Tìm hiểu công nghệ mới <br />- Nghe nhạc <br />- Đá bóng
           </div>
@@ -28,5 +28,12 @@ export default {
   color: #fcb617;
   line-height: 1.2rem;
   font-weight: 1.2rem;
+}
+.favorites {
+  padding: 0.5rem;
+}
+
+.favorites:hover {
+  box-shadow: 0 0 0 2px #ccc inset;
 }
 </style>

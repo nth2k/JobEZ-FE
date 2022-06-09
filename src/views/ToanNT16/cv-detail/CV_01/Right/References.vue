@@ -8,7 +8,7 @@
     <div class="col-12 text-left">
       <div class="row">
         <div class="col-10">
-          <div contenteditable="true">
+          <div contenteditable="true" class="custom-outline">
             Nguyễn Văn B – Team Leader
 
             <br />Công ty CP CV365 <br />SĐT: 0123456789
@@ -31,5 +31,13 @@ export default {
   color: #fcb617;
   line-height: 1.2rem;
   font-weight: 1.2rem;
+}
+
+.reference {
+  padding: 0.5rem;
+}
+
+.reference:hover {
+  box-shadow: 0 0 0 2px #ccc inset;
 }
 </style>

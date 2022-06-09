@@ -8,7 +8,7 @@
     <div class="col-12 text-left">
       <div class="row">
         <div class="col-10">
-          <div contenteditable="true">
+          <div contenteditable="true" class="custom-outline">
             Không ngừng học hỏi trao dồi những kiến thức về lập trình để phát
             triển kỹ năng chuyên môn.
             <br />Mục tiêu trong 1 năm tới, tôi sẽ trở thành 1 lập trình viên
@@ -32,5 +32,13 @@ export default {
   color: #fcb617;
   line-height: 1.2rem;
   font-weight: 1.2rem;
+}
+
+.career-goal {
+  padding: 0.5rem;
+}
+
+.career-goal:hover {
+  box-shadow: 0 0 0 2px #ccc inset;
 }
 </style>

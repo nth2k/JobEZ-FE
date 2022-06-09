@@ -10,13 +10,13 @@
       :key="activity.activityName"
       class="work-experience-content"
     >
-      <div class="activities-name" contenteditable="true">
+      <div class="activities-name custom-outline py-1" contenteditable="true">
         <strong>{{ activity.activityName }}</strong>
       </div>
-      <div class="position" contenteditable="true">
+      <div class="position custom-outline" contenteditable="true">
         {{ activity.position }}
       </div>
-      <div class="description" contenteditable="true">
+      <div class="description custom-outline" contenteditable="true">
         {{ activity.description }}
       </div>
     </div>
@@ -53,5 +53,17 @@ export default {
   color: #fcb617;
   line-height: 1.2rem;
   font-weight: 1.2rem;
+}
+
+.activities-name {
+  line-height: 1.5rem;
+  font-size: 1.4rem;
+}
+.activities-container {
+  padding: 0.5rem;
+}
+
+.activities-container:hover {
+  box-shadow: 0 0 0 2px #ccc inset;
 }
 </style>

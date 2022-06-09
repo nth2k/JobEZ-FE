@@ -7,13 +7,16 @@
     </header>
     <div class="participant-projects-content">
       <div v-for="project in projects" :key="project.projectName">
-        <div class="projects-name">
+        <div class="projects-name custom-outline">
           <strong contenteditable="true">{{ project.projectName }}</strong>
         </div>
-        <div class="project-description" contenteditable="true">
+        <div
+          class="project-description custom-outline py-1"
+          contenteditable="true"
+        >
           {{ project.projectDescription }}
         </div>
-        <div class="skill" contenteditable="true">
+        <div class="skill custom-outline" contenteditable="true">
           {{ project.skill }}
         </div>
       </div>
@@ -52,5 +55,17 @@ export default {
   color: #fcb617;
   line-height: 1.2rem;
   font-weight: 1.2rem;
+}
+
+.projects-name {
+  line-height: 1.5rem;
+  font-size: 1.4rem;
+}
+.education-container {
+  padding: 0.5rem;
+}
+
+.education-container:hover {
+  box-shadow: 0 0 0 2px #ccc inset;
 }
 </style>

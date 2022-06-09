@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-12 mt-4">
-      <div class="mb-4"><BasicInfomation /></div>
+      <div><BasicInfomation /></div>
     </div>
     <div class="col-12 mt-4"><CareerGoal /></div>
     <div class="col-12 mt-4"><Skills /></div>
