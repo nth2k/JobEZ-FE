@@ -30,8 +30,8 @@
               ></v-progress-circular>
             </v-overlay>
           </div>       
-          <div class="text--caption">Type or copy/paste.</div>
-
+          <div class="text--caption">Nhập hoặc copy/paste.</div>
+          
           <v-snackbar v-model="snackbar" :color="snackbarColor" :timeout="2000">
             {{ text }}
           </v-snackbar>
@@ -65,7 +65,7 @@ export default {
         this.snackbarColor = rsp === this.expectedOtp ? "success" : "warning";
         this.text = `Processed OTP with "${rsp}" (${this.snackbarColor})`;
         this.snackbar = true;
-      }, 2000);
+      }, 3500);
     },
   },
 };
