@@ -60,7 +60,7 @@
 
 <script>
 export default {
-  name: "Favorite",
+  name: "Favorites",
   data() {
     return {
       isHidden: false,
