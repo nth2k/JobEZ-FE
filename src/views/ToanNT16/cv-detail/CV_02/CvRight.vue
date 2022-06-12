@@ -1,28 +1,33 @@
 <template>
   <div class="row">
-    <div class="col-12"><AcademicLevel /></div>
-    <div class="col-12"><WorkExperience /></div>
-    <div class="col-12"><Activities /></div>
-    <div class="col-12"><ParticipantProjects /></div>
-    <div class="col-12"><MoreInformation /></div>
+    <div class="col-12"><BasicInfomation /></div>
+    <div class="col-12"><CareerGoal /></div>
+    <div class="col-12"><Skills /></div>
+    <div class="col-12"><Awards /></div>
+    <div class="col-12"><Certificates /></div>
+    <div class="col-12"><Favorites /></div>
+    <div class="col-12"><References /></div>
   </div>
 </template>
 
 <script>
-import AcademicLevel from "./Content/AcademicLevel.vue";
-import WorkExperience from "./Content/WorkExperience.vue";
-import Activities from "./Content/Activities.vue";
-import ParticipantProjects from "./Content/ParticipantProjects.vue";
-import MoreInformation from "./Content/MoreInformation.vue";
-
+import BasicInfomation from "./Right/BasicInfomation.vue";
+import CareerGoal from "./Right/CareerGoal.vue";
+import Skills from "./Right/Skills.vue";
+import Awards from "./Right/Awards.vue";
+import Certificates from "./Right/Certificates.vue";
+import Favorites from "./Right/Favorites.vue";
+import References from "./Right/References.vue";
 export default {
   name: "CvRight",
   components: {
-    AcademicLevel,
-    WorkExperience,
-    Activities,
-    ParticipantProjects,
-    MoreInformation,
+    BasicInfomation,
+    CareerGoal,
+    Skills,
+    Awards,
+    Certificates,
+    Favorites,
+    References,
   },
 };
 </script>
