@@ -9,11 +9,11 @@
           <div class="register"><button class="btn"><router-link to="/candidateRegister">Đăng kí</router-link></button></div>
         </div>
         <h2>Chào mừng trở lại!</h2>
-        <form class="login-form" action="" method="">
+        <form class="login-form" action="" method="post">
           <h5>Email<span style="color: red">*</span></h5>
-          <input type="text" value="" placeholder="Nhập email" />
+          <input type="text" name="email" value="" placeholder="Nhập email" />
           <h5>Mật khẩu<span style="color: red">*</span></h5>
-          <input type="password" value="" placeholder="Nhập mật khẩu" />
+          <input type="password" name="password" value="" placeholder="Nhập mật khẩu" />
           <p>Quên mật khẩu?</p>
           <button class="btn" type="submit">Đăng nhập</button>
         </form>

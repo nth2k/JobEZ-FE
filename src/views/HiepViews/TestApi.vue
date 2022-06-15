@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 500px">
     <div class="text-center">
       <h1>Employees</h1>
 
@@ -9,8 +9,8 @@
           <td>firstName</td>
           <td>lastName</td>
           <td>email</td>
-          <td>update</td>
           <td>delete</td>
+          <td>update</td>
         </tr>
         <tr v-for="employee in listEmployee" v-bind:key="employee.id">
           <td>{{ employee.id }}</td>
@@ -22,12 +22,12 @@
               class="btn btn-secondary"
               @click="deleteEmployee(employee.id)"
             >
-              update
+              delete
             </button>
           </td>
           <td>
             <button class="btn btn-danger" @click="updateEmployee">
-              delete
+              update
             </button>
           </td>
         </tr>
@@ -35,42 +35,48 @@
     </div>
 
     <div class="m-5">
-      <form @submit.prevent="addEmployee()">
-        <label>First Name</label>
-        <input
-          class="ml-5"
-          style="border: 1px solid black"
-          type="text"
-          v-model="employee.firstName"
-        />
-        <br />
+      <label>Id</label>
+      <input
+        class="ml-5"
+        style="border: 1px solid black"
+        type="text"
+        v-model="employee.id"
+      />
+      <br />
+      <label>First Name</label>
+      <input
+        class="ml-5"
+        style="border: 1px solid black"
+        type="text"
+        v-model="employee.firstName"
+      />
+      <br />
 
-        <label>Last Name</label>
-        <input
-          class="ml-5"
-          style="border: 1px solid black"
-          type="text"
-          v-model="employee.lastName"
-        />
-        <br />
+      <label>Last Name</label>
+      <input
+        class="ml-5"
+        style="border: 1px solid black"
+        type="text"
+        v-model="employee.lastName"
+      />
+      <br />
 
-        <label>Email</label>
-        <input
-          class="ml-5"
-          style="border: 1px solid black"
-          type="text"
-          v-model="employee.email"
-        />
-        <br />
+      <label>Email</label>
+      <input
+        class="ml-5"
+        style="border: 1px solid black"
+        type="text"
+        v-model="employee.email"
+      />
+      <br />
 
-        <button type="submit" class="btn btn-primary">Add</button>
-      </form>
+      <button v-on:click="addEmployee()" class="btn btn-primary">Add</button>
     </div>
   </div>
 </template>
 
 <script>
-import EmployeeService from "@/services/EmployeeService.js";
+import EmployeeService from "@/services/TestApiService.js";
 // import axios from "axios";
 
 export default {
@@ -89,18 +95,15 @@ export default {
   methods: {
     getEmployee() {
       EmployeeService.getEmployee().then((res) => {
-        console.log(res.data);
-        this.listEmployee = res.data; 
+        this.listEmployee = res.data;
       });
     },
     addEmployee() {
-      EmployeeService.addEmployee(this.employee).then((res) => {
-        alert(res);
-      });
+      EmployeeService.addEmployee(this.employee).then(() => {});
     },
     deleteEmployee(id) {
       EmployeeService.deleteEmployee(id).then(() => {
-        this.getEmployee()
+        this.getEmployee();
       });
     },
   },
