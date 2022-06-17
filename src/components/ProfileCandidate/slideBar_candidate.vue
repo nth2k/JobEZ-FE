@@ -89,6 +89,24 @@
 
 <script>
 export default {};
+let progressBar = document.querySelector(".circular-progress");
+let valueContainer = document.querySelector(".value-container");
+
+let progressValue = 20;
+let progressEndValue = 50;
+let speed = 50;
+
+let progress = setInterval(() => {
+  progressValue++;
+  valueContainer.textContent = `${progressValue}%`;
+  progressBar.style.background = `conic-gradient(
+      #4d5bf9 ${progressValue * 3.6}deg,
+      #cadcff ${progressValue * 3.6}deg
+  )`;
+  if (progressValue == progressEndValue) {
+    clearInterval(progress);
+  }
+}, speed);
 
 </script>
 
@@ -103,6 +121,7 @@ export default {};
   --color_slide_bar_selection: #1b2467;
   --color_text: #2A3563;
   --color_hover: #C4C4C4;
+  --color_border_Slidebar: #D3D3D3;
 
 }
 #slide_bar {

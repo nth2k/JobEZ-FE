@@ -7,10 +7,12 @@
     <div class="boder_profile_online">
       <div class="col-sm-3" id="slide_bar_profile_online">
         <div>Tiến trình hồ sơ</div>
-        <div class="circular-progress">
-          <div class="value-container">0%</div>
+        <div id="border_circular-progress">
+          <div class="circular-progress">
+            <div class="value-container">0%</div>
+          </div>
         </div>
-        <li class="item_slide_bar_small"> 
+        <li class="item_slide_bar_small">
           <div class="item_slide_bar_selection_small">Thông tin liên hệ</div>
         </li>
         <li class="item_slide_bar_small">
@@ -41,24 +43,7 @@
 </template>
 
 <script>
-let progressBar = document.querySelector(".circular-progress");
-let valueContainer = document.querySelector(".value-container");
 
-let progressValue = 20;
-let progressEndValue = 50;
-let speed = 50;
-
-let progress = setInterval(() => {
-  progressValue++;
-  valueContainer.textContent = `${progressValue}%`;
-  progressBar.style.background = `conic-gradient(
-      #4d5bf9 ${progressValue * 3.6}deg,
-      #cadcff ${progressValue * 3.6}deg
-  )`;
-  if (progressValue == progressEndValue) {
-    clearInterval(progress);
-  }
-}, speed);
 export default {
   name: "ProfileOnline",
 };
@@ -92,11 +77,19 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
+#border_circular-progress{
+  position: relative;
+  height: 150px;
+  width: 80%;
+  margin: 0px 0px 23px 23px;
+  border-bottom: 2px solid var(--color_border_Slidebar);
+}
 .circular-progress {
   position: relative;
-  height: 250px;
-  width: 250px;
   border-radius: 50%;
+    height: 120px;
+  width: 120px;
+   margin: 0px 0px 60px 60px;
   display: grid;
   place-items: center;
 }
@@ -135,6 +128,5 @@ h2 {
 }
 .item_slide_bar_selection_small:hover {
   background-color: var(--color_hover);
-  border-right: 3.5px solid var(--color_yellow);
 }
 </style>
