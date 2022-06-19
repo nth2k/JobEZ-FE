@@ -30,7 +30,12 @@ export default {
   components:{
     ChooseCandidate,
     TopHeaderComponent
-  }
+  },
+  data(){
+    return {
+      
+    }
+  },
 };
 </script>
 
