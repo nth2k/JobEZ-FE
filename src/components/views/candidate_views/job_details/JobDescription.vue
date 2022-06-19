@@ -108,28 +108,28 @@
         <div class="d-flex flex-row">
           <div class="mr-1">
             <img
-              src="../../../../assets/company_image.jpg"
+              src="@/assets/company_image.jpg"
               alt="company_image"
               class="img-thumbnail"
             />
           </div>
           <div>
             <img
-              src="../../../../assets/company_image.jpg"
+              src="@/assets/company_image.jpg"
               alt="company_image"
               class="img-thumbnail"
             />
           </div>
           <div class="mr-1">
             <img
-              src="../../../../assets/company_image.jpg"
+              src="@/assets/company_image.jpg"
               alt="company_image"
               class="img-thumbnail"
             />
           </div>
           <div>
             <img
-              src="../../../../assets/company_image.jpg"
+              src="@/assets/company_image.jpg"
               alt="company_image"
               class="img-thumbnail"
             />
@@ -137,6 +137,9 @@
         </div>
       </div>
       <div class="span_ut">
+        <div class="col-3 col-sm-6"></div>
+        <div class="col-3 col-sm-6"></div>
+        <div class="col-3 col-sm-6"></div>
         <span
           style="margin-right: 20px"
           class="btn_ungtuyen"
@@ -441,15 +444,6 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="dm_gy_list rut_gon">
-        <span class="show_cd"
-          ><img src="/images/icons_more.png" alt="Xem thêm gợi ý"
-        /></span>
-        <span class="hiden_cd"
-          ><img src="/images/icons_hiden.png" alt="Xem thêm gợi ý"
-        /></span>
-      </div> -->
       <p class="dm_gyy descibe">Từ khóa liên quan:</p>
 
       <div class="container">
@@ -547,14 +541,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="dm_gy_list rut_gon">
-        <span class="show_cd"
-          ><img src="/images/icons_more.png" alt="Xem thêm gợi ý"
-        /></span>
-        <span class="hiden_cd"
-          ><img src="/images/icons_hiden.png" alt="Xem thêm gợi ý"
-        /></span>
-      </div> -->
     </div>
   </div>
 </template>

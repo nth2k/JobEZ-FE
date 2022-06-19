@@ -1,24 +1,22 @@
 <template>
-  <!-- <CandidateProfile /> -->
-  <!-- <JobDetails /> -->
-  <!-- <RecruiterProfile /> -->
-  <CurriculumVitae_01 />
+  <div>
+    <JobApplication />
+  </div>
 </template>
 
 <script>
-// import CandidateProfile from "./components/views/candidate_views/CandidateProfile.vue";
-// import JobDetails from "./components/views/recruiter_views/JobDetails.vue";
-// import Header from "./components/views/Header.vue";
-// import RecruiterProfile from "./components/views/RecruiterProfile.vue";
-// import ProfileHeader from "./components/views/candidate_views/candidate_management/candidate_management_profile/ProfileHeader.vue";
-// import ListOfCv from "./views/ToanNT16/cv_menu/CVs.vue";
-import CurriculumVitae_01 from "./views/ToanNT16/curriculum_vitae/CurriculumVitae_01.vue";
-// import JobApplication_01 from "./views/ToanNT16/JobApplication_01.vue";
+// import JobDetails from "@/views/ToanNT16/guest/job_details/JobDetails.vue";
+// import RecruiteProfile from "@/views/ToanNT16/recruiter/profile/RecruiterProfile.vue";
+// import CandidateProfile from "@/views/ToanNT16/candidate/profile/CandidateProfile.vue";
+// import JobDetails from "@/views/ToanNT16/recruiter/job_details_login/JobDetails.vue";
+// import GeneralManagement from "@/components/ToanComponents/GeneralManagement.vue";
+// import CVs from "@/components/ToanComponents/CVs.vue";
+import JobApplication from "@/components/ToanComponents/JobApplication.vue";
 
 export default {
   name: "App",
   components: {
-    CurriculumVitae_01,
+    JobApplication,
   },
 };
 </script>
