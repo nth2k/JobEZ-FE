@@ -98,8 +98,16 @@ export default {
         this.listEmployee = res.data;
       });
     },
-    addEmployee() {
-      EmployeeService.addEmployee(this.employee).then(() => {});
+    async addEmployee() {
+      let result = {
+        id : this.employee.id,
+        firstName: this.employee.firstName,
+        lastName: this.employee.lastName,
+        email: this.employee.email,
+      }
+      await EmployeeService.addEmployee(result).then(() => {});
+
+      console.log(result);
     },
     deleteEmployee(id) {
       EmployeeService.deleteEmployee(id).then(() => {
