@@ -4,12 +4,8 @@
     <div class="row">
       <ChooseCandidate />
       <div class="col-6" style="padding-left: 100px; padding-top: 100px">
-        <div class="back-page">
-          <b-icon icon="arrow-left" aria-hidden="true"></b-icon><span> Back</span>
-        </div>
         <p class="mt-2" style="font-weight: bold">
-          Step 2: Complete the cv: You choose one of the following two ways to
-          complete the application
+          Bước 2: Hoàn thành cv: Bạn chọn một trong hai cách sau để hoàn thành hồ sơ
         </p>
         <div class="row mt-5 mb-5">
           <div @click="onlineForm" class="cv-online">
@@ -28,25 +24,21 @@
           </div>
         </div>
         <div class="guide mt-5 p-2">
-          <span style="font-weight: bold; color: red">Tutorial:</span>
+          <span style="font-weight: bold; color: red">Hướng dẫn:</span>
           <p>
             <span style="font-weight: bold"
-              >Create a profile with an online declaration form:</span
+              >Tạo hồ sơ bằng mẫu khai báo trực tuyến:</span
             >
-            you create all your information for employers to have a basis for
-            selection. The more detailed information your job opportunities
-            increase
+            bạn tạo mọi thông tin của mình để nhà tuyển dụng có cơ sở lựa chọn. Thông tin càng chi tiết, cơ hội việc làm của bạn càng tăng
           </p>
           <p>
             <span style="font-weight: bold"
-              >Upload your cv from your computer:</span
+              >Tải lên cv của bạn từ máy tính của bạn:</span
             >
-            you already have your resume ready from your computer, you just need
-            to upload your cv and confirm your email to complete the
-            registration process.
+            bạn đã chuẩn bị sẵn hồ sơ từ máy tính, bạn chỉ cần tải cv lên và xác nhận email để hoàn tất quá trình đăng ký.
           </p>
           <p style="font-weight: bold">
-            Both profiles are searchable by employers
+            Cả hai hồ sơ đều có thể tìm kiếm được bởi nhà tuyển dụng
           </p>
         </div>
       </div>

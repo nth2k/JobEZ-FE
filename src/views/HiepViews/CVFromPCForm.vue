@@ -6,22 +6,22 @@
       <div class="row">
         <div class="col-3"></div>
         <div class="col-3 left-form">
-          <span>Birthdate<span style="color: red">*</span></span
+          <span>Ngày sinh<span style="color: red">*</span></span
           ><br />
-          <input type="text" placeholder="Enter dd/MM/yyyy" /><br />
-          <span>University<span style="color: red">*</span></span
+          <input type="text" placeholder="Nhập dd/MM/yyyy" /><br />
+          <span>Đại học<span style="color: red">*</span></span
           ><br />
-          <input type="text" placeholder="Enter university name" /><br />
+          <input type="text" placeholder="Nhập tên trường đại học" /><br />
         </div>
         <div class="col-3 right-form">
-          <span>Rating<span style="color: red">*</span></span
+          <span>Xếp loại<span style="color: red">*</span></span
           ><br />
           <select name="rating" id="">
             <option value="0">Excellent certificate</option>
             <option value="1">Good certificate</option>
             <option value="2">Average certificate</option></select
           ><br />
-          <span>Years of experience<span style="color: red">*</span></span
+          <span>Số năm kinh nghiệm<span style="color: red">*</span></span
           ><br />
           <select name="experience" id="">
             <option value="1">1 year</option>
@@ -34,7 +34,7 @@
         <div class="col-3"></div>
         <input type="file" name="file" id="" class="file-cv" />
       </div>
-      <button type="submit" class="btn mt-5 mb-5 btn-regist">Regist</button>
+      <button type="submit" class="btn mt-5 mb-5 btn-regist">Đăng ký</button>
     </form>
   </div>
 </template>
