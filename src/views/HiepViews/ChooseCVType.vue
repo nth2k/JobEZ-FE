@@ -12,14 +12,14 @@
           complete the application
         </p>
         <div class="row mt-5 mb-5">
-          <div class="cv-online">
+          <div @click="onlineForm" class="cv-online">
             <img
               src="https://media.gcflearnfree.org/content/55e0730c7dd48174331f5164_01_17_2014/whatisacomputer_desktop_computers.jpg"
               alt=""
             />
             <span style="font-weight: bold">Use Online form</span>
           </div>
-          <div class="cv-from-pc">
+          <div @click="cvFromPC" class="cv-from-pc">
             <img
               src="https://png.pngtree.com/png-vector/20191030/ourlarge/pngtree-adaptive-computer-mobile-pc-responsive-icon-for-web-png-image_1927634.jpg"
               alt=""
@@ -63,6 +63,14 @@ export default {
     ChooseCandidate,
     TopHeaderComponent,
   },
+  methods:{
+    onlineForm(){
+      this.$router.push("/candidateOnlineCVForm")
+    },
+    cvFromPC(){
+      this.$router.push("/cvFromPCForm")
+    }
+  }
 };
 </script>
 
