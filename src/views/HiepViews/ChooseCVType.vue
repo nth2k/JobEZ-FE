@@ -13,7 +13,7 @@
               src="https://media.gcflearnfree.org/content/55e0730c7dd48174331f5164_01_17_2014/whatisacomputer_desktop_computers.jpg"
               alt=""
             />
-            <span style="font-weight: bold">Dùng Online form</span>
+            <span style="font-weight: bold">Dùng Form Online</span>
           </div>
           <div @click="cvFromPC" class="cv-from-pc">
             <img
