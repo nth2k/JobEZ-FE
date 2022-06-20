@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderComponent />
-    <h2 class="text-center mt-5 mb-5">Profile information</h2>
+    <h2 class="text-center mt-5 mb-5">Hồ sơ ứng viên</h2>
     <form action="" method="post">
       <div class="row">
         <div class="col-3"></div>

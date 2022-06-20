@@ -13,14 +13,14 @@
               src="https://media.gcflearnfree.org/content/55e0730c7dd48174331f5164_01_17_2014/whatisacomputer_desktop_computers.jpg"
               alt=""
             />
-            <span style="font-weight: bold">Use Online form</span>
+            <span style="font-weight: bold">Dùng Online form</span>
           </div>
           <div @click="cvFromPC" class="cv-from-pc">
             <img
               src="https://png.pngtree.com/png-vector/20191030/ourlarge/pngtree-adaptive-computer-mobile-pc-responsive-icon-for-web-png-image_1927634.jpg"
               alt=""
             />
-            <span style="font-weight: bold">Upload CV from PC</span>
+            <span style="font-weight: bold">Tải CV từ PC</span>
           </div>
         </div>
         <div class="guide mt-5 p-2">
