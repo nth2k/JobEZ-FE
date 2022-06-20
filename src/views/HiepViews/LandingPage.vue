@@ -229,23 +229,23 @@
       <h5>VIỆC LÀM HẤP DẪN</h5>
       <hr />
       <div class="job-container1">
-        <div class="job row p-3 m-3">
+        <div v-for="job in listJob" :key="job.attractiveJob.id" class="job row p-3 m-3">
           <div class="logo">
             <img
               style="width: 70px; height: 70px"
-              src="https://tuyendung.fpt.com.vn/public/img/logo-ft.png"
+              :src="job.attractiveJob.images"
               alt=""
             />
           </div>
           <div class="job-info pl-4">
-            <span style="color: red">NHÂN VIÊN PHA CHẾ MỸ PHẨM</span><br />
-            <span>CÔNG TY TNHH HANACOS VN</span><br />
+            <span style="color: red">{{ job.attractiveJob.job_name }}</span><br />
+            <span>{{ job.attractiveJob.commission }}</span><br />
             <b-icon icon="pin-map" aria-hidden="true"></b-icon>
-            <span> Toàn quốc</span><br />
+            <span> {{ job.attractiveJob.address }} </span><br />
             <b-icon icon="briefcase" aria-hidden="true"></b-icon
-            ><span> Hạn nộp: 21/01/2022</span><br />
+            ><span> Hạn nộp: {{ job.attractiveJob.deadline_for_submission }}</span><br />
             <b-icon icon="coin" aria-hidden="true"></b-icon
-            ><span style="color: red"> 7 - 15 triệu</span>
+            ><span style="color: red"> {{ job.attractiveJob.salary }}</span>
           </div>
         </div>
         <div class="job"></div>
@@ -338,12 +338,25 @@
 </template>
 
 <script>
+import LandingPageService from "@/services/LandingPageService.js";
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
 export default {
   name: "LandingPage",
   components: {
     HeaderComponent,
   },
+  data(){
+    return{
+      listJob : [],
+    }
+  },
+  methods: {
+    getJobs(){
+      LandingPageService.getJobs().then((res) => {
+        this.listJob = res.data;
+      });
+    }
+  }
 };
 </script>
 

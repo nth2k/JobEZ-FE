@@ -18,7 +18,7 @@
           <input type="password" value="" placeholder="Nhập mật khẩu" />
           <h5>Xác nhận mật khẩu<span style="color: red">*</span></h5>
           <input type="password" value="" placeholder="Xác nhận mật khẩu" />
-          <button class="btn" type="submit">Đăng ký</button>
+          <button @click="submit" class="btn" type="submit">Đăng ký</button>
         </form>
       </div>
     </div>
@@ -34,6 +34,11 @@ export default {
     ChooseRecruiter,
     TopHeaderComponent,
   },
+  methods:{
+    submit(){
+      this.$router.push("/recruiterOnlineCVForm")
+    }
+  }
 };
 </script>
 
