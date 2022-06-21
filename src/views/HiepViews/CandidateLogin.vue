@@ -1,38 +1,78 @@
 <template>
-  <div>
-    <TopHeaderComponent />
-    <div class="row">     
-      <ChooseCandidate />
-      <div class="col-6 " style="padding: 150px">
-        <div class="tab">
-          <div class="login"><button class="btn"><router-link to="/candidateLogin">Đăng nhập</router-link></button></div>
-          <div class="register"><button class="btn"><router-link to="/candidateRegister">Đăng kí</router-link></button></div>
+  <v-app>
+    <div>
+      <TopHeaderComponent />
+      <div class="row">
+        <ChooseCandidate />
+        <div class="col-6" style="padding: 150px">
+          <div class="tab">
+            <div class="login">
+              <button class="btn">
+                <router-link to="/candidateLogin">Đăng nhập</router-link>
+              </button>
+            </div>
+            <div class="register">
+              <button class="btn">
+                <router-link to="/candidateRegister">Đăng kí</router-link>
+              </button>
+            </div>
+          </div>
+          <h2>Chào mừng trở lại!</h2>
+          <div class="login-form">
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <h5>Email<span style="color: red">*</span></h5>
+              <v-text-field
+                label="Nhập Email"
+                outlined
+                dense
+                v-model="email"
+                :rules="emailRules"
+                required
+              ></v-text-field>
+              <h5>Mật khẩu<span style="color: red">*</span></h5>
+              <v-text-field
+                v-model="password"
+                :rules="passwordRules"
+                label="Nhập Password"
+                outlined
+                dense
+                required
+              ></v-text-field>
+              <p>Quên mật khẩu?</p>
+              <button class="btn" @click="submit">Đăng nhập</button>
+            </v-form>
+          </div>
         </div>
-        <h2>Chào mừng trở lại!</h2>
-        <form class="login-form" action="" method="post">
-          <h5>Email<span style="color: red">*</span></h5>
-          <input type="text" name="email" value="" placeholder="Nhập email" />
-          <h5>Mật khẩu<span style="color: red">*</span></h5>
-          <input type="password" name="password" value="" placeholder="Nhập mật khẩu" />
-          <p>Quên mật khẩu?</p>
-          <button class="btn" type="submit">Đăng nhập</button>
-        </form>
       </div>
     </div>
-  </div>
+  </v-app>
 </template>
 
 <script>
-import ChooseCandidate from '@/components/HiepComponents/ChooseCandidate.vue'
-import TopHeaderComponent from '@/components/HiepComponents/TopHeaderComponent.vue'
+import ChooseCandidate from "@/components/HiepComponents/ChooseCandidate.vue";
+import TopHeaderComponent from "@/components/HiepComponents/TopHeaderComponent.vue";
 export default {
-  name: 'CandidateLogin',
-  components:{
+  name: "CandidateLogin",
+  components: {
     ChooseCandidate,
-    TopHeaderComponent
+    TopHeaderComponent,
   },
-  data(){
-    return {
+  data: () => ({
+    valid: true,
+    email: "",
+    emailRules: [
+      (v) => !!v || "E-mail is required",
+      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+    ],
+    password: "",
+    passwordRules: [
+      (v) => !!v || "Password is required",
+      (v) => (v && v.length > 5) || "Password must be more than 5 characters",
+    ],
+  }),
+
+  methods: {
+    submit(){
       
     }
   },
@@ -46,17 +86,17 @@ export default {
   align-items: flex-start;
 }
 
-.tab button{
-  color: #6874D7;
+.tab button {
+  color: #6874d7;
   width: 200px;
   height: 40px;
   background-color: rgba(76, 91, 212, 0.1);
   border-radius: 5px;
 }
 
-.tab button a{
+.tab button a {
   text-decoration: none;
-  color: #6874D7;
+  color: #6874d7;
 }
 
 h2 {
@@ -72,7 +112,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-.login-form input{
+.login-form input {
   margin-bottom: 20px;
   width: 500px;
   height: 50px;
@@ -81,16 +121,15 @@ h2 {
   border: 1px solid black;
 }
 
-.login-form p{
+.login-form p {
   float: right;
 }
 
-.login-form button{
+.login-form button {
   width: 500px;
   height: 50px;
-  background-color: #6874D7;
+  background-color: #6874d7;
   color: white;
 }
-
 </style>
 
