@@ -2,10 +2,7 @@
   <div class="container-fluid candidate-support bg-white">
     <div class="row">
       <div class="col-1">
-        <img
-          class="rounded-circle img-fluid"
-          src="../../../../../assets/ns.jpg"
-        />
+        <img class="rounded-circle img-fluid" src="@/assets/ns.jpg" />
       </div>
       <div class="col-4 text-left p-0 my-4">
         Chuyên viên hỗ trợ tư vấn dành cho ứng viên

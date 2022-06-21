@@ -40,7 +40,7 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          <img src="../../../../../assets/chuong.png" alt="Thông báo" />
+          <img src="@/assets/chuong.png" alt="Thông báo" />
           <i>5</i>
         </a>
         <div
@@ -74,7 +74,7 @@
         <div class="col-9 row b-0">
           <img
             class="col-3 avatar rounded-circle"
-            src="../../../../../assets/no_img3.png"
+            src="@/assets/no_img3.png"
             alt="Hình ảnh ứng viên"
           />
           <span class="col-7 my-auto p-0">Nguyễn Thế Toàn</span>
@@ -88,10 +88,7 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img
-                src="../../../../../assets/icon_dot.png"
-                class="rounded-circle"
-              />
+              <img src="@/assets/icon_dot.png" class="rounded-circle" />
             </a>
             <div
               class="dropdown-menu dropdown-menu-right"
@@ -100,16 +97,13 @@
               <a class="dropdown-item" href="#"
                 ><img
                   class="mb-1 mr-2"
-                  src="../../../../../assets/icon_pp.png"
+                  src="@/assets/icon_pp.png"
                   alt=""
                 />Thông tin cá nhân</a
               >
               <a class="dropdown-item" href="#"
-                ><img
-                  class="mb-1 mr-2"
-                  src="../../../../../assets/icon_dx.png"
-                  alt=""
-                />Đăng xuất</a
+                ><img class="mb-1 mr-2" src="@/assets/icon_dx.png" alt="" />Đăng
+                xuất</a
               >
             </div></span
           >
