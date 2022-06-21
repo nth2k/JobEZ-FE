@@ -1,29 +1,29 @@
 <template>
   <div class="header">
     <div class="menu" v-on:click="isClicked = !isClicked">
-        <b-icon icon="grid" aria-hidden="true"></b-icon>
+        <img src="@/assets/sub_icon2.png" alt="" class="w-100 h-100">
     </div>
     <div class="login-regist">
       <router-link to="/candidateLogin">Đăng nhập</router-link><span>/</span><router-link to="/candidateRegister">Đăng ký</router-link>
     </div>
     <div v-if="isClicked" class="menu-container">
       <div>
-        <b-icon icon="journals" aria-hidden="true"></b-icon><span>Nhà tuyển dụng</span>
+        <img src="@/assets/ic_new6.png" alt=""><span>Nhà tuyển dụng</span>
       </div>
       <div>
-        <b-icon icon="people" aria-hidden="true"></b-icon><span>Ứng viên</span>
+        <img src="@/assets/ic_new5.png" alt=""><span>Ứng viên</span>
       </div>
       <div>
-        <b-icon icon="person" aria-hidden="true"></b-icon><span>Tìm ứng viên gần đây</span>
+        <img src="@/assets/icon_vlquanhday.png" alt=""><span>Tìm ứng viên gần đây</span>
       </div>
       <div>
-        <b-icon icon="briefcase" aria-hidden="true"></b-icon><span>Tìm công việc gần đây</span>
+        <img src="@/assets/icon_trangvang.png" alt=""><span>Tìm công việc gần đây</span>
       </div>
       <div>
-        <b-icon icon="newspaper" aria-hidden="true"></b-icon><span>Đăng tin miễn phí</span>
+        <img src="@/assets/icon_free_dt.png" alt=""><span>Đăng tin miễn phí</span>
       </div>
       <div>
-        <b-icon icon="hdd-network" aria-hidden="true"></b-icon><span>Việc làm từ xa</span>
+        <img src="@/assets/icon_free_dt.png" alt=""><span>Việc làm từ xa</span>
       </div>
     </div>
   </div>

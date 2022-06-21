@@ -1,15 +1,15 @@
 <template>
   <div>
     <router-view></router-view>
-    <TestApi />
+    <!-- <TestApi /> -->
   </div>
 </template>
 
 <script>
-import TestApi from "@/views/HiepViews/TestApi.vue"
+// import TestApi from "@/views/HiepViews/TestApi.vue"
 export default {
   name: "App",
-  components: {TestApi}, 
+  components: {}, 
 };
 </script>
 
