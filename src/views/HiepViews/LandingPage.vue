@@ -16,11 +16,11 @@
       </div>
       <div class="row advance">
         <div class="col-4 text-center">
-          <b-icon icon="newspaper" aria-hidden="true"></b-icon><br />
+          <img src="@/assets/HomePage1.png" alt=""><br />
           Đăng tin miễn phí
         </div>
         <div class="col-4 text-center">
-          <b-icon icon="search" aria-hidden="true"></b-icon><br />
+          <img src="@/assets/HomePage2.png" alt=""><br />
           <div class="search_nc mb-3 mt-5">
             <div
               class="modal fade bd-example-modal-lg"
@@ -219,7 +219,7 @@
           </div>
         </div>
         <div class="col-4 text-center">
-          <b-icon icon="globe" aria-hidden="true"></b-icon><br />
+          <img src="@/assets/HomePage3.png" alt=""><br />
           Việc làm từ xa
         </div>
       </div>
@@ -229,33 +229,25 @@
       <h5>VIỆC LÀM HẤP DẪN</h5>
       <hr />
       <div class="job-container1">
-        <div class="job row p-3 m-3">
+        <div v-for="(job, id) in listJob.attractiveJob" :key="id" class="job row p-3 m-3 h-auto">
           <div class="logo">
             <img
               style="width: 70px; height: 70px"
-              src="https://tuyendung.fpt.com.vn/public/img/logo-ft.png"
+              :src="job.images"
               alt=""
             />
           </div>
-          <div class="job-info pl-4">
+          <div class="job-info w-75 h-auto pl-4">
             <span style="color: red">NHÂN VIÊN PHA CHẾ MỸ PHẨM</span><br />
-            <span>CÔNG TY TNHH HANACOS VN</span><br />
-            <b-icon icon="pin-map" aria-hidden="true"></b-icon>
-            <span> Toàn quốc</span><br />
-            <b-icon icon="briefcase" aria-hidden="true"></b-icon
-            ><span> Hạn nộp: 21/01/2022</span><br />
-            <b-icon icon="coin" aria-hidden="true"></b-icon
-            ><span style="color: red"> 7 - 15 triệu</span>
+            <span>{{ job.commission }}</span><br />
+            <img src="@/assets/icn_location.png" alt="">
+            <span> Hà Nội </span><br />
+            <img src="@/assets/hn_icon.png" alt="">
+            <span> Hạn nộp: {{ job.deadlineForSubmission }}</span><br />
+            <img src="@/assets/icn_money.png" alt="">
+            <span style="color: red"> 7tr</span>
           </div>
         </div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
       </div>
     </div>
     <div class="row">
@@ -263,32 +255,23 @@
         <h5>VIỆC LÀM THƯƠNG HIỆU</h5>
         <hr />
         <div class="job-container2">
-          <div class="job2 row p-3 m-3">
+          <div  v-for="(job, id) in listJob.urgentRecruitment" :key="id" class="job2 row p-3 m-3 h-auto">
             <div class="logo">
               <img
                 style="width: 70px; height: 70px"
-                src="https://tuyendung.fpt.com.vn/public/img/logo-ft.png"
+                :src="job.images"
                 alt=""
               />
             </div>
             <div class="job-info pl-4">
               <span style="color: red">NHÂN VIÊN PHA CHẾ MỸ PHẨM</span><br />
-              <span>CÔNG TY TNHH HANACOS VN</span><br />
-              <b-icon icon="pin-map" aria-hidden="true"></b-icon>
+              <span>{{ job.commission }}</span><br />
+              <img src="@/assets/icn_location.png" alt="">
               <span> Toàn quốc</span><br />
-              <b-icon icon="briefcase" aria-hidden="true"></b-icon
-              ><span> Hạn nộp: 21/01/2022</span><br />
-              <b-icon icon="coin" aria-hidden="true"></b-icon
-              ><span style="color: red"> 7 - 15 triệu</span>
+              <img src="@/assets/hn_icon.png" alt=""><span> Hạn nộp: {{ job.deadlineForSubmission }}</span><br />
+              <img src="@/assets/icn_money.png" alt=""><span style="color: red"> 7 - 15 triệu</span>
             </div>
           </div>
-          <div class="job2"></div>
-          <div class="job2"></div>
-          <div class="job2"></div>
-          <div class="job2"></div>
-          <div class="job2"></div>
-          <div class="job2"></div>
-          <div class="job2"></div>
         </div>
         <div class="hotline mt-5">
           <div class="hotline-header">
@@ -338,12 +321,29 @@
 </template>
 
 <script>
+import LandingPageService from "@/services/LandingPageService.js";
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
 export default {
   name: "LandingPage",
   components: {
     HeaderComponent,
   },
+  data(){
+    return{
+      listJob : null,
+    }
+  },
+  methods: {
+    async getJobs(){
+      await LandingPageService.getHomePage().then((res) => {
+        this.listJob = res.data;
+        console.log(res.data);
+      });
+    }
+  },
+  created(){
+    this.getJobs();
+  }
 };
 </script>
 
