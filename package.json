@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@babel/preset-env": "^7.18.2",
+    "@mdi/font": "^6.7.96",
     "axios": "^0.27.2",
     "bootstrap-icons": "^1.8.2",
     "bootstrap-vue": "^2.22.0",
