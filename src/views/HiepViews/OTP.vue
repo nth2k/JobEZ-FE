@@ -1,45 +1,50 @@
 <template>
-  <div>
-    <TopHeaderComponent />
-    <div class="row">
-      <div class="col-6 intro">
-        <h1>JobEZ</h1>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s
-        </p>
-      </div>
-      <div class="col-6" style="padding: 150px">
-        <h2>Nhập mã xác thực</h2>
-        <p class="mt-4">
-          Vui lòng điền mã xác thực gồm 6 số. Mã xác thực sẽ được gửi về địa chỉ
-          e-mail của bạn.
-        </p>
-        <div>
-          <div class="ma-auto position-relative" style="max-width: 300px">
-            <v-otp-input
-              v-model="otp"
-              :disabled="loading"
-              @finish="onFinish"
-            ></v-otp-input>
-            <v-overlay absolute :value="loading">
-              <v-progress-circular
-                indeterminate
-                color="primary"
-              ></v-progress-circular>
-            </v-overlay>
-          </div>       
-          <div class="text--caption">Nhập hoặc copy/paste.</div>
-          
-          <v-snackbar v-model="snackbar" :color="snackbarColor" :timeout="2000">
-            {{ text }}
-          </v-snackbar>
+  <v-app>
+    <div>
+      <TopHeaderComponent />
+      <div class="row">
+        <div class="col-6 intro">
+          <h1>JobEZ</h1>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s
+          </p>
         </div>
-        
+        <div class="col-6" style="padding: 150px">
+          <h2>Nhập mã xác thực</h2>
+          <p class="mt-4">
+            Vui lòng điền mã xác thực gồm 6 số. Mã xác thực sẽ được gửi về địa
+            chỉ e-mail của bạn.
+          </p>
+          <div>
+            <div class="ma-auto position-relative" style="max-width: 300px">
+              <v-otp-input
+                v-model="otp"
+                :disabled="loading"
+                @finish="onFinish"
+              ></v-otp-input>
+              <v-overlay absolute :value="loading">
+                <v-progress-circular
+                  indeterminate
+                  color="primary"
+                ></v-progress-circular>
+              </v-overlay>
+            </div>
+            <div class="text--caption">Nhập hoặc copy/paste.</div>
+
+            <v-snackbar
+              v-model="snackbar"
+              :color="snackbarColor"
+              :timeout="2000"
+            >
+              {{ text }}
+            </v-snackbar>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -52,7 +57,7 @@ export default {
   data: () => ({
     loading: false,
     snackbar: false,
-    snackbarColor: 'default',
+    snackbarColor: "default",
     otp: "",
     text: "",
     expectedOtp: "133707",

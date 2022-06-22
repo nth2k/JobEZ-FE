@@ -9,7 +9,7 @@
 // import TestApi from "@/views/HiepViews/TestApi.vue"
 export default {
   name: "App",
-  components: {}, 
+  components: {},
 };
 </script>
 
