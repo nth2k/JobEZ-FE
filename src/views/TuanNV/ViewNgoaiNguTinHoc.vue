@@ -26,10 +26,10 @@
                 </div>
                 <div class="col-1 thead"></div>
               </div>
-              <div class="row d-flex tbody">
-                <div class="col-4">Tiếng Anh</div>
-                <div class="col-4">Toeic</div>
-                <div class="col-3">880</div>
+              <div class="row d-flex tbody" v-for="language in listLanguage" v-bind:key="language.id">
+                <div class="col-4">{{language.certificateName}}</div>
+                <div class="col-4">{{language.name}}</div>
+                <div class="col-3">{{language.grade}}</div>
                 <div class="col-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -54,8 +54,9 @@
 </template>
 
 <script>
+import LanguageCertificateService from "@/services/LanguageCertificateService.js"
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
-import Header from "../ToanNT16/candidate_management/Header.vue";
+import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 export default {
   components: {
@@ -63,6 +64,27 @@ export default {
     Header,
     Profile_menu,
   },
+  data(){
+    return{
+      listLanguage: [],
+      language:{
+        id: "",
+        name: "",
+        certificate_name: "",
+        grade: "",
+      },
+    };
+  },
+  methods:{
+    getLanguage(){
+      LanguageCertificateService.getLanguage().then((res) => {
+        this.listLanguage = res.data;
+      });
+    }
+  },
+  created(){
+    this.getLanguage();
+  }
 };
 </script>
 
