@@ -13,7 +13,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
@@ -97,7 +97,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
@@ -181,7 +181,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
@@ -265,7 +265,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
@@ -349,7 +349,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
@@ -433,7 +433,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
@@ -517,7 +517,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
@@ -601,7 +601,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
@@ -685,7 +685,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
@@ -769,7 +769,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
@@ -853,7 +853,7 @@
             <div class="img_cate">
               <img
                 class="img-fluid"
-                src="../../../../assets/no-image.png"
+                src="@/assets/no-image.png"
                 alt="Công Ty Cổ Phần Đầu Tư Và Phát Triển Trần Gia"
               />
             </div>
