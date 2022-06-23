@@ -17,6 +17,12 @@ import JobContainer from "@/views/ToanNT16/profile/JobContainer.vue";
 
 export default {
   name: "JobDetails",
+  mounted() {
+    this.id = this.$route.params.id;
+  },
+  data() {
+    return { id: null };
+  },
   components: {
     HeaderLogin,
     SearchHeader,
