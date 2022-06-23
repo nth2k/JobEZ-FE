@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "target": "es5",
     "module": "esnext",
     "baseUrl": "./",
