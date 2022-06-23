@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import CandidateLogin from '@/views/HiepViews/CandidateLogin.vue'
-import LandingPage from '@/views/HiepViews//LandingPage.vue'
-import CandidateRegister from '@/views/HiepViews//CandidateRegister.vue'
-import RecruiterLogin from '@/views/HiepViews//RecruiterLogin.vue'
-import RecruiterRegister from '@/views/HiepViews//RecuiterRegister.vue'
-
+import LandingPage from '@/views/HiepViews/LandingPage.vue'
+import CandidateRegister from '@/views/HiepViews/CandidateRegister.vue'
+import RecruiterLogin from '@/views/HiepViews/RecruiterLogin.vue'
+import RecruiterRegister from '@/views/HiepViews/RecuiterRegister.vue'
+import ChooseCVType from '@/views/HiepViews/ChooseCVType.vue'
+import CandidateOnlineCVForm from '@/views/HiepViews/CandidateOnlineCVForm.vue'
+import CVFromPCForm from '@/views/HiepViews/CVFromPCForm.vue'
+import RecruiterOnlineCVForm from '@/views/HiepViews/RecruiterOnlineCVForm.vue'
+import JobDetailsNoLogin from '@/components/ToanComponents/JobDetailsNoLogin.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +39,31 @@ export const routes = [
         name: 'RecruiterRegister',
         component: RecruiterRegister
     }, 
+    {
+        path: '/chooseCVType',
+        name: 'ChooseCVType',
+        component: ChooseCVType
+    }, 
+    {
+        path: '/candidateOnlineCVForm',
+        name: 'CandidateOnlineCVForm',
+        component: CandidateOnlineCVForm
+    }, 
+    {
+        path: '/cvFromPCForm',
+        name: 'CVFromPCForm',
+        component: CVFromPCForm
+    }, 
+    {
+        path: '/recruiterOnlineCVForm',
+        name: 'RecruiterOnlineCVForm',
+        component: RecruiterOnlineCVForm
+    }, 
+    {
+        path: '/job-detail/:id',
+        name: 'JobDetailsNoLogin',
+        component: JobDetailsNoLogin
+    }
     // {
     //     path: '/profileCandidate',
     //     name: 'ProfileCandidate',
