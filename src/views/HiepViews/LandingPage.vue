@@ -293,7 +293,7 @@
                 <img src="@/assets/icn_money.png" alt="" /><span
                   style="color: red"
                 >
-                  7 - 15 triệu</span
+                  7tr - 15 triệu</span
                 >
               </div>
             </div>
@@ -325,19 +325,11 @@
         <div class="chat-recruiter mt-5">
           <h5>TÌM VIỆC THEO TỈNH THÀNH</h5>
           <div class="job-by-province">
-            <span>Việc làm tại Hồ Chí Minh</span>
+            <span>Việc làm tại Hà Nội</span>
             <hr />
             <span>Việc làm tại Hồ Chí Minh</span>
             <hr />
-            <span>Việc làm tại Hồ Chí Minh</span>
-            <hr />
-            <span>Việc làm tại Hồ Chí Minh</span>
-            <hr />
-            <span>Việc làm tại Hồ Chí Minh</span>
-            <hr />
-            <span>Việc làm tại Hồ Chí Minh</span>
-            <hr />
-            <span>Việc làm tại Hồ Chí Minh</span>
+            <span>Việc làm tại Đà Nẵng</span>
             <hr />
           </div>
         </div>

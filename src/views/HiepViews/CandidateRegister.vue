@@ -119,7 +119,7 @@ export default {
   },
   methods: {
     submit() {
-      this.validate();
+      // this.validate();
       this.$router.push("/chooseCVType");
     },
     validate() {
@@ -147,7 +147,7 @@ export default {
     confirmPassword: "",
     confirmPasswordRules: [
       (v) => !!v || "ConfirmPassword is required",
-      (v) => v === this.password || "The password confirmation does not match.",
+      (v) => (v === this.password) || "The password confirmation does not match.",
     ],
     phone: "",
     phoneRules: [
