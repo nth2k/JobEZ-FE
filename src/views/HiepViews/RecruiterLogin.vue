@@ -37,9 +37,12 @@
                 outlined
                 dense
                 required
+                :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show3 ? 'text' : 'password'"
+                @click:append="show3 = !show3"
               ></v-text-field>
               <p>Quên mật khẩu?</p>
-              <button class="btn" @click="submit">Đăng nhập</button>
+              <button class="btn" :disabled="!valid" @click="submit">Đăng nhập</button>
             </v-form>
           </div>
         </div>
@@ -69,12 +72,16 @@ export default {
       (v) => !!v || "Password is required",
       (v) => (v && v.length > 5) || "Password must be more than 5 characters",
     ],
+    show3: false,
   }),
 
   methods: {
-    submit(){
-      
-    }
+    submit() {
+      this.validate();
+    },
+    validate() {
+      this.$refs.form.validate();
+    },
   },
 };
 </script>
