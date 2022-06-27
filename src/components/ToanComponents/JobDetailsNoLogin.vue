@@ -30,6 +30,9 @@ export default {
     BoxTiki,
     JobContainer,
   },
+  created() {
+    console.log(this.$store.params.id);
+  },
 };
 </script>
 

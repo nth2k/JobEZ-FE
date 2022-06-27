@@ -1,9 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
-const state = {
-  count: 0
-}
+
+
 export default new Vuex.Store({
-  state
+  state() {
+    return {
+      count: 1000,
+      transaction: null
+    }
+  },
+  mutations: {
+
+  },
+  actions: {
+    fetchTransaction(commit, {id}) {
+      console.log(commit);
+      console.log(id)
+    }
+  }
 })
