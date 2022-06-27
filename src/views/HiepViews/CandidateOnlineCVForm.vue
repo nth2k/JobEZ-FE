@@ -114,6 +114,8 @@ export default {
   components: {
     HeaderComponent,
   },
+  data: () => ({}),
+  methods: {},
 };
 </script>
 

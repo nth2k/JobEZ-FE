@@ -1,42 +1,85 @@
 <template>
-  <div>
-    <HeaderComponent />
-    <h2 class="text-center mt-5 mb-5">Hồ sơ ứng viên</h2>
-    <form action="" method="post">
-      <div class="row">
-        <div class="col-3"></div>
-        <div class="col-3 left-form">
-          <span>Ngày sinh<span style="color: red">*</span></span
-          ><br />
-          <input type="text" placeholder="Nhập dd/MM/yyyy" /><br />
-          <span>Đại học<span style="color: red">*</span></span
-          ><br />
-          <input type="text" placeholder="Nhập tên trường đại học" /><br />
+  <v-app>
+    <div>
+      <HeaderComponent />
+      <h2 class="text-center mt-5 mb-5">Hồ sơ ứng viên</h2>
+      <v-form ref="form" v-model="valid" lazy-validation>
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-3 left-form">
+            <span>Ngày sinh<span style="color: red">*</span></span
+            ><br />
+            <v-menu
+              ref="menu"
+              v-model="menu"
+              :close-on-content-click="false"
+              :return-value.sync="date"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="date"
+                  label="Picker in menu"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu = false">
+                  Cancel
+                </v-btn>
+                <v-btn text color="primary" @click="$refs.menu.save(date)">
+                  OK
+                </v-btn>
+              </v-date-picker> </v-menu
+            ><br />
+            <span>Đại học<span style="color: red">*</span></span
+            ><br />
+            <v-text-field
+              class="mt-5"
+              label="Nhập tên trường đại học/cao đẳng"
+              outlined
+              dense
+              v-model="university"
+              :rules="universityRules"
+              required
+            ></v-text-field
+            ><br />
+          </div>
+          <div class="col-3 right-form">
+            <span>Xếp loại<span style="color: red">*</span></span
+            ><br />
+            <v-col cols="12" sm="12">
+              <v-select
+                :items="rating"
+                label="Chọn xếp loại"
+                required
+              ></v-select> </v-col
+            ><br />
+            <span>Số năm kinh nghiệm<span style="color: red">*</span></span
+            ><br />
+            <v-col cols="12" sm="12">
+              <v-select
+                :items="experience"
+                label="Chọn năm kinh nghiệm"
+                required
+              ></v-select> </v-col
+            ><br />
+          </div>
+          <div class="col-3"></div>
+          <input type="file" name="file" id="" class="file-cv" />
         </div>
-        <div class="col-3 right-form">
-          <span>Xếp loại<span style="color: red">*</span></span
-          ><br />
-          <select name="rating" id="">
-            <option value="0">Excellent certificate</option>
-            <option value="1">Good certificate</option>
-            <option value="2">Average certificate</option></select
-          ><br />
-          <span>Số năm kinh nghiệm<span style="color: red">*</span></span
-          ><br />
-          <select name="experience" id="">
-            <option value="1">1 year</option>
-            <option value="2">2 years</option>
-            <option value="3">3 years</option>
-            <option value="4">4 years</option>
-            <option value="5">5 years</option></select
-          ><br />
-        </div>
-        <div class="col-3"></div>
-        <input type="file" name="file" id="" class="file-cv" />
-      </div>
-      <button type="submit" class="btn mt-5 mb-5 btn-regist">Đăng ký</button>
-    </form>
-  </div>
+        <button @click="submit" class="btn mt-5 mb-5 btn-regist">
+          Đăng ký
+        </button>
+      </v-form>
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -45,6 +88,28 @@ export default {
   name: "CVFromPCForm",
   components: {
     HeaderComponent,
+  },
+  data: () => ({
+    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      .toISOString()
+      .substr(0, 10),
+    menu: false,
+    university: "",
+    universityRules: [
+      (v) => !!v || "University is required",
+      (v) => (v && v.length > 5) || "University must be more than 5 characters",
+    ],
+    rating: [],
+    experience: [],
+  }),
+  methods: {
+    submit() {
+      // this.validate();
+      this.$router.push("/candidateLogin");
+    },
+    validate() {
+      this.$refs.form.validate();
+    },
   },
 };
 </script>
