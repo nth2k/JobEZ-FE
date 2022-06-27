@@ -251,7 +251,7 @@
           </div>
           <div class="date">
             <multiselect
-              v-model="dayValue"
+              v-model="dayValueDate"
               track-by="dayValue"
               label="dayName"
               placeholder="Ngày"
@@ -261,7 +261,7 @@
             ></multiselect
             >&nbsp;&nbsp;&nbsp;&nbsp;
             <multiselect
-              v-model="monthValue"
+              v-model="monthValueDate"
               track-by="monthValue"
               label="monthName"
               placeholder="Tháng"
@@ -345,7 +345,7 @@
             <input
               type="text"
               class="form-control"
-              v-modle="recruiterPhonenumber"
+              v-model="recruiterPhonenumber"
               placeholder="Số điện thoại liên hệ"
             />
           </div>
@@ -401,8 +401,8 @@ export default {
       yearOfExperienceValue: null,
       degreeRequiredValue: null,
       jobBenefit: null,
-      dayValue: null,
-      monthValue: null,
+      dayValueDate: null,
+      monthValueDate: null,
       yearValue: null,
       jobDescription: null,
       addressValue: null,
@@ -472,26 +472,51 @@ export default {
     },
     async addPost() {
       let post = {
-        position: this.positonValue,
-        rank_id: this.rankValue,
         commission: this.commissionValue,
         benefits: this.jobBenefit,
-        deadline_for_submission: this.dayValue + "-" + this.monthValue + "-" + this.yearValue,
-        degree_required: this.degreeRequiredValue,
+        deadline_for_submissions: this.dayValueDate.dayValue + "-" + this.monthValueDate.monthValue + "-" + this.yearValue,
+        degree_required: this.degreeRequiredValue.certificateName,
         description: this.jobDescription,
-        gender_requirement: this.genderValue,
+        gender_requirement: this.genderValue.gName,
         job_requirement: this.jobRequirement,
         phone_number: this.recruiterPhonenumber,
         probationary_period: this.probPeriodValue,
         profile_included: this.profileRequired,
         quantity_needed: this.quantityRequired,
         recruiter_name: this.recruiterName,
-        working_form_id: this.workingFormValue,
-        salary_id: this.salaryValue,
         email_contact: this.recruiterEmail,
       };
-      await PostNewService.addPost(post).then(() => {});
+      
+      var postFormData = new FormData();
+      postFormData.append('benefits',post.benefits);
+      postFormData.append('commission',post.commission);
+      postFormData.append('deadlineForSubmission',post.deadline_for_submissions);
+      postFormData.append('degreeRequired',post.degree_required);
+      postFormData.append('description',post.description);
+      postFormData.append('emailContact',post.email_contact);
+      postFormData.append('genderRequirement',post.gender_requirement);
+      postFormData.append('jobRequirement',post.job_requirement);
+      postFormData.append('phoneNumber',post.phone_number);
+      postFormData.append('position',post.position);
+      postFormData.append('probationaryPeriod',post.probationary_period);
+      postFormData.append('profileIncluded',post.profile_included);
+      postFormData.append('quantityNeeded',post.quantity_needed);
+      postFormData.append('recruiterName',post.recruiter_name);
+      postFormData.append('address.name',this.addressValue);
+      postFormData.append('rank.id',this.rankValue.id);
+      postFormData.append('rank.name',this.rankValue.name);
+      postFormData.append('salary.id',this.salaryValue.id);
+      postFormData.append('salary.name',this.salaryValue.name);
+      postFormData.append('workingForm.id',this.workingFormValue.id);
+      postFormData.append('workingForm.name',this.workingFormValue.name);
+      postFormData.append('yearOfExperience.id',this.yearOfExperienceValue.id);
+      postFormData.append('yearOfExperience.name',this.yearOfExperienceValue.name);
       console.log(post);
+      await PostNewService.addPost(postFormData).then((res)=>{
+            console.log(res);
+        },(error)=>{
+            console.log(error);
+        });
     },
   },
   created() {
@@ -506,6 +531,7 @@ export default {
     this.value.push(tag);
   },
 };
+
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

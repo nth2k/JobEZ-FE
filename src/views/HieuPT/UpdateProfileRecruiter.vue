@@ -10,7 +10,7 @@
         </div>
         <br>
         <div class="row">
-          <PostForm />
+          <UpdateProfileRecruiterForm />
         </div>
       </div>
     </div>
@@ -20,16 +20,18 @@
 <script>
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
-import PostForm from "@/views/HieuPT/Form/PostForm.vue";
+import UpdateProfileRecruiterForm from "@/views/HieuPT/Form/UpdateProfileRecruiterForm.vue";
+
 export default {
-  name: "PostNew",
+  name: "UpdateProfileRecruiter",
   components: {
     SlideBar_candidate,
     Header,
-    PostForm,
+    UpdateProfileRecruiterForm,
   },
 };
 </script>
 
 <style>
+
 </style>

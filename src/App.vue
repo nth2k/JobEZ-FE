@@ -1,15 +1,17 @@
 <template>
   <div>
     <router-view></router-view>
-    <!-- <TestApi /> -->
+    <UpdateProfileRecruiter/>
   </div>
 </template>
 
 <script>
-// import TestApi from "@/views/HiepViews/TestApi.vue"
+
+import UpdateProfileRecruiter from "./views/HieuPT/UpdateProfileRecruiter.vue"
+
 export default {
   name: "App",
-  components: {},
+  components: { UpdateProfileRecruiter },
 };
 </script>
 
