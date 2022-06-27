@@ -104,7 +104,7 @@ export default {
   --color_slide_bar_selection: #1b2467;
 }
 #slide_bar {
-  height: 2000px;
+  height: 3300px;
   background-color: var(--color_main);
   padding: 0px;
 }
