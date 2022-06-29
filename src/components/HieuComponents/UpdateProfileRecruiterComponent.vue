@@ -9,7 +9,6 @@
               type="text"
               class="form-control"
               v-model="gmailValue"
-              placeholder="Ví dụ: 1 tuần hoặc 1 tháng"
               readonly
             /></div><br/>
             <div class="indent"><b>Mật Khẩu</b></div>
@@ -17,7 +16,6 @@
               type="password"
               class="form-control"
               v-model="passwordValue"
-              placeholder="Ví dụ: Mật khẩu"
               readonly
             /></div><br/><br/>
             <div><b>Thông tin công ty</b></div><br/>
@@ -108,7 +106,7 @@
               placeholder="Ví dụ: Địa chỉ liên hệ"
             /></div><br/><br/>
             <div class="button">
-            <button v-on:click="updateProfileRecruiter()" class="postbtn">Đăng tin</button>
+            <button v-on:click="updateProfileRecruiter()" class="postbtn">Cập Nhật</button>
           </div>
         </div>
         <div class="col-4">
@@ -145,6 +143,7 @@ components: {
   },
   data(){
     return{
+        passwordValue: "sadweqwe",
         provinceCityValue: null,
         companyQuantityValue: null,
         companyQuantityOptions:[{ cqName: "Dưới 10 người"},{ cqName: "10-20 người"},{ cqName: "20-50 người"},{ cqName: "Trên 50 người"}],

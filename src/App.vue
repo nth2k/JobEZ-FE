@@ -1,17 +1,17 @@
 <template>
   <div>
     <router-view></router-view>
-    <UpdateProfileRecruiter/>
+    <ChangePasswordRecruiter/>
   </div>
 </template>
 
 <script>
 
-import UpdateProfileRecruiter from "./views/HieuPT/UpdateProfileRecruiter.vue"
+import ChangePasswordRecruiter from "./views/HieuPT/ChangePaswordRecruiter.vue"
 
 export default {
   name: "App",
-  components: { UpdateProfileRecruiter },
+  components: { ChangePasswordRecruiter },
 };
 </script>
 
