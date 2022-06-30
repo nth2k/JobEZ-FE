@@ -111,6 +111,8 @@
 <script>
 import ChooseCandidate from "@/components/HiepComponents/ChooseCandidate.vue";
 import TopHeaderComponent from "@/components/HiepComponents/TopHeaderComponent.vue";
+import CandidateRegisterService from "@/services/CandidateRegisterService.js";
+
 export default {
   name: "CandidateRegister",
   components: {
@@ -118,9 +120,20 @@ export default {
     TopHeaderComponent,
   },
   methods: {
-    submit() {
+    async submit() {
       // this.validate();
-      this.$router.push("/chooseCVType");
+      const result = await CandidateRegisterService.addCandidate({
+        name: this.fullName,
+        email: this.email,
+        password: this.password,
+        role : {
+          id : 1,
+          rollName : "Candidate"
+        }
+      })
+      if (result.status == 201) {
+        this.$router.push("/chooseCVType");
+      }
     },
     validate() {
       this.$refs.form.validate();
@@ -146,8 +159,8 @@ export default {
     ],
     confirmPassword: "",
     confirmPasswordRules: [
-      (v) => !!v || "ConfirmPassword is required",
-      (v) => (v === this.password) || "The password confirmation does not match.",
+      // (v) => !!v || "ConfirmPassword is required",
+      // (v) => v === this.password || "The password confirmation does not match.",
     ],
     phone: "",
     phoneRules: [
