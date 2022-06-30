@@ -76,6 +76,7 @@
 <script>
 import ChooseRecruiter from "@/components/HiepComponents/ChooseRecruiter.vue";
 import TopHeaderComponent from "@/components/HiepComponents/TopHeaderComponent.vue";
+import RecruiterRegisterService from "@/services/RecruiterRegisterService.js";
 export default {
   name: "RecuiterRegister",
   components: {
@@ -83,9 +84,20 @@ export default {
     TopHeaderComponent,
   },
   methods: {
-    submit() {
-      this.validate();
-      this.$router.push("/recruiterOnlineCVForm");
+    async submit() {
+      // this.validate();
+      const result = await RecruiterRegisterService.addRecruiter({
+        name: this.companyName,
+        email: this.email,
+        password: this.password,
+        role : {
+          id : 2,
+          rollName : "Recruiter"
+        }
+      })
+      if (result.status == 201) {
+        this.$router.push("/recruiterOnlineCVForm");
+      }
     },
     validate() {
       this.$refs.form.validate();
