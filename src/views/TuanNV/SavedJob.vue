@@ -19,7 +19,42 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-for="savedjob in listSavedJob" v-bind:key="savedjob.id">
+                <td class="column"><span>1</span></td>
+                <td>
+                  <div>{{savedjob.posting.jobName}}</div>
+
+                  <div><a href="#">(Xem chi tiết)</a></div>
+                </td>
+                <td class="column"><span>{{savedjob.posting.position}}</span></td>
+                <td>
+                  <div>{{savedjob.deadlineForSubmission}}</div>
+
+                  <div><span>(Còn 13 ngày)</span></div>
+                </td>
+                <td class="column">
+                  <button class="btn btn-danger btnDelete">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-trash"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                      />
+                    </svg>
+                    Xóa
+                  </button>
+                </td>
+              </tr>
+              <!-- <tr>
                 <td class="column"><span>1</span></td>
                 <td>
                   <div>Công ty 1</div>
@@ -88,42 +123,7 @@
                     Xóa
                   </button>
                 </td>
-              </tr>
-              <tr>
-                <td class="column"><span>1</span></td>
-                <td>
-                  <div>Công ty 1</div>
-
-                  <div><a href="#">(Xem chi tiết)</a></div>
-                </td>
-                <td class="column"><span>Nhân viên</span></td>
-                <td>
-                  <div>13/07/2020</div>
-
-                  <div><span>(Còn 13 ngày)</span></div>
-                </td>
-                <td class="column">
-                  <button class="btn btn-danger btnDelete">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-trash"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                      />
-                      <path
-                        fill-rule="evenodd"
-                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                      />
-                    </svg>
-                    Xóa
-                  </button>
-                </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -142,13 +142,35 @@
 <script>
 import SlideBar_candidate from '@/components/ProfileCandidate/slideBar_candidate.vue';
 import Header from '../ToanNT16/candidate_management/Header.vue';
+import SavedJobService from '@/services/SavedJobService.js'
 // import Header from "./components/views/Header.vue";
 // import SlideBar_candidate from "./components/ProfileCandidate/slideBar_candidate.vue";
 export default {
   components:{
     SlideBar_candidate,
     Header
-}
+},
+data(){
+    return{
+      listSavedJob: [],
+      savedJobId: ""
+    };
+  },
+  methods:{
+    getSavedJobs(){
+      SavedJobService.getListSavedJob().then((res) => {
+        this.listSavedJob = res.data;
+      })
+    },
+    // addLanguage(){
+    //   LanguageCertificateService.addLanguage(language).then((res) => {
+    //     console.log(res);
+    //   });
+    // }
+  },
+  created(){
+    this.getSavedJobs();
+  }
 };
 </script>
 
