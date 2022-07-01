@@ -3,7 +3,7 @@
     <div>
       <HeaderComponent />
       <h2 class="text-center mt-3">Hồ sơ ứng viên</h2>
-      <v-form ref="form" v-model="valid" lazy-validation>
+      <v-form ref="form">
         <div class="row mt-5">
           <div class="col-3"></div>
           <div class="col-3 left-form">
@@ -92,8 +92,7 @@
               required
             ></v-select
             ><br />
-            <span>Mục tiêu nghề nghiệp</span
-            ><br />
+            <span>Mục tiêu nghề nghiệp</span><br />
             <span style="font-style: italic" class="ml-5"
               >Mô tả mục tiêu nghề nghiệp ( nếu có ) :</span
             ><br />
@@ -104,8 +103,7 @@
               v-model="careerGoals"
             ></v-textarea
             ><br />
-            <span>Kỹ năng bản thân</span
-            ><br />
+            <span>Kỹ năng bản thân</span><br />
             <span style="font-style: italic" class="ml-5"
               >Mô tả kỹ năng bản thân ( nếu có ) :</span
             ><br />
@@ -119,14 +117,12 @@
           </div>
           <div class="col-1"></div>
           <span class="mt-5 w-100 text-center"
-            >Bằng việc nhấn nút đăng ký, bạn đã đồng ý thỏa thuẩn sử dụng của
-            Timviec365.vn</span
+            >Bằng việc nhấn nút đăng ký, bạn đã đồng ý thỏa thuận sử dụng của
+            JobEz</span
           >
-          <button type="submit" class="btn mt-5 mb-5 btn-regist">
-            Đăng ký
-          </button>
         </div>
       </v-form>
+      <button @click="submit" class="btn mt-5 mb-5 btn-regist">Đăng ký</button>
     </div>
   </v-app>
 </template>
@@ -159,11 +155,9 @@ export default {
   }),
   methods: {
     submit() {
-      // this.validate();
-      this.$router.push("/candidateLogin");
-    },
-    validate() {
-      this.$refs.form.validate();
+      if (this.$refs.form.validate()) {
+        this.$router.push("/candidateLogin");
+      }
     },
   },
 };

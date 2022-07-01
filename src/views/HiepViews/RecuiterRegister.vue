@@ -19,7 +19,7 @@
           </div>
           <h2>Bạn chưa có tài khoản?</h2>
           <div class="login-form">
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form">
               <h5>Tên công ty<span style="color: red">*</span></h5>
               <v-text-field
                 label="Tên công ty"
@@ -62,10 +62,10 @@
                 :type="show3 ? 'text' : 'password'"
                 @click:append="show3 = !show3"
               ></v-text-field>
-              <button @click="submit" :disabled="!valid" class="btn">
-                Đăng ký
-              </button>
             </v-form>
+            <button @click="submit()" :disabled="!valid" class="btn">
+              Đăng ký
+            </button>
           </div>
         </div>
       </div>
@@ -85,22 +85,23 @@ export default {
   },
   methods: {
     async submit() {
-      // this.validate();
-      const result = await RecruiterRegisterService.addRecruiter({
-        name: this.companyName,
-        email: this.email,
-        password: this.password,
-        role : {
-          id : 2,
-          rollName : "Recruiter"
-        }
-      })
-      if (result.status == 201) {
-        this.$router.push("/recruiterOnlineCVForm");
+      if (this.$refs.form.validate()) {
+        await RecruiterRegisterService.addRecruiter({
+          name: this.companyName,
+          email: this.email,
+          password: this.password,
+          role: {
+            id: 2,
+            rollName: "Recruiter",
+          },
+        })
+          .then(() => {
+            this.$router.push("/recruiterOnlineCVForm");
+          })
+          .catch(() => {
+            console.log("error");
+          });
       }
-    },
-    validate() {
-      this.$refs.form.validate();
     },
   },
   data: () => ({
@@ -123,8 +124,8 @@ export default {
     ],
     confirmPassword: "",
     confirmPasswordRules: [
-      (v) => !!v || "ConfirmPassword is required",
-      (v) => v === this.password || "The password confirmation does not match.",
+      // (v) => !!v || "ConfirmPassword is required",
+      // (v) => v === this.password || "The password confirmation does not match.",
     ],
   }),
 };

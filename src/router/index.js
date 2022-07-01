@@ -10,6 +10,7 @@ import CandidateOnlineCVForm from '@/views/HiepViews/CandidateOnlineCVForm.vue'
 import CVFromPCForm from '@/views/HiepViews/CVFromPCForm.vue'
 import RecruiterOnlineCVForm from '@/views/HiepViews/RecruiterOnlineCVForm.vue'
 import JobDetailsNoLogin from '@/components/ToanComponents/JobDetailsNoLogin.vue'
+import SearchJob from '@/views/HiepViews/SearchJob.vue'
 
 Vue.use(VueRouter)
 
@@ -63,6 +64,11 @@ export const routes = [
         path: '/job-detail/:id',
         name: 'JobDetailsNoLogin',
         component: JobDetailsNoLogin
+    },
+    {
+        path: '/searchJob',
+        name: 'SearchJob',
+        component: SearchJob
     }
     // {
     //     path: '/profileCandidate',

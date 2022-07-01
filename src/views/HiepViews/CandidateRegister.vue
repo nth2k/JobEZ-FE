@@ -19,7 +19,7 @@
           </div>
           <h2>Bạn chưa có tài khoản?</h2>
           <div class="login-form">
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form">
               <h5>Tên đầy đủ<span style="color: red">*</span></h5>
               <v-text-field
                 label="Tên đầy đủ"
@@ -97,10 +97,8 @@
                 :rules="desiredPositionRules"
                 required
               ></v-text-field>
-              <button @click="submit" :disabled="!valid" class="btn">
-                Đăng ký
-              </button>
             </v-form>
+            <button @click="submit" class="btn">Đăng ký</button>
           </div>
         </div>
       </div>
@@ -121,22 +119,23 @@ export default {
   },
   methods: {
     async submit() {
-      // this.validate();
-      const result = await CandidateRegisterService.addCandidate({
-        name: this.fullName,
-        email: this.email,
-        password: this.password,
-        role : {
-          id : 1,
-          rollName : "Candidate"
-        }
-      })
-      if (result.status == 201) {
-        this.$router.push("/chooseCVType");
+      if (this.$refs.form.validate()) {
+        await CandidateRegisterService.addCandidate({
+          name: this.fullName,
+          email: this.email,
+          password: this.password,
+          role: {
+            id: 1,
+            rollName: "Candidate",
+          },
+        })
+          .then(() => {
+            this.$router.push("/chooseCVType");
+          })
+          .catch(() => {
+            console.log("error");
+          });
       }
-    },
-    validate() {
-      this.$refs.form.validate();
     },
   },
   data: () => ({
