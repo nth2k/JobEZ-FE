@@ -3,7 +3,7 @@
     <div>
       <HeaderComponent />
       <h2 class="text-center mt-5 mb-5">Hồ sơ ứng viên</h2>
-      <v-form ref="form" v-model="valid" lazy-validation>
+      <v-form ref="form">
         <div class="row">
           <div class="col-3"></div>
           <div class="col-3 left-form">
@@ -73,11 +73,13 @@
           </div>
           <div class="col-3"></div>
           <input type="file" name="file" id="" class="file-cv" />
+          <span class="mt-5 mb-5 w-100 text-center"
+            >Bằng việc nhấn nút đăng ký, bạn đã đồng ý thỏa thuận sử dụng của
+            JobEz</span
+          >
         </div>
-        <button @click="submit" class="btn mt-5 mb-5 btn-regist">
-          Đăng ký
-        </button>
       </v-form>
+      <button @click="submit" class="btn mt-5 mb-5 btn-regist">Đăng ký</button>
     </div>
   </v-app>
 </template>
@@ -104,11 +106,9 @@ export default {
   }),
   methods: {
     submit() {
-      // this.validate();
-      this.$router.push("/candidateLogin");
-    },
-    validate() {
-      this.$refs.form.validate();
+      if (this.$refs.form.validate()) {
+        this.$router.push("/candidateLogin");
+      }
     },
   },
 };

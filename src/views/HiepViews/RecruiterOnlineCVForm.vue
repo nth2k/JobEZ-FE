@@ -3,7 +3,7 @@
     <div>
       <HeaderComponent />
       <h2 class="text-center mt-3">Hồ sơ nhà tuyển dụng</h2>
-      <v-form ref="form" v-model="valid" lazy-validation>
+      <v-form ref="form">
         <div class="row mt-5">
           <div class="col-3"></div>
           <div class="col-3 left-form">
@@ -78,11 +78,9 @@
             >Bằng việc nhấn nút đăng ký, bạn đã đồng ý với thỏa thuận của
             JobEZ</span
           >
-          <button type="submit" class="btn mt-5 mb-5 btn-regist">
-            Đăng ký
-          </button>
         </div>
       </v-form>
+      <button @click="submit()" class="btn mt-5 mb-5 btn-regist">Đăng ký</button>
     </div>
   </v-app>
 </template>
@@ -121,11 +119,9 @@ export default {
   }),
   methods: {
     submit() {
-      // this.validate();
-      this.$router.push("/recruiterLogin");
-    },
-    validate() {
-      this.$refs.form.validate();
+      if (this.$refs.form.validate()) {
+        this.$router.push("/recruiterLogin");
+      }
     },
   },
 };
