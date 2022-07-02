@@ -39,7 +39,7 @@
           </p>
           <p style="font-weight: bold">
             Cả hai hồ sơ đều có thể tìm kiếm được bởi nhà tuyển dụng
-          </p>
+          </p>         
         </div>
       </div>
     </div>
@@ -55,12 +55,15 @@ export default {
     ChooseCandidate,
     TopHeaderComponent,
   },
+  data(){
+    return {candidateId : this.$route.params.id}
+  },
   methods:{
     onlineForm(){
-      this.$router.push("/candidateOnlineCVForm")
+      this.$router.push({ name: 'CandidateOnlineCVForm', params: { id: this.candidateId }})
     },
     cvFromPC(){
-      this.$router.push("/cvFromPCForm")
+      this.$router.push({ name: 'CVFromPCForm', params: { id: this.candidateId }})
     }
   }
 };

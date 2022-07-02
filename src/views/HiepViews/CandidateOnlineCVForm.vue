@@ -135,6 +135,7 @@ export default {
     HeaderComponent,
   },
   data: () => ({
+    candidateId : this.$route.params.id,
     date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
       .toISOString()
       .substr(0, 10),

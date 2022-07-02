@@ -98,11 +98,11 @@ export default {
             rollName: "Recruiter",
           },
         })
-          .then(() => {
+          .then((rs) => {
             this.$store.dispatch("setSnackbar", {
               text: "Đăng kí nhà tuyển dụng bước 1 thành công",
             });
-            this.$router.push("/recruiterOnlineCVForm");
+            this.$router.push({ name: 'RecruiterOnlineCVForm', params: { id: rs.data.id }});
           })
           .catch(() => {
             this.$store.dispatch("setSnackbar", {

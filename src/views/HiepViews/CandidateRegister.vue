@@ -134,11 +134,11 @@ export default {
             rollName: "Candidate",
           },
         })
-          .then(() => {
+          .then((rs) => {
             this.$store.dispatch("setSnackbar", {
               text: "Đăng kí ứng viên bước 1 thành công",
             });
-            this.$router.push("/chooseCVType");
+            this.$router.push({ name: 'ChooseCVType', params: { id: rs.data.id }});
           })
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
