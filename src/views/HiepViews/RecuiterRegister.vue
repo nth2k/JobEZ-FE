@@ -53,7 +53,7 @@
               <h5>Xác nhận mật khẩu<span style="color: red">*</span></h5>
               <v-text-field
                 v-model="confirmPassword"
-                :rules="confirmPasswordRules"
+                :rules="confirmPasswordRules.concat(validatePassword)"
                 label="Xác nhận mật khẩu"
                 outlined
                 dense
@@ -84,6 +84,9 @@ export default {
     TopHeaderComponent,
   },
   methods: {
+    validatePassword(value) {
+      return value === this.password || "The password confirmation does not match."
+    },
     async submit() {
       if (this.$refs.form.validate()) {
         await RecruiterRegisterService.addRecruiter({
@@ -134,7 +137,6 @@ export default {
     confirmPassword: "",
     confirmPasswordRules: [
       (v) => !!v || "ConfirmPassword is required",
-      // (v) => v === this.password || "The password confirmation does not match.",
     ],
   }),
 };
