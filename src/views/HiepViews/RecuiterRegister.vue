@@ -96,10 +96,16 @@ export default {
           },
         })
           .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Đăng kí nhà tuyển dụng bước 1 thành công",
+            });
             this.$router.push("/recruiterOnlineCVForm");
           })
           .catch(() => {
-            console.log("error");
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
           });
       }
     },
@@ -115,7 +121,10 @@ export default {
     email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      (v) =>
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "E-mail must be valid",
     ],
     password: "",
     passwordRules: [
@@ -124,7 +133,7 @@ export default {
     ],
     confirmPassword: "",
     confirmPasswordRules: [
-      // (v) => !!v || "ConfirmPassword is required",
+      (v) => !!v || "ConfirmPassword is required",
       // (v) => v === this.password || "The password confirmation does not match.",
     ],
   }),
