@@ -41,22 +41,22 @@ export const routes = [
         component: RecruiterRegister
     }, 
     {
-        path: '/chooseCVType',
+        path: '/chooseCVType/:id',
         name: 'ChooseCVType',
         component: ChooseCVType
     }, 
     {
-        path: '/candidateOnlineCVForm',
+        path: '/candidateOnlineCVForm/:id',
         name: 'CandidateOnlineCVForm',
         component: CandidateOnlineCVForm
     }, 
     {
-        path: '/cvFromPCForm',
+        path: '/cvFromPCForm/:id',
         name: 'CVFromPCForm',
         component: CVFromPCForm
     }, 
     {
-        path: '/recruiterOnlineCVForm',
+        path: '/recruiterOnlineCVForm/:id',
         name: 'RecruiterOnlineCVForm',
         component: RecruiterOnlineCVForm
     }, 
