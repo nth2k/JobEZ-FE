@@ -19,17 +19,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="savedjob in listSavedJob" v-bind:key="savedjob.id">
+              <tr v-for="savedJob in listSavedJob" v-bind:key="savedJob.id">
                 <td class="column"><span>1</span></td>
                 <td>
-                  <div>{{savedjob.posting.jobName}}</div>
+                  <div>{{savedJob.posting.jobName}}</div>
 
                   <div><a href="#">(Xem chi tiết)</a></div>
                 </td>
-                <td class="column"><span>{{savedjob.posting.position}}</span></td>
+                <td class="column"><span>{{savedJob.posting.position}}</span></td>
                 <td>
-                  <div>{{savedjob.deadlineForSubmission}}</div>
-
+                  <div>{{savedjob.deadlineForSubmission.toString()}}</div>
+                  <!-- <div>12/09/2022</div> -->
                   <div><span>(Còn 13 ngày)</span></div>
                 </td>
                 <td class="column">
@@ -141,7 +141,7 @@
 
 <script>
 import SlideBar_candidate from '@/components/ProfileCandidate/slideBar_candidate.vue';
-import Header from '../ToanNT16/candidate_management/Header.vue';
+import Header from '../ToanNT16/candidate/candidate_management/Header.vue';
 import SavedJobService from '@/services/SavedJobService.js'
 // import Header from "./components/views/Header.vue";
 // import SlideBar_candidate from "./components/ProfileCandidate/slideBar_candidate.vue";
@@ -153,20 +153,21 @@ export default {
 data(){
     return{
       listSavedJob: [],
-      savedJobId: ""
+      savedJob:{
+        id: "",
+        jobName: "",
+        position: "",
+        deadlineForSubmission: "",
+      },
     };
   },
   methods:{
     getSavedJobs(){
-      SavedJobService.getListSavedJob().then((res) => {
+      SavedJobService.getSavedJobs().then((res) => {
         this.listSavedJob = res.data;
+        console.log(this.listSavedJob);
       })
     },
-    // addLanguage(){
-    //   LanguageCertificateService.addLanguage(language).then((res) => {
-    //     console.log(res);
-    //   });
-    // }
   },
   created(){
     this.getSavedJobs();
@@ -181,9 +182,11 @@ table {
 }
 thead {
   background-color: #4c5bd4;
+
 }
 th {
   color: white;
+    padding: 5px 20px;
 }
 td {
   border: 1px solid lightgray;
@@ -198,6 +201,7 @@ a {
 }
 .column {
   background-color: #f5f7f7;
+  padding: 5px 20px;
 }
 .table-job {
   margin: 20px;

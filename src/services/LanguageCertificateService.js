@@ -4,7 +4,7 @@ const Base_URL = "http://localhost:8080";
 
 class LanguageCertificateService{
     getLanguage(){
-        return axios.get(Base_URL + "/language/");
+        return axios.get(Base_URL + "/language/1");
     }
     addLanguage(language){
         return axios.post(Base_URL + "/language/add", language)

@@ -76,7 +76,7 @@
 
 <script>
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
-import Header from "../ToanNT16/candidate_management/Header.vue";
+import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 export default {
   components: {
@@ -109,7 +109,7 @@ export default {
   height: 25px;
 }
 .detail {
-  display: none;
+  /* display: none; */
   background-color: #f2f2f2;
 }
 a {
