@@ -77,6 +77,7 @@
                   <v-select
                     :items="city"
                     label="Chọn tỉnh/Thành phố"
+                    :rules="cityRules"
                     required
                   ></v-select>
                 </v-col>
@@ -84,6 +85,7 @@
                   <v-select
                     :items="province"
                     label="Chọn quận huyện"
+                    :rules="provinceRules"
                     required
                   ></v-select>
                 </v-col>
@@ -130,10 +132,16 @@ export default {
           },
         })
           .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Đăng kí ứng viên bước 1 thành công",
+            });
             this.$router.push("/chooseCVType");
           })
           .catch(() => {
-            console.log("error");
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
           });
       }
     },
@@ -149,7 +157,7 @@ export default {
     email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      (v) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || "E-mail must be valid",
     ],
     password: "",
     passwordRules: [
@@ -158,7 +166,7 @@ export default {
     ],
     confirmPassword: "",
     confirmPasswordRules: [
-      // (v) => !!v || "ConfirmPassword is required",
+      (v) => !!v || "ConfirmPassword is required",
       // (v) => v === this.password || "The password confirmation does not match.",
     ],
     phone: "",
@@ -166,8 +174,14 @@ export default {
       (v) => !!v || "Phone is required",
       (v) => (v && v.length == 10) || "Phone must be 10 digits",
     ],
-    city: [],
-    province: [],
+    city: ["1"],
+    cityRules: [
+      v => !!v || 'city is required'
+    ],
+    province: ["1"],
+    provinceRules: [
+      v => !!v || 'province is required'
+    ],
     desiredPosition: "",
     desiredPositionRules: [
       (v) => !!v || "Phone is required",
