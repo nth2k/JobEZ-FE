@@ -13,7 +13,6 @@
               ref="menu"
               v-model="menu"
               :close-on-content-click="false"
-              :return-value.sync="date"
               transition="scale-transition"
               offset-y
               min-width="auto"
@@ -21,31 +20,49 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
                   v-model="date"
-                  label="Birthdate"
+                  label="Ngày sinh"
                   prepend-icon="mdi-calendar"
                   readonly
                   v-bind="attrs"
                   v-on="on"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="date" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="menu = false">
-                  Cancel
-                </v-btn>
-                <v-btn text color="primary" @click="$refs.menu.save(date)">
-                  OK
-                </v-btn>
-              </v-date-picker> </v-menu
+              <v-date-picker
+                v-model="date"
+                :active-picker.sync="activePicker"
+                :max="
+                  new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+                    .toISOString()
+                    .substr(0, 10)
+                "
+                min="1950-01-01"
+                @change="save"
+              ></v-date-picker> </v-menu
             ><br />
             <span>Giới tính <span style="color: red">*</span></span
             ><br />
-            <v-select :items="gender" label="Chọn giới tính" required></v-select
+            <v-select
+              :items="gender"
+              v-model="selectedGender"
+              @change="
+                (e) => {
+                  this.selectedGender = e;
+                }
+              "
+              label="Chọn giới tính"
+              required
+            ></v-select
             ><br />
             <span>Tình trạng hôn nhân <span style="color: red">*</span></span
             ><br />
             <v-select
               :items="maritalStatus"
+              v-model="selectedMaritalStatus"
+              @change="
+                (e) => {
+                  this.selectedMaritalStatus = e;
+                }
+              "
               label="Chọn tình trạng hôn nhân"
               required
             ></v-select
@@ -70,6 +87,12 @@
             ><br />
             <v-select
               :items="experience"
+              v-model="selectedExperience"
+              @change="
+                (e) => {
+                  this.selectedExperience = e;
+                }
+              "
               label="Chọn số năm kinh nghiệm"
               required
             ></v-select
@@ -80,6 +103,12 @@
             ><br />
             <v-select
               :items="salary"
+              v-model="selectedSalary"
+              @change="
+                (e) => {
+                  this.selectedSalary = e;
+                }
+              "
               label="Chọn mức lương mong muốn"
               required
             ></v-select
@@ -88,6 +117,12 @@
             ><br />
             <v-select
               :items="workingForm"
+              v-model="selectedWorkingForm"
+              @change="
+                (e) => {
+                  this.selectedWorkingForm = e;
+                }
+              "
               label="Chọn hình thức làm việc"
               required
             ></v-select
@@ -129,16 +164,16 @@
 
 <script>
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
+import CandidateRegisterService from "@/services/CandidateRegisterService.js";
 export default {
   name: "CandidateOnlineCVForm",
   components: {
     HeaderComponent,
   },
   data: () => ({
-    candidateId : this.$route.params.id,
-    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-      .toISOString()
-      .substr(0, 10),
+    // candidateId: this.$route.params.id,
+    date: null,
+    activePicker: null,
     menu: false,
     gender: ["Nam", "Nữ"],
     maritalStatus: ["Độc thân", "Đã có gia đình"],
@@ -150,16 +185,34 @@ export default {
     rating: [],
     experience: [],
     salary: [],
-    workingForm: ["Onsite", "Remote"],
+    workingForm: [],
     careerGoals: "",
     personalSkills: "",
+    
+    selectedGender: "",
+    selectedMaritalStatus: "",
+    selectedExperience: "",
+    selectedSalary: "",
+    selectedWorkingForm: "",
   }),
   methods: {
-    submit() {
-      if (this.$refs.form.validate()) {
-        this.$router.push("/candidateLogin");
-      }
+    save(date) {
+      this.$refs.menu.save(date);
     },
+    submit() {
+      // if (this.$refs.form.validate()) {
+      //   this.$router.push("/candidateLogin");
+      // }
+    },
+    getCombobox() {
+      CandidateRegisterService.getCombobox().then((rs) => {
+        this.experience = rs.data.yearOfExperience.map((result) => result.name);
+        this.workingForm = rs.data.workingForm.map((result) => result.name);
+      });
+    },
+  },
+  created() {
+    this.getCombobox();
   },
 };
 </script>

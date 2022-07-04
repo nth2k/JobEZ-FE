@@ -242,7 +242,7 @@
         <hr />
         <div class="job-container1">
           <div
-            v-for="(job, id) in listJob.attractiveJob"
+            v-for="(job, id) in attractiveJob"
             :key="id"
             class="job row p-3 m-3 h-auto"
           >
@@ -250,16 +250,16 @@
               <img style="width: 70px; height: 70px" :src="job.images" alt="" />
             </div>
             <div class="job-info w-75 h-auto pl-4">
-              <span style="color: red">{{ job.jobName }}</span><br />
-              <span>{{ job.commission }}</span
+              <span style="color: red">{{ job.jobName }}</span
               ><br />
+              <br />
               <img src="@/assets/icn_location.png" alt="" />
-              <span> Hà Nội </span><br />
+              <span> Vị trí: {{ job.position }} </span><br />
               <img src="@/assets/hn_icon.png" alt="" />
               <span> Hạn nộp: {{ job.deadlineForSubmission }}</span
               ><br />
-              <img src="@/assets/icn_money.png" alt="" />
-              <span style="color: red"> 7tr - 15 triệu</span>
+              <img src="@/assets/dt_6.png" alt="" />
+              <span> Bằng cấp: {{ job.degreeRequired }} </span>
             </div>
           </div>
         </div>
@@ -270,7 +270,7 @@
           <hr />
           <div class="job-container2">
             <div
-              v-for="(job, id) in listJob.urgentRecruitment"
+              v-for="(job, id) in urgentRecruitment"
               :key="id"
               class="job2 row p-3 m-3 h-auto"
             >
@@ -282,19 +282,17 @@
                 />
               </div>
               <div class="job-info w-75 h-auto pl-4">
-                <span style="color: red">{{ job.jobName }}</span><br />
-                <span>{{ job.commission }}</span
+                <span style="color: red;">{{ job.jobName }}</span
                 ><br />
+                <br />
                 <img src="@/assets/icn_location.png" alt="" />
-                <span> Toàn quốc</span><br />
+                <span> Vị trí: {{ job.position }}</span
+                ><br />
                 <img src="@/assets/hn_icon.png" alt="" /><span>
                   Hạn nộp: {{ job.deadlineForSubmission }}</span
                 ><br />
-                <img src="@/assets/icn_money.png" alt="" /><span
-                  style="color: red"
-                >
-                  7tr - 15 triệu</span
-                >
+                <img src="@/assets/dt_6.png" alt="" />
+                <span> Bằng cấp: {{ job.degreeRequired }} </span>
               </div>
             </div>
           </div>
@@ -348,13 +346,15 @@ export default {
   },
   data() {
     return {
-      listJob: null,
+      attractiveJob: [],
+      urgentRecruitment: [],
     };
   },
   methods: {
     async getJobs() {
       await LandingPageService.getHomePage().then((res) => {
-        this.listJob = res.data;
+        this.attractiveJob = res.data.attractiveJob.slice(1, 10);
+        this.urgentRecruitment = res.data.urgentRecruitment.slice(11, 21);
         console.log(res.data);
       });
     },
