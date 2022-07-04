@@ -38,6 +38,17 @@
                 </v-btn>
               </v-date-picker> </v-menu
             ><br />
+            <span>Số năm kinh nghiệm<span style="color: red">*</span></span
+            ><br />
+            <v-col cols="12" sm="12">
+              <v-select
+                :items="experience"
+                label="Chọn năm kinh nghiệm"
+                required
+              ></v-select> </v-col
+            ><br />
+          </div>
+          <div class="col-3 right-form">
             <span>Đại học<span style="color: red">*</span></span
             ><br />
             <v-text-field
@@ -50,23 +61,12 @@
               required
             ></v-text-field
             ><br />
-          </div>
-          <div class="col-3 right-form">
             <span>Xếp loại<span style="color: red">*</span></span
             ><br />
             <v-col cols="12" sm="12">
               <v-select
                 :items="rating"
                 label="Chọn xếp loại"
-                required
-              ></v-select> </v-col
-            ><br />
-            <span>Số năm kinh nghiệm<span style="color: red">*</span></span
-            ><br />
-            <v-col cols="12" sm="12">
-              <v-select
-                :items="experience"
-                label="Chọn năm kinh nghiệm"
                 required
               ></v-select> </v-col
             ><br />
@@ -92,7 +92,7 @@ export default {
     HeaderComponent,
   },
   data: () => ({
-    candidateId : this.$route.params.id,
+    // candidateId : this.$route.params.id,
     date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
       .toISOString()
       .substr(0, 10),
@@ -135,10 +135,10 @@ export default {
 }
 
 .file-cv {
-  position: relative;
   width: 351px;
   height: 196px;
-  left: 600px;
+  margin-left: 38%;
+  margin-right: 38%;
   margin-top: 20px;
   padding: 80px;
   background: #fbfbff;

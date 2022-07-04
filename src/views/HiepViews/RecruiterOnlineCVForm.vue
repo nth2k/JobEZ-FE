@@ -9,7 +9,10 @@
           <div class="col-3 left-form">
             <span>Logo công ty <span style="color: red">*</span></span
             ><br />
-            <v-file-input accept="image/*" label="Logo công ty"></v-file-input
+            <v-file-input
+              v-model="file"
+              label="Logo công ty"
+            ></v-file-input
             ><br />
             <span>Số điện thoại <span style="color: red">*</span></span
             ><br />
@@ -25,7 +28,7 @@
             <span>Tỉnh/Thành phố<span style="color: red">*</span></span
             ><br />
             <v-select
-              :items="city"
+              :items="province"
               label="Chọn tỉnh/Thành phố"
               required
             ></v-select
@@ -33,7 +36,7 @@
             <span>Quận huyện <span style="color: red">*</span></span
             ><br />
             <v-select
-              :items="province"
+              :items="district"
               label="Chọn quận huyện"
               required
             ></v-select
@@ -80,26 +83,30 @@
           >
         </div>
       </v-form>
-      <button @click="submit()" class="btn mt-5 mb-5 btn-regist">Đăng ký</button>
+      <button @click="submit()" class="btn mt-5 mb-5 btn-regist">
+        Đăng ký
+      </button>
     </div>
   </v-app>
 </template>
 
 <script>
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
+import RecruiterRegisterService from "@/services/RecruiterRegisterService.js"
 export default {
   name: "RecruiterOnlineCVForm",
   components: {
     HeaderComponent,
   },
   data: () => ({
+    file: null,
     phone: "",
     phoneRules: [
       (v) => !!v || "Phone is required",
-      (v) => (v && v.length == 10) || "Phone must be 10 digits",
+      (v) => /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
     ],
-    city: [],
     province: [],
+    district: [],
     address: "",
     addressRules: [
       (v) => !!v || "Address is required",
@@ -120,10 +127,32 @@ export default {
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
-        this.$router.push("/recruiterLogin");
+        const formData = new FormData();
+        formData.append("file", this.file);
+        formData.append("taxCode", this.taxCode);
+        formData.append("phone", this.phone);
+        formData.append("address", this.address);
+        formData.append("description", this.description);
+
+        // axios.post("/api/uploadFile", formData).then(
+        //   function (result) {
+        //     console.log(result);
+        //   },
+        //   function (error) {
+        //     console.log(error);
+        //   }
+        // );
+        console.log(formData);
+
+        // this.$router.push("/recruiterLogin");
       }
     },
   },
+  created(){
+    RecruiterRegisterService.getProvince().then((rs) => {
+      this.province = rs.data.map(result => result.name);
+    })
+  }
 };
 </script>
 

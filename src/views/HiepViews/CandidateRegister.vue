@@ -62,8 +62,10 @@
                 :type="show3 ? 'text' : 'password'"
                 @click:append="show3 = !show3"
               ></v-text-field>
-              <h5>Số điện thoại<span style="color: red">*</span></h5>
+              <span>Số điện thoại<span style="color: red">*</span></span
+              ><br />
               <v-text-field
+                class="mt-5"
                 label="Số điện thoại"
                 outlined
                 dense
@@ -121,7 +123,9 @@ export default {
   },
   methods: {
     validatePassword(value) {
-      return value === this.password || "The password confirmation does not match."
+      return (
+        value === this.password || "The password confirmation does not match."
+      );
     },
     async submit() {
       if (this.$refs.form.validate()) {
@@ -129,6 +133,7 @@ export default {
           name: this.fullName,
           email: this.email,
           password: this.password,
+          phone: this.phone,
           role: {
             id: 1,
             rollName: "Candidate",
@@ -138,7 +143,10 @@ export default {
             this.$store.dispatch("setSnackbar", {
               text: "Đăng kí ứng viên bước 1 thành công",
             });
-            this.$router.push({ name: 'ChooseCVType', params: { id: rs.data.id }});
+            this.$router.push({
+              name: "ChooseCVType",
+              params: { id: rs.data.id },
+            });
           })
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
@@ -160,7 +168,10 @@ export default {
     email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
-      (v) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || "E-mail must be valid",
+      (v) =>
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "E-mail must be valid",
     ],
     password: "",
     passwordRules: [
@@ -168,22 +179,16 @@ export default {
       (v) => (v && v.length > 5) || "Password must be more than 5 characters",
     ],
     confirmPassword: "",
-    confirmPasswordRules: [
-      (v) => !!v || "ConfirmPassword is required",
-    ],
+    confirmPasswordRules: [(v) => !!v || "ConfirmPassword is required"],
     phone: "",
     phoneRules: [
       (v) => !!v || "Phone is required",
-      (v) => (v && v.length == 10) || "Phone must be 10 digits",
+      (v) => /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
     ],
     city: ["1"],
-    cityRules: [
-      v => !!v || 'city is required'
-    ],
+    cityRules: [(v) => !!v || "city is required"],
     province: ["1"],
-    provinceRules: [
-      v => !!v || 'province is required'
-    ],
+    provinceRules: [(v) => !!v || "province is required"],
     desiredPosition: "",
     desiredPositionRules: [
       (v) => !!v || "Phone is required",
