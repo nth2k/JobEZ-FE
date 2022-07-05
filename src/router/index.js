@@ -10,6 +10,11 @@ import CandidateOnlineCVForm from '@/views/HiepViews/CandidateOnlineCVForm.vue'
 import CVFromPCForm from '@/views/HiepViews/CVFromPCForm.vue'
 import RecruiterOnlineCVForm from '@/views/HiepViews/RecruiterOnlineCVForm.vue'
 import JobDetailsNoLogin from '@/components/ToanComponents/JobDetailsNoLogin.vue'
+import AddNgoaiNguTinHoc from '@/views/TuanNV/AddNgoaiNguTinHoc.vue'
+import EditNgoainguTinhoc from '@/views/TuanNV/EditNgoainguTinhoc.vue'
+import ViewNgoaiNguTinHoc from '@/views/TuanNV/ViewNgoaiNguTinHoc.vue'
+import SavedJob from '@/views/TuanNV/SavedJob.vue'
+import AppliedJob from '@/views/TuanNV/AppliedJob.vue'
 
 Vue.use(VueRouter)
 
@@ -63,6 +68,26 @@ export const routes = [
         path: '/job-detail/:id',
         name: 'JobDetailsNoLogin',
         component: JobDetailsNoLogin
+    },{
+        path: '/addLanguage',
+        name: 'AddNgoaiNguTinHoc',
+        component: AddNgoaiNguTinHoc
+    },{
+        path: '/editLanguage/:id',
+        name: 'EditNgoaiNguTinHoc',
+        component: EditNgoainguTinhoc
+    },{
+        path: '/language',
+        name: 'ViewNgoaiNguTinHoc',
+        component: ViewNgoaiNguTinHoc
+    },{
+        path: '/savedjobs',
+        name: 'SavedJob',
+        component: SavedJob
+    },{
+        path: '/appliedjob',
+        name: 'AppliedJob',
+        component: AppliedJob
     }
     // {
     //     path: '/profileCandidate',
