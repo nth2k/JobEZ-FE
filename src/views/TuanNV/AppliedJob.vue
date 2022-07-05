@@ -24,14 +24,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="column"><span>1</span></td>
+              <tr v-for="(appliedjob, index) in listAppliedJob" v-bind:key="appliedjob.id">
+                <td class="column"><span>{{index + 1}}</span></td>
                 <td>
-                  <div>Công ty 1</div>
+                  <div>{{appliedjob.posting.jobName}}</div>
 
                   <div><a href="#">(Xem chi tiết)</a></div>
                 </td>
-                <td class="column"><span>Nhân viên</span></td>
+                <td class="column"><span>{{appliedjob.posting.position}}</span></td>
                 <td>
                   <div>13/07/2020</div>
 
@@ -42,9 +42,9 @@
 
                   <div><span>(4 tháng trước)</span></div>
                 </td>
-                <td><span>Không đạt yêu cầu</span></td>
+                <td><span>{{appliedjob.commentFromEmployer}}</span></td>
                 <td class="column">
-                  <button class="btn btn-danger btnDelete">
+                  <button class="btn btn-danger btnDelete" @click="deleteAppliedJob(appliedjob.id)">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -65,7 +65,7 @@
                   </button>
                 </td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td class="column"><span>1</span></td>
                 <td>
                   <div>Công ty 1</div>
@@ -228,7 +228,7 @@
                     Xóa
                   </button>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -246,12 +246,37 @@
 
 <script>
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
-import Header from "../ToanNT16/candidate_management/Header.vue";
+import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
+import AppliedJobService from '@/services/AppliedJobService.js'
 export default {
+  name: "AppliedJob",
   components: {
     SlideBar_candidate,
     Header,
   },
+  data(){
+    return {
+      listAppliedJob: [],
+    };
+  },
+  methods:{
+    getAppliedJobs(){
+      AppliedJobService.getAppliedJobs().then((res) => {
+        this.listAppliedJob = res.data;
+      })
+    },
+    deleteAppliedJob(id){
+      let textConfirm = "Press Ok to delete your applied job.";
+      if(confirm(textConfirm) == true){
+        AppliedJobService.deleteAppliedJob(id);
+        alert('delete successful');
+        location.reload();
+      }
+    }
+  },
+  created(){
+    this.getAppliedJobs();
+  }
 };
 </script>
 
