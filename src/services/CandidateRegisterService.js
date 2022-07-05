@@ -8,6 +8,12 @@ const CandidateRegisterService  = {
   },
   getCombobox(){
     return axios.get(Base_URL + "/candidateOnlineCVForm/")
+  },
+  updateCandidate(id, candidate){
+    return axios.put(Base_URL + "/candidateOnlineCVForm/" + id, candidate);
+  },
+  updateCandidate2(id, candidate){
+    return axios.put(Base_URL + "/cvFromPCForm/" + id, candidate);
   }
 }
 

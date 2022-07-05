@@ -25,6 +25,8 @@
                   readonly
                   v-bind="attrs"
                   v-on="on"
+                  required
+                  :rules="dateRules"
                 ></v-text-field>
               </template>
               <v-date-picker
@@ -51,6 +53,7 @@
               "
               label="Chọn giới tính"
               required
+              :rules="genderRules"
             ></v-select
             ><br />
             <span>Tình trạng hôn nhân <span style="color: red">*</span></span
@@ -65,6 +68,7 @@
               "
               label="Chọn tình trạng hôn nhân"
               required
+              :rules="maritalStatusRules"
             ></v-select
             ><br />
             <span>Tên trường học <span style="color: red">*</span></span
@@ -81,7 +85,18 @@
             ><br />
             <span>Xếp loại <span style="color: red">*</span></span
             ><br />
-            <v-select :items="rating" label="Chọn xếp loại" required></v-select
+            <v-select
+              :items="rating"
+              v-model="selectedRating"
+              @change="
+                (e) => {
+                  this.selectedRating = e;
+                }
+              "
+              label="Chọn xếp loại"
+              required
+              :rules="ratingRules"
+            ></v-select
             ><br />
             <span>Số năm kinh nghiệm <span style="color: red">*</span></span
             ><br />
@@ -95,6 +110,7 @@
               "
               label="Chọn số năm kinh nghiệm"
               required
+              :rules="experienceRules"
             ></v-select
             ><br />
           </div>
@@ -111,6 +127,7 @@
               "
               label="Chọn mức lương mong muốn"
               required
+              :rules="salaryRules"
             ></v-select
             ><br />
             <span>Hình thức làm việc <span style="color: red">*</span></span
@@ -125,6 +142,7 @@
               "
               label="Chọn hình thức làm việc"
               required
+              :rules="workingFormRules"
             ></v-select
             ><br />
             <span>Mục tiêu nghề nghiệp</span><br />
@@ -133,7 +151,6 @@
             ><br />
             <v-textarea
               outlined
-              name="careerGoals"
               label="Mục tiêu nghề nghiệp"
               v-model="careerGoals"
             ></v-textarea
@@ -144,7 +161,6 @@
             ><br />
             <v-textarea
               outlined
-              name="personalSkills"
               label="Kỹ năng bản thân"
               v-model="personalSkills"
             ></v-textarea
@@ -170,39 +186,72 @@ export default {
   components: {
     HeaderComponent,
   },
-  data: () => ({
-    // candidateId: this.$route.params.id,
-    date: null,
-    activePicker: null,
-    menu: false,
-    gender: ["Nam", "Nữ"],
-    maritalStatus: ["Độc thân", "Đã có gia đình"],
-    university: "",
-    universityRules: [
-      (v) => !!v || "University is required",
-      (v) => (v && v.length > 5) || "University must be more than 5 characters",
-    ],
-    rating: [],
-    experience: [],
-    salary: [],
-    workingForm: [],
-    careerGoals: "",
-    personalSkills: "",
-    
-    selectedGender: "",
-    selectedMaritalStatus: "",
-    selectedExperience: "",
-    selectedSalary: "",
-    selectedWorkingForm: "",
-  }),
+  data() {
+    return {
+      candidateId: this.$route.params.id,
+      date: null,
+      activePicker: null,
+      menu: false,
+      dateRules: [(v) => !!v || "date is required"],
+      gender: ["Nam", "Nữ"],
+      genderRules: [(v) => !!v || "gender is required"],
+      maritalStatus: ["Độc thân", "Đã có gia đình"],
+      maritalStatusRules: [(v) => !!v || "maritalStatus is required"],
+      university: "",
+      universityRules: [
+        (v) => !!v || "University is required",
+        (v) =>
+          (v && v.length > 5) || "University must be more than 5 characters",
+      ],
+      rating: ["Giỏi", "Khá", "Trung Bình", "Chưa ra trường"],
+      ratingRules: [(v) => !!v || "rating is required"],
+      experience: [],
+      experienceRules: [(v) => !!v || "experience is required"],
+      salary: ["3-5 triệu", "5-7 triệu", "7-10 triệu", "10-15 triệu", "15-20 triệu"],
+      salaryRules: [(v) => !!v || "salary is required"],
+      workingForm: [],
+      workingFormRules: [(v) => !!v || "workingForm is required"],
+      careerGoals: "",
+      personalSkills: "",
+
+      selectedGender: "",
+      selectedMaritalStatus: "",
+      selectedRating: "",
+      selectedExperience: "",
+      selectedSalary: "",
+      selectedWorkingForm: "",
+    };
+  },
   methods: {
     save(date) {
       this.$refs.menu.save(date);
     },
     submit() {
-      // if (this.$refs.form.validate()) {
-      //   this.$router.push("/candidateLogin");
-      // }
+      if (this.$refs.form.validate()) {
+        CandidateRegisterService.updateCandidate(this.candidateId, {
+          birthDate: this.date,
+          gender: this.selectedGender,
+          mariaStatus: this.selectedMaritalStatus,
+          university: this.university,
+          rating: this.selectedRating,
+          experience: this.selectedExperience,
+          workingForm: this.selectedWorkingForm,
+          careerGoals: this.careerGoals,
+          description: this.personalSkills,
+        })
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Đăng kí ứng viên bước 2 thành công",
+            });
+            this.$router.push("/candidateLogin");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
+      }
     },
     getCombobox() {
       CandidateRegisterService.getCombobox().then((rs) => {
