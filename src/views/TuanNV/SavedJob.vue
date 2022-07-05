@@ -19,8 +19,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="savedJob in listSavedJob" v-bind:key="savedJob.id">
-                <td class="column"><span>1</span></td>
+              <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="savedJob.id">
+                <td class="column"><span>{{index + 1}}</span></td>
                 <td>
                   <div>{{savedJob.posting.jobName}}</div>
 
@@ -28,12 +28,12 @@
                 </td>
                 <td class="column"><span>{{savedJob.posting.position}}</span></td>
                 <td>
-                  <div>{{savedjob.deadlineForSubmission.toString()}}</div>
-                  <!-- <div>12/09/2022</div> -->
+                  <!-- <div>{{savedjob.deadlineForSubmission.toString()}}</div> -->
+                  <div>12/09/2022</div>
                   <div><span>(Còn 13 ngày)</span></div>
                 </td>
                 <td class="column">
-                  <button class="btn btn-danger btnDelete">
+                  <button class="btn btn-danger btnDelete" @click="deleteSavedJob(savedJob.id)">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -146,6 +146,7 @@ import SavedJobService from '@/services/SavedJobService.js'
 // import Header from "./components/views/Header.vue";
 // import SlideBar_candidate from "./components/ProfileCandidate/slideBar_candidate.vue";
 export default {
+  name: "SavedJob",
   components:{
     SlideBar_candidate,
     Header
@@ -153,20 +154,28 @@ export default {
 data(){
     return{
       listSavedJob: [],
-      savedJob:{
-        id: "",
-        jobName: "",
-        position: "",
-        deadlineForSubmission: "",
-      },
+      // savedJob:{
+      //   id: "",
+      //   jobName: "",
+      //   position: "",
+      //   deadlineForSubmission: "",
+      // },
     };
   },
   methods:{
     getSavedJobs(){
       SavedJobService.getSavedJobs().then((res) => {
         this.listSavedJob = res.data;
-        console.log(this.listSavedJob);
+        // console.log(this.listSavedJob);
       })
+    },
+    deleteSavedJob(id){
+      let textConfirm = "Press Ok to delete your saved job.";
+      if(confirm(textConfirm) == true){
+        SavedJobService.deleteSavedJob(id);
+        alert('delete successful');
+        location.reload();
+      }
     },
   },
   created(){
