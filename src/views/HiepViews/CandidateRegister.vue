@@ -92,15 +92,6 @@
                   ></v-select>
                 </v-col>
               </v-row>
-              <h5>Vị trí mong muốn<span style="color: red">*</span></h5>
-              <v-text-field
-                label="Vị trí mong muốn"
-                outlined
-                dense
-                v-model="desiredPosition"
-                :rules="desiredPositionRules"
-                required
-              ></v-text-field>
             </v-form>
             <button @click="submit" class="btn">Đăng ký</button>
           </div>
