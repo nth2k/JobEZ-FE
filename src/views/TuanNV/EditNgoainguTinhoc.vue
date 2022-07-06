@@ -79,8 +79,7 @@ export default {
       Id: this.$route.params.id,
       certificateName: "",
       languageName: "",
-      grade: "",
-      selectedLanguage: ""
+      grade: ""
     }
   },
   methods: {
@@ -96,6 +95,8 @@ export default {
     updateLanguage(){
       // console.log(this.certificateName, this.languageName, this.grade, this.selectedLanguage);
       LanguageCertificateService.updateLanguage(this.Id, {certificateName: this.certificateName, name: this.languageName, grade: this.grade});
+      alert("Update Successful!");
+      window.location = "/language";
     }
   },
   created() {
