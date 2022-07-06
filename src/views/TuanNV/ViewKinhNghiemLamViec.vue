@@ -13,10 +13,10 @@
           <div class="titleRight">Kinh nghiệm làm việc</div>
           <div class="container">
             <div class="mb-3">
-              <button class="btnAdd py-1 px-3">+ Thêm</button>
+              <router-link class="btnAdd py-1 px-3" to="/addworkexp">+ Thêm</router-link >
             </div>
-            <div>
-              <a href="#" id="show" @click="showDetail()">
+            <div class="block" v-for="workexp in listWorkExp" v-bind:key="workexp.id">
+              <span id="show" @click="showDetail">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -29,9 +29,9 @@
                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"
                   />
                 </svg>
-                Công ty TNHH máy lọc nước CV365
-              </a>
-              <button class="btnDelete">
+                {{workexp.companyName}}
+              </span>
+              <button class="btnDelete" @click="deleteWorkExp(workexp.id)">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -51,18 +51,13 @@
               </button>
               <div class="detail container p-3" id="detailInfo">
                 <div>
-                  <span>Thời gian từ: </span><span>15/03/2019</span
-                  ><span> Đến </span><span>20/02/2020</span>
+                  <span class="font-weight-bold">Thời gian từ: </span><span>{{workexp.startDate.slice(0,10)}}</span
+                  ><span class="font-weight-bold"> Đến </span><span>{{workexp.endDate.slice(0,10)}}</span>
                 </div>
-                <div><span>Chức danh: </span><span> Designer</span></div>
+                <div><span class="font-weight-bold">Chức danh: </span><span> {{workexp.position}}</span></div>
                 <div>
                   <span
-                    >- Gặp gỡ, tư vấn cho các khách hàng đã được công ty phân
-                    công. - Trực tiếp khảo sát và đo đạc ô chờ cho các công
-                    trình chưa được sản xuất, chốt các kích thước ô chờ đã đo
-                    đạc, bản vẽ thiết kế,... - Lập biên bản làm việc với khách
-                    hàng. - Gửi kết quả đo đạc và các thay đổi so với thiết kế
-                    ban đầu cho phòng kinh doanh.
+                    >{{workexp.description}}
                   </span>
                 </div>
               </div>
@@ -78,23 +73,45 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
+import WorkExperienceService from "@/services/WorkExperienceService.js";
 export default {
+  name: "ViewKinhNghiemLamViec",
   components: {
     SlideBar_candidate,
     Header,
     Profile_menu,
   },
+  data(){
+    return {
+      listWorkExp: [],
+    }
+  },
   methods: {
     showDetail() {
       const detail = document.getElementById("detailInfo");
-      // if (detail.style.display == "none") {
-      //   detail.style.display = "block";
-      // } else {
-      //   detail.style.display = "none";
-      // }
-      console.log(detail.style.display);
+      if (detail.style.display == "none") {
+        detail.style.display = "block";
+      } else {
+        detail.style.display = "none";
+      }
     },
+    getAllWorkExp(){
+      WorkExperienceService.getWorkExps().then((res) => {
+        this.listWorkExp = res.data;
+      })
+    },
+    deleteWorkExp(id){
+      let textConfirm = "Press Ok to delete your work experience.";
+      if(confirm(textConfirm) == true){
+        WorkExperienceService.deleteWorkExp(id);
+        alert('delete successful');
+        location.reload();
+      }
+    }
   },
+  created(){
+    this.getAllWorkExp();
+  }
 };
 </script>
 
@@ -108,13 +125,23 @@ export default {
   width: 25px;
   height: 25px;
 }
+.block{
+  padding-bottom: 20px;
+  border-bottom: 1px solid lightgray;
+}
 .detail {
   /* display: none; */
   background-color: #f2f2f2;
+  transition: 0.5s;
 }
 a {
   text-decoration: none;
   font-size: 18px;
+}
+#show{
+  color:#2a3563;
+  margin-bottom: 20px;
+  font-size: 25px;
 }
 .btnAdd {
   background-color: #eceefa;
