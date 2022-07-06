@@ -290,6 +290,7 @@ thead {
 }
 th {
   color: white;
+  padding: 5px 20px;
 }
 td {
   border: 1px solid lightgray;
