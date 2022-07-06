@@ -15,6 +15,8 @@ import EditNgoainguTinhoc from '@/views/TuanNV/EditNgoainguTinhoc.vue'
 import ViewNgoaiNguTinHoc from '@/views/TuanNV/ViewNgoaiNguTinHoc.vue'
 import SavedJob from '@/views/TuanNV/SavedJob.vue'
 import AppliedJob from '@/views/TuanNV/AppliedJob.vue'
+import ViewKinhNghiemLamViec from '@/views/TuanNV/ViewKinhNghiemLamViec.vue'
+import AddKinhNghiemLamViec from '@/views/TuanNV/AddKinhNghiemLamViec.vue'
 
 Vue.use(VueRouter)
 
@@ -88,6 +90,14 @@ export const routes = [
         path: '/appliedjob',
         name: 'AppliedJob',
         component: AppliedJob
+    },{
+        path: '/workexp',
+        name: 'ViewKinhNghiemLamViec',
+        component: ViewKinhNghiemLamViec
+    },{
+        path: '/addworkexp',
+        name: 'AddKinhNghiemLamViec',
+        component: AddKinhNghiemLamViec
     }
     // {
     //     path: '/profileCandidate',
