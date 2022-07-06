@@ -100,6 +100,8 @@ export default {
     addLanguage(){
       // console.log(this.certificateName, this.languageName, this.grade);
       LanguageCertificateService.addLanguage({certificateName: this.languageName, name: this.certificateName, grade: this.grade});
+      alert("Add successful");
+      window.location = "/language";
     }
   }
 };
