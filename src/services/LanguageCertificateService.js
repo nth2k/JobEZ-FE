@@ -12,11 +12,11 @@ class LanguageCertificateService{
     addLanguage(language){
         return axios.post(Base_URL + "/language/add", language);
     }
-    updateLanguage(language, id){
-        return axios.post(Base_URL+ "/update/" + id, language);
+    updateLanguage(id, language){
+        return axios.post(Base_URL+ "/language/update/" + id, language);
     }
     deleteLanguage(id){
-        return axios.delete(Base_URL + "/delete/" + id);
+        return axios.delete(Base_URL + "/language/delete/" + id);
     }
 }
 
