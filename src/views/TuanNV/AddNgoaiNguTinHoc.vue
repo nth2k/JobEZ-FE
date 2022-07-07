@@ -13,7 +13,7 @@
           <div class="titleRight">Ngoại ngữ- Tin học</div>
 
           <div class="container">
-            <form>
+            <v-form>
               <div class="row">
                 <div class="col-12">
                   <div class="title">
@@ -51,25 +51,23 @@
                     <span>Số điểm <span class="star">*</span></span>
                   </div>
                   <div>
-                    <input
-                     v-model="grade"
-                      class="form-control"
+                    <v-text-field v-model.number="grade" class="form-control"
                       type="text"
                       id="sodiem"
                       placeholder="Số điểm"
-                    />
+                      :rules="inputRules"></v-text-field>
                   </div>
                 </div>
                 <div class="text-center container">
-                  <button
+                  <v-btn
                     class="btn btn-primary btnSave px-5 mt-5"
                     @click.prevent="addLanguage"
                   >
                     Lưu
-                  </button>
+                  </v-btn>
                 </div>
               </div>
-            </form>
+            </v-form>
           </div>
         </div>
       </div>
@@ -81,7 +79,7 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
-import LanguageCertificateService from "@/services/LanguageCertificateService";
+// import LanguageCertificateService from "@/services/LanguageCertificateService";
 export default {
   name: "AddNgoaiNguTinHoc",
   components: {
@@ -93,15 +91,18 @@ export default {
     return {
       languageName: "",
       certificateName: "",
-      grade: ""
+      grade: "",
+      inputRules:[
+        v => v.length >= 3 || 'Minimum length is 3 character'
+      ]
     }
   },
   methods: {
     addLanguage(){
-      // console.log(this.certificateName, this.languageName, this.grade);
-      LanguageCertificateService.addLanguage({certificateName: this.languageName, name: this.certificateName, grade: this.grade});
-      alert("Add successful");
-      window.location = "/language";
+      console.log(this.certificateName, this.languageName, this.grade);
+      // LanguageCertificateService.addLanguage({certificateName: this.languageName, name: this.certificateName, grade: this.grade});
+      // alert("Add successful");
+      // window.location = "/language";
     }
   }
 };
