@@ -19,7 +19,7 @@
           </div>
           <h2>Bạn chưa có tài khoản?</h2>
           <div class="login-form">
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form">
               <h5>Tên đầy đủ<span style="color: red">*</span></h5>
               <v-text-field
                 label="Tên đầy đủ"
@@ -53,7 +53,7 @@
               <h5>Xác nhận mật khẩu<span style="color: red">*</span></h5>
               <v-text-field
                 v-model="confirmPassword"
-                :rules="confirmPasswordRules"
+                :rules="confirmPasswordRules.concat(validatePassword)"
                 label="Xác nhận mật khẩu"
                 outlined
                 dense
@@ -62,8 +62,10 @@
                 :type="show3 ? 'text' : 'password'"
                 @click:append="show3 = !show3"
               ></v-text-field>
-              <h5>Số điện thoại<span style="color: red">*</span></h5>
+              <span>Số điện thoại<span style="color: red">*</span></span
+              ><br />
               <v-text-field
+                class="mt-5"
                 label="Số điện thoại"
                 outlined
                 dense
@@ -77,6 +79,7 @@
                   <v-select
                     :items="city"
                     label="Chọn tỉnh/Thành phố"
+                    :rules="cityRules"
                     required
                   ></v-select>
                 </v-col>
@@ -84,23 +87,13 @@
                   <v-select
                     :items="province"
                     label="Chọn quận huyện"
+                    :rules="provinceRules"
                     required
                   ></v-select>
                 </v-col>
               </v-row>
-              <h5>Vị trí mong muốn<span style="color: red">*</span></h5>
-              <v-text-field
-                label="Vị trí mong muốn"
-                outlined
-                dense
-                v-model="desiredPosition"
-                :rules="desiredPositionRules"
-                required
-              ></v-text-field>
-              <button @click="submit" :disabled="!valid" class="btn">
-                Đăng ký
-              </button>
             </v-form>
+            <button @click="submit" class="btn">Đăng ký</button>
           </div>
         </div>
       </div>
@@ -111,6 +104,8 @@
 <script>
 import ChooseCandidate from "@/components/HiepComponents/ChooseCandidate.vue";
 import TopHeaderComponent from "@/components/HiepComponents/TopHeaderComponent.vue";
+import CandidateRegisterService from "@/services/CandidateRegisterService.js";
+
 export default {
   name: "CandidateRegister",
   components: {
@@ -118,12 +113,39 @@ export default {
     TopHeaderComponent,
   },
   methods: {
-    submit() {
-      // this.validate();
-      this.$router.push("/chooseCVType");
+    validatePassword(value) {
+      return (
+        value === this.password || "The password confirmation does not match."
+      );
     },
-    validate() {
-      this.$refs.form.validate();
+    async submit() {
+      if (this.$refs.form.validate()) {
+        await CandidateRegisterService.addCandidate({
+          name: this.fullName,
+          email: this.email,
+          password: this.password,
+          phone: this.phone,
+          role: {
+            id: 1,
+            rollName: "Candidate",
+          },
+        })
+          .then((rs) => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Đăng kí ứng viên bước 1 thành công",
+            });
+            this.$router.push({
+              name: "ChooseCVType",
+              params: { id: rs.data.id },
+            });
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
+      }
     },
   },
   data: () => ({
@@ -137,7 +159,10 @@ export default {
     email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      (v) =>
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "E-mail must be valid",
     ],
     password: "",
     passwordRules: [
@@ -145,17 +170,16 @@ export default {
       (v) => (v && v.length > 5) || "Password must be more than 5 characters",
     ],
     confirmPassword: "",
-    confirmPasswordRules: [
-      (v) => !!v || "ConfirmPassword is required",
-      (v) => (v === this.password) || "The password confirmation does not match.",
-    ],
+    confirmPasswordRules: [(v) => !!v || "ConfirmPassword is required"],
     phone: "",
     phoneRules: [
       (v) => !!v || "Phone is required",
-      (v) => (v && v.length == 10) || "Phone must be 10 digits",
+      (v) => /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
     ],
-    city: [],
-    province: [],
+    city: ["1"],
+    cityRules: [(v) => !!v || "city is required"],
+    province: ["1"],
+    provinceRules: [(v) => !!v || "province is required"],
     desiredPosition: "",
     desiredPositionRules: [
       (v) => !!v || "Phone is required",

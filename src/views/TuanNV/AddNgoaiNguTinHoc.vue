@@ -13,7 +13,7 @@
           <div class="titleRight">Ngoại ngữ- Tin học</div>
 
           <div class="container">
-            <v-form>
+            <v-form ref="form">
               <div class="row">
                 <div class="col-12">
                   <div class="title">
@@ -24,12 +24,18 @@
                     </div>
                   </div>
                   <div>
-                    <select v-model="languageName" class="form-control" >
+                    <!-- <select v-model="languageName" class="form-control" >
                       <option value="-1">Chọn ngôn ngữ</option>
                       <option value="English">English</option>
                       <option value="Japan">Japan</option>
                       <option value="Korea">Korea</option>
-                    </select>
+                    </select> -->
+                    <v-select
+                    :items="language"
+                    label="Chọn ngôn ngữ"
+                    :rules="languageNameRules"
+                    required
+                  ></v-select>
                   </div>
                 </div>
                 <div class="col-12">
@@ -37,34 +43,54 @@
                     <span>Chứng chỉ <span class="star">*</span></span>
                   </div>
                   <div>
-                    <input
+                    <!-- <input
                       v-model="certificateName"
                       class="form-control"
                       type="text"
                       id="tenchungchi"
                       placeholder="Tên chứng chỉ"
-                    />
+                    /> -->
+                    <v-text-field
+                    class="mt-5"
+                    label="Chứng chỉ"
+                    outlined
+                    dense
+                    v-model="certificateName"
+                    :rules="certificateNameRules"
+                    required
+                  ></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="title">
                     <span>Số điểm <span class="star">*</span></span>
                   </div>
-                  <div>
-                    <v-text-field v-model.number="grade" class="form-control"
+                  <!-- <div> -->
+                    <!-- <v-text-field
+                      label="Số điểm"
+                      v-model.number="grade" class="form-control"
                       type="text"
                       id="sodiem"
-                      placeholder="Số điểm"
-                      :rules="inputRules"></v-text-field>
-                  </div>
+                      :rules="inputRules"
+                      required></v-text-field> -->
+                      <v-text-field
+                      class="mt-5"
+                      label="Số điểm"
+                      outlined
+                      dense
+                      v-model.number="grade"
+                      :rules="inputGradeRules"
+                      required
+                    ></v-text-field>
+                  <!-- </div> -->
                 </div>
                 <div class="text-center container">
-                  <v-btn
+                  <button
                     class="btn btn-primary btnSave px-5 mt-5"
                     @click.prevent="addLanguage"
                   >
                     Lưu
-                  </v-btn>
+                  </button>
                 </div>
               </div>
             </v-form>
@@ -89,17 +115,28 @@ export default {
   },
   data(){
     return {
-      languageName: "",
-      certificateName: "",
       grade: "",
-      inputRules:[
-        v => v.length >= 3 || 'Minimum length is 3 character'
+      inputGradeRules:[
+        (v) => v >= 0 || 'Minimum length is 3 character',
+        (v) => !!v || "Grade must be required"
+      ],
+      certificateName: "",
+      certificateNameRules:[
+        (v) => !!v || "Tên chứng chỉ không được để trống"
+      ],
+      languageName: "",
+      language:["English", "Japan", "Korea"],
+      languageNameRules:[
+        (v) => !!v || "Vui lòng chọn ngôn ngữ"
       ]
     }
   },
   methods: {
     addLanguage(){
-      console.log(this.certificateName, this.languageName, this.grade);
+      if(this.$refs.form.validate()){
+        console.log(this.certificateName, this.languageName, this.grade);
+      }
+      
       // LanguageCertificateService.addLanguage({certificateName: this.languageName, name: this.certificateName, grade: this.grade});
       // alert("Add successful");
       // window.location = "/language";

@@ -17,6 +17,7 @@ import SavedJob from '@/views/TuanNV/SavedJob.vue'
 import AppliedJob from '@/views/TuanNV/AppliedJob.vue'
 import ViewKinhNghiemLamViec from '@/views/TuanNV/ViewKinhNghiemLamViec.vue'
 import AddKinhNghiemLamViec from '@/views/TuanNV/AddKinhNghiemLamViec.vue'
+import SearchJob from '@/views/HiepViews/SearchJob.vue'
 
 Vue.use(VueRouter)
 
@@ -47,22 +48,22 @@ export const routes = [
         component: RecruiterRegister
     }, 
     {
-        path: '/chooseCVType',
+        path: '/chooseCVType/:id',
         name: 'ChooseCVType',
         component: ChooseCVType
     }, 
     {
-        path: '/candidateOnlineCVForm',
+        path: '/candidateOnlineCVForm/:id',
         name: 'CandidateOnlineCVForm',
         component: CandidateOnlineCVForm
     }, 
     {
-        path: '/cvFromPCForm',
+        path: '/cvFromPCForm/:id',
         name: 'CVFromPCForm',
         component: CVFromPCForm
     }, 
     {
-        path: '/recruiterOnlineCVForm',
+        path: '/recruiterOnlineCVForm/:id',
         name: 'RecruiterOnlineCVForm',
         component: RecruiterOnlineCVForm
     }, 
@@ -98,6 +99,11 @@ export const routes = [
         path: '/addworkexp',
         name: 'AddKinhNghiemLamViec',
         component: AddKinhNghiemLamViec
+    },
+    {
+        path: '/searchJob',
+        name: 'SearchJob',
+        component: SearchJob
     }
     // {
     //     path: '/profileCandidate',
