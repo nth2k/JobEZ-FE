@@ -12,7 +12,7 @@
         <div class="right col-9">
           <div class="titleheader">Kinh nghiệm làm việc</div>
           <div class="container">
-            <form>
+            <v-form ref="form">
               <div class="row block2">
                 <div class="col-12">
                   <div class="title">
@@ -23,12 +23,15 @@
                     </div>
                   </div>
                   <div>
-                    <input v-model="position"
-                      class="form-control"
-                      type="text"
-                      id="chucdanh"
-                      placeholder="Nhập chức danh"
-                    />
+                    <v-text-field
+                    class="mt-3"
+                    label="Nhập chức danh"
+                    outlined
+                    dense
+                    v-model="position"
+                    :rules="positionRules"
+                    required
+                  ></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
@@ -39,12 +42,15 @@
                     >
                   </div>
                   <div>
-                    <input v-model="companyName"
-                      class="form-control"
-                      type="text"
-                      id="congty"
-                      placeholder="Nhập tên công ty"
-                    />
+                    <v-text-field
+                    class="mt-3"
+                    label="Nhập tên công ty"
+                    outlined
+                    dense
+                    v-model="companyName"
+                    :rules="companyNameRules"
+                    required
+                  ></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
@@ -58,23 +64,29 @@
                       class="col-5"
                       style="padding-left: 0; padding-right: 0"
                     >
-                      <input v-model="startDate"
-                        class="form-control"
-                        type="text"
-                        id="ngaybatdau"
-                        placeholder="Ngày bắt đầu"
-                      />
+                      <v-text-field
+                        class="mt-3"
+                        label="Ngày bắt đầu"
+                        outlined
+                        dense
+                        v-model="startDate"
+                        :rules="startDateRules"
+                        required
+                      ></v-text-field>
                     </div>
                     <div
                       class="col-5"
                       style="padding-left: 0; padding-right: 0"
                     >
-                      <input v-model="endDate"
-                        class="form-control"
-                        type="text"
-                        id="ngayketthuc"
-                        placeholder="Ngày kết thúc"
-                      />
+                      <v-text-field
+                        class="mt-3"
+                        label="Ngày kết thúc"
+                        outlined
+                        dense
+                        v-model="endDate"
+                        :rules="endDateRules"
+                        required
+                      ></v-text-field>
                     </div>
                   </div>
                 </div>
@@ -85,11 +97,13 @@
                     >
                   </div>
                   <div class="form-group shadow-textarea">
-                    <textarea v-model="description"
+                    <v-textarea v-model="description"
                       class="form-control z-depth-1"
+                      label="Mô tả công việc"
                       rows="5"
-                      placeholder="Mô tả công việc như là nhiệm vụ, trách nhiệm, thành tích đạt được..."
-                    ></textarea>
+                      :rules="descriptionRules"
+                      required
+                      ></v-textarea>
                   </div>
                   <div class="row">
                     <div class="col-12 justify-content-center">
@@ -98,7 +112,7 @@
                   </div>
                 </div>
               </div>
-            </form>
+            </v-form>
           </div>
         </div>
       </div>
@@ -122,21 +136,38 @@ export default {
   data(){
     return{
       position: "",
+      positionRules:[
+          (v) => !!v || "Position must be required"
+      ],
       companyName: "",
+      companyNameRules:[
+        (v) => !!v || "Company Name must be required"
+      ],
       startDate: "",
+      startDateRules:[
+        (v) => !!v || "Start Date must be required"
+      ],
       endDate: "",
+      endDateRules:[
+        (v) => !!v || "End Date must be required"
+      ],
       description: "",
+      descriptionRules:[
+        (v) => !!v || "Description must be required"
+      ],
     }
   },
   methods:{
     addWorkExp(){
-      var [day, month, year] = this.startDate.split('-');
-      this.startDate = [year, month, day].join('-');
-      [day, month, year] = this.endDate.split('-');
-      this.endDate = [year, month, day].join('-');
-      WorkExperienceService.addWorkExp({companyName: this.companyName, position: this.position, description: this.description, startDate: this.startDate, endDate: this.endDate})
-      alert('Add successful');
-      window.location = "/workexp";
+      if(this.$refs.form.validate()){
+        var [day, month, year] = this.startDate.split('-');
+        this.startDate = [year, month, day].join('-');
+        [day, month, year] = this.endDate.split('-');
+        this.endDate = [year, month, day].join('-');
+        WorkExperienceService.addWorkExp({companyName: this.companyName, position: this.position, description: this.description, startDate: this.startDate, endDate: this.endDate})
+        alert('Add successful');
+        window.location = "/workexp";
+      }
     }
   }
 };
