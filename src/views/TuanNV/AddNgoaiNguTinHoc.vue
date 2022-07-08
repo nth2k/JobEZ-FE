@@ -50,7 +50,7 @@
                       id="tenchungchi"
                       placeholder="Tên chứng chỉ"
                     /> -->
-                    <v-text-field
+                    <!-- <v-text-field
                     class="mt-5"
                     label="Chứng chỉ"
                     outlined
@@ -58,7 +58,9 @@
                     v-model="certificateName"
                     :rules="certificateNameRules"
                     required
-                  ></v-text-field>
+                  ></v-text-field> -->
+                  <v-textarea label="Chứng chỉ" v-model="certificateName" outlined filled no-resize rows="1"
+                      :rules="certificateNameRules" required background-color="white"></v-textarea>
                   </div>
                 </div>
                 <div class="col-12">
@@ -73,7 +75,7 @@
                       id="sodiem"
                       :rules="inputRules"
                       required></v-text-field> -->
-                      <v-text-field
+                      <!-- <v-text-field
                       class="mt-5"
                       label="Số điểm"
                       outlined
@@ -81,7 +83,9 @@
                       v-model.number="grade"
                       :rules="inputGradeRules"
                       required
-                    ></v-text-field>
+                    ></v-text-field> -->
+                    <v-textarea label="Số điểm" v-model.number="grade" outlined filled no-resize rows="1"
+                      :rules="inputGradeRules" required background-color="white"></v-textarea>
                   <!-- </div> -->
                 </div>
                 <div class="text-center container">

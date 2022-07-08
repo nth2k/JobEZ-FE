@@ -22,8 +22,10 @@
                     </div>
                   </div>
                   <div>
-                    <v-text-field class="mt-3" label="Nhập chức danh" outlined dense v-model="position"
-                      :rules="positionRules" required></v-text-field>
+                    <!-- <v-text-field class="mt-3" label="Nhập chức danh" outlined dense v-model="position"
+                      :rules="positionRules" required></v-text-field> -->
+                    <v-textarea label="Nhập chức danh" v-model="position" outlined filled no-resize rows="1"
+                      :rules="positionRules" required background-color="white"></v-textarea>
                   </div>
                 </div>
                 <div class="col-12">
@@ -32,8 +34,10 @@
                       <span class="star">*</span></span>
                   </div>
                   <div>
-                    <v-text-field class="mt-3" label="Nhập tên công ty" outlined dense v-model="companyName"
-                      :rules="companyNameRules" required></v-text-field>
+                    <!-- <v-text-field class="mt-3" label="Nhập tên công ty" outlined dense v-model="companyName"
+                      :rules="companyNameRules" required></v-text-field> -->
+                    <v-textarea label="Nhập tên công ty" v-model="companyName" outlined filled no-resize rows="1"
+                      :rules="companyNameRules" required background-color="white"></v-textarea>
                   </div>
                 </div>
                 <div class="col-12">
@@ -42,12 +46,16 @@
                   </div>
                   <div class="d-flex justify-content-between">
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <v-text-field class="mt-3" label="Ngày bắt đầu" outlined dense v-model="startDate"
-                        :rules="startDateRules" required></v-text-field>
+                      <!-- <v-text-field class="mt-3" label="Ngày bắt đầu" outlined dense v-model="startDate"
+                        :rules="startDateRules" required></v-text-field> -->
+                      <v-textarea label="Ngày bắt đầu" v-model="startDate" outlined filled no-resize rows="1"
+                        :rules="startDateRules" required background-color="white"></v-textarea>
                     </div>
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <v-text-field class="mt-3" label="Ngày kết thúc" outlined dense v-model="endDate"
-                        :rules="endDateRules" required value="asdasdasd"></v-text-field>
+                      <!-- <v-text-field class="mt-3" label="Ngày kết thúc" outlined dense v-model="endDate"
+                        :rules="endDateRules" required value="asdasdasd"></v-text-field> -->
+                      <v-textarea label="Ngày kết thúc" v-model="endDate" outlined filled no-resize rows="1"
+                        :rules="endDateRules" required background-color="white"></v-textarea>
                     </div>
                   </div>
                 </div>
@@ -55,10 +63,8 @@
                   <div class="title">
                     <span class="py-2 label">Mô tả công việc <span class="star">*</span></span>
                   </div>
-                  <v-container>
-                    <v-textarea v-model="description" filled label="Mô tả công việc" auto-grow background-color="white"
-                      outlined></v-textarea>
-                  </v-container>
+                  <v-textarea v-model="description" :rules="descriptionRules" filled label="Mô tả công việc" auto-grow
+                    background-color="white" outlined required></v-textarea>
                   <!-- <div class="form-group shadow-textarea">
                     <v-textarea v-model="description"
                       class="form-control z-depth-1"
@@ -70,7 +76,7 @@
                   </div> -->
                   <div class="row">
                     <div class="col-12 justify-content-center">
-                      <button class="btn btn-primary px-5" @click="addWorkExp">Lưu</button>
+                      <button class="btn btn-primary px-5" @click.prevent="addWorkExp">Lưu</button>
                     </div>
                   </div>
                 </div>
@@ -121,7 +127,7 @@ export default {
     }
   },
   methods: {
-    addWorkExp() {
+    async addWorkExp() {
       if (this.$refs.form.validate()) {
         var [day, month, year] = this.startDate.split('-');
         this.startDate = [year, month, day].join('-');
@@ -159,8 +165,11 @@ export default {
 }
 
 .title {
-  margin: 0.5rem 0;
   font-weight: bold;
+}
+
+.col-12 {
+  margin: 0;
 }
 
 .titleheader {
