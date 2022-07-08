@@ -87,8 +87,8 @@ export default {
     }
   },
   methods: {
-    showDetail() {
-      const detail = document.getElementById("detailInfo");
+    showDetail(e) {
+      const detail = e.target.nextElementSibling.nextElementSibling;
       if (detail.style.display == "none") {
         detail.style.display = "block";
       } else {
@@ -141,7 +141,7 @@ a {
 #show{
   color:#2a3563;
   margin-bottom: 20px;
-  font-size: 25px;
+  font-size: 20px;
 }
 .btnAdd {
   background-color: #eceefa;
