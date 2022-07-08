@@ -16,87 +16,50 @@
               <div class="row block2">
                 <div class="col-12">
                   <div class="title">
-                    <span>Chức danh vị trí <span class="star">*</span></span>
+                    <span class="label">Chức danh vị trí <span class="star">*</span></span>
                     <div class="titleright">
-                      <span>(</span><span class="star">*</span
-                      ><span>)Thông tin bắt buộc</span>
+                      <span>(</span><span class="star">*</span><span>)Thông tin bắt buộc</span>
                     </div>
                   </div>
                   <div>
-                    <v-text-field
-                    class="mt-3"
-                    label="Nhập chức danh"
-                    outlined
-                    dense
-                    v-model="position"
-                    :rules="positionRules"
-                    required
-                  ></v-text-field>
+                    <v-text-field class="mt-3" label="Nhập chức danh" outlined dense v-model="position"
+                      :rules="positionRules" required></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span
-                      >Công ty
-                      <span class="star">*</span></span
-                    >
+                    <span class="label">Công ty
+                      <span class="star">*</span></span>
                   </div>
                   <div>
-                    <v-text-field
-                    class="mt-3"
-                    label="Nhập tên công ty"
-                    outlined
-                    dense
-                    v-model="companyName"
-                    :rules="companyNameRules"
-                    required
-                  ></v-text-field>
+                    <v-text-field class="mt-3" label="Nhập tên công ty" outlined dense v-model="companyName"
+                      :rules="companyNameRules" required></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span
-                      >Thời gian (dd/mm/yyy) <span class="star">*</span></span
-                    >
+                    <span class="label">Thời gian (dd/mm/yyyy) <span class="star">*</span></span>
                   </div>
                   <div class="d-flex justify-content-between">
-                    <div
-                      class="col-5"
-                      style="padding-left: 0; padding-right: 0"
-                    >
-                      <v-text-field
-                        class="mt-3"
-                        label="Ngày bắt đầu"
-                        outlined
-                        dense
-                        v-model="startDate"
-                        :rules="startDateRules"
-                        required
-                      ></v-text-field>
+                    <div class="col-5" style="padding-left: 0; padding-right: 0">
+                      <v-text-field class="mt-3" label="Ngày bắt đầu" outlined dense v-model="startDate"
+                        :rules="startDateRules" required></v-text-field>
                     </div>
-                    <div
-                      class="col-5"
-                      style="padding-left: 0; padding-right: 0"
-                    >
-                      <v-text-field
-                        class="mt-3"
-                        label="Ngày kết thúc"
-                        outlined
-                        dense
-                        v-model="endDate"
-                        :rules="endDateRules"
-                        required
-                      ></v-text-field>
+                    <div class="col-5" style="padding-left: 0; padding-right: 0">
+                      <v-text-field class="mt-3" label="Ngày kết thúc" outlined dense v-model="endDate"
+                        :rules="endDateRules" required value="asdasdasd"></v-text-field>
                     </div>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span class="py-2"
-                      >Mô tả công việc <span class="star">*</span></span
-                    >
+                    <span class="py-2 label">Mô tả công việc <span class="star">*</span></span>
                   </div>
-                  <div class="form-group shadow-textarea">
+                  <v-container>
+                    <v-textarea v-model="description" filled label="Mô tả công việc" auto-grow background-color="white"
+                      outlined></v-textarea>
+                  </v-container>
+                  <!-- <div class="form-group shadow-textarea">
                     <v-textarea v-model="description"
                       class="form-control z-depth-1"
                       label="Mô tả công việc"
@@ -104,7 +67,7 @@
                       :rules="descriptionRules"
                       required
                       ></v-textarea>
-                  </div>
+                  </div> -->
                   <div class="row">
                     <div class="col-12 justify-content-center">
                       <button class="btn btn-primary px-5" @click="addWorkExp">Lưu</button>
@@ -133,38 +96,38 @@ export default {
     Header,
     Profile_menu,
   },
-  data(){
-    return{
+  data() {
+    return {
       position: "",
-      positionRules:[
-          (v) => !!v || "Position must be required"
+      positionRules: [
+        (v) => !!v || "Position must be required"
       ],
       companyName: "",
-      companyNameRules:[
+      companyNameRules: [
         (v) => !!v || "Company Name must be required"
       ],
       startDate: "",
-      startDateRules:[
+      startDateRules: [
         (v) => !!v || "Start Date must be required"
       ],
       endDate: "",
-      endDateRules:[
+      endDateRules: [
         (v) => !!v || "End Date must be required"
       ],
       description: "",
-      descriptionRules:[
+      descriptionRules: [
         (v) => !!v || "Description must be required"
       ],
     }
   },
-  methods:{
-    addWorkExp(){
-      if(this.$refs.form.validate()){
+  methods: {
+    addWorkExp() {
+      if (this.$refs.form.validate()) {
         var [day, month, year] = this.startDate.split('-');
         this.startDate = [year, month, day].join('-');
         [day, month, year] = this.endDate.split('-');
         this.endDate = [year, month, day].join('-');
-        WorkExperienceService.addWorkExp({companyName: this.companyName, position: this.position, description: this.description, startDate: this.startDate, endDate: this.endDate})
+        WorkExperienceService.addWorkExp({ companyName: this.companyName, position: this.position, description: this.description, startDate: this.startDate, endDate: this.endDate })
         alert('Add successful');
         window.location = "/workexp";
       }
@@ -179,29 +142,38 @@ export default {
   border-radius: 5px;
   box-shadow: 5px 5px lightgray;
 }
+
 .star {
   color: red;
 }
+
+.right {
+  border-left: 1px solid gray;
+}
+
 .titleright {
   float: right;
   font-weight: initial;
   font-size: 12px;
   font-style: italic;
 }
-.right {
-  border-left: 1px solid gray;
-}
+
 .title {
   margin: 0.5rem 0;
   font-weight: bold;
 }
+
 .titleheader {
-  margin-top: 20px;
+  margin-left: 0.5rem;
   margin-bottom: 20px;
   border-bottom: 1px solid gray;
   width: 203px;
   color: #2A3563;
   font-size: 20px;
   font-weight: bold;
+}
+
+.label {
+  font-size: 15px;
 }
 </style>
