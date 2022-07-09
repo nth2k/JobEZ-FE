@@ -13,7 +13,7 @@
           <div class="titleRight">Ngoại ngữ- Tin học</div>
 
           <div class="container">
-            <form>
+            <v-form ref="form">
               <div class="row">
                 <div class="col-12">
                   <div class="title">
@@ -23,12 +23,8 @@
                     </div>
                   </div>
                   <div>
-                    <select v-model="languageName" class="form-control">
-                      <option value="-1" >Chọn ngôn ngữ</option>
-                      <option value="English">English</option>
-                      <option value="Japan">Japan</option>
-                      <option value="Korea">Korea</option>
-                    </select>
+                    <v-select :items="language" label="Chọn ngôn ngữ" :rules="languageNameRules" required
+                      v-model="languageName"></v-select>
                   </div>
                 </div>
                 <div class="col-12">
@@ -36,17 +32,16 @@
                     <span>Chứng chỉ <span class="star">*</span></span>
                   </div>
                   <div>
-                    <input v-model="certificateName" class="form-control" type="text" id="tenchungchi"
-                      placeholder="Tên chứng chỉ" />
+                    <v-textarea label="Chứng chỉ" v-model="certificateName" outlined filled no-resize rows="1"
+                      :rules="certificateNameRules" required background-color="white"></v-textarea>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="title">
                     <span>Số điểm <span class="star">*</span></span>
                   </div>
-                  <div>
-                    <input v-model="grade" class="form-control" type="text" id="sodiem" placeholder="Số điểm" />
-                  </div>
+                  <v-textarea label="Số điểm" v-model.number="grade" outlined filled no-resize rows="1"
+                    :rules="inputGradeRules" required background-color="white"></v-textarea>
                 </div>
                 <div class="text-center container">
                   <button class="btn btn-primary btnSave px-5 mt-5" @click.prevent="updateLanguage">
@@ -54,7 +49,7 @@
                   </button>
                 </div>
               </div>
-            </form>
+            </v-form>
           </div>
         </div>
       </div>
@@ -77,9 +72,20 @@ export default {
   data() {
     return {
       Id: this.$route.params.id,
+      grade: "",
+      inputGradeRules: [
+        (v) => v >= 0 || 'Minimum length is 3 character',
+        (v) => !!v || "Grade must be required"
+      ],
       certificateName: "",
+      certificateNameRules: [
+        (v) => !!v || "Tên chứng chỉ không được để trống"
+      ],
       languageName: "",
-      grade: ""
+      language: ["English", "Japan", "Korea"],
+      languageNameRules: [
+        (v) => !!v || "Vui lòng chọn ngôn ngữ"
+      ]
     }
   },
   methods: {
@@ -92,11 +98,13 @@ export default {
       });
     },
 
-    updateLanguage(){
+    updateLanguage() {
       // console.log(this.certificateName, this.languageName, this.grade, this.selectedLanguage);
-      LanguageCertificateService.updateLanguage(this.Id, {certificateName: this.certificateName, name: this.languageName, grade: this.grade});
-      alert("Update Successful!");
-      window.location = "/language";
+      if (this.$refs.form.validate()) {
+        LanguageCertificateService.updateLanguage(this.Id, { certificateName: this.certificateName, name: this.languageName, grade: this.grade });
+        alert("Update Successful!");
+        window.location = "/language";
+      }
     }
   },
   created() {
