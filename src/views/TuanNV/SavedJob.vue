@@ -29,8 +29,8 @@
                 <td class="column"><span>{{savedJob.posting.position}}</span></td>
                 <td>
                   <!-- <div>{{savedjob.deadlineForSubmission.toString()}}</div> -->
-                  <div>12/09/2022</div>
-                  <div><span>(Còn 13 ngày)</span></div>
+                  <div>{{formatDate(savedJob.deadlineForSubmission)}}</div>
+                  <div><span>{{countDays(savedJob.deadlineForSubmission)}}</span></div>
                 </td>
                 <td class="column">
                   <button class="btn btn-danger btnDelete" @click="deleteSavedJob(savedJob.id)">
@@ -154,12 +154,6 @@ export default {
 data(){
     return{
       listSavedJob: [],
-      // savedJob:{
-      //   id: "",
-      //   jobName: "",
-      //   position: "",
-      //   deadlineForSubmission: "",
-      // },
     };
   },
   methods:{
@@ -177,6 +171,16 @@ data(){
         location.reload();
       }
     },
+    countDays(date) {
+      var date1 = new Date(date);
+      var date2 = new Date();
+      var duration = Math.ceil((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000));
+      return (duration) < 0 ? "(" + Math.abs(duration) + " ngày trước)" : "(Còn " + duration + " ngày)";
+    },
+    formatDate(date) {
+      var d = new Date(date);
+      return d.toLocaleDateString();
+    }
   },
   created(){
     this.getSavedJobs();
