@@ -269,11 +269,8 @@ export default {
       return data;
     },
     advanceSearch() {
-      console.log("Hello World");
     },
     onChangeProvince() {
-      console.log("Hello");
-      // this.provinceId = event.target.value;
     },
   },
   async created() {

@@ -14,25 +14,22 @@ import SearchHeader from "@/views/ToanNT16/profile/SearchHeader.vue";
 import CandidateNavigator from "@/views/ToanNT16/profile/CandidateNavigator.vue";
 import BoxTiki from "@/views/ToanNT16/profile/BoxTiki.vue";
 import JobContainer from "@/views/ToanNT16/profile/JobContainer.vue";
-import { useStore, mapGetters } from "vuex";
+
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "JobDetailsNoLogin",
-  setup() {
-    const store = useStore();
-    console.log(store);
-  },
+  setup() {},
   data() {
     return { id: null };
   },
-  beforeCreate() {},
-  created() {
+  async created() {
     this.id = this.$route.params.id;
-    this.$store.dispatch("fetchTransaction", { id: this.id });
+    await this.$store.dispatch("getJobById", this.id);
   },
-  beforeMount() {},
-  mounted() {},
-  beforeUpdate() {},
-  updated() {},
+  methods: {
+    ...mapActions(["getJobById", "setJobId"]),
+  },
   components: {
     HeaderLogin,
     SearchHeader,
@@ -40,7 +37,9 @@ export default {
     BoxTiki,
     JobContainer,
   },
-  computed: { ...mapGetters({ doneTodos: "doneTodos" }) },
+  computed: {
+    ...mapGetters(["getJob"]),
+  },
 };
 </script>
 

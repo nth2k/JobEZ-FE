@@ -355,7 +355,6 @@ export default {
     async getJobs() {
       await LandingPageService.getHomePage().then((res) => {
         this.listJob = res.data;
-        console.log(res.data);
       });
     },
   },

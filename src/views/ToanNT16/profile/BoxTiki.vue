@@ -87,7 +87,6 @@
                   <span style="color: #ff4d43">Trên 30 triệu</span>
                 </p>
                 <div>
-                  <!-- <p class="lv_luong">Mức lương: <span style="color: #FF4D43">Thỏa thuận</span></p> -->
                   <p
                     class="chat_call btn_login_do"
                     data-type="0"
@@ -108,7 +107,22 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  name: "BoxTiki",
+  data() {
+    return {
+      job: this.getJob,
+    };
+  },
+  created() {
+    this.job = this.getJob;
+  },
+  methods: {},
+  computed: {
+    ...mapGetters(["getJob"]),
+  },
+};
 </script>
 
 <style scoped>
