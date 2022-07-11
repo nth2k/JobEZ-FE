@@ -119,7 +119,8 @@ export default {
       taxCode: "",
       taxCodeRules: [
         (v) => !!v || "TaxCode is required",
-        (v) => (v && v.length > 5) || "TaxCode must be more than 5 characters",
+        (v) =>
+          /(^[0-9]{10,13}$)\b/.test(v) || "TaxCode must be valid",
       ],
       description: "",
       descriptionRules: [
