@@ -79,13 +79,7 @@
           </div>
           <div class="col-3"></div>
           <div class="file-cv">
-            <input ref="fileInput" style="display: none" type="file" @change="onFileSelected" />
-            <button class="btn btn-light mx-auto" @click.prevent="$refs.fileInput.click()">
-              Chọn file
-            </button>
-            <button class="btn btn-light ml-4 mx-auto" @click.prevent="onUpload">
-              Tải file lên
-            </button>
+            <v-file-input v-model="image" label="CV ứng viên"></v-file-input>
           </div>
           <span class="mt-5 mb-5 w-100 text-center"
             >Bằng việc nhấn nút đăng ký, bạn đã đồng ý thỏa thuận sử dụng của
@@ -125,7 +119,7 @@ export default {
       experienceRules: [(v) => !!v || "experience is required"],
 
       selectedRating: "",
-      selectdFile: null,
+      image: null,
     };
   },
   methods: {
@@ -134,7 +128,7 @@ export default {
     },
     onUpload() {
       const fd = new FormData();
-      fd.append("file", this.selectdFile)
+      fd.append("file", this.selectdFile);
     },
     save(date) {
       this.$refs.menu.save(date);

@@ -10,7 +10,7 @@
             <span>Logo công ty <span style="color: red">*</span></span
             ><br />
             <v-file-input
-              v-model="file"
+              v-model="image"
               label="Logo công ty"
             ></v-file-input
             ><br />
@@ -92,67 +92,89 @@
 
 <script>
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
-import RecruiterRegisterService from "@/services/RecruiterRegisterService.js"
+import RecruiterRegisterService from "@/services/RecruiterRegisterService.js";
 export default {
   name: "RecruiterOnlineCVForm",
   components: {
     HeaderComponent,
   },
-  data: () => ({
-    file: null,
-    phone: "",
-    phoneRules: [
-      (v) => !!v || "Phone is required",
-      (v) => /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
-    ],
-    province: [],
-    district: [],
-    address: "",
-    addressRules: [
-      (v) => !!v || "Address is required",
-      (v) => (v && v.length > 5) || "Address must be more than 5 characters",
-    ],
-    taxCode: "",
-    taxCodeRules: [
-      (v) => !!v || "TaxCode is required",
-      (v) => (v && v.length > 5) || "TaxCode must be more than 5 characters",
-    ],
-    description: "",
-    descriptionRules: [
-      (v) => !!v || "Description is required",
-      (v) =>
-        (v && v.length > 5) || "Description must be more than 5 characters",
-    ],
-  }),
-  methods: {
-    submit() {
-      if (this.$refs.form.validate()) {
-        const formData = new FormData();
-        formData.append("file", this.file);
-        formData.append("taxCode", this.taxCode);
-        formData.append("phone", this.phone);
-        formData.append("address", this.address);
-        formData.append("description", this.description);
-
-        // axios.post("/api/uploadFile", formData).then(
-        //   function (result) {
-        //     console.log(result);
-        //   },
-        //   function (error) {
-        //     console.log(error);
-        //   }
-        // );
-        console.log(formData);
-
-        // this.$router.push("/recruiterLogin");
+  data() {
+    return {
+      recruiterId: this.$route.params.id,
+      image: null,
+      base64: null,
+      phone: "",
+      phoneRules: [
+        (v) => !!v || "Phone is required",
+        (v) =>
+          /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
+      ],
+      province: [],
+      district: [],
+      address: "",
+      addressRules: [
+        (v) => !!v || "Address is required",
+        (v) => (v && v.length > 5) || "Address must be more than 5 characters",
+      ],
+      taxCode: "",
+      taxCodeRules: [
+        (v) => !!v || "TaxCode is required",
+        (v) => (v && v.length > 5) || "TaxCode must be more than 5 characters",
+      ],
+      description: "",
+      descriptionRules: [
+        (v) => !!v || "Description is required",
+        (v) =>
+          (v && v.length > 5) || "Description must be more than 5 characters",
+      ],
+    };
+  },
+  watch: {
+    image: function (newVal) {
+      if (newVal) {
+        this.createBase64Image(newVal);
+      } else {
+        this.base64 = null;
       }
     },
   },
-  created(){
+  methods: {
+    createBase64Image: function (FileObject) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.base64 = event.target.result;
+      };
+      reader.readAsDataURL(FileObject);
+    },
+    submit() {
+      if (this.$refs.form.validate()) {
+        RecruiterRegisterService.updateRecruiter(this.recruiterId, {
+          images: this.base64,
+          phone: this.phone,
+          addressName: this.address,
+          taxtNumber: this.taxCode,
+          description: this.description,
+        })
+        .then(() => {
+          this.$store.dispatch("setSnackbar", {
+            text: "Đăng kí nhà tuyển dụng bước 2 thành công",
+          });
+          this.$router.push("/recruiterLogin");
+        })
+        .catch(() => {
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Có lỗi xảy ra! Vui lòng thử lại",
+          });
+        });
+      }
+    },
+  },
+  created() {
     RecruiterRegisterService.getProvince().then((rs) => {
-      this.province = rs.data.map(result => result.name);
-    })
-  }
+      this.province = rs.data.map((result) => result.name);
+    });
+  },
 };
 </script>
 
