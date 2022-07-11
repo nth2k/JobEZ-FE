@@ -19,7 +19,7 @@
           </div>
           <h2>Bạn chưa có tài khoản?</h2>
           <div class="login-form">
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form">
               <h5>Tên công ty<span style="color: red">*</span></h5>
               <v-text-field
                 label="Tên công ty"
@@ -53,7 +53,7 @@
               <h5>Xác nhận mật khẩu<span style="color: red">*</span></h5>
               <v-text-field
                 v-model="confirmPassword"
-                :rules="confirmPasswordRules"
+                :rules="confirmPasswordRules.concat(validatePassword)"
                 label="Xác nhận mật khẩu"
                 outlined
                 dense
@@ -62,10 +62,10 @@
                 :type="show3 ? 'text' : 'password'"
                 @click:append="show3 = !show3"
               ></v-text-field>
-              <button @click="submit" :disabled="!valid" class="btn">
-                Đăng ký
-              </button>
             </v-form>
+            <button @click="submit()" :disabled="!valid" class="btn">
+              Đăng ký
+            </button>
           </div>
         </div>
       </div>
@@ -76,6 +76,7 @@
 <script>
 import ChooseRecruiter from "@/components/HiepComponents/ChooseRecruiter.vue";
 import TopHeaderComponent from "@/components/HiepComponents/TopHeaderComponent.vue";
+import RecruiterRegisterService from "@/services/RecruiterRegisterService.js";
 export default {
   name: "RecuiterRegister",
   components: {
@@ -83,12 +84,33 @@ export default {
     TopHeaderComponent,
   },
   methods: {
-    submit() {
-      this.validate();
-      this.$router.push("/recruiterOnlineCVForm");
+    validatePassword(value) {
+      return value === this.password || "The password confirmation does not match."
     },
-    validate() {
-      this.$refs.form.validate();
+    async submit() {
+      if (this.$refs.form.validate()) {
+        await RecruiterRegisterService.addRecruiter({
+          name: this.companyName,
+          email: this.email,
+          password: this.password,
+          role: {
+            id: 2,
+            rollName: "Recruiter",
+          },
+        })
+          .then((rs) => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Đăng kí nhà tuyển dụng bước 1 thành công",
+            });
+            this.$router.push({ name: 'RecruiterOnlineCVForm', params: { id: rs.data.id }});
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
+      }
     },
   },
   data: () => ({
@@ -102,7 +124,10 @@ export default {
     email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      (v) =>
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "E-mail must be valid",
     ],
     password: "",
     passwordRules: [
@@ -112,7 +137,6 @@ export default {
     confirmPassword: "",
     confirmPasswordRules: [
       (v) => !!v || "ConfirmPassword is required",
-      (v) => v === this.password || "The password confirmation does not match.",
     ],
   }),
 };
