@@ -120,18 +120,28 @@ export default {
 
       selectedRating: "",
       image: null,
+      base64: null,
     };
   },
+  watch: {
+    image: function (newVal) {
+      if (newVal) {
+        this.createBase64Image(newVal);
+      } else {
+        this.base64 = null;
+      }
+    },
+  },
   methods: {
-    onFileSelected(e) {
-      this.selectdFile = e.target.files[0];
-    },
-    onUpload() {
-      const fd = new FormData();
-      fd.append("file", this.selectdFile);
-    },
     save(date) {
       this.$refs.menu.save(date);
+    },
+    createBase64Image: function (FileObject) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.base64 = event.target.result;
+      };
+      reader.readAsDataURL(FileObject);
     },
     submit() {
       if (this.$refs.form.validate()) {
@@ -140,9 +150,10 @@ export default {
           university: this.university,
           rating: this.selectedRating,
           experience: this.selectedExperience,
+          candidateCV: this.base64,
         })
           .then(() => {
-            console.log(this.selectedRating);
+            console.log(this.base64);
             this.$store.dispatch("setSnackbar", {
               text: "Đăng kí ứng viên bước 2 thành công",
             });
