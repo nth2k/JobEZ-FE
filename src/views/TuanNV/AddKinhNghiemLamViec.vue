@@ -11,7 +11,7 @@
         </div>
         <div class="right col-9">
           <div class="titleheader">Kinh nghiệm làm việc</div>
-          <div class="container">
+          <div class="container ml-2">
             <v-form ref="form">
               <div class="row block2">
                 <div class="col-12">
@@ -75,8 +75,8 @@
                       ></v-textarea>
                   </div> -->
                   <div class="row">
-                    <div class="col-12 justify-content-center">
-                      <button class="btn btn-primary px-5" @click.prevent="addWorkExp">Lưu</button>
+                    <div class="col-12 text-center">
+                      <button class="btn btn-primary btnSave" @click.prevent="addWorkExp">Lưu</button>
                     </div>
                   </div>
                 </div>
@@ -114,11 +114,13 @@ export default {
       ],
       startDate: "",
       startDateRules: [
-        (v) => !!v || "Start Date must be required"
+        (v) => !!v || "Start Date must be required",
+        (v) => /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) || "Invalid Start Date(dd/MM/yyyy)"
       ],
       endDate: "",
       endDateRules: [
-        (v) => !!v || "End Date must be required"
+        (v) => !!v || "End Date must be required",
+        (v) => /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) || "Invalid End Date(dd/MM/yyyy)"
       ],
       description: "",
       descriptionRules: [
@@ -129,13 +131,19 @@ export default {
   methods: {
     async addWorkExp() {
       if (this.$refs.form.validate()) {
-        var [day, month, year] = this.startDate.split('-');
-        this.startDate = [year, month, day].join('-');
-        [day, month, year] = this.endDate.split('-');
-        this.endDate = [year, month, day].join('-');
-        WorkExperienceService.addWorkExp({ companyName: this.companyName, position: this.position, description: this.description, startDate: this.startDate, endDate: this.endDate })
-        alert('Add successful');
-        window.location = "/workexp";
+        var inputStartDate = new Date(this.startDate);
+        var inputEndDate = new Date(this.endDate);
+        if(inputStartDate.getTime() >= inputEndDate.getTime()){
+          alert('EndDate can not greater than StartDate\nPlease check again!');
+        }else{
+          var [day, month, year] = this.startDate.split('/');
+          this.startDate = [year, month, day].join('-');
+          [day, month, year] = this.endDate.split('/');
+          this.endDate = [year, month, day].join('-');
+          WorkExperienceService.addWorkExp({ companyName: this.companyName, position: this.position, description: this.description, startDate: this.startDate, endDate: this.endDate })
+          window.location = "/workexp";
+          alert('Add successful');
+        }
       }
     }
   }
@@ -170,6 +178,7 @@ export default {
 
 .col-12 {
   margin: 0;
+  padding: 0;
 }
 
 .titleheader {
@@ -184,5 +193,8 @@ export default {
 
 .label {
   font-size: 15px;
+}
+.btnSave{
+  padding: 5px 70px;
 }
 </style>
