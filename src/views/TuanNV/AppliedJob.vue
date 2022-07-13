@@ -257,8 +257,8 @@ export default {
       let textConfirm = "Press Ok to delete your applied job.";
       if (confirm(textConfirm) == true) {
         AppliedJobService.deleteAppliedJob(id);
-        alert('delete successful');
         location.reload();
+        alert('Xóa thành công');
       }
     },
     countDays(date) {
