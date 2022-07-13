@@ -17,18 +17,7 @@
             </div>
             <div class="block" v-for="workexp in listWorkExp" v-bind:key="workexp.id">
               <span id="show" @click="showDetail">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-arrow-down-circle-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"
-                  />
-                </svg>
+                <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i>
                 {{workexp.companyName}}
               </span>
               <button class="btnDelete" @click="deleteWorkExp(workexp.id)">
@@ -51,8 +40,8 @@
               </button>
               <div class="detail container p-3" id="detailInfo">
                 <div>
-                  <span class="font-weight-bold">Thời gian từ: </span><span>{{workexp.startDate.slice(0,10)}}</span
-                  ><span class="font-weight-bold"> Đến </span><span>{{workexp.endDate.slice(0,10)}}</span>
+                  <span class="font-weight-bold">Thời gian từ: </span><span>{{new Date(workexp.startDate.slice(0,10)).toLocaleDateString()}}</span
+                  ><span class="font-weight-bold"> Đến </span><span>{{new Date(workexp.endDate.slice(0,10)).toLocaleDateString()}}</span>
                 </div>
                 <div><span class="font-weight-bold">Chức danh: </span><span> {{workexp.position}}</span></div>
                 <div>
@@ -89,10 +78,13 @@ export default {
   methods: {
     showDetail(e) {
       const detail = e.target.nextElementSibling.nextElementSibling;
+      const icon = e.target.firstChild;
       if (detail.style.display == "none") {
         detail.style.display = "block";
+        icon.classList.toggle('rotate');
       } else {
         detail.style.display = "none";
+        icon.classList.toggle('rotate');
       }
     },
     getAllWorkExp(){
@@ -104,8 +96,8 @@ export default {
       let textConfirm = "Press Ok to delete your work experience.";
       if(confirm(textConfirm) == true){
         WorkExperienceService.deleteWorkExp(id);
-        alert('delete successful');
         location.reload();
+        alert('Xóa thành công');
       }
     }
   },
@@ -126,8 +118,11 @@ export default {
   height: 25px;
 }
 .block{
-  padding-bottom: 20px;
+  padding: 20px 0;
   border-bottom: 1px solid lightgray;
+}
+.block:last-child{
+  border-bottom: none;
 }
 .detail {
   /* display: none; */
@@ -142,6 +137,7 @@ a {
   color:#2a3563;
   margin-bottom: 20px;
   font-size: 20px;
+  cursor: pointer;
 }
 .btnAdd {
   background-color: #eceefa;
@@ -172,5 +168,11 @@ a {
   border: 1px solid blue;
   border-radius: 5px;
   box-shadow: 5px 5px lightgray;
+}
+.animate-icon {
+  transition: 0.4s;
+}
+.rotate {
+  transform:rotate(180deg);
 }
 </style>
