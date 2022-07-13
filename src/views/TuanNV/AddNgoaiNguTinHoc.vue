@@ -10,15 +10,14 @@
           <Profile_menu />
         </div>
         <div class="blockright col-9">
-          <div class="titleRight">Ngoại ngữ- Tin học</div>
-
-          <div class="container">
+          <div class="titleheader">Ngoại ngữ- Tin học</div>
+          <div class="container ml-3">
             <v-form ref="form">
               <div class="row">
                 <div class="col-12">
                   <div class="title">
-                    <span>Ngoại ngữ <span class="star">*</span></span>
-                    <div class="right">
+                    <span class="label">Ngoại ngữ <span class="star">*</span></span>
+                    <div class="titleright">
                       <span>(</span><span class="star">*</span><span>)Thông tin bắt buộc</span>
                     </div>
                   </div>
@@ -29,12 +28,12 @@
                       <option value="Japan">Japan</option>
                       <option value="Korea">Korea</option>
                     </select> -->
-                    <v-select :items="language" label="Chọn ngôn ngữ" :rules="languageNameRules" required></v-select>
+                    <v-select :items="language" label="Chọn ngôn ngữ" outlined :rules="languageNameRules" required></v-select>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span>Chứng chỉ <span class="star">*</span></span>
+                    <span class="label">Chứng chỉ <span class="star">*</span></span>
                   </div>
                   <div>
                     <!-- <input
@@ -59,7 +58,7 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span>Số điểm <span class="star">*</span></span>
+                    <span class="label">Số điểm <span class="star">*</span></span>
                   </div>
                   <!-- <div> -->
                   <!-- <v-text-field
@@ -112,8 +111,8 @@ export default {
     return {
       grade: "",
       inputGradeRules: [
-        (v) => v >= 0 || 'Minimum length is 3 character',
-        (v) => !!v || "Grade must be required"
+        (v) => !!v || "Số điểm không được để trống",
+        (v) => v > 0 || 'Số điểm phải lớn hơn 0'
       ],
       certificateName: "",
       certificateNameRules: [
@@ -131,8 +130,8 @@ export default {
       if (this.$refs.form.validate()) {
         // console.log(this.certificateName, this.languageName, this.grade);
         LanguageCertificateService.addLanguage({ certificateName: this.languageName, name: this.certificateName, grade: this.grade });
-        alert("Add successful");
         window.location = "/language";
+        alert("Add successful");
       }
     }
   }
@@ -155,14 +154,27 @@ export default {
   border-radius: 5px;
   box-shadow: 5px 5px lightgray;
 }
+.title {
+  font-weight: bold;
+}
+.col-12 {
+  margin: 0;
+  padding: 0;
+}
 
-.titleRight {
-  margin-top: 20px;
+.titleright {
+  float: right;
+  font-weight: initial;
+  font-size: 12px;
+  font-style: italic;
+}
+.titleheader{
+  margin-left: 0.5rem;
   margin-bottom: 20px;
-  margin-left: 15px;
   border-bottom: 1px solid gray;
-  width: 150px;
-  color: #2a3563;
+  width: 170px;
+  color: #2A3563;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -176,5 +188,9 @@ export default {
 
 .btnSave {
   color: white;
+  padding: 5px 70px;
+}
+.label {
+  font-size: 15px;
 }
 </style>
