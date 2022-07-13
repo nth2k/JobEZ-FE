@@ -167,8 +167,8 @@ data(){
       let textConfirm = "Press Ok to delete your saved job.";
       if(confirm(textConfirm) == true){
         SavedJobService.deleteSavedJob(id);
-        alert('delete successful');
         location.reload();
+        alert('Xóa thành công');
       }
     },
     countDays(date) {
