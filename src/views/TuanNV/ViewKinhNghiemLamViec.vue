@@ -15,6 +15,7 @@
             <div class="mb-3">
               <router-link class="btnAdd py-1 px-3" to="/addworkexp">+ Thêm</router-link >
             </div>
+            <div v-if="!listWorkExp.length">Không có kinh nghiệm làm việc</div>
             <div class="block" v-for="workexp in listWorkExp" v-bind:key="workexp.id">
               <span id="show" @click="showDetail">
                 <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i>
