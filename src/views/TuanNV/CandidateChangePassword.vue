@@ -27,6 +27,7 @@
                 type="password"
                 id="inputcurrentpassword"
                 placeholder="Mật khẩu hiện tại"
+                v-model="oldpassword"
               />
             </div>
             <div>
@@ -65,12 +66,31 @@
 
 <script>
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
-import Header from "../ToanNT16/candidate_management/Header.vue";
+import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
+// import CandidateChangePassword from "@/services/CandidateChangePassword";
 export default {
+  name: "CandidateChangePassword",
   components: {
     SlideBar_candidate,
     Header,
   },
+  data(){
+    return{
+      oldpassword: "",
+      newpassword: "",
+      confirmpass: "",
+    }
+  },
+  // methods:{
+  //   getPassword(id){
+  //     CandidateChangePassword.getPassword(id).then((res) => {
+  //       this.oldpassword = res.data;
+  //     });
+  //   }
+  // },
+  // created(){
+  //   this.getPassword(2);
+  // }
 };
 </script>
 
