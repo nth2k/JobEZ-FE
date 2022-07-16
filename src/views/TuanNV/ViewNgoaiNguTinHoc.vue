@@ -26,6 +26,7 @@
                 </div>
                 <div class="col-1 thead"></div>
               </div>
+              <div v-if="!listLanguage.length" class="pt-4">Không có bằng ngôn ngữ - tin học</div>
               <div class="row d-flex tbody" v-for="language in listLanguage" v-bind:key="language.id">
                 <div class="col-4">{{language.certificateName}}</div>
                 <div class="col-4">{{language.name}}</div>
