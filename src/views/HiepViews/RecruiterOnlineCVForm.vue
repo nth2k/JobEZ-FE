@@ -9,10 +9,7 @@
           <div class="col-3 left-form">
             <span>Logo công ty <span style="color: red">*</span></span
             ><br />
-            <v-file-input
-              v-model="image"
-              label="Logo công ty"
-            ></v-file-input
+            <v-file-input v-model="image" label="Logo công ty"></v-file-input
             ><br />
             <span>Số điện thoại <span style="color: red">*</span></span
             ><br />
@@ -27,19 +24,35 @@
             ><br />
             <span>Tỉnh/Thành phố<span style="color: red">*</span></span
             ><br />
-            <v-select
-              :items="province"
-              label="Chọn tỉnh/Thành phố"
-              required
-            ></v-select
+            <select
+              class="w-100"
+              @change="onProvinceSelect"
+              v-model="selectedProvince"
+            >
+              <option value="" disabled hidden>Chọn tỉnh thành</option>
+              <option
+                v-for="(item, index) in province"
+                :key="index"
+                :value="item.province_id"
+              >
+                {{ item.province_name }}
+              </option></select
             ><br />
             <span>Quận huyện <span style="color: red">*</span></span
             ><br />
-            <v-select
-              :items="district"
-              label="Chọn quận huyện"
-              required
-            ></v-select
+            <select
+              class="w-100"
+              @change="onDistrictSelect"
+              v-model="selectedDistrict"
+            >
+              <option value="" disabled hidden>Chọn quận huyện</option>
+              <option
+                v-for="(item, index) in district"
+                :key="index"
+                :value="item.district_id"
+              >
+                {{ item.district_name }}
+              </option></select
             ><br />
           </div>
           <div class="col-3 right-form">
@@ -93,6 +106,8 @@
 <script>
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
 import RecruiterRegisterService from "@/services/RecruiterRegisterService.js";
+import AddressService from "@/services/AddressService.js";
+
 export default {
   name: "RecruiterOnlineCVForm",
   components: {
@@ -119,8 +134,7 @@ export default {
       taxCode: "",
       taxCodeRules: [
         (v) => !!v || "TaxCode is required",
-        (v) =>
-          /(^[0-9]{10,13}$)\b/.test(v) || "TaxCode must be valid",
+        (v) => /(^[0-9]{10,13}$)\b/.test(v) || "TaxCode must be valid",
       ],
       description: "",
       descriptionRules: [
@@ -128,6 +142,8 @@ export default {
         (v) =>
           (v && v.length > 5) || "Description must be more than 5 characters",
       ],
+      selectedProvince: "",
+      selectedDistrict: "",
     };
   },
   watch: {
@@ -147,6 +163,20 @@ export default {
       };
       reader.readAsDataURL(FileObject);
     },
+    getProvince() {
+      AddressService.getProvince().then((rs) => {
+        this.province = rs.data.results;
+      });
+    },
+    onProvinceSelect(event) {
+      AddressService.getDistrict(event.target.value).then((rs) => {
+        this.district = rs.data.results;
+        console.log(event.target.value);
+      });
+    },
+    onDistrictSelect(event) {
+      console.log(event.target.value);
+    },
     submit() {
       if (this.$refs.form.validate()) {
         RecruiterRegisterService.updateRecruiter(this.recruiterId, {
@@ -156,25 +186,23 @@ export default {
           taxtNumber: this.taxCode,
           description: this.description,
         })
-        .then(() => {
-          this.$store.dispatch("setSnackbar", {
-            text: "Đăng kí nhà tuyển dụng bước 2 thành công",
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Đăng kí nhà tuyển dụng bước 2 thành công",
+            });
+            this.$router.push("/recruiterLogin");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
           });
-          this.$router.push("/recruiterLogin");
-        })
-        .catch(() => {
-          this.$store.dispatch("setSnackbar", {
-            color: "error",
-            text: "Có lỗi xảy ra! Vui lòng thử lại",
-          });
-        });
       }
     },
   },
   created() {
-    RecruiterRegisterService.getProvince().then((rs) => {
-      this.province = rs.data.map((result) => result.name);
-    });
+    this.getProvince();
   },
 };
 </script>
