@@ -76,6 +76,12 @@
               <h5>Tỉnh/Thành phố<span style="color: red">*</span></h5>
               <v-row>
                 <v-col cols="6" sm="6">
+                  <!-- <v-select
+                    :items="city"
+                    label="Chọn tỉnh/Thành phố"
+                    :rules="cityRules"
+                    required
+                  ></v-select> -->
                   <select
                     class="w-100 h-75"
                     @change="onProvinceSelect"
