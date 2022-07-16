@@ -24,6 +24,7 @@
               </tr>
             </thead>
             <tbody>
+              <div v-if="!listAppliedJob.length" class="text-center">Không có công việc đã ứng tuyển</div>
               <tr v-for="(appliedjob, index) in listAppliedJob" v-bind:key="appliedjob.id">
                 <td class="column"><span>{{ index + 1 }}</span></td>
                 <td>
