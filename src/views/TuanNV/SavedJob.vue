@@ -19,6 +19,7 @@
               </tr>
             </thead>
             <tbody>
+              <div v-if="!listSavedJob.length" class="pt-5">Không có công việc đã lưu</div>
               <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="savedJob.id">
                 <td class="column"><span>{{index + 1}}</span></td>
                 <td>
