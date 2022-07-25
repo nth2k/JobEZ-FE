@@ -63,7 +63,7 @@ import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import LanguageCertificateService from "@/services/LanguageCertificateService";
 export default {
-  name: "EditNgoaiNguTinHoc",
+  name: "EditLanguageCertificate",
   components: {
     SlideBar_candidate,
     Header,

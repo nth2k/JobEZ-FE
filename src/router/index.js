@@ -10,13 +10,13 @@ import CandidateOnlineCVForm from '@/views/HiepViews/CandidateOnlineCVForm.vue'
 import CVFromPCForm from '@/views/HiepViews/CVFromPCForm.vue'
 import RecruiterOnlineCVForm from '@/views/HiepViews/RecruiterOnlineCVForm.vue'
 import JobDetailsNoLogin from '@/components/ToanComponents/JobDetailsNoLogin.vue'
-import AddNgoaiNguTinHoc from '@/views/TuanNV/AddNgoaiNguTinHoc.vue'
-import EditNgoainguTinhoc from '@/views/TuanNV/EditNgoainguTinhoc.vue'
-import ViewNgoaiNguTinHoc from '@/views/TuanNV/ViewNgoaiNguTinHoc.vue'
+import AddLanguageCertificate from '@/views/TuanNV/AddLanguageCertificate.vue'
+import EditLanguageCertificate from '@/views/TuanNV/EditLanguageCertificate.vue'
+import ViewLanguageCertificate from '@/views/TuanNV/ViewLanguageCertificate.vue'
 import SavedJob from '@/views/TuanNV/SavedJob.vue'
 import AppliedJob from '@/views/TuanNV/AppliedJob.vue'
-import ViewKinhNghiemLamViec from '@/views/TuanNV/ViewKinhNghiemLamViec.vue'
-import AddKinhNghiemLamViec from '@/views/TuanNV/AddKinhNghiemLamViec.vue'
+import ViewWorkExperience from '@/views/TuanNV/ViewWorkExperience.vue'
+import AddWorkExperience from '@/views/TuanNV/AddWorkExperience.vue'
 import SearchJob from '@/views/HiepViews/SearchJob.vue'
 import CandidateChangePassword from '@/views/TuanNV/CandidateChangePassword'
 
@@ -74,16 +74,16 @@ export const routes = [
         component: JobDetailsNoLogin
     },{
         path: '/addLanguage',
-        name: 'AddNgoaiNguTinHoc',
-        component: AddNgoaiNguTinHoc
+        name: 'AddLanguageCertificate',
+        component: AddLanguageCertificate
     },{
         path: '/editLanguage/:id',
-        name: 'EditNgoaiNguTinHoc',
-        component: EditNgoainguTinhoc
+        name: 'EditLanguageCertificate',
+        component: EditLanguageCertificate
     },{
         path: '/language',
-        name: 'ViewNgoaiNguTinHoc',
-        component: ViewNgoaiNguTinHoc
+        name: 'ViewLanguageCertificate',
+        component: ViewLanguageCertificate
     },{
         path: '/savedjobs',
         name: 'SavedJob',
@@ -94,12 +94,12 @@ export const routes = [
         component: AppliedJob
     },{
         path: '/workexp',
-        name: 'ViewKinhNghiemLamViec',
-        component: ViewKinhNghiemLamViec
+        name: 'ViewWorkExperience',
+        component: ViewWorkExperience
     },{
         path: '/addworkexp',
-        name: 'AddKinhNghiemLamViec',
-        component: AddKinhNghiemLamViec
+        name: 'AddWorkExperience',
+        component: AddWorkExperience
     },
     {
         path: '/searchJob',

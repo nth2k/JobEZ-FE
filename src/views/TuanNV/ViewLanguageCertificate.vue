@@ -100,7 +100,7 @@ export default {
     },
     editLanguageCertificate(languageId){
       this.$router.push({
-        name: "EditNgoaiNguTinHoc",
+        name: "EditLanguageCertificate",
         params: { id: languageId },
       });
     },

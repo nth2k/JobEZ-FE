@@ -96,7 +96,7 @@ import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import WorkExperienceService from "@/services/WorkExperienceService.js";
 
 export default {
-  name: "AddKinhNghiemLamViec",
+  name: "AddWorkExperience",
   components: {
     SlideBar_candidate,
     Header,

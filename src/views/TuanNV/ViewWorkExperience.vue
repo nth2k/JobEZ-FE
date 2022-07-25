@@ -65,7 +65,7 @@ import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import WorkExperienceService from "@/services/WorkExperienceService.js";
 export default {
-  name: "ViewKinhNghiemLamViec",
+  name: "ViewWorkExperience",
   components: {
     SlideBar_candidate,
     Header,
