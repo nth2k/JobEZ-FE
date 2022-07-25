@@ -18,6 +18,7 @@ import AppliedJob from '@/views/TuanNV/AppliedJob.vue'
 import ViewKinhNghiemLamViec from '@/views/TuanNV/ViewKinhNghiemLamViec.vue'
 import AddKinhNghiemLamViec from '@/views/TuanNV/AddKinhNghiemLamViec.vue'
 import SearchJob from '@/views/HiepViews/SearchJob.vue'
+import CandidateChangePassword from '@/views/TuanNV/CandidateChangePassword'
 
 Vue.use(VueRouter)
 
@@ -104,12 +105,11 @@ export const routes = [
         path: '/searchJob',
         name: 'SearchJob',
         component: SearchJob
+    },{
+        path: '/candidate/changepass',
+        name: 'CandidateChangePassword',
+        component: CandidateChangePassword
     }
-    // {
-    //     path: '/profileCandidate',
-    //     name: 'ProfileCandidate',
-    //     component: ProfileCandidate
-    // }
 ]
 
 const router = new VueRouter({

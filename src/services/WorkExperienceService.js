@@ -4,7 +4,7 @@ const Base_URL = "http://localhost:8080";
 
 class WorkExpService{
     getWorkExps(){
-        return axios.get(Base_URL + "/workexp/1")
+        return axios.get(Base_URL + "/workexp/2")
     }
     deleteWorkExp(id){
         return axios.delete(Base_URL + "/workexp/delete/" + id );

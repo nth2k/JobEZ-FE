@@ -154,20 +154,21 @@ export default {
 },
 data(){
     return{
+      userId: 1,
       listSavedJob: [],
     };
   },
   methods:{
-    getSavedJobs(){
-      SavedJobService.getSavedJobs().then((res) => {
+    getSavedJobs(userId){
+      SavedJobService.getSavedJobs(userId).then((res) => {
         this.listSavedJob = res.data;
         // console.log(this.listSavedJob);
       })
     },
-    deleteSavedJob(id){
+    deleteSavedJob(savedJobId){
       let textConfirm = "Press Ok to delete your saved job.";
       if(confirm(textConfirm) == true){
-        SavedJobService.deleteSavedJob(id);
+        SavedJobService.deleteSavedJob(savedJobId);
         location.reload();
         alert('Xóa thành công');
       }
@@ -184,7 +185,7 @@ data(){
     }
   },
   created(){
-    this.getSavedJobs();
+    this.getSavedJobs(this.userId);
   }
 };
 </script>

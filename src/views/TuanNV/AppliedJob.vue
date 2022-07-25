@@ -245,19 +245,20 @@ export default {
   },
   data() {
     return {
+      userId : 1,
       listAppliedJob: [],
     };
   },
   methods: {
-    getAppliedJobs() {
-      AppliedJobService.getAppliedJobs().then((res) => {
+    getAppliedJobs(userId) {
+      AppliedJobService.getAppliedJobs(userId).then((res) => {
         this.listAppliedJob = res.data;
       })
     },
-    deleteAppliedJob(id) {
+    deleteAppliedJob(appliedjobId) {
       let textConfirm = "Press Ok to delete your applied job.";
       if (confirm(textConfirm) == true) {
-        AppliedJobService.deleteAppliedJob(id);
+        AppliedJobService.deleteAppliedJob(appliedjobId);
         location.reload();
         alert('Xóa thành công');
       }
@@ -274,7 +275,7 @@ export default {
     }
   },
   created() {
-    this.getAppliedJobs();
+    this.getAppliedJobs(this.userId);
   }
 };
 </script>

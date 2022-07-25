@@ -3,19 +3,19 @@ import axios from "axios";
 const Base_URL = "http://localhost:8080";
 
 class LanguageCertificateService{
-    getLanguage(){
-        return axios.get(Base_URL + "/language/1");
+    getLanguageCertificate(id){
+        return axios.get(Base_URL + "/language/" + id);
     }
-    findLanguage(id){
+    findLanguageCertificate(id){
         return axios.get(Base_URL + "/language/editlanguage/" + id);
     }
-    addLanguage(language){
+    addLanguageCertificate(language){
         return axios.post(Base_URL + "/language/add", language);
     }
-    updateLanguage(id, language){
+    updateLanguageCertificate(id, language){
         return axios.post(Base_URL+ "/language/update/" + id, language);
     }
-    deleteLanguage(id){
+    deleteLanguageCertificate(id){
         return axios.delete(Base_URL + "/language/delete/" + id);
     }
 }

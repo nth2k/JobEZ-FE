@@ -28,7 +28,7 @@
                       <option value="Japan">Japan</option>
                       <option value="Korea">Korea</option>
                     </select> -->
-                    <v-select :items="language" label="Chọn ngôn ngữ" outlined :rules="languageNameRules" required></v-select>
+                    <v-select :items="language" label="Chọn ngôn ngữ" outlined :rules="languageNameRules" v-model="languageName" required></v-select>
                   </div>
                 </div>
                 <div class="col-12">
@@ -82,7 +82,7 @@
                   <!-- </div> -->
                 </div>
                 <div class="text-center container">
-                  <button class="btn btn-primary btnSave px-5 mt-5" @click.prevent="addLanguage">
+                  <button class="btn btn-primary btnSave px-5 mt-5" @click.prevent="addLanguageCertificate">
                     Lưu
                   </button>
                 </div>
@@ -119,19 +119,19 @@ export default {
         (v) => !!v || "Tên chứng chỉ không được để trống"
       ],
       languageName: "",
-      language: ["English", "Japan", "Korea"],
+      language: ["Tiếng Anh", "Tiếng Nhật", "Tiếng Hàn Quốc"],
       languageNameRules: [
         (v) => !!v || "Vui lòng chọn ngôn ngữ"
       ]
     }
   },
   methods: {
-    addLanguage() {
+    addLanguageCertificate() {
       if (this.$refs.form.validate()) {
-        // console.log(this.certificateName, this.languageName, this.grade);
-        LanguageCertificateService.addLanguage({ certificateName: this.languageName, name: this.certificateName, grade: this.grade });
+        console.log(this.certificateName, this.languageName, this.grade);
+        LanguageCertificateService.addLanguageCertificate({name: this.certificateName, certificateName: this.languageName,  grade: this.grade });
         window.location = "/language";
-        alert("Add successful");
+        alert("Thêm thành công");
       }
     }
   }

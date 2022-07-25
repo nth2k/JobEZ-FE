@@ -44,7 +44,7 @@
                     :rules="inputGradeRules" required background-color="white"></v-textarea>
                 </div>
                 <div class="text-center container">
-                  <button class="btn btn-primary btnSave px-5 mt-5" @click.prevent="updateLanguage">
+                  <button class="btn btn-primary btnSave px-5 mt-5" @click.prevent="updateLanguageCertificate">
                     Lưu
                   </button>
                 </div>
@@ -89,26 +89,26 @@ export default {
     }
   },
   methods: {
-    getLanguage(id) {
-      LanguageCertificateService.findLanguage(id).then((res) => {
-        console.log(res.data);
+    getLanguageCertificate(id) {
+      LanguageCertificateService.findLanguageCertificate(id).then((res) => {
+        // console.log(res.data);
         this.certificateName = res.data.certificateName;
         this.languageName = res.data.name;
         this.grade = res.data.grade;
       });
     },
 
-    updateLanguage() {
-      // console.log(this.certificateName, this.languageName, this.grade, this.selectedLanguage);
+    updateLanguageCertificate() {
+      console.log(this.Id, this.certificateName, this.languageName, this.grade, this.selectedLanguage);
       if (this.$refs.form.validate()) {
-        LanguageCertificateService.updateLanguage(this.Id, { certificateName: this.certificateName, name: this.languageName, grade: this.grade });
-        alert("Update Successful!");
+        LanguageCertificateService.updateLanguageCertificate(this.Id, {certificateName: this.certificateName, name: this.languageName, grade: this.grade });
+        alert("Cập nhật thành công");
         window.location = "/language";
       }
     }
   },
   created() {
-    this.getLanguage(this.Id);
+    this.getLanguageCertificate(this.Id);
   }
 };
 </script>
