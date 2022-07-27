@@ -339,6 +339,7 @@
 <script>
 import LandingPageService from "@/services/LandingPageService.js";
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
+// import axios from 'axios';
 export default {
   name: "LandingPage",
   components: {
