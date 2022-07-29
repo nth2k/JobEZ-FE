@@ -74,6 +74,7 @@ export default {
   data(){
     return {
       listWorkExp: [],
+      userId: 1,
     }
   },
   methods: {
@@ -88,8 +89,8 @@ export default {
         icon.classList.toggle('rotate');
       }
     },
-    getAllWorkExp(){
-      WorkExperienceService.getWorkExps().then((res) => {
+    getAllWorkExp(userId){
+      WorkExperienceService.getWorkExps(userId).then((res) => {
         this.listWorkExp = res.data;
       })
     },
@@ -103,7 +104,7 @@ export default {
     }
   },
   created(){
-    this.getAllWorkExp();
+    this.getAllWorkExp(this.userId);
   }
 };
 </script>

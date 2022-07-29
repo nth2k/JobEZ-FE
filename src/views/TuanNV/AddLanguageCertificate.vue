@@ -129,7 +129,7 @@ export default {
     addLanguageCertificate() {
       if (this.$refs.form.validate()) {
         console.log(this.certificateName, this.languageName, this.grade);
-        LanguageCertificateService.addLanguageCertificate({name: this.certificateName, certificateName: this.languageName,  grade: this.grade });
+        LanguageCertificateService.addLanguageCertificate({certificateName: this.languageName, name: this.certificateName,  grade: this.grade });
         window.location = "/language";
         alert("Thêm thành công");
       }

@@ -23,8 +23,13 @@
                     </div>
                   </div>
                   <div>
-                    <v-select :items="language" label="Chọn ngôn ngữ" :rules="languageNameRules" required
-                      v-model="languageName"></v-select>
+                    <v-select 
+                      :items="language" 
+                      label="Chọn ngôn ngữ" 
+                      :rules="languageNameRules" 
+                      required
+                      v-model="languageName">
+                    </v-select>
                   </div>
                 </div>
                 <div class="col-12">
@@ -82,7 +87,7 @@ export default {
         (v) => !!v || "Tên chứng chỉ không được để trống"
       ],
       languageName: "",
-      language: ["English", "Japan", "Korea"],
+      language: ["Tiếng Anh", "Tiếng Nhật", "Tiếng Hàn Quốc"],
       languageNameRules: [
         (v) => !!v || "Vui lòng chọn ngôn ngữ"
       ]
