@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import HeaderComponent from "@/components/Hiepcomponents/HeaderComponent.vue";
+import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
 export default {
   name: "SearchCandidate",
   components: {

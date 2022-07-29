@@ -90,13 +90,13 @@ export default {
     async submit() {
       if (this.$refs.form.validate()) {
         await RecruiterRegisterService.addRecruiter({
-          name: this.companyName,
+          full_name: this.companyName,
           email: this.email,
           password: this.password,
-          role: {
-            id: 2,
-            rollName: "Recruiter",
-          },
+          // role: {
+          //   id: 2,
+          //   rollName: "Recruiter",
+          // },
         })
           .then((rs) => {
             this.$store.dispatch("setSnackbar", {

@@ -7,13 +7,15 @@
           JobEZ
         </h1>
         <div class="search-form">
-          <form action="">
-            <input type="text" placeholder="Nhập công việc, vị trí" />
-            <select name="province" id="">
-              <option value="">---Chọn tỉnh thành---</option>
-            </select>
-            <button type="submit">Tìm kiếm</button>
-          </form>
+          <input
+            v-model="searchText"
+            type="text"
+            placeholder="Nhập công việc, vị trí"
+          />
+          <select>
+            <option value="">---Chọn tỉnh thành---</option>
+          </select>
+          <button @click="submit">Tìm kiếm</button>
         </div>
         <div class="row advance">
           <div class="col-4 text-center">
@@ -282,7 +284,7 @@
                 />
               </div>
               <div class="job-info w-75 h-auto pl-4">
-                <span style="color: red;">{{ job.jobName }}</span
+                <span style="color: red">{{ job.jobName }}</span
                 ><br />
                 <br />
                 <img src="@/assets/icn_location.png" alt="" />
@@ -349,6 +351,7 @@ export default {
     return {
       attractiveJob: [],
       urgentRecruitment: [],
+      searchText: "",
     };
   },
   methods: {
@@ -358,6 +361,9 @@ export default {
         this.urgentRecruitment = res.data.urgentRecruitment.slice(11, 21);
         console.log(res.data);
       });
+    },
+    submit() {
+      console.log(this.searchText);
     },
   },
   created() {

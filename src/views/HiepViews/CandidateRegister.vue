@@ -144,14 +144,16 @@ export default {
     async submit() {
       if (this.$refs.form.validate()) {
         await CandidateRegisterService.addCandidate({
-          name: this.fullName,
+          full_name: this.fullName,
           email: this.email,
           password: this.password,
-          phone: this.phone,
-          role: {
-            id: 1,
-            rollName: "Candidate",
-          },
+          province_id: 1,
+          city_id: 1,
+          phone_number: this.phone,
+          // role: {
+          //   id: 1,
+          //   rollName: "Candidate",
+          // },
         })
           .then((rs) => {
             this.$store.dispatch("setSnackbar", {
