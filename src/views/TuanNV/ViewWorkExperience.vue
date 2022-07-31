@@ -74,7 +74,7 @@ export default {
   data(){
     return {
       listWorkExp: [],
-      userId: 1,
+      userId: 3,
     }
   },
   methods: {

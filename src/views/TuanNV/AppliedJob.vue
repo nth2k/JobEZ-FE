@@ -28,19 +28,19 @@
               <tr v-for="(appliedjob, index) in listAppliedJob" v-bind:key="appliedjob.id">
                 <td class="column"><span>{{ index + 1 }}</span></td>
                 <td>
-                  <div>{{ appliedjob.posting.jobName }}</div>
+                  <div>{{ appliedjob.positionJobname }}</div>
 
                   <div><a href="#">(Xem chi tiết)</a></div>
                 </td>
-                <td class="column"><span>{{ appliedjob.posting.position }}</span></td>
+                <td class="column"><span>{{ appliedjob.postingPosition }}</span></td>
                 <td>
-                  <div>{{ formatDate(appliedjob.deadlineForSubmission) }}</div>
-                  <div><span>{{ countDays(appliedjob.deadlineForSubmission) }}</span></div>
+                  <div>{{ appliedjob.deadlineForSubmission }}</div>
+                  <div><span>{{ countDaysDeadlineForSubmission(appliedjob.deadlineForSubmission) }}</span></div>
                 </td>
                 <td class="column">
                   <div>{{ formatDate(appliedjob.dateSubmission) }}</div>
 
-                  <div><span>{{ countDays(appliedjob.dateSubmission) }}</span></div>
+                  <div><span>{{ countDaysDateSubmission(appliedjob.dateSubmission) }}</span></div>
                 </td>
                 <td><span>{{ appliedjob.commentFromEmployer }}</span></td>
                 <td class="column">
@@ -245,7 +245,7 @@ export default {
   },
   data() {
     return {
-      userId : 1,
+      userId: 3,
       listAppliedJob: [],
     };
   },
@@ -263,8 +263,19 @@ export default {
         alert('Xóa thành công');
       }
     },
-    countDays(date) {
-      var date1 = new Date(date);
+    countDaysDeadlineForSubmission(date) {
+      var datesplit = date.split("/");
+      var date1 = new Date(datesplit[1] + "/" + datesplit[0] + "/" + datesplit[2]);
+      var date2 = new Date();
+      var duration = Math.ceil((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000));
+      return (duration) < 0 ? "(" + Math.abs(duration) + " ngày trước)" : "(Còn " + duration + " ngày)";
+    },
+    countDaysDateSubmission(date) {
+      var year = Number(date.substring(0, 4));
+      var month = Number(date.substring(5, 7));
+      var day = Number(date.substring(8, 10));
+      var dateformat = month + "/" + day + "/" + year;
+      var date1 = new Date(dateformat);
       var date2 = new Date();
       var duration = Math.ceil((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000));
       return (duration) < 0 ? "(" + Math.abs(duration) + " ngày trước)" : "(Còn " + duration + " ngày)";

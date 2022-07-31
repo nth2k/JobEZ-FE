@@ -23,14 +23,13 @@
               <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="savedJob.id">
                 <td class="column"><span>{{index + 1}}</span></td>
                 <td>
-                  <div>{{savedJob.posting.jobName}}</div>
+                  <div>{{savedJob.postingJobname}}</div>
 
                   <div><a href="#">(Xem chi tiết)</a></div>
                 </td>
-                <td class="column"><span>{{savedJob.posting.position}}</span></td>
+                <td class="column"><span>{{savedJob.postingPosition}}</span></td>
                 <td>
-                  <!-- <div>{{savedjob.deadlineForSubmission.toString()}}</div> -->
-                  <div>{{formatDate(savedJob.deadlineForSubmission)}}</div>
+                  <div>{{savedJob.deadlineForSubmission}}</div>
                   <div><span>{{countDays(savedJob.deadlineForSubmission)}}</span></div>
                 </td>
                 <td class="column">
@@ -154,7 +153,7 @@ export default {
 },
 data(){
     return{
-      userId: 1,
+      userId: 3,
       listSavedJob: [],
     };
   },
@@ -162,7 +161,6 @@ data(){
     getSavedJobs(userId){
       SavedJobService.getSavedJobs(userId).then((res) => {
         this.listSavedJob = res.data;
-        // console.log(this.listSavedJob);
       })
     },
     deleteSavedJob(savedJobId){
@@ -174,15 +172,13 @@ data(){
       }
     },
     countDays(date) {
-      var date1 = new Date(date);
+      var datesplit = date.split("/");
+      var date1 = new Date(datesplit[1] + "/" + datesplit[0] + "/" + datesplit[2]);
       var date2 = new Date();
       var duration = Math.ceil((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000));
       return (duration) < 0 ? "(" + Math.abs(duration) + " ngày trước)" : "(Còn " + duration + " ngày)";
     },
-    formatDate(date) {
-      var d = new Date(date);
-      return d.toLocaleDateString();
-    }
+    
   },
   created(){
     this.getSavedJobs(this.userId);
