@@ -10,7 +10,7 @@
           <input
             v-model="searchText"
             type="text"
-            placeholder="Nhập công việc, vị trí"
+            placeholder="Nhập công việc, vị trí, ..."
           />
           <select>
             <option value="">---Chọn tỉnh thành---</option>
@@ -306,16 +306,14 @@
               <span>HOTLINE tư vấn tuyển dụng</span>
               <div class="row w-100 p-2">
                 <div class="w-50">
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
+                  <span>0982.079.209 - Nhóm Hiệp Nguyễn</span><br />
+                  <span>0982.079.209 - Nhóm Toàn Nguyễn</span><br />
+                  <span>0982.079.209 - Nhóm Tuấn Nguyễn</span><br />
                 </div>
                 <div class="w-50">
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
+                  <span>0982.079.209 - Nhóm Hiệp Nguyễn</span><br />
+                  <span>0982.079.209 - Nhóm Toàn Nguyễn</span><br />
+                  <span>0982.079.209 - Nhóm Tuấn Nguyễn</span><br />
                 </div>
               </div>
               <hr />
@@ -358,12 +356,16 @@ export default {
     async getJobs() {
       await LandingPageService.getHomePage().then((res) => {
         this.attractiveJob = res.data.attractiveJob.slice(1, 10);
-        this.urgentRecruitment = res.data.urgentRecruitment.slice(11, 21);
+        this.urgentRecruitment = res.data.urgentRecruitment.slice(10, 21);
         console.log(res.data);
       });
     },
     submit() {
       console.log(this.searchText);
+      this.$router.push({
+        name: "SearchJob",
+        params: { searchText: this.searchText },
+      });
     },
   },
   created() {

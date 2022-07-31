@@ -67,7 +67,7 @@ export const routes = [
         component: JobDetailsNoLogin
     },
     {
-        path: '/searchJob',
+        path: '/searchJob/:searchText',
         name: 'SearchJob',
         component: SearchJob
     },
