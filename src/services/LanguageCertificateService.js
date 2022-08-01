@@ -12,8 +12,8 @@ class LanguageCertificateService{
     addLanguageCertificate(language){
         return axios.post(Base_URL + "/language/add", language);
     }
-    updateLanguageCertificate(id, language){
-        return axios.post(Base_URL+ "/language/update/" + id, language);
+    updateLanguageCertificate(language){
+        return axios.post(Base_URL+ "/language/update" , language);
     }
     deleteLanguageCertificate(id){
         return axios.delete(Base_URL + "/language/delete/" + id);
