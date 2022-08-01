@@ -23,11 +23,7 @@
                     </div>
                   </div>
                   <div>
-                    <v-select 
-                      :items="language" 
-                      label="Chọn ngôn ngữ" 
-                      :rules="languageNameRules" 
-                      required
+                    <v-select :items="language" label="Chọn ngôn ngữ" :rules="languageNameRules" required
                       v-model="languageName">
                     </v-select>
                   </div>
@@ -77,6 +73,7 @@ export default {
   data() {
     return {
       Id: this.$route.params.id,
+      userId: this.$route.params.userId,
       grade: "",
       inputGradeRules: [
         (v) => v >= 0 || 'Minimum length is 3 character',
@@ -96,17 +93,15 @@ export default {
   methods: {
     getLanguageCertificate(id) {
       LanguageCertificateService.findLanguageCertificate(id).then((res) => {
-        // console.log(res.data);
-        this.certificateName = res.data.certificateName;
         this.languageName = res.data.name;
+        this.certificateName = res.data.certificateName;
         this.grade = res.data.grade;
       });
     },
 
     updateLanguageCertificate() {
-      console.log(this.Id, this.certificateName, this.languageName, this.grade, this.selectedLanguage);
       if (this.$refs.form.validate()) {
-        LanguageCertificateService.updateLanguageCertificate(this.Id, {certificateName: this.certificateName, name: this.languageName, grade: this.grade });
+        LanguageCertificateService.updateLanguageCertificate({ id: this.Id, certificate_name: this.certificateName, name: this.languageName, mark: this.grade, userId: this.userId });
         alert("Cập nhật thành công");
         window.location = "/language";
       }
