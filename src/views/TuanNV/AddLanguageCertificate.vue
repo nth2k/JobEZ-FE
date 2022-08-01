@@ -22,12 +22,6 @@
                     </div>
                   </div>
                   <div>
-                    <!-- <select v-model="languageName" class="form-control" >
-                      <option value="-1">Chọn ngôn ngữ</option>
-                      <option value="English">English</option>
-                      <option value="Japan">Japan</option>
-                      <option value="Korea">Korea</option>
-                    </select> -->
                     <v-select :items="language" label="Chọn ngôn ngữ" outlined :rules="languageNameRules" v-model="languageName" required></v-select>
                   </div>
                 </div>
@@ -36,22 +30,6 @@
                     <span class="label">Chứng chỉ <span class="star">*</span></span>
                   </div>
                   <div>
-                    <!-- <input
-                      v-model="certificateName"
-                      class="form-control"
-                      type="text"
-                      id="tenchungchi"
-                      placeholder="Tên chứng chỉ"
-                    /> -->
-                    <!-- <v-text-field
-                    class="mt-5"
-                    label="Chứng chỉ"
-                    outlined
-                    dense
-                    v-model="certificateName"
-                    :rules="certificateNameRules"
-                    required
-                  ></v-text-field> -->
                     <v-textarea label="Chứng chỉ" v-model="certificateName" outlined filled no-resize rows="1"
                       :rules="certificateNameRules" required background-color="white"></v-textarea>
                   </div>
@@ -60,26 +38,8 @@
                   <div class="title">
                     <span class="label">Số điểm <span class="star">*</span></span>
                   </div>
-                  <!-- <div> -->
-                  <!-- <v-text-field
-                      label="Số điểm"
-                      v-model.number="grade" class="form-control"
-                      type="text"
-                      id="sodiem"
-                      :rules="inputRules"
-                      required></v-text-field> -->
-                  <!-- <v-text-field
-                      class="mt-5"
-                      label="Số điểm"
-                      outlined
-                      dense
-                      v-model.number="grade"
-                      :rules="inputGradeRules"
-                      required
-                    ></v-text-field> -->
                   <v-textarea label="Số điểm" v-model.number="grade" outlined filled no-resize rows="1"
                     :rules="inputGradeRules" required background-color="white"></v-textarea>
-                  <!-- </div> -->
                 </div>
                 <div class="text-center container">
                   <button class="btn btn-primary btnSave px-5 mt-5" @click.prevent="addLanguageCertificate">
@@ -109,6 +69,7 @@ export default {
   },
   data() {
     return {
+      userId: this.$route.params.userId,
       grade: "",
       inputGradeRules: [
         (v) => !!v || "Số điểm không được để trống",
@@ -127,9 +88,10 @@ export default {
   },
   methods: {
     addLanguageCertificate() {
+      // console.log(this.userId);
       if (this.$refs.form.validate()) {
-        console.log(this.certificateName, this.languageName, this.grade);
-        LanguageCertificateService.addLanguageCertificate({certificateName: this.languageName, name: this.certificateName,  grade: this.grade });
+        // console.log(this.certificateName, this.languageName, this.grade, this.userId);
+        LanguageCertificateService.addLanguageCertificate({certificate_name: this.certificateName, name: this.languageName,  mark: this.grade, userId: this.userId });
         window.location = "/language";
         alert("Thêm thành công");
       }
