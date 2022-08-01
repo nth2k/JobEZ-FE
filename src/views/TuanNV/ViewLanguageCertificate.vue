@@ -28,9 +28,9 @@
               </div>
               <div v-if="!listLanguage.length" class="pt-4">Không có bằng ngôn ngữ - tin học</div>
               <div class="row d-flex tbody" v-for="language in listLanguage" v-bind:key="language.id">
-                <div class="col-4">{{language.certificateName}}</div>
                 <div class="col-4">{{language.name}}</div>
-                <div class="col-3">{{language.grade}}</div>
+                <div class="col-4">{{language.certificate_name}}</div>
+                <div class="col-3">{{language.mark}}</div>
                 <div class="col-1" style="padding: 0">
                   <span class="icon_tt">
                     <a
@@ -48,11 +48,11 @@
                       class="dropdown-menu dropdown-menu-right"
                       aria-labelledby="userDropdownMenuLink"
                     >
-                      <router-link class="dropdown-item" to="/addLanguage"
+                      <span class="dropdown-item" @click="addLanguageCertificate(userId)"
                         ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                      </svg> Thêm</router-link>
+                      </svg> Thêm</span>
                       <span class="dropdown-item" @click="editLanguageCertificate(language.id)"
                         ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -98,10 +98,19 @@ export default {
         this.listLanguage = res.data;
       });
     },
+    addLanguageCertificate(userId){
+      console.log(this.userId);
+      this.$router.push({
+        name: "AddLanguageCertificate",
+        params: { userId: userId },
+      });
+    },
     editLanguageCertificate(languageId){
       this.$router.push({
         name: "EditLanguageCertificate",
-        params: { id: languageId },
+        params: { id: languageId,
+          userId: this.userId
+        },
       });
     },
     deleteLanguageCertificate(languageId){
