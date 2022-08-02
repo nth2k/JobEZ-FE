@@ -80,7 +80,7 @@ export default {
         (v) => !!v || "Tên chứng chỉ không được để trống"
       ],
       languageName: "",
-      language: ["Tiếng Anh", "Tiếng Nhật", "Tiếng Hàn Quốc"],
+      language: ["Tiếng Anh", "Tiếng Nhật", "Tiếng Hàn", "Tiếng Nga", "Tiếng Trung", "Tiếng Pháp"],
       languageNameRules: [
         (v) => !!v || "Vui lòng chọn ngôn ngữ"
       ]
@@ -134,7 +134,7 @@ export default {
   margin-left: 0.5rem;
   margin-bottom: 20px;
   border-bottom: 1px solid gray;
-  width: 170px;
+  width: 183px;
   color: #2A3563;
   font-size: 20px;
   font-weight: bold;

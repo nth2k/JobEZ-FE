@@ -26,7 +26,10 @@
                 </div>
                 <div class="col-1 thead"></div>
               </div>
-              <div v-if="!listLanguage.length" class="pt-4">Không có bằng ngôn ngữ - tin học</div>
+              <div v-if="!listLanguage.length" class="pt-4">
+                <div>Không có bằng ngôn ngữ - tin học</div>
+                <button @click="addLanguageCertificate(userId)" class="py-1 px-3 btnAdd">Thêm +</button>
+              </div>
               <div class="row d-flex tbody" v-for="language in listLanguage" v-bind:key="language.id">
                 <div class="col-4">{{language.name}}</div>
                 <div class="col-4">{{language.certificate_name}}</div>
@@ -165,7 +168,12 @@ export default {
 .nav_link{
   padding: 0;
 }
-
+.btnAdd {
+  background-color: #eceefa;
+  color: #333333;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
 .dropdown-item{
   border-bottom: 1px solid lightgray;
   padding-bottom: 10px;

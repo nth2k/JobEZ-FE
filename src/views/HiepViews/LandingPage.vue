@@ -7,13 +7,15 @@
           JobEZ
         </h1>
         <div class="search-form">
-          <form action="">
-            <input type="text" placeholder="Nhập công việc, vị trí" />
-            <select name="province" id="">
-              <option value="">---Chọn tỉnh thành---</option>
-            </select>
-            <button type="submit">Tìm kiếm</button>
-          </form>
+          <input
+            v-model="searchText"
+            type="text"
+            placeholder="Nhập công việc, vị trí, ..."
+          />
+          <select>
+            <option value="">---Chọn tỉnh thành---</option>
+          </select>
+          <button @click="submit">Tìm kiếm</button>
         </div>
         <div class="row advance">
           <div class="col-4 text-center">
@@ -282,7 +284,7 @@
                 />
               </div>
               <div class="job-info w-75 h-auto pl-4">
-                <span style="color: red;">{{ job.jobName }}</span
+                <span style="color: red">{{ job.jobName }}</span
                 ><br />
                 <br />
                 <img src="@/assets/icn_location.png" alt="" />
@@ -304,16 +306,14 @@
               <span>HOTLINE tư vấn tuyển dụng</span>
               <div class="row w-100 p-2">
                 <div class="w-50">
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
+                  <span>0982.079.209 - Nhóm Hiệp Nguyễn</span><br />
+                  <span>0982.079.209 - Nhóm Toàn Nguyễn</span><br />
+                  <span>0982.079.209 - Nhóm Tuấn Nguyễn</span><br />
                 </div>
                 <div class="w-50">
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
-                  <span>0982.079.209 - Nhóm Ngô Dung</span><br />
+                  <span>0982.079.209 - Nhóm Hiệp Nguyễn</span><br />
+                  <span>0982.079.209 - Nhóm Toàn Nguyễn</span><br />
+                  <span>0982.079.209 - Nhóm Tuấn Nguyễn</span><br />
                 </div>
               </div>
               <hr />
@@ -339,6 +339,7 @@
 <script>
 import LandingPageService from "@/services/LandingPageService.js";
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
+// import axios from 'axios';
 export default {
   name: "LandingPage",
   components: {
@@ -348,14 +349,22 @@ export default {
     return {
       attractiveJob: [],
       urgentRecruitment: [],
+      searchText: "",
     };
   },
   methods: {
     async getJobs() {
       await LandingPageService.getHomePage().then((res) => {
         this.attractiveJob = res.data.attractiveJob.slice(1, 10);
-        this.urgentRecruitment = res.data.urgentRecruitment.slice(11, 21);
+        this.urgentRecruitment = res.data.urgentRecruitment.slice(10, 21);
         console.log(res.data);
+      });
+    },
+    submit() {
+      console.log(this.searchText);
+      this.$router.push({
+        name: "SearchJob",
+        params: { searchText: this.searchText },
       });
     },
   },

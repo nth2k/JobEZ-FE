@@ -18,7 +18,7 @@ import AppliedJob from '@/views/TuanNV/AppliedJob.vue'
 import ViewWorkExperience from '@/views/TuanNV/ViewWorkExperience.vue'
 import AddWorkExperience from '@/views/TuanNV/AddWorkExperience.vue'
 import SearchJob from '@/views/HiepViews/SearchJob.vue'
-import CandidateChangePassword from '@/views/TuanNV/CandidateChangePassword'
+import SearchCandidate from '@/views/HiepViews/SearchCandidate.vue'
 
 Vue.use(VueRouter)
 
@@ -102,13 +102,14 @@ export const routes = [
         component: AddWorkExperience
     },
     {
-        path: '/searchJob',
+        path: '/searchJob/:searchText',
         name: 'SearchJob',
         component: SearchJob
-    },{
-        path: '/candidate/changepass',
-        name: 'CandidateChangePassword',
-        component: CandidateChangePassword
+    },
+    {
+        path: '/searchCandidate',
+        name: 'SearchCandidate',
+        component: SearchCandidate
     }
 ]
 

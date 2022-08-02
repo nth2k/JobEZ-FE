@@ -9,10 +9,7 @@
           <div class="col-3 left-form">
             <span>Logo công ty <span style="color: red">*</span></span
             ><br />
-            <v-file-input
-              v-model="file"
-              label="Logo công ty"
-            ></v-file-input
+            <v-file-input v-model="image" label="Logo công ty"></v-file-input
             ><br />
             <span>Số điện thoại <span style="color: red">*</span></span
             ><br />
@@ -27,19 +24,35 @@
             ><br />
             <span>Tỉnh/Thành phố<span style="color: red">*</span></span
             ><br />
-            <v-select
-              :items="province"
-              label="Chọn tỉnh/Thành phố"
-              required
-            ></v-select
+            <select
+              class="w-100"
+              @change="onProvinceSelect"
+              v-model="selectedProvince"
+            >
+              <option value="" disabled hidden>Chọn tỉnh thành</option>
+              <option
+                v-for="(item, index) in province"
+                :key="index"
+                :value="item.province_id"
+              >
+                {{ item.province_name }}
+              </option></select
             ><br />
             <span>Quận huyện <span style="color: red">*</span></span
             ><br />
-            <v-select
-              :items="district"
-              label="Chọn quận huyện"
-              required
-            ></v-select
+            <select
+              class="w-100"
+              @change="onDistrictSelect"
+              v-model="selectedDistrict"
+            >
+              <option value="" disabled hidden>Chọn quận huyện</option>
+              <option
+                v-for="(item, index) in district"
+                :key="index"
+                :value="item.district_id"
+              >
+                {{ item.district_name }}
+              </option></select
             ><br />
           </div>
           <div class="col-3 right-form">
@@ -92,67 +105,105 @@
 
 <script>
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
-import RecruiterRegisterService from "@/services/RecruiterRegisterService.js"
+import RecruiterRegisterService from "@/services/RecruiterRegisterService.js";
+import AddressService from "@/services/AddressService.js";
+
 export default {
   name: "RecruiterOnlineCVForm",
   components: {
     HeaderComponent,
   },
-  data: () => ({
-    file: null,
-    phone: "",
-    phoneRules: [
-      (v) => !!v || "Phone is required",
-      (v) => /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
-    ],
-    province: [],
-    district: [],
-    address: "",
-    addressRules: [
-      (v) => !!v || "Address is required",
-      (v) => (v && v.length > 5) || "Address must be more than 5 characters",
-    ],
-    taxCode: "",
-    taxCodeRules: [
-      (v) => !!v || "TaxCode is required",
-      (v) => (v && v.length > 5) || "TaxCode must be more than 5 characters",
-    ],
-    description: "",
-    descriptionRules: [
-      (v) => !!v || "Description is required",
-      (v) =>
-        (v && v.length > 5) || "Description must be more than 5 characters",
-    ],
-  }),
-  methods: {
-    submit() {
-      if (this.$refs.form.validate()) {
-        const formData = new FormData();
-        formData.append("file", this.file);
-        formData.append("taxCode", this.taxCode);
-        formData.append("phone", this.phone);
-        formData.append("address", this.address);
-        formData.append("description", this.description);
-
-        // axios.post("/api/uploadFile", formData).then(
-        //   function (result) {
-        //     console.log(result);
-        //   },
-        //   function (error) {
-        //     console.log(error);
-        //   }
-        // );
-        console.log(formData);
-
-        // this.$router.push("/recruiterLogin");
+  data() {
+    return {
+      recruiterId: this.$route.params.id,
+      image: null,
+      base64: null,
+      phone: "",
+      phoneRules: [
+        (v) => !!v || "Phone is required",
+        (v) =>
+          /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
+      ],
+      province: [],
+      district: [],
+      address: "",
+      addressRules: [
+        (v) => !!v || "Address is required",
+        (v) => (v && v.length > 5) || "Address must be more than 5 characters",
+      ],
+      taxCode: "",
+      taxCodeRules: [
+        (v) => !!v || "TaxCode is required",
+        (v) => /(^[0-9]{10,13}$)\b/.test(v) || "TaxCode must be valid",
+      ],
+      description: "",
+      descriptionRules: [
+        (v) => !!v || "Description is required",
+        (v) =>
+          (v && v.length > 5) || "Description must be more than 5 characters",
+      ],
+      selectedProvince: "",
+      selectedDistrict: "",
+    };
+  },
+  watch: {
+    image: function (newVal) {
+      if (newVal) {
+        this.createBase64Image(newVal);
+      } else {
+        this.base64 = null;
       }
     },
   },
-  created(){
-    RecruiterRegisterService.getProvince().then((rs) => {
-      this.province = rs.data.map(result => result.name);
-    })
-  }
+  methods: {
+    createBase64Image: function (FileObject) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.base64 = event.target.result;
+      };
+      reader.readAsDataURL(FileObject);
+    },
+    getProvince() {
+      AddressService.getProvince().then((rs) => {
+        this.province = rs.data.results;
+      });
+    },
+    onProvinceSelect(event) {
+      AddressService.getDistrict(event.target.value).then((rs) => {
+        this.district = rs.data.results;
+        console.log(event.target.value);
+      });
+    },
+    onDistrictSelect(event) {
+      console.log(event.target.value);
+    },
+    submit() {
+      if (this.$refs.form.validate()) {
+        RecruiterRegisterService.updateRecruiter(this.recruiterId, {
+          images: this.base64,
+          phone: this.phone,
+          addressName: this.address,
+          taxtNumber: this.taxCode,
+          description: this.description,
+        })
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Đăng kí nhà tuyển dụng bước 2 thành công",
+            });
+            this.$router.push("/recruiterLogin");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
+      }
+    },
+  },
+  created() {
+    this.getProvince();
+  },
 };
 </script>
 

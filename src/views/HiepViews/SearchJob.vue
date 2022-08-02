@@ -3,13 +3,15 @@
     <HeaderComponent />
     <div class="search-container">
       <div class="search-form">
-        <form action="" method="post">
-          <input type="text" placeholder="Nhập công việc, vị trí" />
-          <select name="province" id="">
-            <option value="">---Chọn tỉnh thành---</option>
-          </select>
-          <button type="submit">Tìm kiếm</button>
-        </form>
+        <input
+          v-model="searchText"
+          type="text"
+          placeholder="Nhập công việc, vị trí, ..."
+        />
+        <select name="province" id="">
+          <option value="">---Chọn tỉnh thành---</option>
+        </select>
+        <button @click="submit">Tìm kiếm</button>
       </div>
       <div class="text-center mt-5 mb-5">
         <span style="color: white">Cần thêm nhiều tùy chọn tìm kiếm? </span>
@@ -23,82 +25,73 @@
       <h5>Việc tìm người mới nhất - cập nhật liên tục</h5>
       <hr />
       <div class="job-container1">
-        <div class="job row p-3 m-3">
+        <div
+          v-for="(job, index) in listSearchJob"
+          :key="index"
+          class="job row p-3 m-3"
+        >
           <div class="logo">
-            <img
-              style="width: 170px; height: 100px"
-              src="https://tuyendung.fpt.com.vn/public/img/logo-ft.png"
-              alt=""
-            />
+            <img style="width: 170px; height: 100px" :src="job.images" alt="" />
           </div>
           <div class="job-info pl-4">
-            <span style="color: red">NHÂN VIÊN PHA CHẾ MỸ PHẨM</span><br />
-            <span>CÔNG TY TNHH HANACOS VN</span><br />
-            <b-icon icon="pin-map" aria-hidden="true"></b-icon>
-            <span> Toàn quốc</span><br />
-            <b-icon icon="briefcase" aria-hidden="true"></b-icon
-            ><span> Hạn nộp: 21/01/2022</span>
-            <b-icon class="ml-5" icon="coin" aria-hidden="true"></b-icon
-            ><span style="color: red"> 7 - 15 triệu</span><br />
-            <span style="float: right" v-if="isClicked == false" v-on:click="isClicked = !isClicked"> - Xem thêm</span>
-            <span style="float: right" v-if="isClicked" v-on:click="isClicked = !isClicked"> - Rút gọn</span><br />
+            <span style="color: red">{{ job.jobName }}</span
+            ><br />
+            <span>Vị trí: {{ job.position }}</span
+            ><br />
+            <img src="@/assets/icn_location.png" alt="" />
+            <span> Bằng cấp: {{ job.degreeRequired }}</span
+            ><br />
+            <img src="@/assets/hn_icon.png" alt="" /><span>
+              Hạn nộp: {{ job.deadlineForSubmission }}</span
+            >
+            <img
+              style="margin-left: 70px"
+              src="@/assets/dt_6.png"
+              alt=""
+            /><span style="color: green"> Lượt xem: {{ job.view }}</span
+            ><br />
+            <span
+              v-if="isClicked == false"
+              v-on:click="isClicked = !isClicked"
+              style="color: green"
+            >
+              - Xem thêm</span
+            >
+            <span
+              v-if="isClicked"
+              v-on:click="isClicked = !isClicked"
+              style="color: red"
+            >
+              - Rút gọn</span
+            ><br />
           </div>
           <div v-if="isClicked" class="shortDes p-3">
             <h5>Mô tả công việc</h5>
             <p>
-              Xử lý các sự cố liên quan đến máy tính, phần mềm, thiết bị mạng, đường truyền trong công ty. Xác định, chẩn đoán và giải quyết vấn đề đối với yêu cầu của người sử dụng máy tính cá nhân, phần mềm máy tính và phần cứng, mạng, Internet trong công ty.
+              {{ job.description }}
             </p>
           </div>
         </div>
-        <div class="job row p-3 m-3">
-          <div class="logo">
-            <img
-              style="width: 170px; height: 100px"
-              src="https://tuyendung.fpt.com.vn/public/img/logo-ft.png"
-              alt=""
-            />
-          </div>
-          <div class="job-info pl-4">
-            <span style="color: red">NHÂN VIÊN PHA CHẾ MỸ PHẨM</span><br />
-            <span>CÔNG TY TNHH HANACOS VN</span><br />
-            <b-icon icon="pin-map" aria-hidden="true"></b-icon>
-            <span> Toàn quốc</span><br />
-            <b-icon icon="briefcase" aria-hidden="true"></b-icon
-            ><span> Hạn nộp: 21/01/2022</span>
-            <b-icon class="ml-5" icon="coin" aria-hidden="true"></b-icon
-            ><span style="color: red"> 7 - 15 triệu</span><br />
-            <span style="float: right" v-if="isClicked == false" v-on:click="isClicked = !isClicked"> - Xem thêm</span>
-            <span style="float: right" v-if="isClicked" v-on:click="isClicked = !isClicked"> - Rút gọn</span><br />
-          </div>
-          <div v-if="isClicked" class="shortDes p-3">
-            <h5>Mô tả công việc</h5>
-            <p>
-              Xử lý các sự cố liên quan đến máy tính, phần mềm, thiết bị mạng, đường truyền trong công ty. Xác định, chẩn đoán và giải quyết vấn đề đối với yêu cầu của người sử dụng máy tính cá nhân, phần mềm máy tính và phần cứng, mạng, Internet trong công ty.
-            </p>
-          </div>
-        </div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
-        <div class="job"></div>
       </div>
 
       <div class="page">
         <ul class="pagination">
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
+            <a class="page-link" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
               <span class="sr-only">Previous</span>
             </a>
           </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li
+            v-for="i in totalPage"
+            :key="i"
+            class="page-item"
+            @click="paging(i)"
+          >
+            <a class="page-link"> {{ i }}</a>
+          </li>
           <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
+            <a class="page-link" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
               <span class="sr-only">Next</span>
             </a>
@@ -111,6 +104,7 @@
 </template>
 
 <script>
+import SearchJobService from "@/services/SearchJobService.js";
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
 export default {
   name: "SearchJob",
@@ -120,7 +114,53 @@ export default {
   data() {
     return {
       isClicked: false,
+      searchText: this.$route.params.searchText,
+      pageOffset: 1,
+      listSearchJob: [],
+      totalPage: 0,
+      selectedPage: 1,
     };
+  },
+  methods: {
+    paging(selectedPage) {
+      SearchJobService.getJobByTextField(this.searchText, selectedPage).then(
+        (rs) => {
+          this.listSearchJob = rs.data.content;
+        }
+      );
+    },
+    submit() {
+      this.$router.push({
+        name: "SearchJob",
+        params: { searchText: this.searchText },
+      });
+      SearchJobService.getJobByTextField(this.searchText, this.pageOffset).then(
+        (rs) => {
+          this.listSearchJob = rs.data.content;
+          if (rs.data.total % 4 == 0) {
+            this.totalPage = rs.data.total % 4;
+          } else if (rs.data.total % 4 != 0) {
+            this.totalPage = (rs.data.total % 4) + 1;
+          } else if (rs.data.total % 4 < 1) {
+            this.totalPage = 1;
+          }
+        }
+      );
+    },
+  },
+  created() {
+    SearchJobService.getJobByTextField(this.searchText, this.pageOffset).then(
+      (rs) => {
+        this.listSearchJob = rs.data.content;
+        if (rs.data.total % 4 == 0) {
+          this.totalPage = rs.data.total % 4;
+        } else if (rs.data.total % 4 != 0) {
+          this.totalPage = (rs.data.total % 4) + 1;
+        } else if (rs.data.total % 4 < 1) {
+          this.totalPage = 1;
+        }
+      }
+    );
   },
 };
 </script>
@@ -193,7 +233,7 @@ export default {
   margin-top: 13px;
   background-color: #f2f2f2;
   width: 100%;
-  height: 150px;
+  height: auto;
 }
 
 .page {
