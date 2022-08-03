@@ -18,7 +18,7 @@
             <div v-if="!listWorkExp.length">Không có kinh nghiệm làm việc</div>
             <div class="block" v-for="workexp in listWorkExp" v-bind:key="workexp.id">
               <span id="show" @click="showDetail">
-                <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i>
+                <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i>Công ty 
                 {{workexp.companyName}}
               </span>
               <button class="btnDelete" @click="deleteWorkExp(workexp.id)">
@@ -159,7 +159,7 @@ a {
   margin-left: 15px;
   padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 163px;
+  width: 165px;
   color: #2a3563;
   font-weight: bold;
 }

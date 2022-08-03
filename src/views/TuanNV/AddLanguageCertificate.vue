@@ -91,7 +91,13 @@ export default {
       // console.log(this.userId);
       if (this.$refs.form.validate()) {
         // console.log(this.certificateName, this.languageName, this.grade, this.userId);
-        LanguageCertificateService.addLanguageCertificate({certificate_name: this.certificateName, name: this.languageName,  mark: this.grade, userId: this.userId });
+        LanguageCertificateService.addLanguageCertificate(
+          {
+            certificate_name: this.certificateName, 
+            name: this.languageName,  
+            mark: this.grade, 
+            userId: this.userId 
+          });
         window.location = "/language";
         alert("Thêm thành công");
       }

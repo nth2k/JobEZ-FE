@@ -2,15 +2,15 @@ import axios from "axios";
 
 const Base_URL = "http://localhost:8081";
 
-class WorkExpService{
-    getWorkExps(id){
+class WorkExpService {
+    getWorkExps(id) {
         return axios.get(Base_URL + "/workexp/" + id)
     }
-    deleteWorkExp(id){
+    deleteWorkExp(id) {
         return axios.delete(Base_URL + "/workexp/delete/" + id);
     }
-    addWorkExp(WorkExp, userId){
-        return axios.post(Base_URL + "/workexp/add/" + userId, WorkExp);
+    addWorkExp(WorkExp) {
+        return axios.post(Base_URL + "/workexp/add", WorkExp);
     }
 }
 export default new WorkExpService();

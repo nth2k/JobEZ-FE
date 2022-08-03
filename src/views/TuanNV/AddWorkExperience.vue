@@ -104,7 +104,7 @@ export default {
   },
   data() {
     return {
-      userId: 1,
+      userId: 3,
       position: "",
       positionRules: [
         (v) => !!v || "Position must be required"
@@ -141,7 +141,15 @@ export default {
           this.startDate = [year, month, day].join('-');
           [day, month, year] = this.endDate.split('/');
           this.endDate = [year, month, day].join('-');
-          WorkExperienceService.addWorkExp({ companyName: this.companyName, position: this.position, description: this.description, startDate: this.startDate, endDate: this.endDate }, this.userId)
+          WorkExperienceService.addWorkExp(
+            { 
+              companyName: this.companyName, 
+              position: this.position, 
+              description: this.description, 
+              startDate: this.startDate, 
+              endDate: this.endDate, 
+              userId: this.userId
+            });
           window.location = "/workexp";
           alert('Add successful');
         }
