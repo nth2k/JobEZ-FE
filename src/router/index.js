@@ -10,13 +10,6 @@ import CandidateOnlineCVForm from '@/views/HiepViews/CandidateOnlineCVForm.vue'
 import CVFromPCForm from '@/views/HiepViews/CVFromPCForm.vue'
 import RecruiterOnlineCVForm from '@/views/HiepViews/RecruiterOnlineCVForm.vue'
 import JobDetailsNoLogin from '@/components/ToanComponents/JobDetailsNoLogin.vue'
-import AddLanguageCertificate from '@/views/TuanNV/AddLanguageCertificate.vue'
-import EditLanguageCertificate from '@/views/TuanNV/EditLanguageCertificate.vue'
-import ViewLanguageCertificate from '@/views/TuanNV/ViewLanguageCertificate.vue'
-import SavedJob from '@/views/TuanNV/SavedJob.vue'
-import AppliedJob from '@/views/TuanNV/AppliedJob.vue'
-import ViewWorkExperience from '@/views/TuanNV/ViewWorkExperience.vue'
-import AddWorkExperience from '@/views/TuanNV/AddWorkExperience.vue'
 import SearchJob from '@/views/HiepViews/SearchJob.vue'
 import SearchCandidate from '@/views/HiepViews/SearchCandidate.vue'
 
@@ -72,34 +65,6 @@ export const routes = [
         path: '/job-detail/:id',
         name: 'JobDetailsNoLogin',
         component: JobDetailsNoLogin
-    },{
-        path: '/addLanguage',
-        name: 'AddLanguageCertificate',
-        component: AddLanguageCertificate
-    },{
-        path: '/editLanguage/:id',
-        name: 'EditLanguageCertificate',
-        component: EditLanguageCertificate
-    },{
-        path: '/language',
-        name: 'ViewLanguageCertificate',
-        component: ViewLanguageCertificate
-    },{
-        path: '/savedjobs',
-        name: 'SavedJob',
-        component: SavedJob
-    },{
-        path: '/appliedjob',
-        name: 'AppliedJob',
-        component: AppliedJob
-    },{
-        path: '/workexp',
-        name: 'ViewWorkExperience',
-        component: ViewWorkExperience
-    },{
-        path: '/addworkexp',
-        name: 'AddWorkExperience',
-        component: AddWorkExperience
     },
     {
         path: '/searchJob/:searchText',
@@ -111,6 +76,11 @@ export const routes = [
         name: 'SearchCandidate',
         component: SearchCandidate
     }
+    // {
+    //     path: '/profileCandidate',
+    //     name: 'ProfileCandidate',
+    //     component: ProfileCandidate
+    // }
 ]
 
 const router = new VueRouter({
