@@ -172,7 +172,7 @@ a {
   border-bottom: 1px solid gray;
 }
 .leftHoso {
-  /* border-right: 1px solid gray; */
+  border-right: 1px solid gray;
 }
 .items {
   margin: 10px 20px;
