@@ -115,7 +115,7 @@ export default {
     return {
       isClicked: false,
       searchText: this.$route.params.searchText,
-      pageOffset: 1,
+      pageOffset: 0,
       listSearchJob: [],
       totalPage: 0,
       selectedPage: 1,
