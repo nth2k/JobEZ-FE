@@ -50,8 +50,8 @@
           <ul class="row list-group">
             <li
               class="col-12 border-bottom list-group-item"
-              v-for="(notify,index) in notifies"
-              :key="index"
+              v-for="notify in notifies"
+              :key="notify.company_name"
             >
               <div class="row notify-item">
                 <div class="col-3">
