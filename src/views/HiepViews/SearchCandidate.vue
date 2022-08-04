@@ -3,13 +3,15 @@
     <HeaderComponent />
     <div class="search-container">
       <div class="search-form">
-        <form action="" method="post">
-          <input type="text" placeholder="Nhập công việc, vị trí" />
-          <select name="province" id="">
-            <option value="">---Chọn tỉnh thành---</option>
-          </select>
-          <button type="submit">Tìm kiếm</button>
-        </form>
+        <input
+          type="text"
+          v-model="searchText"
+          placeholder="Nhập công việc, vị trí"
+        />
+        <select name="province" id="">
+          <option value="">---Chọn tỉnh thành---</option>
+        </select>
+        <button @click="submit">Tìm kiếm</button>
       </div>
       <div class="text-center mt-5 mb-5">
         <span style="color: white">Cần thêm nhiều tùy chọn tìm kiếm? </span>
@@ -23,75 +25,54 @@
         </h5>
         <hr />
         <div class="candidate-detail">
-          <div class="candidate row p-3 m-3">
+          <div
+            v-for="(candidate, index) in listSearchCandidate"
+            :key="index"
+            class="candidate row p-3 m-3"
+          >
             <div class="logo">
               <img
                 style="width: 170px; height: 120px"
-                src="https://tuyendung.fpt.com.vn/public/img/logo-ft.png"
+                :src="candidate.images"
                 alt=""
               />
             </div>
             <div class="pl-4">
-              <span style="color: #4c5bd4; font-weight: bold"
-                >NHÂN VIÊN PHA CHẾ MỸ PHẨM</span
+              <span style="color: #4c5bd4; font-weight: bold">{{
+                candidate.name
+              }}</span
               ><br />
-              <span style="color: #f2994a">TRẦN THỊ XUÂN ÁNH</span><br />
-              <b-icon icon="pin-map" aria-hidden="true"></b-icon>
-              <span> Toàn quốc</span><br />
-              <b-icon icon="briefcase" aria-hidden="true"></b-icon
-              ><span> Hạn nộp: 21/01/2022</span>
-              <b-icon
-                class="ml-5"
-                icon="layout-text-window"
-                aria-hidden="true"
-              ></b-icon
-              ><span> 6 phút trước</span>
-              <b-icon class="ml-5" icon="chat-dots" aria-hidden="true"></b-icon
-              ><span> Chat</span>
-            </div>
-          </div>
-          <div class="candidate row p-3 m-3">
-            <div class="logo">
-              <img
-                style="width: 170px; height: 120px"
-                src="https://tuyendung.fpt.com.vn/public/img/logo-ft.png"
-                alt=""
-              />
-            </div>
-            <div class="pl-4">
-              <span style="color: #4c5bd4; font-weight: bold"
-                >NHÂN VIÊN PHA CHẾ MỸ PHẨM</span
+              <span style="color: #f2994a"
+                >Học tại: {{ candidate.university }}</span
               ><br />
-              <span style="color: #f2994a">TRẦN THỊ XUÂN ÁNH</span><br />
-              <b-icon icon="pin-map" aria-hidden="true"></b-icon>
-              <span> Toàn quốc</span><br />
-              <b-icon icon="briefcase" aria-hidden="true"></b-icon
-              ><span> Hạn nộp: 21/01/2022</span>
-              <b-icon
-                class="ml-5"
-                icon="layout-text-window"
-                aria-hidden="true"
-              ></b-icon
-              ><span> 6 phút trước</span>
-              <b-icon class="ml-5" icon="chat-dots" aria-hidden="true"></b-icon
-              ><span> Chat</span>
+              <span>Học lực: {{ candidate.rating }}</span>
+              <br />
+              <span>Giớitính: {{ candidate.gender }}</span
+              ><br />
+              <span>Mong muốn nghề nghiệp: {{ candidate.careerGoals }}</span
+              ><br />
             </div>
           </div>
         </div>
 
         <div class="page">
           <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
+            <li @click="paging(0)" class="page-item">
+              <a class="page-link" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
               </a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li
+              v-for="i in totalPage"
+              :key="i"
+              class="page-item"
+              @click="paging(i)"
+            >
+              <a class="page-link"> {{ i }}</a>
+            </li>
             <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
+              <a class="page-link" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
               </a>
@@ -100,7 +81,7 @@
         </div>
       </div>
       <div class="chat-candidate w-25 mt-5 p-3">
-        <h5 class="text-center" style="color: #4c5bd4">CHAT VỚI ỨNG VIÊN</h5>
+        <h5 class="text-center" style="color: #4c5bd4">ỨNG VIÊN TIỀM NĂNG</h5>
         <hr />
         <div class="chat-info row">
           <div class="logo">
@@ -129,13 +110,14 @@
             <span>Nhân viên pha chế mỹ phẩm</span>
           </div>
         </div>
-        <hr />       
+        <hr />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import SearchCandidateService from "@/services/SearchCandidateService.js";
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
 export default {
   name: "SearchCandidate",
@@ -143,7 +125,39 @@ export default {
     HeaderComponent,
   },
   data() {
-    return {};
+    return {
+      searchText: "",
+      pageOffset: 0,
+      listSearchCandidate: [],
+      totalPage: 0,
+      selectedPage: 1,
+    };
+  },
+  methods: {
+    submit() {
+      SearchCandidateService.getCandidateByTextField(
+        this.searchText,
+        this.pageOffset
+      ).then((rs) => {
+        this.listSearchCandidate = rs.data.content;
+        if (rs.data.total % 4 == 0) {
+          this.totalPage = rs.data.total % 4;
+        } else if (rs.data.total % 4 != 0) {
+          this.totalPage = (rs.data.total % 4) + 1;
+        } else if (rs.data.total / 4 < 1) {
+          this.totalPage = 1;
+        }
+        console.log(rs);
+      });
+    },
+    paging(selectedPage) {
+      SearchCandidateService.getCandidateByTextField(
+        this.searchText,
+        selectedPage
+      ).then((rs) => {
+        this.listSearchCandidate = rs.data.content;
+      });
+    },
   },
 };
 </script>

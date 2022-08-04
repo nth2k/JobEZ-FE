@@ -83,41 +83,11 @@ export const routes = [
     name: "JobCategory",
     component: JobCategory,
   },
-  // {
-  //   path: "/addLanguage",
-  //   name: "AddLanguageCertificate",
-  //   component: AddLanguageCertificate,
-  // },
-  // {
-  //   path: "/editLanguage/:id",
-  //   name: "EditLanguageCertificate",
-  //   component: EditLanguageCertificate,
-  // },
-  // {
-  //   path: "/language",
-  //   name: "ViewLanguageCertificate",
-  //   component: ViewLanguageCertificate,
-  // },
-  // {
-  //   path: "/savedjobs",
-  //   name: "SavedJob",
-  //   component: SavedJob,
-  // },
-  // {
-  //   path: "/appliedjob",
-  //   name: "AppliedJob",
-  //   component: AppliedJob,
-  // },
-  // {
-  //   path: "/workexp",
-  //   name: "ViewWorkExperience",
-  //   component: ViewWorkExperience,
-  // },
-  // {
-  //   path: "/addworkexp",
-  //   name: "AddWorkExperience",
-  //   component: AddWorkExperience,
-  // },
+  {
+    path: "/addLanguage",
+    name: "AddLanguageCertificate",
+    component: () => import("@/views/TuanNV/AddLanguageCertificate.vue"),
+  },
   {
     path: "/searchJob/:searchText",
     name: "SearchJob",
@@ -127,6 +97,36 @@ export const routes = [
     path: "/searchCandidate",
     name: "SearchCandidate",
     component: SearchCandidate,
+  },
+  {
+    path: "/editLanguage/:id",
+    name: "EditLanguageCertificate",
+    component: () => import("@/views/TuanNV/EditLanguageCertificate.vue"),
+  },
+  {
+    path: "/language",
+    name: "ViewLanguageCertificate",
+    component: () => import("@/views/TuanNV/ViewLanguageCertificate.vue"),
+  },
+  {
+    path: "/savedjobs",
+    name: "SavedJob",
+    component: () => import("@/views/TuanNV/SavedJob.vue"),
+  },
+  {
+    path: "/appliedjob",
+    name: "AppliedJob",
+    component: () => import("@/views/TuanNV/AppliedJob.vue"),
+  },
+  {
+    path: "/workexp",
+    name: "ViewWorkExperience",
+    component: () => import("@/views/TuanNV/ViewWorkExperience.vue"),
+  },
+  {
+    path: "/addworkexp",
+    name: "AddWorkExperience",
+    component: () => import("@/views/TuanNV/AddWorkExperience.vue"),
   },
 ];
 
