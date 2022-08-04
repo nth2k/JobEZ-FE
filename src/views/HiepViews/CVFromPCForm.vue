@@ -148,7 +148,6 @@ export default {
           experience: this.selectedExperience,
         })
           .then(() => {
-            console.log(this.selectedRating);
             this.$store.dispatch("setSnackbar", {
               text: "Đăng kí ứng viên bước 2 thành công",
             });

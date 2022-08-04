@@ -9,10 +9,7 @@
           <div class="col-3 left-form">
             <span>Logo công ty <span style="color: red">*</span></span
             ><br />
-            <v-file-input
-              v-model="file"
-              label="Logo công ty"
-            ></v-file-input
+            <v-file-input v-model="file" label="Logo công ty"></v-file-input
             ><br />
             <span>Số điện thoại <span style="color: red">*</span></span
             ><br />
@@ -92,7 +89,7 @@
 
 <script>
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
-import RecruiterRegisterService from "@/services/RecruiterRegisterService.js"
+import RecruiterRegisterService from "@/services/RecruiterRegisterService.js";
 export default {
   name: "RecruiterOnlineCVForm",
   components: {
@@ -133,26 +130,14 @@ export default {
         formData.append("phone", this.phone);
         formData.append("address", this.address);
         formData.append("description", this.description);
-
-        // axios.post("/api/uploadFile", formData).then(
-        //   function (result) {
-        //     console.log(result);
-        //   },
-        //   function (error) {
-        //     console.log(error);
-        //   }
-        // );
-        console.log(formData);
-
-        // this.$router.push("/recruiterLogin");
       }
     },
   },
-  created(){
+  created() {
     RecruiterRegisterService.getProvince().then((rs) => {
-      this.province = rs.data.map(result => result.name);
-    })
-  }
+      this.province = rs.data.map((result) => result.name);
+    });
+  },
 };
 </script>
 

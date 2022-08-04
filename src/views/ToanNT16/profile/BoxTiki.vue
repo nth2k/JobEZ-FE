@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div v-if="isGetAPI" class="container-fluid">
     <div class="container pt-4">
       <div class="box_titi">
         <div class="container_timviec">
@@ -9,82 +9,83 @@
                 <img
                   class="lazyloaded img-fluid"
                   src="https://timviec365.vn/pictures/2021/05/15/avatar211635.jpg"
-                  data-src="https://timviec365.vn/pictures/2021/05/15/avatar211635.jpg"
-                  alt="CÔNG TY CỔ PHẦN DỊCH VỤ VÀ THƯƠNG MẠI NEW WORD"
+                  :data-src="getJob.companyName"
+                  :alt="getJob.companyName"
                 />
               </div>
-              <a
-                rel="nofollow"
+              <router-link
                 class="ct_com text-white text-center p-2"
-                href="/congg-ty-co-phan-dich-vu-va-thuong-mai-new-word-co211635"
-                >Chi tiết công ty</a
+                tag="a"
+                :to="{
+                  name: 'RecruiterProfile',
+                  params: { recruiterId: getJob.companyId },
+                }"
+                >Chi tiết công ty</router-link
               >
             </div>
             <div class="right_tit col-7 pl-4">
               <h1 class="font-weight-bold">
-                [TUYỂN GẤP] Nhân viên kinh doanh (Fitness)
+                {{ formatTitle }}
               </h1>
-              <a
+
+              <router-link
                 class="na_cty text-dark mb-2"
-                href="/congg-ty-co-phan-dich-vu-va-thuong-mai-new-word-co211635"
-                title="CÔNG TY CỔ PHẦN DỊCH VỤ VÀ THƯƠNG MẠI NEW WORD"
-                ><i class="bi bi-house-heart-fill"></i>CÔNG TY CỔ PHẦN DỊCH VỤ
-                VÀ THƯƠNG MẠI NEW WORD</a
+                tag="a"
+                :to="{
+                  name: 'RecruiterProfile',
+                  params: { recruiterId: getJob.companyId },
+                }"
+                >{{ getJob.companyName }}</router-link
               >
+
               <p class="mt-1 mb-1">
-                Lượt xem: 17011 |
+                Lượt xem: {{ getJob.view }}. |
                 <span class="date_update"
-                  >Ngày cập nhật: 14/05/2022<span>(4 ngày trước)</span>
+                  >Ngày cập nhật: {{ currentDate }}
                 </span>
               </p>
               <p class="dd_tuyen">
                 Tỉnh thành tuyển dụng:
-                <a
+                <router-link
                   class="p-1"
-                  target="blank"
-                  href="/tim-viec-lam-tai-ha-noi.html"
-                  title="Việc làm tại Hà Nội"
-                  >Hà Nội</a
+                  tag="a"
+                  :to="{
+                    name: 'JobCategory',
+                    params: { provinceId: getJob.province[0].id },
+                  }"
+                  >{{ formatProvince }}</router-link
                 >
               </p>
               <p class="dd_tuyen">
                 Quận huyện tuyển dụng:
-                <a
+                <router-link
                   class="p-1"
-                  target="blank"
-                  href="/tag1/viec-lam-tai-quan-bac-tu-liem-ha-noi-213"
-                  title="việc làm Quận Bắc Từ Liêm"
-                  >Quận Bắc Từ Liêm</a
+                  tag="a"
+                  :to="{
+                    name: 'JobCategory',
+                    params: { cityId: getJob.cities[0].id },
+                  }"
+                  >{{ formatCity }}</router-link
                 >
               </p>
               <p class="mb-2">
                 Địa điểm tuyển dụng:
-                <span> Tòa CT2B khu đô thị Cổ Nhuế, Bắc Từ Liêm</span>
+                <span> {{ formatStreet }}</span>
               </p>
               <p></p>
-              <p>Hạn nộp hồ sơ: <span> 30/06/2022 </span></p>
+              <p>
+                Hạn nộp hồ sơ: <span> {{ getJob.deadlineForSubmission }} </span>
+              </p>
             </div>
             <div
-              class="
-                right_tit_2
-                col-3
-                d-flex
-                justify-content-center
-                align-items-center
-                pl-5
-              "
+              class="right_tit_2 col-3 d-flex justify-content-center align-items-center pl-5"
             >
               <div
-                class="
-                  d-flex
-                  flex-column
-                  justify-content-center
-                  align-items-center
-                "
+                class="d-flex flex-column justify-content-center align-items-center"
               >
                 <p class="dd_tuyen">
                   Mức lương:
-                  <span style="color: #ff4d43">Trên 30 triệu</span>
+                  <span style="color: #ff4d43">{{ getJob.salary }}</span>
                 </p>
                 <div>
                   <p
@@ -108,19 +109,29 @@
 
 <script>
 import { mapGetters } from "vuex";
+import moment from "moment";
+import JobDetailService from "@/services/JobDetailService";
 export default {
   name: "BoxTiki",
   data() {
     return {
-      job: this.getJob,
+      currentDate: moment().format("DD/MM/YYYY"),
     };
   },
-  created() {
-    this.job = this.getJob;
-  },
-  methods: {},
   computed: {
-    ...mapGetters(["getJob"]),
+    ...mapGetters(["getJob", "isGetAPI"]),
+    formatTitle: function () {
+      return JobDetailService.titleCase(this.getJob.jobName);
+    },
+    formatProvince: function () {
+      return JobDetailService.formatProvince(this.getJob.province);
+    },
+    formatCity: function () {
+      return JobDetailService.formatCity(this.getJob.cities);
+    },
+    formatStreet: function () {
+      return JobDetailService.formatStreet(this.getJob.street);
+    },
   },
 };
 </script>

@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import JobDescription from "../../../components/views/candidate_views/job_details/JobDescription.vue";
-import RelatedJob from "../../../components/views/candidate_views/job_details/RelatedJob.vue";
+import JobDescription from "@/components/views/candidate_views/job_details/JobDescription.vue";
+import RelatedJob from "@/components/views/candidate_views/job_details/RelatedJob.vue";
 
 export default {
   name: "JobContainer",

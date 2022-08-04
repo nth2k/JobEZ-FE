@@ -355,7 +355,6 @@ export default {
       await LandingPageService.getHomePage().then((res) => {
         this.attractiveJob = res.data.attractiveJob.slice(1, 10);
         this.urgentRecruitment = res.data.urgentRecruitment.slice(11, 21);
-        console.log(res.data);
       });
     },
   },

@@ -1,17 +1,16 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import jobDetailStore from "./modules/JobDetailStore";
+import JobCategoryStore from "./modules/JobCategoryStore";
+import RecruiterProfileStore from "./modules/RecruiterProfileStore";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  // state() {
-  //   return {
-  //     count: 1000,
-  //     transaction: null,
-  //     todos: [{ id: 1, text: '...', done: true },
-  //     { id: 2, text: '...', done: false }]
-  //   }
-  // },
+  modules: {
+    jobDetailStore,
+    JobCategoryStore,
+    RecruiterProfileStore,
+  },
   state: {
     snackbars: [],
   },

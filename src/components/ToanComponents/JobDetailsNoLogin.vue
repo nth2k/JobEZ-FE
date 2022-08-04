@@ -15,20 +15,21 @@ import CandidateNavigator from "@/views/ToanNT16/profile/CandidateNavigator.vue"
 import BoxTiki from "@/views/ToanNT16/profile/BoxTiki.vue";
 import JobContainer from "@/views/ToanNT16/profile/JobContainer.vue";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   name: "JobDetailsNoLogin",
-  setup() {},
-  data() {
-    return { id: null };
+  methods: {
+    ...mapActions(["getJobById"]),
+  },
+  computed: {
+    ...mapGetters(["getJob"]),
+    ...mapState(["job"]),
   },
   async created() {
-    this.id = this.$route.params.id;
-    await this.$store.dispatch("getJobById", this.id);
-  },
-  methods: {
-    ...mapActions(["getJobById", "setJobId"]),
+    const postingId = this.$route.params.id;
+    const userId = 1;
+    await this.getJobById({ userId, postingId });
   },
   components: {
     HeaderLogin,
@@ -36,9 +37,6 @@ export default {
     CandidateNavigator,
     BoxTiki,
     JobContainer,
-  },
-  computed: {
-    ...mapGetters(["getJob"]),
   },
 };
 </script>
