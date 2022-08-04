@@ -79,13 +79,7 @@
           </div>
           <div class="col-3"></div>
           <div class="file-cv">
-            <input ref="fileInput" style="display: none" type="file" @change="onFileSelected" />
-            <button class="btn btn-light mx-auto" @click.prevent="$refs.fileInput.click()">
-              Chọn file
-            </button>
-            <button class="btn btn-light ml-4 mx-auto" @click.prevent="onUpload">
-              Tải file lên
-            </button>
+            <v-file-input v-model="image" label="CV ứng viên"></v-file-input>
           </div>
           <span class="mt-5 mb-5 w-100 text-center"
             >Bằng việc nhấn nút đăng ký, bạn đã đồng ý thỏa thuận sử dụng của
@@ -125,19 +119,29 @@ export default {
       experienceRules: [(v) => !!v || "experience is required"],
 
       selectedRating: "",
-      selectdFile: null,
+      image: null,
+      base64: null,
     };
   },
+  watch: {
+    image: function (newVal) {
+      if (newVal) {
+        this.createBase64Image(newVal);
+      } else {
+        this.base64 = null;
+      }
+    },
+  },
   methods: {
-    onFileSelected(e) {
-      this.selectdFile = e.target.files[0];
-    },
-    onUpload() {
-      const fd = new FormData();
-      fd.append("file", this.selectdFile)
-    },
     save(date) {
       this.$refs.menu.save(date);
+    },
+    createBase64Image: function (FileObject) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.base64 = event.target.result;
+      };
+      reader.readAsDataURL(FileObject);
     },
     submit() {
       if (this.$refs.form.validate()) {
@@ -146,8 +150,10 @@ export default {
           university: this.university,
           rating: this.selectedRating,
           experience: this.selectedExperience,
+          candidateCV: this.base64,
         })
           .then(() => {
+            console.log(this.base64);
             this.$store.dispatch("setSnackbar", {
               text: "Đăng kí ứng viên bước 2 thành công",
             });

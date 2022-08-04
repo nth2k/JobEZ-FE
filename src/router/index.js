@@ -13,6 +13,14 @@ import JobDetailsNoLogin from "@/components/ToanComponents/JobDetailsNoLogin.vue
 import SearchJob from "@/views/HiepViews/SearchJob.vue";
 import RecruiterProfile from "@/components/ToanComponents/RecruiterProfile.vue";
 import JobCategory from "@/components/ToanComponents/JobCategory.vue";
+import AddLanguageCertificate from "@/views/TuanNV/AddLanguageCertificate.vue";
+import EditLanguageCertificate from "@/views/TuanNV/EditLanguageCertificate.vue";
+import ViewLanguageCertificate from "@/views/TuanNV/ViewLanguageCertificate.vue";
+import SavedJob from "@/views/TuanNV/SavedJob.vue";
+import AppliedJob from "@/views/TuanNV/AppliedJob.vue";
+import ViewWorkExperience from "@/views/TuanNV/ViewWorkExperience.vue";
+import AddWorkExperience from "@/views/TuanNV/AddWorkExperience.vue";
+import SearchCandidate from "@/views/HiepViews/SearchCandidate.vue";
 
 Vue.use(VueRouter);
 
@@ -81,6 +89,51 @@ export const routes = [
     path: "/job-category/:name",
     name: "JobCategory",
     component: JobCategory,
+  },
+  {
+    path: "/addLanguage",
+    name: "AddLanguageCertificate",
+    component: AddLanguageCertificate,
+  },
+  {
+    path: "/editLanguage/:id",
+    name: "EditLanguageCertificate",
+    component: EditLanguageCertificate,
+  },
+  {
+    path: "/language",
+    name: "ViewLanguageCertificate",
+    component: ViewLanguageCertificate,
+  },
+  {
+    path: "/savedjobs",
+    name: "SavedJob",
+    component: SavedJob,
+  },
+  {
+    path: "/appliedjob",
+    name: "AppliedJob",
+    component: AppliedJob,
+  },
+  {
+    path: "/workexp",
+    name: "ViewWorkExperience",
+    component: ViewWorkExperience,
+  },
+  {
+    path: "/addworkexp",
+    name: "AddWorkExperience",
+    component: AddWorkExperience,
+  },
+  {
+    path: "/searchJob/:searchText",
+    name: "SearchJob",
+    component: SearchJob,
+  },
+  {
+    path: "/searchCandidate",
+    name: "SearchCandidate",
+    component: SearchCandidate,
   },
 ];
 

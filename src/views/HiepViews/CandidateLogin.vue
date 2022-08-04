@@ -56,6 +56,9 @@
 <script>
 import ChooseCandidate from "@/components/HiepComponents/ChooseCandidate.vue";
 import TopHeaderComponent from "@/components/HiepComponents/TopHeaderComponent.vue";
+import LoginService from "@/services/LoginService.js";
+import axios from "axios";
+
 export default {
   name: "CandidateLogin",
   components: {
@@ -67,7 +70,10 @@ export default {
     email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
-      (v) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || "E-mail must be valid",
+      (v) =>
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "E-mail must be valid",
     ],
     password: "",
     passwordRules: [
@@ -79,7 +85,33 @@ export default {
 
   methods: {
     submit() {
-      this.validate();
+      if (this.$refs.form.validate()) {
+        LoginService.getUser({
+          email: this.email,
+          password: this.password,
+        })
+          .then((rs) => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Đăng nhập thành công",
+            });
+            console.log(rs);
+            axios.defaults.headers.common[
+              "Authorization"
+            ] = `Bearer ${rs.data.refreshToken.token}`;
+
+            if (rs.data.accessToken) {
+              localStorage.setItem("user", JSON.stringify(rs.data));
+            }
+
+            this.$router.push("/");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
+      }
     },
     validate() {
       this.$refs.form.validate();

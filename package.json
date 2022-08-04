@@ -9,7 +9,11 @@
   },
   "dependencies": {
     "@babel/preset-env": "^7.18.2",
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
     "@mdi/font": "^6.7.96",
+    "@vue/composition-api": "^1.7.0",
+    "@vuelidate/core": "^2.0.0-alpha.42",
+    "@vuelidate/validators": "^2.0.0-alpha.30",
     "axios": "^0.27.2",
     "bootstrap-icons": "^1.8.2",
     "bootstrap-vue": "^2.22.0",
@@ -17,12 +21,13 @@
     "moment": "^2.29.4",
     "vue": "^2.6.14",
     "vue-router": "^3.5.4",
-    "vuetify": "^2.6.0",
+    "vuetify": "^2.6.7",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/eslint-parser": "^7.12.16",
+    "@nuxtjs/vuetify": "^1.12.3",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",

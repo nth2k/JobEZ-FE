@@ -76,20 +76,42 @@
               <h5>Tỉnh/Thành phố<span style="color: red">*</span></h5>
               <v-row>
                 <v-col cols="6" sm="6">
-                  <v-select
+                  <!-- <v-select
                     :items="city"
                     label="Chọn tỉnh/Thành phố"
                     :rules="cityRules"
                     required
-                  ></v-select>
+                  ></v-select> -->
+                  <select
+                    class="w-100 h-75"
+                    @change="onProvinceSelect"
+                    v-model="selectedProvince"
+                  >
+                    <option value="" disabled hidden>Chọn tỉnh thành</option>
+                    <option
+                      v-for="(item, index) in province"
+                      :key="index"
+                      :value="item.province_id"
+                    >
+                      {{ item.province_name }}
+                    </option>
+                  </select>
                 </v-col>
                 <v-col cols="6" sm="6">
-                  <v-select
-                    :items="province"
-                    label="Chọn quận huyện"
-                    :rules="provinceRules"
-                    required
-                  ></v-select>
+                  <select
+                    class="w-100 h-75"
+                    @change="onDistrictSelect"
+                    v-model="selectedDistrict"
+                  >
+                    <option value="" disabled hidden>Chọn quận huyện</option>
+                    <option
+                      v-for="(item, index) in district"
+                      :key="index"
+                      :value="item.district_id"
+                    >
+                      {{ item.district_name }}
+                    </option>
+                  </select>
                 </v-col>
               </v-row>
             </v-form>
@@ -105,6 +127,7 @@
 import ChooseCandidate from "@/components/HiepComponents/ChooseCandidate.vue";
 import TopHeaderComponent from "@/components/HiepComponents/TopHeaderComponent.vue";
 import CandidateRegisterService from "@/services/CandidateRegisterService.js";
+import AddressService from "@/services/AddressService.js";
 
 export default {
   name: "CandidateRegister",
@@ -121,14 +144,16 @@ export default {
     async submit() {
       if (this.$refs.form.validate()) {
         await CandidateRegisterService.addCandidate({
-          name: this.fullName,
+          full_name: this.fullName,
           email: this.email,
           password: this.password,
-          phone: this.phone,
-          role: {
-            id: 1,
-            rollName: "Candidate",
-          },
+          province_id: 1,
+          city_id: 1,
+          phone_number: this.phone,
+          // role: {
+          //   id: 1,
+          //   rollName: "Candidate",
+          // },
         })
           .then((rs) => {
             this.$store.dispatch("setSnackbar", {
@@ -147,6 +172,23 @@ export default {
           });
       }
     },
+    getProvince() {
+      AddressService.getProvince().then((rs) => {
+        this.province = rs.data.results;
+      });
+    },
+    onProvinceSelect(event) {
+      AddressService.getDistrict(event.target.value).then((rs) => {
+        this.district = rs.data.results;
+        console.log(event.target.value);
+      });
+    },
+    onDistrictSelect(event) {
+      console.log(event.target.value);
+    },
+  },
+  created() {
+    this.getProvince();
   },
   data: () => ({
     show3: false,
@@ -176,17 +218,13 @@ export default {
       (v) => !!v || "Phone is required",
       (v) => /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
     ],
-    city: ["1"],
-    cityRules: [(v) => !!v || "city is required"],
-    province: ["1"],
+    listProvince: [],
+    province: [],
     provinceRules: [(v) => !!v || "province is required"],
-    desiredPosition: "",
-    desiredPositionRules: [
-      (v) => !!v || "Phone is required",
-      (v) =>
-        (v && v.length > 5) ||
-        "Desired Position must be more than 5 characters",
-    ],
+    district: [],
+    districtRules: [(v) => !!v || "district is required"],
+    selectedProvince: "",
+    selectedDistrict: "",
   }),
 };
 </script>
