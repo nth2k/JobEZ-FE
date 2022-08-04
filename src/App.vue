@@ -31,7 +31,6 @@ import { mapState } from "vuex";
 
 export default {
   name: "App",
-  components: {},
   computed: {
     ...mapState(["snackbars"]),
   },
