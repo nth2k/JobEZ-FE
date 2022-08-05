@@ -27,7 +27,7 @@ export default {
     ...mapState(["job"]),
   },
   async created() {
-    const postingId = this.$route.params.id;
+    const postingId = this.$route.params.postingId;
     const userId = 1;
     await this.getJobById({ userId, postingId });
   },

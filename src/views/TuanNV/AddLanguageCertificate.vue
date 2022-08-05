@@ -16,33 +16,68 @@
               <div class="row">
                 <div class="col-12">
                   <div class="title">
-                    <span class="label">Ngoại ngữ <span class="star">*</span></span>
+                    <span class="label"
+                      >Ngoại ngữ <span class="star">*</span></span
+                    >
                     <div class="titleright">
-                      <span>(</span><span class="star">*</span><span>)Thông tin bắt buộc</span>
+                      <span>(</span><span class="star">*</span
+                      ><span>)Thông tin bắt buộc</span>
                     </div>
                   </div>
                   <div>
-                    <v-select :items="language" label="Chọn ngôn ngữ" outlined :rules="languageNameRules" v-model="languageName" required></v-select>
+                    <v-select
+                      :items="language"
+                      label="Chọn ngôn ngữ"
+                      outlined
+                      :rules="languageNameRules"
+                      v-model="languageName"
+                      required
+                    ></v-select>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span class="label">Chứng chỉ <span class="star">*</span></span>
+                    <span class="label"
+                      >Chứng chỉ <span class="star">*</span></span
+                    >
                   </div>
                   <div>
-                    <v-textarea label="Chứng chỉ" v-model="certificateName" outlined filled no-resize rows="1"
-                      :rules="certificateNameRules" required background-color="white"></v-textarea>
+                    <v-textarea
+                      label="Chứng chỉ"
+                      v-model="certificateName"
+                      outlined
+                      filled
+                      no-resize
+                      rows="1"
+                      :rules="certificateNameRules"
+                      required
+                      background-color="white"
+                    ></v-textarea>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span class="label">Số điểm <span class="star">*</span></span>
+                    <span class="label"
+                      >Số điểm <span class="star">*</span></span
+                    >
                   </div>
-                  <v-textarea label="Số điểm" v-model.number="grade" outlined filled no-resize rows="1"
-                    :rules="inputGradeRules" required background-color="white"></v-textarea>
+                  <v-textarea
+                    label="Số điểm"
+                    v-model.number="grade"
+                    outlined
+                    filled
+                    no-resize
+                    rows="1"
+                    :rules="inputGradeRules"
+                    required
+                    background-color="white"
+                  ></v-textarea>
                 </div>
                 <div class="text-center container">
-                  <button class="btn btn-primary btnSave px-5 mt-5" @click.prevent="addLanguageCertificate">
+                  <button
+                    class="btn btn-primary btnSave px-5 mt-5"
+                    @click.prevent="addLanguageCertificate"
+                  >
                     Lưu
                   </button>
                 </div>
@@ -73,36 +108,36 @@ export default {
       grade: "",
       inputGradeRules: [
         (v) => !!v || "Số điểm không được để trống",
-        (v) => v > 0 || 'Số điểm phải lớn hơn 0'
+        (v) => v > 0 || "Số điểm phải lớn hơn 0",
       ],
       certificateName: "",
-      certificateNameRules: [
-        (v) => !!v || "Tên chứng chỉ không được để trống"
-      ],
+      certificateNameRules: [(v) => !!v || "Tên chứng chỉ không được để trống"],
       languageName: "",
-      language: ["Tiếng Anh", "Tiếng Nhật", "Tiếng Hàn", "Tiếng Nga", "Tiếng Trung", "Tiếng Pháp"],
-      languageNameRules: [
-        (v) => !!v || "Vui lòng chọn ngôn ngữ"
-      ]
-    }
+      language: [
+        "Tiếng Anh",
+        "Tiếng Nhật",
+        "Tiếng Hàn",
+        "Tiếng Nga",
+        "Tiếng Trung",
+        "Tiếng Pháp",
+      ],
+      languageNameRules: [(v) => !!v || "Vui lòng chọn ngôn ngữ"],
+    };
   },
   methods: {
     addLanguageCertificate() {
-      // console.log(this.userId);
       if (this.$refs.form.validate()) {
-        // console.log(this.certificateName, this.languageName, this.grade, this.userId);
-        LanguageCertificateService.addLanguageCertificate(
-          {
-            certificate_name: this.certificateName, 
-            name: this.languageName,  
-            mark: this.grade, 
-            userId: this.userId 
-          });
+        LanguageCertificateService.addLanguageCertificate({
+          certificate_name: this.certificateName,
+          name: this.languageName,
+          mark: this.grade,
+          userId: this.userId,
+        });
         window.location = "/language";
         alert("Thêm thành công");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -133,12 +168,12 @@ export default {
   font-size: 12px;
   font-style: italic;
 }
-.titleheader{
+.titleheader {
   margin-left: 0.5rem;
   margin-bottom: 20px;
   border-bottom: 1px solid gray;
   width: 183px;
-  color: #2A3563;
+  color: #2a3563;
   font-size: 20px;
   font-weight: bold;
 }

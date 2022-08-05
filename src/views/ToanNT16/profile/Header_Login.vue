@@ -1,7 +1,9 @@
 <template>
   <div class="d-flex flex-row banner">
     <div class="mr-auto p-2">
-      <a href="#"><img src="@/assets/logo_w.png" alt="" /></a>
+      <router-link tag="a" :to="'/'">
+        <img src="@/assets/logo_w.png" alt="" />
+      </router-link>
     </div>
     <div class="menu_item p-2">
       <div class="dropdown">

@@ -3,6 +3,9 @@ import Vuex from "vuex";
 import jobDetailStore from "./modules/JobDetailStore";
 import JobCategoryStore from "./modules/JobCategoryStore";
 import RecruiterProfileStore from "./modules/RecruiterProfileStore";
+import RecruiterListStore from "@/store/modules/RecruiterListStore";
+import CandidateProfileService from "@/store/modules/CandidateProfileStore";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -10,6 +13,8 @@ export default new Vuex.Store({
     jobDetailStore,
     JobCategoryStore,
     RecruiterProfileStore,
+    RecruiterListStore,
+    CandidateProfileService,
   },
   state: {
     snackbars: [],

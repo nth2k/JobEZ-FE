@@ -21,7 +21,7 @@
         itemscope=""
         itemtype="http://schema.org/ListItem"
       >
-        <router-link to="/">Công ty tuyển dụng</router-link>
+        <router-link to="/recruiter-list">Công ty tuyển dụng</router-link>
         <meta itemprop="position" content="2" />
       </li>
       <li

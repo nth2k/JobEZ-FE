@@ -14,6 +14,9 @@ import SearchJob from "@/views/HiepViews/SearchJob.vue";
 import RecruiterProfile from "@/components/ToanComponents/RecruiterProfile.vue";
 import JobCategory from "@/components/ToanComponents/JobCategory.vue";
 import SearchCandidate from "@/views/HiepViews/SearchCandidate.vue";
+import RecruiterList from "@/components/ToanComponents/RecruiterList.vue";
+import GeneralManagement from "@/views/ToanNT16/GeneralManagement.vue";
+import CandidateProfile from "@/components/ToanComponents/CandidateProfile.vue";
 
 Vue.use(VueRouter);
 
@@ -64,7 +67,7 @@ export const routes = [
     component: RecruiterOnlineCVForm,
   },
   {
-    path: "/job-detail/:id",
+    path: "/job-detail/:postingId",
     name: "JobDetailsNoLogin",
     component: JobDetailsNoLogin,
   },
@@ -127,6 +130,21 @@ export const routes = [
     path: "/addworkexp",
     name: "AddWorkExperience",
     component: () => import("@/views/TuanNV/AddWorkExperience.vue"),
+  },
+  {
+    path: "/recruiter-list",
+    name: "RecruiterList",
+    component: RecruiterList,
+  },
+  {
+    path: "/general-management",
+    name: "GeneralManagement",
+    component: GeneralManagement,
+  },
+  {
+    path: "/candidate-profile/:candidateId",
+    name: "CandidateProfile",
+    component: CandidateProfile,
   },
 ];
 

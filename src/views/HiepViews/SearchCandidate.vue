@@ -147,7 +147,6 @@ export default {
         } else if (rs.data.total / 4 < 1) {
           this.totalPage = 1;
         }
-        console.log(rs);
       });
     },
     paging(selectedPage) {
