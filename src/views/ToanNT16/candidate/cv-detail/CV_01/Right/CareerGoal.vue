@@ -73,9 +73,7 @@ export default {
     hidden() {
       this.isHidden = !this.isHidden;
     },
-    check: function () {
-      console.log("isHiddenOptions: " + this.isHiddenOptions);
-    },
+    check: function () {},
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="address-container">
+  <div v-if="isGetRecruiterFunction" class="address-container">
     <div class="address-header">
       <h3 class="address-title">Chi Tiết Nhà Tuyển Dụng</h3>
     </div>
@@ -7,9 +7,11 @@
       <p></p>
       <div class="icon-address">
         <img class="mr-2" src="@/assets/dt_1.png" alt="địa chỉ" /><span
-          ><strong>Địa chỉ:</strong> Lô B31-1, Đường dọc 2, Khu CN Phú An Thạnh,
-          Bến Lức, Long An</span
-        >
+          ><strong
+            >Địa chỉ: {{ getRecruiter.street }}, {{ getRecruiter.province }},
+            {{ getRecruiter.city }}</strong
+          >
+        </span>
       </div>
 
       <p></p>
@@ -36,8 +38,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "RecruiterAddress",
+  computed: {
+    ...mapGetters(["getRecruiter", "isGetRecruiterFunction"]),
+  },
 };
 </script>
 

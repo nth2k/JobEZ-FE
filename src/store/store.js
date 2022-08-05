@@ -1,19 +1,23 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-Vue.use(Vuex)
+import Vue from "vue";
+import Vuex from "vuex";
+import jobDetailStore from "./modules/JobDetailStore";
+import JobCategoryStore from "./modules/JobCategoryStore";
+import RecruiterProfileStore from "./modules/RecruiterProfileStore";
+import RecruiterListStore from "@/store/modules/RecruiterListStore";
+import CandidateProfileService from "@/store/modules/CandidateProfileStore";
 
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  // state() {
-  //   return {
-  //     count: 1000,
-  //     transaction: null,
-  //     todos: [{ id: 1, text: '...', done: true },
-  //     { id: 2, text: '...', done: false }]
-  //   }
-  // },
+  modules: {
+    jobDetailStore,
+    JobCategoryStore,
+    RecruiterProfileStore,
+    RecruiterListStore,
+    CandidateProfileService,
+  },
   state: {
-    snackbars: []
+    snackbars: [],
   },
   mutations: {
     setTransaction(state, transaction) {
@@ -21,7 +25,7 @@ export default new Vuex.Store({
     },
     SET_SNACKBAR(state, snackbar) {
       state.snackbars = state.snackbars.concat(snackbar);
-    }
+    },
   },
   actions: {
     fetchTransaction({ commit }, { id }) {
@@ -31,11 +35,11 @@ export default new Vuex.Store({
       snackbar.showing = true;
       snackbar.color = snackbar.color || "success";
       commit("SET_SNACKBAR", snackbar);
-    }
+    },
   },
   getters: {
     doneTodos: (state) => {
-      return state.todos.filter(todo => todo.done);
-    }
-  }
-})
+      return state.todos.filter((todo) => todo.done);
+    },
+  },
+});

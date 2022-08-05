@@ -107,7 +107,6 @@
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
 import RecruiterRegisterService from "@/services/RecruiterRegisterService.js";
 import AddressService from "@/services/AddressService.js";
-
 export default {
   name: "RecruiterOnlineCVForm",
   components: {
@@ -171,7 +170,6 @@ export default {
     onProvinceSelect(event) {
       AddressService.getDistrict(event.target.value).then((rs) => {
         this.district = rs.data.results;
-        console.log(event.target.value);
       });
     },
     onDistrictSelect(event) {
@@ -216,7 +214,6 @@ export default {
   margin-top: 10px;
   margin-bottom: 20px;
 }
-
 .left-form select {
   width: 80%;
   border-radius: 5px;
@@ -225,7 +222,6 @@ export default {
   margin-top: 10px;
   margin-bottom: 20px;
 }
-
 .right-form input {
   width: 55%;
   border-radius: 5px;
@@ -234,7 +230,6 @@ export default {
   margin-top: 10px;
   margin-bottom: 20px;
 }
-
 .btn-regist {
   display: block;
   margin: 0 auto;
@@ -244,7 +239,6 @@ export default {
   height: 46px;
   border-radius: 25px;
 }
-
 textarea {
   border: 1px solid black;
 }

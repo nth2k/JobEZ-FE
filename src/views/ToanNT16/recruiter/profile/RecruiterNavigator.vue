@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div v-if="isGetRecruiterFunction" class="container">
     <ul
       class="breadcrumb"
       style="margin-top: 0; background-color: #ffff"
@@ -12,9 +12,7 @@
         itemscope=""
         itemtype="http://schema.org/ListItem"
       >
-        <a href="https://timviec365.vn/" target="_blank" itemprop="item">
-          <span itemprop="name">Trang chủ</span>
-        </a>
+        <router-link to="/">Trang Chủ</router-link>
         <meta itemprop="position" content="1" />
       </li>
       <li
@@ -23,13 +21,7 @@
         itemscope=""
         itemtype="http://schema.org/ListItem"
       >
-        <a
-          href="https://timviec365.vn/viec-lam-dich-vu-c21v0"
-          target="_blank"
-          itemprop="item"
-        >
-          <span itemprop="name">Công ty tuyển dụng</span>
-        </a>
+        <router-link to="/recruiter-list">Công ty tuyển dụng</router-link>
         <meta itemprop="position" content="2" />
       </li>
       <li
@@ -39,9 +31,7 @@
         itemtype="http://schema.org/ListItem"
       >
         <a itemprop="item"
-          ><span itemprop="name"
-            >Công ty TNHH Đầu Tư và Phân Phối BĐS Duy Long</span
-          ></a
+          ><span itemprop="name">{{ getRecruiter.recruiterName }}</span></a
         >
         <meta itemprop="position" content="3" />
       </li>
@@ -50,8 +40,15 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "RecruiterNavigator",
+  methods: {
+    ...mapActions(["getRecruiterById"]),
+  },
+  computed: {
+    ...mapGetters(["getRecruiter", "isGetRecruiterFunction"]),
+  },
 };
 </script>
 

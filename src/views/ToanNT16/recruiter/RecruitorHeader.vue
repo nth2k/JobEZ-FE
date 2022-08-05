@@ -1,16 +1,16 @@
 <template>
-  <div class="recruiter-header">
+  <div v-if="isGetRecruiterFunction" class="recruiter-header">
     <div class="container">
       <div class="row pb-4">
         <div class="col-12 col-md-2 header-logo-image">
-          <a href="https://www.google.com/">
-            <img src="@/assets/avatar213631.jpg" alt="Hãng Dược Phẩm Nutramed"
-          /></a>
+          <img src="@/assets/avatar213631.jpg" alt="Hãng Dược Phẩm Nutramed" />
         </div>
         <div class="col-12 col-md-10 container">
           <div class="row">
             <div class="col-12 mb-3">
-              <a href="" class="headers-info-name">Hãng Dược Phẩm Nutramed</a>
+              <div class="headers-info-name" style="color: #4c5bd4">
+                {{ getRecruiter.recruiterName }}
+              </div>
             </div>
             <div class="col-12">
               <button
@@ -29,8 +29,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "RecruitorHeader",
+  computed: {
+    ...mapGetters(["getRecruiter", "isGetRecruiterFunction"]),
+  },
 };
 </script>
 

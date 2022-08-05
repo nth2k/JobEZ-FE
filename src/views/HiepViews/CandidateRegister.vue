@@ -180,7 +180,6 @@ export default {
     onProvinceSelect(event) {
       AddressService.getDistrict(event.target.value).then((rs) => {
         this.district = rs.data.results;
-        console.log(event.target.value);
       });
     },
     onDistrictSelect(event) {

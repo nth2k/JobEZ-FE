@@ -2,14 +2,7 @@
   <div class="d-flex flex-column">
     <!-- P1. Form Search -->
     <div
-      class="
-        box_m_search
-        d-flex
-        flex-column
-        justify-content-center
-        align-items-center
-        search-container
-      "
+      class="box_m_search d-flex flex-column justify-content-center align-items-center search-container"
     >
       <div class="search-area">
         <form class="d-flex flex-row">
@@ -32,12 +25,12 @@
               <option value="0">Chọn tỉnh thành</option>
               <option
                 v-for="province in provinces"
-                :key="province.code"
+                :key="province.province_id"
                 :class="{ 'text-center': isClickProvince }"
-                :value="province.code"
+                :value="province.province_id"
                 @click="isClickProvince = !isClickProvince"
               >
-                {{ province.name }}
+                {{ province.province_name }}
               </option>
             </select>
           </div>
@@ -69,20 +62,26 @@
                     <div class="col-sm">
                       <div class="form-group">
                         <select
+                          @change="changeCityByProvince"
                           class="form-control"
-                          id="exampleFormControlSelect1"
                         >
-                          <option>Chọn tỉnh thành</option>
-                          <option>5</option>
+                          <option value="0">Chọn tỉnh thành</option>
+                          <option
+                            v-for="province in provinces"
+                            :key="province.province_id"
+                            :class="{ 'text-center': isClickProvince }"
+                            :value="province.province_id"
+                            @click="isClickProvince = !isClickProvince"
+                          >
+                            {{ province.province_name }}
+                          </option>
                         </select>
                       </div>
                     </div>
                     <div class="col-sm">
                       <div class="form-group">
-                        <select
-                          class="form-control"
-                          id="exampleFormControlSelect1"
-                        >
+                        <select class="form-control">
+                          <option value="0">Chọn trình độ học vấn</option>
                           <option value="0">Không yêu cầu</option>
                           <option value="7">Đại học trở lên</option>
                           <option value="5">Cao đẳng trở lên</option>
@@ -108,12 +107,17 @@
                     </div>
                     <div class="col-sm">
                       <div class="form-group">
-                        <select
-                          class="form-control"
-                          id="exampleFormControlSelect1"
-                        >
+                        <select class="form-control">
                           <option>Chọn quận huyện</option>
-                          <option>2</option>
+                          <option
+                            v-for="district in districts"
+                            :key="district.district_id"
+                            :class="{ 'text-center': isClickProvince }"
+                            :value="district.district_id"
+                            @click="isClickProvince = !isClickProvince"
+                          >
+                            {{ district.district_name }}
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -121,10 +125,7 @@
                   <div class="row">
                     <div class="col-sm">
                       <div class="form-group">
-                        <select
-                          class="form-control"
-                          id="exampleFormControlSelect1"
-                        >
+                        <select class="form-control">
                           <option value="0">Chọn giới tính</option>
                           <option value="1">Nam</option>
                           <option value="2">Nữ</option>
@@ -133,10 +134,7 @@
                     </div>
                     <div class="col-sm">
                       <div class="form-group">
-                        <select
-                          class="form-control"
-                          id="exampleFormControlSelect1"
-                        >
+                        <select class="form-control">
                           <option value="0">Chọn mức lương</option>
                           <option value="1">Thỏa thuận</option>
                           <option value="2">1 - 3 triệu</option>
@@ -154,10 +152,8 @@
                     </div>
                     <div class="col-sm">
                       <div class="form-group">
-                        <select
-                          class="form-control"
-                          id="exampleFormControlSelect1"
-                        >
+                        <select class="form-control">
+                          <option value="0">Chọn hình thức</option>
                           <option value="1">Toàn thời gian cố định</option>
                           <option value="2">Toàn thời gian tạm thời</option>
                           <option value="3">Bán thời gian</option>
@@ -172,11 +168,8 @@
                   <div class="row">
                     <div class="col-sm">
                       <div class="form-group">
-                        <select
-                          class="form-control"
-                          id="exampleFormControlSelect1"
-                        >
-                          <option value="0">Vui lòng chọn</option>
+                        <select class="form-control">
+                          <option value="0">Chọn cấp bậc</option>
                           <option value="1">Mới tốt nghiệp</option>
                           <option value="6">Thực tập sinh</option>
                           <option value="3">Nhân viên</option>
@@ -196,10 +189,8 @@
                     </div>
                     <div class="col-sm">
                       <div class="form-group">
-                        <select
-                          class="form-control"
-                          id="exampleFormControlSelect1"
-                        >
+                        <select class="form-control">
+                          <option value="0">Chọn kinh nghiệm</option>
                           <option value="0">Chưa có kinh nghiệm</option>
                           <option value="1">0 - 1 năm kinh nghiệm</option>
                           <option value="2">Hơn 1 năm kinh nghiệm</option>
@@ -211,10 +202,7 @@
                     </div>
                     <div class="col-sm">
                       <div class="form-group">
-                        <select
-                          class="form-control"
-                          id="exampleFormControlSelect1"
-                        >
+                        <select class="form-control">
                           <option value="0">Hôm nay</option>
                           <option value="1">1 tuần trở lại</option>
                           <option value="2">1 tháng trở lại</option>
@@ -247,38 +235,45 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
       provinces: [],
+      districts: [],
       isClickProvince: false,
-      provinceId: 0,
     };
   },
   methods: {
     async fetProvinceData() {
-      const res = await fetch("https://provinces.open-api.vn/api/");
+      const res = await fetch("https://vapi.vnappmob.com/api/province");
       const data = await res.json();
-      return data;
-    },
-    async fetchDistrictByProvinceData() {
-      const res = await fetch(
-        `https://vapi.vnappmob.com/api/province/district/${this.provinceId}`
+      data.results.forEach((province) =>
+        this.provinces.push({
+          province_id: province.province_id,
+          province_name: province.province_name,
+        })
       );
-      const data = await res.json();
-      return data;
     },
-    advanceSearch() {
-      console.log("Hello World");
-    },
-    onChangeProvince() {
-      console.log("Hello");
-      // this.provinceId = event.target.value;
+    async changeCityByProvince(e) {
+      const provinceId = e.target.value;
+      const res = await fetch(
+        `https://vapi.vnappmob.com/api/province/district/${provinceId}`
+      ).then((response) => response.json());
+      res.results.forEach((district) =>
+        this.districts.push({
+          district_id: district.district_id,
+          district_name: district.district_name,
+        })
+      );
     },
   },
   async created() {
-    const provinces = await this.fetProvinceData();
-    this.provinces = provinces;
+    await this.fetProvinceData();
+  },
+  computed: {
+    ...mapGetters(["getJob"]),
+    ...mapState(["job"]),
   },
 };
 </script>
