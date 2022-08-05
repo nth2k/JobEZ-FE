@@ -7,11 +7,9 @@ class CandidateProfileService {
     const body = {
       candidate_id: candidateId,
     };
-    axios
-      .post(Base_URL + "/posting/city/" + candidateId, body)
-      .then((response) => {
-        commit("SET_POSTING", response.data);
-      });
+    axios.post(Base_URL + "/id/" + candidateId, body).then((response) => {
+      commit("SET_CANDIDATE_CV", response.data);
+    });
   }
 }
 

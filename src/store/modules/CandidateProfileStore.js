@@ -21,7 +21,12 @@ const actions = {
   },
 };
 
-const mutations = {};
+const mutations = {
+  SET_CANDIDATE_CV: function (state, newCandidate) {
+    state.candidate = newCandidate;
+    state.isGetCandidate = true;
+  },
+};
 
 export default {
   state,
