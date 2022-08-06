@@ -22,7 +22,8 @@
                     </div>
                   </div>
                   <div>
-                    <v-select :items="language" label="Chọn ngôn ngữ" outlined :rules="languageNameRules" v-model="languageName" required></v-select>
+                    <v-select :items="language" label="Chọn ngôn ngữ" outlined :rules="languageNameRules"
+                      v-model="languageName" required></v-select>
                   </div>
                 </div>
                 <div class="col-12">
@@ -93,13 +94,16 @@ export default {
         // console.log(this.certificateName, this.languageName, this.grade, this.userId);
         LanguageCertificateService.addLanguageCertificate(
           {
-            certificate_name: this.certificateName, 
-            name: this.languageName,  
-            mark: this.grade, 
-            userId: this.userId 
+            certificate_name: this.certificateName,
+            name: this.languageName,
+            mark: this.grade,
+            userId: this.userId
+          }).then(() => {
+            window.location = "/language";
+            alert("Thêm thành công");
+          }).catch(() => {
+            alert("Chứng chỉ đã tồn tại");
           });
-        window.location = "/language";
-        alert("Thêm thành công");
       }
     }
   }
@@ -110,30 +114,36 @@ export default {
 .star {
   color: red;
 }
+
 .right {
   float: right;
   font-style: italic;
   font-size: 12px;
 }
+
 .body {
   border: 1px solid blue;
   border-radius: 5px;
   box-shadow: 5px 5px lightgray;
 }
+
 .title {
   font-weight: bold;
 }
+
 .col-12 {
   margin: 0;
   padding: 0;
 }
+
 .titleright {
   float: right;
   font-weight: initial;
   font-size: 12px;
   font-style: italic;
 }
-.titleheader{
+
+.titleheader {
   margin-left: 0.5rem;
   margin-bottom: 20px;
   border-bottom: 1px solid gray;
@@ -142,16 +152,20 @@ export default {
   font-size: 20px;
   font-weight: bold;
 }
+
 .blockright {
   border-left: 1px solid gray;
 }
+
 .title {
   margin: 5px 0;
 }
+
 .btnSave {
   color: white;
   padding: 5px 70px;
 }
+
 .label {
   font-size: 15px;
 }

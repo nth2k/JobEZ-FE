@@ -36,7 +36,7 @@
 <script>
 import profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
-import Header from "../ToanNT16/candidate_management/Header.vue";
+import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 // import profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 export default {
   components: {
