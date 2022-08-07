@@ -108,9 +108,19 @@ export default {
     deleteSavedJob(savedJobId) {
       let textConfirm = "Press Ok to delete your saved job.";
       if (confirm(textConfirm) == true) {
-        SavedJobService.deleteSavedJob(savedJobId);
-        location.reload();
-        alert("Xóa thành công");
+        SavedJobService.deleteSavedJob(savedJobId)
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Xóa thành công",
+            });
+            this.$router.push("/savedjobs");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
       }
     },
     countDays(date) {

@@ -15,12 +15,22 @@
           </div>
           <v-form ref="form">
             <div class="form-group shadow-textarea">
-              <v-textarea v-model="careerGoal" :rules="careerGoalRules" filled label="Mô tả ngắn ngọn mục tiêu nghề nghiệp" auto-grow
-                    background-color="white" outlined required></v-textarea>
+              <v-textarea
+                v-model="careerGoal"
+                :rules="careerGoalRules"
+                filled
+                label="Mô tả ngắn ngọn mục tiêu nghề nghiệp"
+                auto-grow
+                background-color="white"
+                outlined
+                required
+              ></v-textarea>
             </div>
             <div class="row">
               <div class="d-flex col-12 justify-content-center">
-                <button class="btn btn-primary px-5" @click.prevent="updateCareerGoal">Lưu</button>
+                <button class="btn btn-primary px-5" @click.prevent="updateCareerGoal">
+                  Lưu
+                </button>
               </div>
             </div>
           </v-form>
@@ -36,7 +46,7 @@ import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import CareerGoalService from "@/services/CareerGoalService";
 export default {
-  name:"CareerGoal",
+  name: "CareerGoal",
   components: {
     profile_menu,
     SlideBar_candidate,
@@ -44,28 +54,41 @@ export default {
   },
   data() {
     return {
-      id: "",
       careerGoal: "",
-      careerGoalRules: [
-        (v) => !!v || "Career Goal must be required"
-      ],
+      careerGoalRules: [(v) => !!v || "Career Goal must be required"],
       userId: 1,
     };
   },
   methods: {
-    getCareerGoal(id){
+    getCareerGoal(id) {
       CareerGoalService.getCareerGoal(id).then((rs) => {
         this.id = rs.data.id;
         this.careerGoal = rs.data.careerGoal;
-      })
+      });
     },
-    updateCareerGoal(){
-      CareerGoalService.updateCareerGoal({id: this.id, careerGoal: this.careerGoal, userId: this.userId});
-    }
+    updateCareerGoal() {
+      CareerGoalService.updateCareerGoal({
+        id: this.id,
+        careerGoal: this.careerGoal,
+        userId: this.userId,
+      })
+        .then(() => {
+          this.$store.dispatch("setSnackbar", {
+            text: "Cập nhật thành công",
+          });
+          this.$router.push("/careergoal");
+        })
+        .catch(() => {
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Có lỗi xảy ra! Vui lòng thử lại",
+          });
+        });
+    },
   },
-  created(){
+  created() {
     this.getCareerGoal(this.userId);
-  }
+  },
 };
 </script>
 

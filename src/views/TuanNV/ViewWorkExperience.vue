@@ -104,9 +104,19 @@ export default {
     deleteWorkExp(id) {
       let textConfirm = "Press Ok to delete your work experience.";
       if (confirm(textConfirm) == true) {
-        WorkExperienceService.deleteWorkExp(id);
-        location.reload();
-        alert("Xóa thành công");
+        WorkExperienceService.deleteWorkExp(id)
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Xóa thành công",
+            });
+            this.$router.push("/workexp");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
       }
     },
   },
