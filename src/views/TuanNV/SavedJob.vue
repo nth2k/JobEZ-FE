@@ -19,22 +19,33 @@
               </tr>
             </thead>
             <tbody>
-              <div v-if="!listSavedJob.length" class="pt-5">Bạn chưa lưu công việc nào</div>
+              <div v-if="!listSavedJob.length" class="pt-5">
+                Bạn chưa lưu công việc nào
+              </div>
               <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="savedJob.id">
-                <td class="column"><span>{{ index + 1 }}</span></td>
-             
+                <td class="column">
+                  <span>{{ index + 1 }}</span>
+                </td>
+
                 <td>
                   <div>{{ savedJob.postingJobname }}</div>
 
                   <div><a href="#">(Xem chi tiết)</a></div>
                 </td>
-                <td class="column"><span>{{ savedJob.postingPosition }}</span></td>
+                <td class="column">
+                  <span>{{ savedJob.postingPosition }}</span>
+                </td>
                 <td>
                   <div>{{ savedJob.deadlineForSubmission }}</div>
-                  <div><span>{{ countDays(savedJob.deadlineForSubmission) }}</span></div>
+                  <div>
+                    <span>{{ countDays(savedJob.deadlineForSubmission) }}</span>
+                  </div>
                 </td>
                 <td class="column">
-                  <button class="btn btn-danger btnDelete" @click="deleteSavedJob(savedJob.id)">
+                  <button
+                    class="btn btn-danger btnDelete"
+                    @click="deleteSavedJob(savedJob.id)"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -59,9 +70,11 @@
           </table>
         </div>
         <div class="update">
-          <span>Hãy cập nhật thông tin về người tham chiếu hồ sơ của bạn để tăng
-            chất lượng hồ sơ và thu hút nhà tuyển dụng
-            <a href="#" class="text-danger">Cập nhật ngay</a></span>
+          <span
+            >Hãy cập nhật thông tin về người tham chiếu hồ sơ của bạn để tăng chất lượng
+            hồ sơ và thu hút nhà tuyển dụng
+            <a href="#" class="text-danger">Cập nhật ngay</a></span
+          >
         </div>
       </div>
     </div>
@@ -69,53 +82,52 @@
 </template>
 
 <script>
-import SlideBar_candidate from '@/components/ProfileCandidate/slideBar_candidate.vue';
-import Header from '../ToanNT16/candidate/candidate_management/Header.vue';
-import SavedJobService from '@/services/SavedJobService.js'
+import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
+import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
+import SavedJobService from "@/services/SavedJobService.js";
 // import Header from "./components/views/Header.vue";
 // import SlideBar_candidate from "./components/ProfileCandidate/slideBar_candidate.vue";
 export default {
   name: "SavedJob",
   components: {
     SlideBar_candidate,
-    Header
+    Header,
   },
-data(){
-    return{
-<<<<<<< HEAD
+  data() {
+    return {
       userId: 1,
-=======
-      userId: 3,
->>>>>>> bee79d0c237e15e6f19ba7e1e9eb87db27e2ee5f
       listSavedJob: [],
     };
   },
-  methods:{
-    getSavedJobs(userId){
+  methods: {
+    getSavedJobs(userId) {
       SavedJobService.getSavedJobs(userId).then((res) => {
         this.listSavedJob = res.data;
-      })
+      });
     },
-    deleteSavedJob(savedJobId){
+    deleteSavedJob(savedJobId) {
       let textConfirm = "Press Ok to delete your saved job.";
-      if(confirm(textConfirm) == true){
+      if (confirm(textConfirm) == true) {
         SavedJobService.deleteSavedJob(savedJobId);
         location.reload();
-        alert('Xóa thành công');
+        alert("Xóa thành công");
       }
     },
     countDays(date) {
       var datesplit = date.split("/");
       var date1 = new Date(datesplit[1] + "/" + datesplit[0] + "/" + datesplit[2]);
       var date2 = new Date();
-      var duration = Math.ceil((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000));
-      return (duration) < 0 ? "(" + Math.abs(duration) + " ngày trước)" : "(Còn " + duration + " ngày)";
+      var duration = Math.ceil(
+        (date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)
+      );
+      return duration < 0
+        ? "(" + Math.abs(duration) + " ngày trước)"
+        : "(Còn " + duration + " ngày)";
     },
-    
   },
-  created(){
+  created() {
     this.getSavedJobs(this.userId);
-  }
+  },
 };
 </script>
 
