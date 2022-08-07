@@ -18,9 +18,11 @@ import RecruiterList from "@/components/ToanComponents/RecruiterList.vue";
 import GeneralManagement from "@/views/ToanNT16/GeneralManagement.vue";
 import CandidateProfile from "@/components/ToanComponents/CandidateProfile.vue";
 
+
 Vue.use(VueRouter);
 
 export const routes = [
+
   {
     path: "/",
     name: "LandingPage",
@@ -130,7 +132,15 @@ export const routes = [
     path: "/addworkexp",
     name: "AddWorkExperience",
     component: () => import("@/views/TuanNV/AddWorkExperience.vue"),
-  },
+  }, {
+    path: '/careergoal',
+    name: 'CareerGoal',
+    component: () => import("@/views/TuanNV/CareerGoal.vue")
+}, {
+    path: '/selfskill',
+    name: 'SelfSkill',
+    component: () => import("@/views/TuanNV/SelfSkill.vue")
+},
   {
     path: "/recruiter-list",
     name: "RecruiterList",

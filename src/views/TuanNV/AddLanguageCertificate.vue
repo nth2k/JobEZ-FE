@@ -16,9 +16,7 @@
               <div class="row">
                 <div class="col-12">
                   <div class="title">
-                    <span class="label"
-                      >Ngoại ngữ <span class="star">*</span></span
-                    >
+                    <span class="label">Ngoại ngữ <span class="star">*</span></span>
                     <div class="titleright">
                       <span>(</span><span class="star">*</span
                       ><span>)Thông tin bắt buộc</span>
@@ -37,9 +35,7 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span class="label"
-                      >Chứng chỉ <span class="star">*</span></span
-                    >
+                    <span class="label">Chứng chỉ <span class="star">*</span></span>
                   </div>
                   <div>
                     <v-textarea
@@ -53,13 +49,7 @@
                       required
                       background-color="white"
                     ></v-textarea>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="title">
-                    <span class="label"
-                      >Số điểm <span class="star">*</span></span
-                    >
+                    <span class="label">Số điểm <span class="star">*</span></span>
                   </div>
                   <v-textarea
                     label="Số điểm"
@@ -177,12 +167,15 @@ export default {
   font-size: 20px;
   font-weight: bold;
 }
+
 .blockright {
   border-left: 1px solid gray;
 }
+
 .title {
   margin: 5px 0;
 }
+
 .btnSave {
   color: white;
   padding: 5px 70px;
@@ -190,4 +183,4 @@ export default {
 .label {
   font-size: 15px;
 }
-</style> 
+</style>
