@@ -1,5 +1,5 @@
 <template>
-  <div class="candidate-overview-container">
+  <div v-if="isGetCandidateFunction" class="candidate-overview-container">
     <header>Tổng quan về ứng viên</header>
     <div class="candidate-body row">
       <div class="col-12 col-sm-2">
@@ -7,7 +7,9 @@
       </div>
       <div class="col-12 col-sm-10 row">
         <div class="col-12">Chỗ ở hiện tại</div>
-        <div class="col-12 value">An Bình, Yên Hòa, Đồng Nai</div>
+        <div class="col-12 value">
+          {{ getCanidate.city }}, {{ getCanidate.province }}
+        </div>
       </div>
 
       <div class="col-12 col-sm-2">
@@ -15,7 +17,7 @@
       </div>
       <div class="col-12 col-sm-10 row">
         <div class="col-12">Nơi mong muốn làm việc</div>
-        <div class="col-12 value">Hồ Chí Minh, Bình Dương, Đồng Nai</div>
+        <div class="col-12 value">{{ getCanidate.workplaceDesired }}</div>
       </div>
 
       <div class="col-12 col-sm-2">
@@ -23,7 +25,7 @@
       </div>
       <div class="col-12 col-sm-10 row">
         <div class="col-12">Kinh nghiệm làm việc</div>
-        <div class="col-12 value">Chưa có kinh nghiệm</div>
+        <div class="col-12 value">{{ getCanidate.yearOfExperience }}</div>
       </div>
 
       <div class="col-12 col-sm-2">
@@ -31,14 +33,8 @@
       </div>
       <div class="col-12 col-sm-10 row">
         <div class="col-12">SĐT</div>
-        <div class="col-12 value d-none">0845684888</div>
-        <div
-          @click="requireLogin()"
-          class="col-12 require-login ml-3 mb-2 pr-0"
-          data-toggle="modal"
-          data-target="#requireLoginModal"
-        >
-          Đăng nhập để xem số điên thoại
+        <div class="col-12 value">
+          {{ getCanidate.phone }}
         </div>
       </div>
 
@@ -127,16 +123,19 @@
       </div>
       <div class="col-12 col-sm-10 row">
         <div class="col-12">Email</div>
-        <div class="col-12 value">nguyenthetoan1606@gmail.com</div>
-        <div class="d-none">Đăng nhập để xem Mail</div>
+        <div class="col-12 value">{{ getCanidate.email }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "CandidateOverview",
+  computed: {
+    ...mapGetters(["getCanidate", "isGetCandidateFunction"]),
+  },
 };
 </script>
 
