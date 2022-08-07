@@ -1,8 +1,9 @@
 <template>
   <div class="d-flex flex-row banner">
     <div class="mr-auto p-2">
-      <a href="#"><img src="@/assets/logo_w.png" alt="" /></a>
-      <!-- @/../assets/logo_w.png -->
+      <router-link tag="a" :to="'/'">
+        <img src="@/assets/logo_w.png" alt="" />
+      </router-link>
     </div>
     <div class="menu_item p-2">
       <div class="dropdown">
@@ -86,14 +87,8 @@
     </div>
     <div class="mr-3 p-2 justify-content-center align-items-center">
       <div
-        class="
-          pt-1
-          pb-1
-          pl-3
-          pr-3
-          d-flex
-          flex-row flex-sm-row flex-md-row flex-lg-row flex-xl-row
-        "
+        v-if="isAuthenticated"
+        class="pt-1 pb-1 pl-3 pr-3 d-flex flex-row flex-sm-row flex-md-row flex-lg-row flex-xl-row"
       >
         <div class="mr-4">
           <div class="dropdown">
@@ -229,6 +224,17 @@
           </div>
         </div>
       </div>
+      <div
+        class="text-white p-1 rounded"
+        style="background-color: #232f87"
+        v-else
+      >
+        <router-link class="text-white" tag="a" :to="'/candidateLogin'"
+          >Đăng nhập</router-link
+        >/<router-link class="text-white" tag="a" :to="'/candidateRegister'"
+          >Đăng ký</router-link
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -236,6 +242,11 @@
 <script>
 export default {
   name: "Header_Login",
+  data() {
+    return {
+      isAuthenticated: false,
+    };
+  },
 };
 </script>
 

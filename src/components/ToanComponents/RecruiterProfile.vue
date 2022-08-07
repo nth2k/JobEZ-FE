@@ -17,6 +17,8 @@ import RecruitorHeader from "@/views/ToanNT16/recruiter/RecruitorHeader.vue";
 import RecruiterSummary from "@/views/ToanNT16/recruiter/profile/RecruiterSummary.vue";
 import RecruiterPostings from "@/views/ToanNT16/recruiter/profile/posting_views/RecruiterPostings.vue";
 
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "RecruiteProfile",
   components: {
@@ -26,6 +28,16 @@ export default {
     RecruitorHeader,
     RecruiterSummary,
     RecruiterPostings,
+  },
+  async created() {
+    const recruiterId = this.$route.params.recruiterId;
+    await this.getRecruiterById(recruiterId);
+  },
+  methods: {
+    ...mapActions(["getRecruiterById"]),
+  },
+  computed: {
+    ...mapGetters(["getRecruiter", "isGetRecruiterFunction"]),
   },
 };
 </script>

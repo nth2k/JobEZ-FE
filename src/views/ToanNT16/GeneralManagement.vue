@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import Header from "./candidate_management/Header.vue";
-import Navigator from "./candidate_management/Navigator.vue";
-import Suggesstions from "./candidate_management/Suggesstions.vue";
-import SuitableJobs from "./candidate_management/SuitableJobs.vue";
-import CurriculumVitae from "./candidate_management/CurriculumVitae.vue";
-import InformationRecruitment from "./candidate_management/InformationRecruitment.vue";
-import News from "./candidate_management/News.vue";
-import LookupInformation from "./candidate_management/LookupInformation.vue";
+import Header from "@/views/ToanNT16/profile/Header.vue";
+import Navigator from "@/views/ToanNT16/candidate/candidate_management/Navigator.vue";
+import Suggesstions from "@/views/ToanNT16/candidate/cv_menu/Suggesstions.vue";
+import SuitableJobs from "@/views/ToanNT16/candidate/candidate_management/SuitableJobs.vue";
+import CurriculumVitae from "@/components/ToanComponents/CurriculumVitae.vue";
+import InformationRecruitment from "@/views/ToanNT16/candidate/candidate_management/InformationRecruitment.vue";
+import News from "@/views/ToanNT16/candidate/candidate_management/News.vue";
+import LookupInformation from "@/views/ToanNT16/candidate/candidate_management/LookupInformation.vue";
 
 export default {
   name: "GeneralManagement",

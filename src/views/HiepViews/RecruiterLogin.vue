@@ -42,7 +42,9 @@
                 @click:append="show3 = !show3"
               ></v-text-field>
               <p>Quên mật khẩu?</p>
-              <button class="btn" :disabled="!valid" @click="submit">Đăng nhập</button>
+              <button class="btn" :disabled="!valid" @click="submit">
+                Đăng nhập
+              </button>
             </v-form>
           </div>
         </div>
@@ -65,7 +67,10 @@ export default {
     email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
-      (v) => /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || "E-mail must be valid",
+      (v) =>
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "E-mail must be valid",
     ],
     password: "",
     passwordRules: [
