@@ -1,5 +1,8 @@
 <template>
-  <div class="container mt-3 candidate-header-container">
+  <div
+    v-if="isGetCandidateFunction"
+    class="container mt-3 candidate-header-container"
+  >
     <div class="row">
       <div class="col-12 col-sm-2">
         <img src="@/assets/ic_ava1.png" alt="Nguyễn Tiến Sang" />
@@ -7,17 +10,19 @@
       <div class="col-12 col-sm-10 row">
         <div class="col-12 col-sm-8 row">
           <div class="col-12 col-md-5">
-            <h4>{candidate.name}</h4>
-            <p>Giới tính : {Xem trong CV}</p>
-            <p>Ngày sinh : {16/06/2022}</p>
-            <p>Hôn nhân : {Độc thân}</p>
+            <h4>{{ getCanidate.name }}</h4>
+            <p>Giới tính : {{ getCanidate.gender }}</p>
+            <p>Ngày sinh : {{ getCanidate.dateOfBirth }}</p>
+            <p>Hôn nhân : {{ getCanidate.mariaStatus }}</p>
           </div>
           <div class="col-12 col-md-7">
             <br />
             <br />
             <br />
-            <p>Mã hồ sơ:760464 | Lượt xem : 0</p>
-            <p>Công việc mong muốn: <strong>Fresher IT</strong></p>
+            <p>Mã hồ sơ : {{ getCanidate.profileCode }}</p>
+            <p>
+              Công việc mong muốn: <strong>{{ getCanidate.desiredJob }}</strong>
+            </p>
           </div>
         </div>
         <div class="col-12 col-sm-4">
@@ -30,7 +35,6 @@
             type="button"
             data-target="#login-modal"
             data-toggle="modal"
-            @click="display"
           >
             Chat ngay
           </button>
@@ -81,8 +85,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "CandidateHeader",
+  computed: {
+    ...mapGetters(["getCanidate", "isGetCandidateFunction"]),
+  },
 };
 </script>
 
