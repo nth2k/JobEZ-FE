@@ -1,8 +1,4 @@
 <template>
-  <!-- <v-app>
-      <RecruiterAddNewPosting />
-  </v-app> -->
-
   <v-app>
     <div>
       <router-view></router-view>
