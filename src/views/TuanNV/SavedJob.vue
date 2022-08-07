@@ -82,7 +82,11 @@ export default {
   },
 data(){
     return{
+<<<<<<< HEAD
       userId: 1,
+=======
+      userId: 3,
+>>>>>>> bee79d0c237e15e6f19ba7e1e9eb87db27e2ee5f
       listSavedJob: [],
     };
   },

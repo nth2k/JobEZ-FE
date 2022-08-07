@@ -13,13 +13,13 @@
           <div class="titleRight">Kinh nghiệm làm việc</div>
           <div class="container">
             <div class="mb-3">
-              <router-link class="btnAdd py-1 px-3" to="/addworkexp">+ Thêm</router-link >
+              <router-link class="btnAdd py-1 px-3" to="/addworkexp">+ Thêm</router-link>
             </div>
             <div v-if="!listWorkExp.length">Không có kinh nghiệm làm việc</div>
             <div class="block" v-for="workexp in listWorkExp" v-bind:key="workexp.id">
               <span id="show" @click="showDetail">
-                <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i>Công ty 
-                {{workexp.companyName}}
+                <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i>Công ty
+                {{ workexp.companyName }}
               </span>
               <button class="btnDelete" @click="deleteWorkExp(workexp.id)">
                 <svg
@@ -41,14 +41,21 @@
               </button>
               <div class="detail container p-3" id="detailInfo">
                 <div>
-                  <span class="font-weight-bold">Thời gian từ: </span><span>{{new Date(workexp.startDate.slice(0,10)).toLocaleDateString()}}</span
-                  ><span class="font-weight-bold"> Đến </span><span>{{new Date(workexp.endDate.slice(0,10)).toLocaleDateString()}}</span>
+                  <span class="font-weight-bold">Thời gian từ: </span
+                  ><span>{{
+                    new Date(workexp.startDate.slice(0, 10)).toLocaleDateString()
+                  }}</span
+                  ><span class="font-weight-bold"> Đến </span
+                  ><span>{{
+                    new Date(workexp.endDate.slice(0, 10)).toLocaleDateString()
+                  }}</span>
                 </div>
-                <div><span class="font-weight-bold">Chức danh: </span><span> {{workexp.position}}</span></div>
                 <div>
-                  <span
-                    >{{workexp.description}}
-                  </span>
+                  <span class="font-weight-bold">Chức danh: </span
+                  ><span> {{ workexp.position }}</span>
+                </div>
+                <div>
+                  <span>{{ workexp.description }} </span>
                 </div>
               </div>
             </div>
@@ -71,11 +78,11 @@ export default {
     Header,
     Profile_menu,
   },
-  data(){
+  data() {
     return {
       listWorkExp: [],
       userId: 1,
-    }
+    };
   },
   methods: {
     showDetail(e) {
@@ -83,29 +90,29 @@ export default {
       const icon = e.target.firstChild;
       if (detail.style.display == "none") {
         detail.style.display = "block";
-        icon.classList.toggle('rotate');
+        icon.classList.toggle("rotate");
       } else {
         detail.style.display = "none";
-        icon.classList.toggle('rotate');
+        icon.classList.toggle("rotate");
       }
     },
-    getAllWorkExp(userId){
+    getAllWorkExp(userId) {
       WorkExperienceService.getWorkExps(userId).then((res) => {
         this.listWorkExp = res.data;
-      })
+      });
     },
-    deleteWorkExp(id){
+    deleteWorkExp(id) {
       let textConfirm = "Press Ok to delete your work experience.";
-      if(confirm(textConfirm) == true){
+      if (confirm(textConfirm) == true) {
         WorkExperienceService.deleteWorkExp(id);
         location.reload();
-        alert('Xóa thành công');
+        alert("Xóa thành công");
       }
-    }
+    },
   },
-  created(){
+  created() {
     this.getAllWorkExp(this.userId);
-  }
+  },
 };
 </script>
 
@@ -119,11 +126,11 @@ export default {
   width: 25px;
   height: 25px;
 }
-.block{
+.block {
   padding: 20px 0;
   border-bottom: 1px solid lightgray;
 }
-.block:last-child{
+.block:last-child {
   border-bottom: none;
 }
 .detail {
@@ -135,8 +142,8 @@ a {
   text-decoration: none;
   font-size: 18px;
 }
-#show{
-  color:#2a3563;
+#show {
+  color: #2a3563;
   margin-bottom: 20px;
   font-size: 20px;
   cursor: pointer;
@@ -175,6 +182,6 @@ a {
   transition: 0.4s;
 }
 .rotate {
-  transform:rotate(180deg);
+  transform: rotate(180deg);
 }
 </style>

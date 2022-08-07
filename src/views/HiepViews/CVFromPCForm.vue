@@ -153,7 +153,6 @@ export default {
           candidateCV: this.base64,
         })
           .then(() => {
-            console.log(this.base64);
             this.$store.dispatch("setSnackbar", {
               text: "Đăng kí ứng viên bước 2 thành công",
             });

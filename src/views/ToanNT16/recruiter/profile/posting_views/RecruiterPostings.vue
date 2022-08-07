@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <div class="container pt-4">
-      <div class="posting-header">Hãng Dược Phẩm Nutramed Tuyển Dụng</div>
+  <div v-if="isGetRecruiterFunction">
+    <div
+      v-for="(item, index) of getRecruiter.postings"
+      :key="index"
+      class="container pt-4"
+    >
+      <div class="posting-header">{{ getRecruiter.recruiterName }}</div>
       <div class="posting-body posting-container">
         <div class="posting-article">
           <div class="row">
             <div class="col-10 p-0"></div>
             <div class="posting-date text-center text-light col-2 p-1">
-              25/05/2022
+              {{ item.deadlineForSubmission }}
             </div>
           </div>
 
@@ -16,15 +20,24 @@
               <div class="row">
                 <div class="col-12">
                   <h3>
-                    <a class="posting-title" href="https://www.google.com/"
-                      >[TOÀN QUỐC] NHÂN VIÊN KINH DOANH LƯƠNG THƯỞNG CAO</a
+                    <router-link
+                      class="posting-title"
+                      tag="a"
+                      :to="{
+                        name: 'JobDetailsNoLogin',
+                        params: { postingId: item.id },
+                      }"
+                      >{{ item.jobName }}</router-link
                     >
+                    <a href="https://www.google.com/"></a>
                   </h3>
                 </div>
-                <div class="col-12 text-secondary"><h5>Nhân viên</h5></div>
+                <div class="col-12 text-secondary">
+                  <h5>{{ item.position }}</h5>
+                </div>
                 <div class="col-12">
                   <h5 class="text-danger font-weight-bold">
-                    Từ 10.000.000 VNĐ Đến 15.000.000 VNĐ / tháng
+                    {{ item.salary }}
                   </h5>
                 </div>
                 <div class="col-12 row">
@@ -32,7 +45,7 @@
                     <span
                       ><img class="pb-2 pr-2" src="@/assets/dt_5.png" alt=""
                     /></span>
-                    Không yêu cầu
+                    {{ item.genderRequirement }}
                   </div>
                   <div class="col-12 sol-sm-6 col-md-12">
                     <span
@@ -40,8 +53,7 @@
                         class="pb-2 pr-2"
                         src="@/assets/dt_6.png"
                         alt=""
-                      />Marketing - PR, Nhân viên kinh doanh, Việc làm bán
-                      hàng</span
+                      />{{ item.jobName }}</span
                     >
                   </div>
                   <div class="col-12 sol-sm-6 col-md-12">
@@ -50,8 +62,7 @@
                         class="pb-2 pr-2"
                         src="@/assets/dt_7.png"
                         alt=""
-                      />Hồ Chí Minh, Đà Nẵng, Hải Phòng, Nghệ An, Thái
-                      Nguyên</span
+                      />{{ item.province }}</span
                     >
                   </div>
                 </div>
@@ -65,7 +76,7 @@
                       class="pb-2 pr-2"
                       src="@/assets/dt_9.png"
                       alt="hình thức làm việc" /></span
-                  >Toàn thời gian cố định
+                  >{{ item.workingForm }}
                 </div>
                 <div class="col-6 col-md-12">
                   <span
@@ -81,108 +92,8 @@
         </div>
         <div class="posting-description">
           <div class="mt-2">
-            Giới thiệu sản phẩm công ty đến các phòng khám, bệnh viện, nhà thuốc
-            để thiết lập mối quan hệ chặc chẽ với các bác sỹ, dược sỹ cũng như
-            các nhân viên y tế khác.
+            {{ item.description }}
           </div>
-          <div class="mt-2">
-            Luôn luôn theo dõi cập nhật các thông tin về sản phẩm của đối thủ
-            cạnh tranh mình.
-          </div>
-          <div class="mt-2">Hoàn thành mục tiêu của công ty giao</div>
-        </div>
-      </div>
-    </div>
-    <div class="container pt-4">
-      <div class="posting-header">Hãng Dược Phẩm Nutramed Tuyển Dụng</div>
-      <div class="posting-body posting-container">
-        <div class="posting-article">
-          <div class="row">
-            <div class="col-10 p-0"></div>
-            <div class="posting-date text-center text-light col-2 p-1">
-              25/05/2022
-            </div>
-          </div>
-
-          <div class="posting-content row">
-            <div class="posting-brief col-12 col-sm-8">
-              <div class="row">
-                <div class="col-12">
-                  <h3>
-                    <a class="posting-title" href="https://www.google.com/"
-                      >[TOÀN QUỐC] NHÂN VIÊN KINH DOANH LƯƠNG THƯỞNG CAO</a
-                    >
-                  </h3>
-                </div>
-                <div class="col-12 text-secondary"><h5>Nhân viên</h5></div>
-                <div class="col-12">
-                  <h5 class="text-danger font-weight-bold">
-                    Từ 10.000.000 VNĐ Đến 15.000.000 VNĐ / tháng
-                  </h5>
-                </div>
-                <div class="col-12 row">
-                  <div class="col-12 sol-sm-6 col-md-12">
-                    <span
-                      ><img class="pb-2 pr-2" src="@/assets/dt_5.png" alt=""
-                    /></span>
-                    Không yêu cầu
-                  </div>
-                  <div class="col-12 sol-sm-6 col-md-12">
-                    <span
-                      ><img
-                        class="pb-2 pr-2"
-                        src="@/assets/dt_6.png"
-                        alt=""
-                      />Marketing - PR, Nhân viên kinh doanh, Việc làm bán
-                      hàng</span
-                    >
-                  </div>
-                  <div class="col-12 sol-sm-6 col-md-12">
-                    <span
-                      ><img
-                        class="pb-2 pr-2"
-                        src="@/assets/dt_7.png"
-                        alt=""
-                      />Hồ Chí Minh, Đà Nẵng, Hải Phòng, Nghệ An, Thái
-                      Nguyên</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="posting-required col-12 col-sm-4">
-              <div class="row">
-                <div class="col-6 col-md-12">
-                  <span
-                    ><img
-                      class="pb-2 pr-2"
-                      src="@/assets/dt_9.png"
-                      alt="hình thức làm việc" /></span
-                  >Toàn thời gian cố định
-                </div>
-                <div class="col-6 col-md-12">
-                  <span
-                    ><img
-                      class="pb-2 pr-2"
-                      src="@/assets/dt_8.png"
-                      alt="yêu cầu bằng cấp" /></span
-                  >THPT trở lên
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="posting-description">
-          <div class="mt-2">
-            Giới thiệu sản phẩm công ty đến các phòng khám, bệnh viện, nhà thuốc
-            để thiết lập mối quan hệ chặc chẽ với các bác sỹ, dược sỹ cũng như
-            các nhân viên y tế khác.
-          </div>
-          <div class="mt-2">
-            Luôn luôn theo dõi cập nhật các thông tin về sản phẩm của đối thủ
-            cạnh tranh mình.
-          </div>
-          <div class="mt-2">Hoàn thành mục tiêu của công ty giao</div>
         </div>
       </div>
     </div>
@@ -190,8 +101,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "RecruiterPostings",
+  computed: {
+    ...mapGetters(["getRecruiter", "isGetRecruiterFunction"]),
+  },
 };
 </script>
 

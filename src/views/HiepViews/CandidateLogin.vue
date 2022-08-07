@@ -94,7 +94,6 @@ export default {
             this.$store.dispatch("setSnackbar", {
               text: "Đăng nhập thành công",
             });
-            console.log(rs);
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${rs.data.refreshToken.token}`;

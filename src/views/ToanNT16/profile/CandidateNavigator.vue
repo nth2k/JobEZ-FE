@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div v-if="isGetAPI" class="container">
     <ul
       class="breadcrumb"
       style="margin-top: 0; background-color: #ffff"
@@ -12,46 +12,39 @@
         itemscope=""
         itemtype="http://schema.org/ListItem"
       >
-        <a href="https://timviec365.vn/" target="_blank" itemprop="item">
-          <span itemprop="name">Trang chủ</span>
-        </a>
-        <meta itemprop="position" content="1" />
+        <router-link tag="a" :to="'/'">Trang chủ</router-link>
       </li>
-      <li
-        class="second pl-3"
-        itemprop="itemListElement"
-        itemscope=""
-        itemtype="http://schema.org/ListItem"
-      >
-        <a
-          href="https://timviec365.vn/viec-lam-dich-vu-c21v0"
-          target="_blank"
-          itemprop="item"
+      <li class="second pl-3">
+        <router-link
+          tag="a"
+          :to="{
+            name: 'JobCategory',
+            params: { postingCategory: getJob.postingCategoryId },
+          }"
+          >{{ getJob.postingCategoryName }}</router-link
         >
-          <span itemprop="name">Việc làm Dịch vụ</span>
-        </a>
-        <meta itemprop="position" content="2" />
       </li>
-      <li
-        class="pl-3"
-        itemprop="itemListElement"
-        itemscope=""
-        itemtype="http://schema.org/ListItem"
-      >
-        <a itemprop="item"
-          ><span itemprop="name"
-            >NHÂN VIÊN KINH DOANH BẤT ĐỘNG SẢN TẠI HẢI PHÒNG</span
-          ></a
-        >
-        <meta itemprop="position" content="3" />
+      <li class="pl-3">
+        <p>
+          <span>{{ formatTitle }}</span>
+        </p>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import JobDetailService from "@/services/JobDetailService";
+
 export default {
   name: "CandidateNavigator",
+  computed: {
+    ...mapGetters(["getJob", "isGetAPI"]),
+    formatTitle: function () {
+      return JobDetailService.titleCase(this.getJob.jobName);
+    },
+  },
 };
 </script>
 

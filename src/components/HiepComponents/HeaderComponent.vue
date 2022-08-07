@@ -19,8 +19,8 @@
       </div>
       <div><img src="@/assets/ic_new5.png" alt="" /><span>Ứng viên</span></div>
       <div>
-        <img src="@/assets/icon_vlquanhday.png" alt="" /><span
-          >Tìm ứng viên gần đây</span
+        <img src="@/assets/icon_vlquanhday.png" alt="" /><span @click="searchCandidate"
+          >Tìm ứng viên</span
         >
       </div>
       <div>
@@ -60,6 +60,9 @@ export default {
       const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
       return theLoggedUser.user.name;
     },
+    searchCandidate(){
+      this.$router.push("/searchCandidate");
+    }    
   },
   computed: {
     currentUser() {
