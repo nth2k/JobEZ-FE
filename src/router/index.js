@@ -146,6 +146,26 @@ export const routes = [
     name: "CandidateProfile",
     component: CandidateProfile,
   },
+  {
+    path: '/recruiterManagement',
+    name: 'RecruiterManagement',
+    component: () => import("@/views/HiepViews/RecruiterManagement.vue")
+  },
+  {
+    path: '/recruiterAddNewPosting',
+    name: 'RecruiterAddNewPosting',
+    component: () => import("@/views/HiepViews/RecruiterAddNewPosting.vue")
+  },
+  {
+    path: '/postedPosting',
+    name: 'PostedPosting',
+    component: () => import("@/views/HiepViews/PostedPosting.vue")
+  },
+  {
+    path: '/appliedCandidate',
+    name: 'AppliedCandidate',
+    component: () => import("@/views/HiepViews/AppliedCandidate.vue")
+  },
 ];
 
 const router = new VueRouter({
