@@ -4,7 +4,7 @@ const Base_URL = "http://localhost:8081";
 
 const SearchJobService = {
   getJobByTextField(searchText, pageOffset) {
-    return axios.get(`${Base_URL}/posting/search/page?text=${searchText}&limit=4&pageOffset=${pageOffset}`);
+    return axios.get(`${Base_URL}/posting/searchJob?text=${searchText}&limit=4&pageOffset=${pageOffset}`);
   },
 }
 

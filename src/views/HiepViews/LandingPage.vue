@@ -356,7 +356,7 @@ export default {
     async getJobs() {
       await LandingPageService.getHomePage().then((res) => {
         this.attractiveJob = res.data.attractiveJob.slice(1, 10);
-        this.urgentRecruitment = res.data.urgentRecruitment.slice(10, 21);
+        this.urgentRecruitment = res.data.urgentRecruitment.slice(10, 15);
       });
     },
     submit() {
