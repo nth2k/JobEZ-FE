@@ -74,11 +74,6 @@ export const routes = [
     component: JobDetailsNoLogin,
   },
   {
-    path: "/searchJob",
-    name: "SearchJob",
-    component: SearchJob,
-  },
-  {
     path: "/recruiter-detail/:name",
     name: "RecruiterProfile",
     component: RecruiterProfile,
