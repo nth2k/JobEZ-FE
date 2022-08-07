@@ -148,6 +148,7 @@ export default {
           this.totalPage = 1;
         }
         console.log(rs);
+        console.log(this.totalPage);
       });
     },
     paging(selectedPage) {

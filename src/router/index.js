@@ -117,7 +117,27 @@ export const routes = [
         path: '/addworkexp',
         name: 'AddWorkExperience',
         component:() => import("@/views/TuanNV/AddWorkExperience.vue")
-    }
+    },
+    {
+        path: '/recruiterManagement',
+        name: 'RecruiterManagement',
+        component:() => import("@/views/HiepViews/RecruiterManagement.vue")
+    },
+    {
+        path: '/recruiterAddNewPosting',
+        name: 'RecruiterAddNewPosting',
+        component:() => import("@/views/HiepViews/RecruiterAddNewPosting.vue")
+    },
+    {
+        path: '/postedPosting',
+        name: 'PostedPosting',
+        component:() => import("@/views/HiepViews/PostedPosting.vue")
+    },
+    {
+        path: '/appliedCandidate',
+        name: 'AppliedCandidate',
+        component:() => import("@/views/HiepViews/AppliedCandidate.vue")
+    },
     // {
     //     path: '/profileCandidate',
     //     name: 'ProfileCandidate',

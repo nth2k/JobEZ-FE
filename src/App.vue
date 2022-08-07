@@ -1,4 +1,8 @@
 <template>
+  <!-- <v-app>
+      <RecruiterAddNewPosting />
+  </v-app> -->
+
   <v-app>
     <div>
       <router-view></router-view>
@@ -31,7 +35,7 @@ import { mapState } from "vuex";
 
 export default {
   name: "App",
-  components: {},
+  components: {  },
   computed: {
     ...mapState(["snackbars"]),
   },
