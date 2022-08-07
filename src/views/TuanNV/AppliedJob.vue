@@ -75,7 +75,7 @@ export default {
   },
   data() {
     return {
-      userId: 3,
+      userId: 1,
       listAppliedJob: [],
     };
   },

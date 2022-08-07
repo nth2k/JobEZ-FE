@@ -110,6 +110,14 @@ export const routes = [
         path: '/addworkexp',
         name: 'AddWorkExperience',
         component: () => import("@/views/TuanNV/AddWorkExperience.vue")
+    }, {
+        path: '/careergoal',
+        name: 'CareerGoal',
+        component: () => import("@/views/TuanNV/CareerGoal.vue")
+    }, {
+        path: '/selfskill',
+        name: 'SelfSkill',
+        component: () => import("@/views/TuanNV/SelfSkill.vue")
     }
     // {
     //     path: '/profileCandidate',

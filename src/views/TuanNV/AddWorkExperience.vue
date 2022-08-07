@@ -103,7 +103,7 @@ export default {
   },
   data() {
     return {
-      userId: 3,
+      userId: 1,
       position: "",
       positionRules: [
         (v) => !!v || "Position must be required"

@@ -92,7 +92,7 @@ export default {
   data(){
     return{
       listLanguage: [],
-      userId: 3,
+      userId: 1,
     };
   },
   methods:{

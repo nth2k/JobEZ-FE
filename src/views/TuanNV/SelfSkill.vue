@@ -13,20 +13,27 @@
           <div class="title titleRight mb-3">
             <span class="pb-2">Kỹ năng bản thân</span>
           </div>
-          <form>
+          <v-form ref="form">
             <div class="form-group shadow-textarea">
-              <textarea
-                class="form-control z-depth-1"
-                rows="9"
-                placeholder="Mô tả ngắn gọn về kỹ năng bản thân"
-              ></textarea>
+              <v-textarea
+                v-model="selfSkill"
+                :rules="selfSkillRules"
+                filled
+                label="Mô tả ngắn gọn về kỹ năng bản thân"
+                auto-grow
+                background-color="white"
+                outlined
+                required
+              ></v-textarea>
             </div>
             <div class="row">
               <div class="d-flex col-12 justify-content-center">
-                <button class="btn btn-primary px-5">Lưu</button>
+                <button class="btn btn-primary px-5" @click.prevent="updateSelfSkill">
+                  Lưu
+                </button>
               </div>
             </div>
-          </form>
+          </v-form>
         </div>
       </div>
     </div>
@@ -36,13 +43,38 @@
 <script>
 import profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
+import SelfSkillService from "@/services/SelfSkillService";
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 // import profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 export default {
+  name: "SelfSkill",
   components: {
     profile_menu,
     SlideBar_candidate,
     Header,
+  },
+  data() {
+    return {
+      selfSkill: "",
+      selfSkillRules: [(v) => !!v || "Self Skill must be required"],
+      userId: 1,
+    };
+  },
+  methods: {
+    getSelfSkill(id) {
+      SelfSkillService.getSelfSkill(id).then((rs) => {
+        this.selfSkill = rs.data.selfSkill;
+      });
+    },
+    updateSelfSkill() {
+      SelfSkillService.updateSelfSkill({
+        selfSkill: this.selfSkill,
+        userId: this.userId,
+      });
+    },
+  },
+  created() {
+    this.getSelfSkill(this.userId);
   },
 };
 </script>
@@ -78,7 +110,7 @@ textarea {
   border-radius: 10px;
   resize: none;
 }
-.leftHoso{
+.leftHoso {
   border-right: 1px solid lightgray;
 }
-</style> 
+</style>
