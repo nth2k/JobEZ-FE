@@ -140,6 +140,14 @@ export const routes = [
     path: '/selfskill',
     name: 'SelfSkill',
     component: () => import("@/views/TuanNV/SelfSkill.vue")
+},{
+  path: '/adddegree',
+  name: 'AddDegree',
+  component: () => import("@/views/TuanNV/AddDegree.vue")
+},{
+  path: '/degree',
+  name: 'ViewDegree',
+  component: () => import("@/views/TuanNV/ViewDegree.vue")
 },
   {
     path: "/recruiter-list",

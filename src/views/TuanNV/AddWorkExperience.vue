@@ -155,7 +155,7 @@ export default {
   },
   data() {
     return {
-      userId: 1,
+      userId: 5,
       position: "",
       positionRules: [(v) => !!v || "Vị trí công việc không được để trống"],
       companyName: "",

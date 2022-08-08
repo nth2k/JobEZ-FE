@@ -99,6 +99,9 @@ export default {
       listSavedJob: [],
     };
   },
+  // computed: {
+  //   this.
+  // },
   methods: {
     getSavedJobs(userId) {
       SavedJobService.getSavedJobs(userId).then((res) => {
@@ -113,7 +116,7 @@ export default {
             this.$store.dispatch("setSnackbar", {
               text: "Xóa thành công",
             });
-            this.$router.push("/savedjobs");
+            location.reload();
           })
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
