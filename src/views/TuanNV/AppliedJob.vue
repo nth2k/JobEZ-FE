@@ -102,34 +102,22 @@ export default {
   },
   data() {
     return {
-      userId: "",
+      userId: 1,
       listAppliedJob: [],
     };
   },
   methods: {
-    getAppliedJobs() {
-      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
-      this.userId = theLoggedUser.user.id;
-      AppliedJobService.getAppliedJobs(this.userId).then((res) => {
+    getAppliedJobs(userId) {
+      AppliedJobService.getAppliedJobs(userId).then((res) => {
         this.listAppliedJob = res.data;
       });
     },
     deleteAppliedJob(appliedjobId) {
       let textConfirm = "Press Ok to delete your applied job.";
       if (confirm(textConfirm) == true) {
-        AppliedJobService.deleteAppliedJob(appliedjobId)
-          .then(() => {
-            this.$store.dispatch("setSnackbar", {
-              text: "Xóa thành công",
-            });
-            this.$router.push("/appliedjob");
-          })
-          .catch(() => {
-            this.$store.dispatch("setSnackbar", {
-              color: "error",
-              text: "Có lỗi xảy ra! Vui lòng thử lại",
-            });
-          });
+        AppliedJobService.deleteAppliedJob(appliedjobId);
+        location.reload();
+        alert("Xóa thành công");
       }
     },
     countDaysDeadlineForSubmission(date) {
@@ -163,7 +151,7 @@ export default {
     },
   },
   created() {
-    this.getAppliedJobs();
+    this.getAppliedJobs(this.userId);
   },
 };
 </script>
