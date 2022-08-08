@@ -3,7 +3,7 @@
     <div>
       <router-view></router-view>
       <v-snackbar
-        v-for="(snackbar, index) in snackbars.filter((s) => s.showing)"
+        v-for="(snackbar, index) in snackbars.filter(s => s.showing)"
         :key="snackbar.text + Math.random()"
         v-model="snackbar.showing"
         :color="snackbar.color"
@@ -12,7 +12,12 @@
       >
         {{ snackbar.text }}
         <template v-slot:action="{ attrs }">
-          <v-btn color="white" text v-bind="attrs" @click="snackbar.showing = false">
+          <v-btn
+            color="white"
+            text
+            v-bind="attrs"
+            @click="snackbar.showing = false"
+          >
             Đóng
           </v-btn>
         </template>
@@ -26,11 +31,12 @@ import { mapState } from "vuex";
 
 export default {
   name: "App",
-  components: {},
+  components: {  },
   computed: {
     ...mapState(["snackbars"]),
   },
 };
 </script>
 
-<style></style>
+<style>
+</style>

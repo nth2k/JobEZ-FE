@@ -1,3 +1,4 @@
+
 <template>
   <div class="col-sm-12" id="slide_bar">
     <div id="logo_timviec">
@@ -24,12 +25,18 @@
       <input type="checkbox" id="bt1" />
       <ul style="margin: 0px; padding: 0px">
         <li class="item_slide_bar">
-          <div class="item_slide_bar_selection" style="padding: 13px 0px 13px 50px">
+          <div
+            class="item_slide_bar_selection"
+            style="padding: 13px 0px 13px 50px"
+          >
             Hồ sơ online
           </div>
         </li>
         <li class="item_slide_bar">
-          <div class="item_slide_bar_selection" style="padding: 13px 0px 13px 50px">
+          <div
+            class="item_slide_bar_selection"
+            style="padding: 13px 0px 13px 50px"
+          >
             CV xin việc
           </div>
         </li>
@@ -57,12 +64,18 @@
       <input type="checkbox" id="bt4" />
       <ul style="margin: 0px; padding: 0px">
         <li class="item_slide_bar">
-          <div class="item_slide_bar_selection" style="padding: 13px 0px 13px 50px">
+          <div
+            class="item_slide_bar_selection"
+            style="padding: 13px 0px 13px 50px"
+          >
             Cập nhật thông tin
           </div>
         </li>
         <li class="item_slide_bar">
-          <div class="item_slide_bar_selection" style="padding: 13px 0px 13px 50px">
+          <div
+            class="item_slide_bar_selection"
+            style="padding: 13px 0px 13px 50px"
+          >
             Đổi mật khẩu
           </div>
         </li>
@@ -113,8 +126,8 @@ export default {};
   height: 38px;
   font-weight: 600;
   padding-top: 5px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-align: center;
   color: var(--color_white);
   background-color: var(--color_yellow);
@@ -135,8 +148,8 @@ export default {};
   border-radius: 20px 0px 0px 20px;
   display: block;
   color: var(--color_white);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
   font-size: 15px;
   cursor: pointer;
@@ -155,8 +168,8 @@ export default {};
   height: 38px;
   font-weight: 600;
   padding-top: 5px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-align: center;
   color: var(--color_white);
   background-color: var(--color_yellow);

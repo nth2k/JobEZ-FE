@@ -70,19 +70,7 @@ export default {
       SelfSkillService.updateSelfSkill({
         selfSkill: this.selfSkill,
         userId: this.userId,
-      })
-        .then(() => {
-          this.$store.dispatch("setSnackbar", {
-            text: "Cập nhật thành công",
-          });
-          this.$router.push("/selfskill");
-        })
-        .catch(() => {
-          this.$store.dispatch("setSnackbar", {
-            color: "error",
-            text: "Có lỗi xảy ra! Vui lòng thử lại",
-          });
-        });
+      });
     },
   },
   created() {

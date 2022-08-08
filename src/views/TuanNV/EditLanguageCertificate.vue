@@ -19,18 +19,12 @@
                   <div class="title">
                     <span>Ngoại ngữ <span class="star">*</span></span>
                     <div class="right">
-                      <span>(</span><span class="star">*</span
-                      ><span>)Thông tin bắt buộc</span>
+                      <span>(</span><span class="star">*</span><span>)Thông tin bắt buộc</span>
                     </div>
                   </div>
                   <div>
-                    <v-select
-                      :items="language"
-                      label="Chọn ngôn ngữ"
-                      :rules="languageNameRules"
-                      required
-                      v-model="languageName"
-                    >
+                    <v-select :items="language" label="Chọn ngôn ngữ" :rules="languageNameRules" required
+                      v-model="languageName">
                     </v-select>
                   </div>
                 </div>
@@ -39,40 +33,19 @@
                     <span>Chứng chỉ <span class="star">*</span></span>
                   </div>
                   <div>
-                    <v-textarea
-                      label="Chứng chỉ"
-                      v-model="certificateName"
-                      outlined
-                      filled
-                      no-resize
-                      rows="1"
-                      :rules="certificateNameRules"
-                      required
-                      background-color="white"
-                    ></v-textarea>
+                    <v-textarea label="Chứng chỉ" v-model="certificateName" outlined filled no-resize rows="1"
+                      :rules="certificateNameRules" required background-color="white"></v-textarea>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="title">
                     <span>Số điểm <span class="star">*</span></span>
                   </div>
-                  <v-textarea
-                    label="Số điểm"
-                    v-model.number="grade"
-                    outlined
-                    filled
-                    no-resize
-                    rows="1"
-                    :rules="inputGradeRules"
-                    required
-                    background-color="white"
-                  ></v-textarea>
+                  <v-textarea label="Số điểm" v-model.number="grade" outlined filled no-resize rows="1"
+                    :rules="inputGradeRules" required background-color="white"></v-textarea>
                 </div>
                 <div class="text-center container">
-                  <button
-                    class="btn btn-primary btnSave px-5 mt-5"
-                    @click.prevent="updateLanguageCertificate"
-                  >
+                  <button class="btn btn-primary btnSave px-5 mt-5" @click.prevent="updateLanguageCertificate">
                     Lưu
                   </button>
                 </div>
@@ -103,15 +76,19 @@ export default {
       userId: this.$route.params.userId,
       grade: "",
       inputGradeRules: [
-        (v) => v >= 0 || "Minimum length is 3 character",
-        (v) => !!v || "Grade must be required",
+        (v) => v >= 0 || 'Minimum length is 3 character',
+        (v) => !!v || "Grade must be required"
       ],
       certificateName: "",
-      certificateNameRules: [(v) => !!v || "Tên chứng chỉ không được để trống"],
+      certificateNameRules: [
+        (v) => !!v || "Tên chứng chỉ không được để trống"
+      ],
       languageName: "",
       language: ["Tiếng Anh", "Tiếng Nhật", "Tiếng Hàn Quốc"],
-      languageNameRules: [(v) => !!v || "Vui lòng chọn ngôn ngữ"],
-    };
+      languageNameRules: [
+        (v) => !!v || "Vui lòng chọn ngôn ngữ"
+      ]
+    }
   },
   methods: {
     getLanguageCertificate(id) {
@@ -123,31 +100,15 @@ export default {
     },
     updateLanguageCertificate() {
       if (this.$refs.form.validate()) {
-        LanguageCertificateService.updateLanguageCertificate({
-          id: this.Id,
-          certificate_name: this.certificateName,
-          name: this.languageName,
-          mark: this.grade,
-          userId: this.userId,
-        })
-          .then(() => {
-            this.$store.dispatch("setSnackbar", {
-              text: "Cập nhật thành công",
-            });
-            this.$router.push("/language");
-          })
-          .catch(() => {
-            this.$store.dispatch("setSnackbar", {
-              color: "error",
-              text: "Có lỗi xảy ra! Vui lòng thử lại",
-            });
-          });
+        LanguageCertificateService.updateLanguageCertificate({ id: this.Id, certificate_name: this.certificateName, name: this.languageName, mark: this.grade, userId: this.userId });
+        alert("Cập nhật thành công");
+        window.location = "/language";
       }
-    },
+    }
   },
   created() {
     this.getLanguageCertificate(this.Id);
-  },
+  }
 };
 </script>
 
@@ -183,4 +144,4 @@ export default {
 .btnSave {
   color: white;
 }
-</style>
+</style> 
