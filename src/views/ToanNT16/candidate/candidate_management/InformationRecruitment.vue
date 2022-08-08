@@ -9,7 +9,9 @@
             </div>
             <div class="col-12 text-left h5 mt-3">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Đã ứng tuyển:
-              {{ numberOfApplied }}&nbsp;&nbsp;&nbsp;&nbsp;
+              {{
+                getSuitablePosting.numberOfAppliedJob
+              }}&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
           </div>
         </div>
@@ -20,7 +22,8 @@
               <img class="img-fluid" src="@/assets/cc2.png" alt="" />
             </div>
             <div class="col-12 text-left h5 mt-3">
-              &nbsp;&nbsp;Việc làm phù hợp: {{ suitableJobs }}
+              &nbsp;&nbsp;Việc làm phù hợp:
+              {{ getSuitablePosting.numberOfSuitableJob }}
             </div>
           </div>
         </div>
@@ -42,7 +45,8 @@
               <img class="img-fluid" src="@/assets/cc4.png" alt="" />
             </div>
             <div class="col-12 text-left h5 mt-3">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NTD xem hồ sơ: {{ seen }}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NTD xem hồ sơ:
+              {{ getSuitablePosting.view }}
             </div>
           </div>
         </div>
@@ -52,14 +56,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "InformationRecruitment",
-  data() {
-    return {
-      numberOfApplied: 0,
-      suitableJobs: 12721,
-      seen: 15,
-    };
+  computed: {
+    ...mapGetters(["getSuitablePosting", "isGetSuitablePostingFunction"]),
   },
 };
 </script>

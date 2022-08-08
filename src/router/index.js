@@ -20,6 +20,9 @@ import CandidateProfile from "@/components/ToanComponents/CandidateProfile.vue";
 import CVs from "@/components/ToanComponents/CVs.vue";
 import JobApplication from "@/components/ToanComponents/JobApplication.vue";
 import CoverLetter from "@/components/ToanComponents/CoverLetter.vue";
+import CV_01 from "@/views/ToanNT16/candidate/cv-detail/CV_01.vue";
+import CV_02 from "@/views/ToanNT16/candidate/cv-detail/CV_02.vue";
+import JobApplication_01 from "@/views/ToanNT16/JobApplication_01.vue";
 
 Vue.use(VueRouter);
 
@@ -188,6 +191,21 @@ export const routes = [
     path: "/appliedCandidate",
     name: "AppliedCandidate",
     component: () => import("@/views/HiepViews/AppliedCandidate.vue"),
+  },
+  {
+    path: "/cv_01",
+    name: "CV_01",
+    component: CV_01,
+  },
+  {
+    path: "/cv_02",
+    name: "CV_02",
+    component: CV_02,
+  },
+  {
+    path: "/job_application_01",
+    name: "JobApplication_01",
+    component: JobApplication_01,
   },
 ];
 
