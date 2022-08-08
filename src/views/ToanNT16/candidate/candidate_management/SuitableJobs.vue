@@ -3,8 +3,8 @@
     <header><strong>// Việc Làm Phù Hợp</strong></header>
     <div class="row px-5 py-3">
       <div
-        v-for="job in jobs"
-        :key="job.logo"
+        v-for="(job, index) in jobs"
+        :key="index"
         class="col-12 col-sm-6 border mr-2 row mb-4"
       >
         <div class="col-2">
@@ -14,13 +14,17 @@
             alt="Hinh Anh Cong Ty"
           />
         </div>
-        <div class="col-8 row">
-          <div class="col-12">{{ job.position }}</div>
-          <div class="col-12">{{ job.company_name }}</div>
-          <div class="col-12 row">
-            <div class="col-3">{{ job.address }}</div>
-            <div class="col-4 text-danger">{{ job.salary }}</div>
-            <div class="col-4">{{ job.date_created }}</div>
+        <div class="col-8">
+          <div class="row">
+            <div class="col-12">{{ job.position }}</div>
+            <div class="col-12">{{ job.company_name }}</div>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3">{{ job.address }}</div>
+              <div class="col-4 text-danger">{{ job.salary }}</div>
+              <div class="col-4">{{ job.date_created }}</div>
+            </div>
           </div>
         </div>
       </div>

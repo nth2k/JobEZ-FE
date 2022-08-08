@@ -17,12 +17,13 @@ import SearchCandidate from "@/views/HiepViews/SearchCandidate.vue";
 import RecruiterList from "@/components/ToanComponents/RecruiterList.vue";
 import GeneralManagement from "@/views/ToanNT16/GeneralManagement.vue";
 import CandidateProfile from "@/components/ToanComponents/CandidateProfile.vue";
-
+import CVs from "@/components/ToanComponents/CVs.vue";
+import JobApplication from "@/components/ToanComponents/JobApplication.vue";
+import CoverLetter from "@/components/ToanComponents/CoverLetter.vue";
 
 Vue.use(VueRouter);
 
 export const routes = [
-
   {
     path: "/",
     name: "LandingPage",
@@ -127,15 +128,17 @@ export const routes = [
     path: "/addworkexp",
     name: "AddWorkExperience",
     component: () => import("@/views/TuanNV/AddWorkExperience.vue"),
-  }, {
-    path: '/careergoal',
-    name: 'CareerGoal',
-    component: () => import("@/views/TuanNV/CareerGoal.vue")
-}, {
-    path: '/selfskill',
-    name: 'SelfSkill',
-    component: () => import("@/views/TuanNV/SelfSkill.vue")
-},
+  },
+  {
+    path: "/careergoal",
+    name: "CareerGoal",
+    component: () => import("@/views/TuanNV/CareerGoal.vue"),
+  },
+  {
+    path: "/selfskill",
+    name: "SelfSkill",
+    component: () => import("@/views/TuanNV/SelfSkill.vue"),
+  },
   {
     path: "/recruiter-list",
     name: "RecruiterList",
@@ -152,24 +155,39 @@ export const routes = [
     component: CandidateProfile,
   },
   {
-    path: '/recruiterManagement',
-    name: 'RecruiterManagement',
-    component: () => import("@/views/HiepViews/RecruiterManagement.vue")
+    path: "/cv",
+    name: "CVs",
+    component: CVs,
   },
   {
-    path: '/recruiterAddNewPosting',
-    name: 'RecruiterAddNewPosting',
-    component: () => import("@/views/HiepViews/RecruiterAddNewPosting.vue")
+    path: "/job-application",
+    name: "JobApplication",
+    component: JobApplication,
   },
   {
-    path: '/postedPosting',
-    name: 'PostedPosting',
-    component: () => import("@/views/HiepViews/PostedPosting.vue")
+    path: "/cover-letter",
+    name: "CoverLetter",
+    component: CoverLetter,
   },
   {
-    path: '/appliedCandidate',
-    name: 'AppliedCandidate',
-    component: () => import("@/views/HiepViews/AppliedCandidate.vue")
+    path: "/recruiterManagement",
+    name: "RecruiterManagement",
+    component: () => import("@/views/HiepViews/RecruiterManagement.vue"),
+  },
+  {
+    path: "/recruiterAddNewPosting",
+    name: "RecruiterAddNewPosting",
+    component: () => import("@/views/HiepViews/RecruiterAddNewPosting.vue"),
+  },
+  {
+    path: "/postedPosting",
+    name: "PostedPosting",
+    component: () => import("@/views/HiepViews/PostedPosting.vue"),
+  },
+  {
+    path: "/appliedCandidate",
+    name: "AppliedCandidate",
+    component: () => import("@/views/HiepViews/AppliedCandidate.vue"),
   },
 ];
 

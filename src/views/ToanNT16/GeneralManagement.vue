@@ -6,7 +6,6 @@
         <div class="mb-2"><Header /></div>
         <div><Suggesstions /></div>
         <div class="mb-2"><SuitableJobs /></div>
-        <div class="mb-5"><CurriculumVitae /></div>
         <div><InformationRecruitment /></div>
         <div class="mb-5"><News /></div>
         <div class="mb-5"><LookupInformation /></div>
@@ -16,11 +15,11 @@
 </template>
 
 <script>
-import Header from "@/views/ToanNT16/profile/Header.vue";
+import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import Navigator from "@/views/ToanNT16/candidate/candidate_management/Navigator.vue";
 import Suggesstions from "@/views/ToanNT16/candidate/cv_menu/Suggesstions.vue";
 import SuitableJobs from "@/views/ToanNT16/candidate/candidate_management/SuitableJobs.vue";
-import CurriculumVitae from "@/components/ToanComponents/CurriculumVitae.vue";
+// import CurriculumVitae from "@/components/ToanComponents/CurriculumVitae.vue";
 import InformationRecruitment from "@/views/ToanNT16/candidate/candidate_management/InformationRecruitment.vue";
 import News from "@/views/ToanNT16/candidate/candidate_management/News.vue";
 import LookupInformation from "@/views/ToanNT16/candidate/candidate_management/LookupInformation.vue";
@@ -32,7 +31,6 @@ export default {
     Navigator,
     Suggesstions,
     SuitableJobs,
-    CurriculumVitae,
     InformationRecruitment,
     News,
     LookupInformation,

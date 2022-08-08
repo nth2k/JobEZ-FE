@@ -16,10 +16,10 @@
       <nav class="navbar navbar-expand-sm p-0">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link p-0" href="#">Trang chủ </a>
+            <a class="nav-link p-0" href="/">Trang chủ </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link p-0" href="#">CV xin việc</a>
+            <a class="nav-link p-0" href="/cv">CV xin việc</a>
           </li>
           <li class="nav-item">
             <a class="nav-link p-0" href="#">Câu hỏi tuyển dụng</a>
@@ -33,7 +33,7 @@
     <div class="col-3">
       <div class="row">
         <a
-          class="nav-link p-0 col-2"
+          class="nav-link pt-4 col-2"
           id="notificationDropdown"
           role="button"
           data-toggle="dropdown"
