@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-row banner">
     <div class="mr-auto p-2">
-      <a href="#"><img src="@/assets/logo_w.png" alt="" /></a>
+      <a href="/"><img src="@/assets/logo_w.png" alt="" /></a>
     </div>
     <div class="menu_item p-2">
       <div class="dropdown">
@@ -85,22 +85,14 @@
     </div>
     <div class="mr-3 p-2 justify-content-center align-items-center">
       <div
-        class="
-          pt-1
-          pb-1
-          pl-3
-          pr-3
-          d-flex
-          flex-row flex-sm-row flex-md-row flex-lg-row flex-xl-row
-          custom-rouded
-        "
+        class="pt-1 pb-1 pl-3 pr-3 d-flex flex-row flex-sm-row flex-md-row flex-lg-row flex-xl-row custom-rouded"
         style="background-color: #232f87"
       >
         <div>
-          <a class="text-decoration-none" href="/dang-ky.html"
-            ><span class="register text-white" style="font-family: 'Roboto'"
-              >Đăng ký</span
-            ></a
+          <router-link
+            class="text-decoration-none register text-white"
+            to="/candidateRegister"
+            >Đăng ký</router-link
           >
         </div>
         <div>
@@ -109,10 +101,10 @@
           </p>
         </div>
         <div>
-          <a class="text-decoration-none" href="/dang-nhap.html"
-            ><span class="text-white" style="font-family: 'Roboto'"
-              >Đăng nhập</span
-            ></a
+          <router-link
+            class="text-decoration-none text-white"
+            to="/candidateLogin"
+            >Đăng nhập</router-link
           >
         </div>
       </div>

@@ -17,6 +17,9 @@ import SearchCandidate from "@/views/HiepViews/SearchCandidate.vue";
 import RecruiterList from "@/components/ToanComponents/RecruiterList.vue";
 import GeneralManagement from "@/views/ToanNT16/GeneralManagement.vue";
 import CandidateProfile from "@/components/ToanComponents/CandidateProfile.vue";
+import CVs from "@/components/ToanComponents/CVs.vue";
+import JobApplication from "@/components/ToanComponents/JobApplication.vue";
+import CoverLetter from "@/components/ToanComponents/CoverLetter.vue";
 
 Vue.use(VueRouter);
 
@@ -145,6 +148,21 @@ export const routes = [
     path: "/candidate-profile/:candidateId",
     name: "CandidateProfile",
     component: CandidateProfile,
+  },
+  {
+    path: "/cv",
+    name: "CVs",
+    component: CVs,
+  },
+  {
+    path: "/job-application",
+    name: "JobApplication",
+    component: JobApplication,
+  },
+  {
+    path: "/cover-letter",
+    name: "CoverLetter",
+    component: CoverLetter,
   },
 ];
 
