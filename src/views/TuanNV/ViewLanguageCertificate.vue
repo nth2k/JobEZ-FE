@@ -28,10 +28,7 @@
               </div>
               <div v-if="!listLanguage.length" class="pt-4">
                 <div>Không có bằng ngôn ngữ - tin học</div>
-                <button
-                  @click="addLanguageCertificate(userId)"
-                  class="py-1 px-3 btnAdd"
-                >
+                <button @click="addLanguageCertificate(userId)" class="py-1 px-3 btnAdd">
                   Thêm +
                 </button>
               </div>
@@ -60,9 +57,7 @@
                       class="dropdown-menu dropdown-menu-right"
                       aria-labelledby="userDropdownMenuLink"
                     >
-                      <span
-                        class="dropdown-item"
-                        @click="addLanguageCertificate(userId)"
+                      <span class="dropdown-item" @click="addLanguageCertificate(userId)"
                         ><svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
@@ -142,10 +137,11 @@ export default {
     Header,
     Profile_menu,
   },
+
   data() {
     return {
       listLanguage: [],
-      userId: 3,
+      userId: 1,
     };
   },
   methods: {
@@ -155,11 +151,13 @@ export default {
       });
     },
     addLanguageCertificate(userId) {
+      // console.log(this.userId);
       this.$router.push({
         name: "AddLanguageCertificate",
         params: { userId: userId },
       });
     },
+
     editLanguageCertificate(languageId) {
       this.$router.push({
         name: "EditLanguageCertificate",
@@ -215,6 +213,7 @@ export default {
   border-radius: 5px;
   box-shadow: 5px 5px lightgray;
 }
+
 .nav_link {
   padding: 0;
 }
@@ -232,4 +231,4 @@ export default {
   color: red;
   border-bottom: none;
 }
-</style> 
+</style>

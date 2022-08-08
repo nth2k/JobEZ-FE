@@ -121,42 +121,22 @@ export default {
       notifies: [
         {
           image: require("@/assets/iip1635479355.jpg"),
-          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM",
+          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM 1",
           ago: 10,
         },
         {
           image: require("@/assets/iip1635479355.jpg"),
-          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM",
+          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM 2",
           ago: 10,
         },
         {
           image: require("@/assets/iip1635479355.jpg"),
-          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM",
+          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM 3",
           ago: 10,
         },
         {
           image: require("@/assets/iip1635479355.jpg"),
-          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM",
-          ago: 10,
-        },
-        {
-          image: require("@/assets/iip1635479355.jpg"),
-          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM",
-          ago: 10,
-        },
-        {
-          image: require("@/assets/iip1635479355.jpg"),
-          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM",
-          ago: 10,
-        },
-        {
-          image: require("@/assets/iip1635479355.jpg"),
-          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM",
-          ago: 10,
-        },
-        {
-          image: require("@/assets/iip1635479355.jpg"),
-          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM",
+          company_name: "CÔNG TY TNHH GOLD MEDIA VIỆT NAM 4",
           ago: 10,
         },
       ],

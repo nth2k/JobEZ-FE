@@ -75,11 +75,6 @@ export const routes = [
     component: JobDetailsNoLogin,
   },
   {
-    path: "/searchJob",
-    name: "SearchJob",
-    component: SearchJob,
-  },
-  {
     path: "/recruiter-detail/:name",
     name: "RecruiterProfile",
     component: RecruiterProfile,
@@ -135,6 +130,16 @@ export const routes = [
     component: () => import("@/views/TuanNV/AddWorkExperience.vue"),
   },
   {
+    path: "/careergoal",
+    name: "CareerGoal",
+    component: () => import("@/views/TuanNV/CareerGoal.vue"),
+  },
+  {
+    path: "/selfskill",
+    name: "SelfSkill",
+    component: () => import("@/views/TuanNV/SelfSkill.vue"),
+  },
+  {
     path: "/recruiter-list",
     name: "RecruiterList",
     component: RecruiterList,
@@ -163,6 +168,26 @@ export const routes = [
     path: "/cover-letter",
     name: "CoverLetter",
     component: CoverLetter,
+  },
+  {
+    path: "/recruiterManagement",
+    name: "RecruiterManagement",
+    component: () => import("@/views/HiepViews/RecruiterManagement.vue"),
+  },
+  {
+    path: "/recruiterAddNewPosting",
+    name: "RecruiterAddNewPosting",
+    component: () => import("@/views/HiepViews/RecruiterAddNewPosting.vue"),
+  },
+  {
+    path: "/postedPosting",
+    name: "PostedPosting",
+    component: () => import("@/views/HiepViews/PostedPosting.vue"),
+  },
+  {
+    path: "/appliedCandidate",
+    name: "AppliedCandidate",
+    component: () => import("@/views/HiepViews/AppliedCandidate.vue"),
   },
 ];
 

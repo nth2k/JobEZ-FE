@@ -115,7 +115,7 @@ export default {
       ],
       rating: ["Giỏi", "Khá", "Trung Bình", "Chưa ra trường"],
       ratingRules: [(v) => !!v || "rating is required"],
-      experience: [],
+      experience: ["1 năm", "2 năm", "3 năm"],
       experienceRules: [(v) => !!v || "experience is required"],
 
       selectedRating: "",
@@ -166,14 +166,14 @@ export default {
           });
       }
     },
-    getCombobox() {
-      CandidateRegisterService.getCombobox().then((rs) => {
-        this.experience = rs.data.yearOfExperience.map((result) => result.name);
-      });
-    },
+    // getCombobox() {
+    //   CandidateRegisterService.getCombobox().then((rs) => {
+    //     this.experience = rs.data.yearOfExperience.map((result) => result.name);
+    //   });
+    // },
   },
   created() {
-    this.getCombobox();
+    // this.getCombobox();
   },
 };
 </script>
