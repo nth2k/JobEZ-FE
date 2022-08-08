@@ -15,7 +15,7 @@
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import Navigator from "@/views/ToanNT16/candidate/candidate_management/Navigator.vue";
 import Suggesstions from "@/views/ToanNT16/candidate/cv_menu/Suggesstions.vue";
-import ListOfCoverLetter from "@/views/ToanNT16/candidate/cover-letter/ListOfCoverLetter.vue";
+import ListOfCoverLetter from "@/views/ToanNT16/candidate/cover_letter/ListOfCoverLetter.vue";
 export default {
   name: "CoverLetter",
   components: {

@@ -12,7 +12,7 @@
         itemscope=""
         itemtype="http://schema.org/ListItem"
       >
-        <router-link tag="a" :to="'/home'">Trang chủ</router-link>
+        <router-link tag="a" :to="'/'">Trang chủ</router-link>
       </li>
       <li class="second pl-3">
         {{ getJob.postingCategoryName }}

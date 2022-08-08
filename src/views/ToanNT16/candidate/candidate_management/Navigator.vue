@@ -25,7 +25,12 @@
       </div>
       <div class="body col-12 text-left border-bottom">
         <div class="row">
-          <div class="col-12 navigator-element active">Quản lý chung</div>
+          <div
+            @click="moveToGeneralManagement"
+            class="col-12 navigator-element active"
+          >
+            Quản lý chung
+          </div>
           <div class="col-12 dropdown-items pr-0">
             <ul class="col-12 p-0 m-0">
               <div
@@ -39,8 +44,26 @@
               <li :class="{ 'd-none': isDropdownProfileVisible }">
                 <div class="navigator-element">Hồ sơ online</div>
               </li>
-              <li :class="{ 'd-none': isDropdownProfileVisible }" ref="cvApply">
+              <li
+                @click="moveToCV"
+                :class="{ 'd-none': isDropdownProfileVisible }"
+                ref="cvApply"
+              >
                 <div class="navigator-element">CV xin việc</div>
+              </li>
+              <li
+                @click="moveToJobApplication"
+                :class="{ 'd-none': isDropdownProfileVisible }"
+                ref="cvApply"
+              >
+                <div class="navigator-element">Đơn xin việc</div>
+              </li>
+              <li
+                @click="moveToCoverLetter"
+                :class="{ 'd-none': isDropdownProfileVisible }"
+                ref="cvApply"
+              >
+                <div class="navigator-element">Thư xin việc</div>
               </li>
             </ul>
           </div>
@@ -100,6 +123,21 @@ export default {
     };
   },
   components: {},
+  methods: {
+    moveToCV: function () {
+      this.$router.push("/cv");
+    },
+    moveToJobApplication: function () {
+      this.$router.push("/job-application");
+    },
+    moveToCoverLetter: function () {
+      this.$router.push("/cover-letter");
+    },
+
+    moveToGeneralManagement: function () {
+      this.$router.push("/general-management");
+    },
+  },
 };
 </script>
 
