@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <HeaderLogin />
     <SearchHeader />
     <CandidateHeader />
     <CandidateSummary />
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Header from "@/views/ToanNT16/candidate/profile/Header.vue";
+import HeaderLogin from "@/views/ToanNT16/profile/Header_Login.vue";
 import SearchHeader from "@/views/ToanNT16/profile/SearchHeader.vue";
 import CandidateHeader from "@/views/ToanNT16/candidate/profile/CandidateHeader.vue";
 import CandidateSummary from "@/views/ToanNT16/candidate/profile/candidate_summary/CandidateSummary.vue";
@@ -18,13 +18,12 @@ import { mapGetters } from "vuex";
 export default {
   name: "CandidateProfile",
   components: {
-    Header,
+    HeaderLogin,
     SearchHeader,
     CandidateHeader,
     CandidateSummary,
   },
   async created() {
-    // const candidateId = this.$route.params.candidateId;
     const candidateId = 4;
     this.getCandiateById({ candidateId });
   },

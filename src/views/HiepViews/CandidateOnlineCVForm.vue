@@ -205,11 +205,11 @@ export default {
       ],
       rating: ["Giỏi", "Khá", "Trung Bình", "Chưa ra trường"],
       ratingRules: [(v) => !!v || "rating is required"],
-      experience: [],
+      experience: ["1 năm", "2 năm", "3 năm"],
       experienceRules: [(v) => !!v || "experience is required"],
       salary: ["3-5 triệu", "5-7 triệu", "7-10 triệu", "10-15 triệu", "15-20 triệu"],
       salaryRules: [(v) => !!v || "salary is required"],
-      workingForm: [],
+      workingForm: ["Toàn thời gian cố định", "Toàn thời gian tạm thời", "Bán thời gian", "Bán thời gian tạm thời", "Hợp đồng", "Việc làm từ xa"],
       workingFormRules: [(v) => !!v || "workingForm is required"],
       careerGoals: "",
       personalSkills: "",
@@ -253,15 +253,15 @@ export default {
           });
       }
     },
-    getCombobox() {
-      CandidateRegisterService.getCombobox().then((rs) => {
-        this.experience = rs.data.yearOfExperience.map((result) => result.name);
-        this.workingForm = rs.data.workingForm.map((result) => result.name);
-      });
-    },
+    // getCombobox() {
+    //   CandidateRegisterService.getCombobox().then((rs) => {
+    //     this.experience = rs.data.yearOfExperience.map((result) => result.name);
+    //     this.workingForm = rs.data.workingForm.map((result) => result.name);
+    //   });
+    // },
   },
   created() {
-    this.getCombobox();
+    // this.getCombobox();
   },
 };
 </script>

@@ -5,7 +5,7 @@
   >
     <div class="row">
       <div class="col-12 col-sm-2">
-        <img src="@/assets/ic_ava1.png" alt="Nguyễn Tiến Sang" />
+        <img src="@/assets/ic_ava1.png" alt="" />
       </div>
       <div class="col-12 col-sm-10 row">
         <div class="col-12 col-sm-8 row">
@@ -81,6 +81,7 @@
         </div>
       </div>
     </div>
+    <button @click="checkLocalStorage">Check checkLocalStorage</button>
   </div>
 </template>
 
@@ -88,8 +89,20 @@
 import { mapGetters } from "vuex";
 export default {
   name: "CandidateHeader",
+  data() {
+    return {
+      user: window.localStorage.getItem("user"),
+      isAuthenticated: window.localStorage.getItem("user") != null,
+    };
+  },
   computed: {
     ...mapGetters(["getCanidate", "isGetCandidateFunction"]),
+  },
+  methods: {
+    checkLocalStorage() {
+      console.log("localStorage: " + window.localStorage.getItem("user"));
+      console.log("isAuthenticated : " + this.isAuthenticated);
+    },
   },
 };
 </script>

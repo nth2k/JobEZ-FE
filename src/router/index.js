@@ -17,12 +17,13 @@ import SearchCandidate from "@/views/HiepViews/SearchCandidate.vue";
 import RecruiterList from "@/components/ToanComponents/RecruiterList.vue";
 import GeneralManagement from "@/views/ToanNT16/GeneralManagement.vue";
 import CandidateProfile from "@/components/ToanComponents/CandidateProfile.vue";
-
+import CVs from "@/components/ToanComponents/CVs.vue";
+import JobApplication from "@/components/ToanComponents/JobApplication.vue";
+import CoverLetter from "@/components/ToanComponents/CoverLetter.vue";
 
 Vue.use(VueRouter);
 
 export const routes = [
-
   {
     path: "/",
     name: "LandingPage",
@@ -72,11 +73,6 @@ export const routes = [
     path: "/job-detail/:postingId",
     name: "JobDetailsNoLogin",
     component: JobDetailsNoLogin,
-  },
-  {
-    path: "/searchJob",
-    name: "SearchJob",
-    component: SearchJob,
   },
   {
     path: "/recruiter-detail/:name",

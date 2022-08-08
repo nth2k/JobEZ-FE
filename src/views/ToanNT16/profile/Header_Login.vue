@@ -107,7 +107,7 @@
                     class="dropdown-item text-primary"
                     href="/bang-gia-dich-vu.html"
                     rel="nofollow"
-                    ><i class="bi bi-arrow-bar-up"></i>Bảng giá</a
+                    ><i class="bi bi-arrow-bar-up"></i>Tin nhắn 1</a
                   >
                 </li>
               </ul>
@@ -131,7 +131,7 @@
                     class="dropdown-item text-primary"
                     href="/bang-gia-dich-vu.html"
                     rel="nofollow"
-                    ><i class="bi bi-arrow-bar-up"></i>Bảng giá</a
+                    ><i class="bi bi-arrow-bar-up"></i>Thông báo 1</a
                   >
                 </li>
               </ul>
@@ -167,21 +167,29 @@
                 <li class="list-group-item shadow menu-item pl-3">
                   <div class="row text-uppercase">
                     <div class="col-12">
-                      <a href="#" class="text-decoration-none text-dark">
+                      <router-link
+                        tag="a"
+                        :to="'/general-management'"
+                        class="text-decoration-none text-dark"
+                      >
                         <img
                           class="mb-2 mr-3"
                           src="@/assets/ic_1.png"
                           alt=""
-                        />hoàn thiện hồ sơ</a
+                        />hoàn thiện hồ sơ</router-link
                       >
                     </div>
                     <div class="col-12">
-                      <a href="#" class="text-decoration-none text-dark">
+                      <router-link
+                        tag="a"
+                        :to="'/general-management'"
+                        class="text-decoration-none text-dark"
+                      >
                         <img
                           class="mb-2 mr-3"
                           src="@/assets/ic_2.png"
                           alt=""
-                        />quản lý tài khoản</a
+                        />quản lý tài khoản</router-link
                       >
                     </div>
                     <div class="col-12">
@@ -229,10 +237,15 @@
         style="background-color: #232f87"
         v-else
       >
-        <router-link class="text-white" tag="a" :to="'/candidateLogin'"
+        <router-link
+          class="text-decoration-none text-white"
+          to="/candidateLogin"
           >Đăng nhập</router-link
-        >/<router-link class="text-white" tag="a" :to="'/candidateRegister'"
-          >Đăng ký</router-link
+        >/
+        <router-link
+          class="text-decoration-none text-white"
+          to="/candidateRegister"
+          >Đăng kí</router-link
         >
       </div>
     </div>
@@ -244,7 +257,8 @@ export default {
   name: "Header_Login",
   data() {
     return {
-      isAuthenticated: false,
+      user: window.localStorage.getItem("user"),
+      isAuthenticated: window.localStorage.getItem("user") != null,
     };
   },
 };
