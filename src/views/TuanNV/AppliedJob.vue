@@ -122,7 +122,7 @@ export default {
             this.$store.dispatch("setSnackbar", {
               text: "Xóa thành công",
             });
-            this.$router.push("/appliedjob");
+            location.reload();
           })
           .catch(() => {
             this.$store.dispatch("setSnackbar", {

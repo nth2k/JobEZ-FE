@@ -17,7 +17,6 @@
             <div class="form-group shadow-textarea">
               <v-textarea
                 v-model="careerGoal"
-                :rules="careerGoalRules"
                 filled
                 label="Mô tả ngắn ngọn mục tiêu nghề nghiệp"
                 auto-grow
@@ -55,13 +54,15 @@ export default {
   data() {
     return {
       careerGoal: "",
-      careerGoalRules: [(v) => !!v || "Career Goal must be required"],
-      userId: 1,
+      // careerGoalRules: [(v) => !!v || "Career Goal must be required"],
+      userId: "",
     };
   },
   methods: {
-    getCareerGoal(id) {
-      CareerGoalService.getCareerGoal(id).then((rs) => {
+    getCareerGoal() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      this.userId = theLoggedUser.user.id;
+      CareerGoalService.getCareerGoal(this.userId).then((rs) => {
         this.id = rs.data.id;
         this.careerGoal = rs.data.careerGoal;
       });
@@ -76,7 +77,7 @@ export default {
           this.$store.dispatch("setSnackbar", {
             text: "Cập nhật thành công",
           });
-          this.$router.push("/careergoal");
+          location.reload();
         })
         .catch(() => {
           this.$store.dispatch("setSnackbar", {

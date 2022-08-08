@@ -38,10 +38,12 @@
         <div class="item_slide_bar_selection">Việc làm</div>
       </li>
       <li class="item_slide_bar">
-        <div class="item_slide_bar_selection">Việc làm đã ứng tuyển</div>
+        <div class="item_slide_bar_selection" @click="appliedJob()">
+          Việc làm đã ứng tuyển
+        </div>
       </li>
       <li class="item_slide_bar">
-        <div class="item_slide_bar_selection">Việc làm đã lưu</div>
+        <div class="item_slide_bar_selection" @click="savedJob()">Việc làm đã lưu</div>
       </li>
       <label for="bt4" class="item_slide_bar">
         <div class="item_slide_bar_selection">
@@ -75,7 +77,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    appliedJob() {
+      this.$router.push("/appliedjob");
+    },
+    savedJob() {
+      this.$router.push("/savedjobs");
+    },
+  },
+};
 </script>
 
 <style>

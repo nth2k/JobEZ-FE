@@ -109,7 +109,14 @@ export default {
       certificateName: "",
       certificateNameRules: [(v) => !!v || "Tên chứng chỉ không được để trống"],
       languageName: "",
-      language: ["Tiếng Anh", "Tiếng Nhật", "Tiếng Hàn Quốc"],
+      language: [
+        "Tiếng Anh",
+        "Tiếng Nhật",
+        "Tiếng Hàn",
+        "Tiếng Nga",
+        "Tiếng Trung",
+        "Tiếng Pháp",
+      ],
       languageNameRules: [(v) => !!v || "Vui lòng chọn ngôn ngữ"],
     };
   },

@@ -179,6 +179,20 @@ export const routes = [
     path: '/appliedCandidate',
     name: 'AppliedCandidate',
     component: () => import("@/views/HiepViews/AppliedCandidate.vue")
+  },{
+    path: "/cv",
+    name: "CVs",
+    component: CVs,
+  },
+  {
+    path: "/job-application",
+    name: "JobApplication",
+    component: JobApplication,
+  },
+  {
+    path: "/cover-letter",
+    name: "CoverLetter",
+    component: CoverLetter,
   },
 ];
 

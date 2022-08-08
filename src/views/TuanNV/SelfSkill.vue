@@ -17,7 +17,6 @@
             <div class="form-group shadow-textarea">
               <v-textarea
                 v-model="selfSkill"
-                :rules="selfSkillRules"
                 filled
                 label="Mô tả ngắn gọn về kỹ năng bản thân"
                 auto-grow
@@ -56,13 +55,15 @@ export default {
   data() {
     return {
       selfSkill: "",
-      selfSkillRules: [(v) => !!v || "Self Skill must be required"],
-      userId: 1,
+      // selfSkillRules: [(v) => !!v || "Self Skill must be required"],
+      userId: "",
     };
   },
   methods: {
-    getSelfSkill(id) {
-      SelfSkillService.getSelfSkill(id).then((rs) => {
+    getSelfSkill() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      this.userId = theLoggedUser.user.id;
+      SelfSkillService.getSelfSkill(this.userId).then((rs) => {
         this.selfSkill = rs.data.selfSkill;
       });
     },
@@ -75,7 +76,7 @@ export default {
           this.$store.dispatch("setSnackbar", {
             text: "Cập nhật thành công",
           });
-          this.$router.push("/selfskill");
+          location.reload();
         })
         .catch(() => {
           this.$store.dispatch("setSnackbar", {
@@ -86,7 +87,7 @@ export default {
     },
   },
   created() {
-    this.getSelfSkill(this.userId);
+    this.getSelfSkill();
   },
 };
 </script>

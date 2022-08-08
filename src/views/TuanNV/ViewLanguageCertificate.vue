@@ -141,12 +141,14 @@ export default {
   data() {
     return {
       listLanguage: [],
-      userId: 1,
+      userId: "",
     };
   },
   methods: {
-    getLanguageCertificate(userId) {
-      LanguageCertificateService.getLanguageCertificate(userId).then((res) => {
+    getLanguageCertificate() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      this.userId = theLoggedUser.user.id;
+      LanguageCertificateService.getLanguageCertificate(this.userId).then((res) => {
         this.listLanguage = res.data;
       });
     },
@@ -172,7 +174,7 @@ export default {
             this.$store.dispatch("setSnackbar", {
               text: "Xóa thành công",
             });
-            this.$router.push("/language");
+            location.reload();
           })
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
@@ -184,7 +186,7 @@ export default {
     },
   },
   created() {
-    this.getLanguageCertificate(this.userId);
+    this.getLanguageCertificate();
   },
 };
 </script>

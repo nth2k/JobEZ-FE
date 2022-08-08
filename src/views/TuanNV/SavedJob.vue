@@ -95,7 +95,7 @@ export default {
   },
   data() {
     return {
-      userId: 1,
+      userId: "",
       listSavedJob: [],
     };
   },
@@ -103,8 +103,10 @@ export default {
   //   this.
   // },
   methods: {
-    getSavedJobs(userId) {
-      SavedJobService.getSavedJobs(userId).then((res) => {
+    getSavedJobs() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      this.userId = theLoggedUser.user.id;
+      SavedJobService.getSavedJobs(this.userId).then((res) => {
         this.listSavedJob = res.data;
       });
     },
@@ -139,7 +141,7 @@ export default {
     },
   },
   created() {
-    this.getSavedJobs(this.userId);
+    this.getSavedJobs();
   },
 };
 </script>

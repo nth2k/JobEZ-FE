@@ -155,7 +155,7 @@ export default {
   },
   data() {
     return {
-      userId: 5,
+      userId: this.$route.params.userId,
       position: "",
       positionRules: [(v) => !!v || "Vị trí công việc không được để trống"],
       companyName: "",

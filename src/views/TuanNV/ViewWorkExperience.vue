@@ -13,7 +13,7 @@
           <div class="titleRight">Kinh nghiệm làm việc</div>
           <div class="container">
             <div class="mb-3">
-              <router-link class="btnAdd py-1 px-3" to="/addworkexp">+ Thêm</router-link>
+              <button class="btnAdd py-1 px-3" @click="addWorkExp()">+ Thêm</button>
             </div>
             <div v-if="!listWorkExp.length">Không có kinh nghiệm làm việc</div>
             <div class="block" v-for="workexp in listWorkExp" v-bind:key="workexp.id">
@@ -81,7 +81,7 @@ export default {
   data() {
     return {
       listWorkExp: [],
-      userId: 5,
+      userId: "",
     };
   },
   methods: {
@@ -96,8 +96,16 @@ export default {
         icon.classList.toggle("rotate");
       }
     },
-    getAllWorkExp(userId) {
-      WorkExperienceService.getWorkExps(userId).then((res) => {
+    addWorkExp() {
+      this.$router.push({
+        name: "AddWorkExperience",
+        params: { userId: this.userId },
+      });
+    },
+    getAllWorkExp() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      this.userId = theLoggedUser.user.id;
+      WorkExperienceService.getWorkExps(this.userId).then((res) => {
         this.listWorkExp = res.data;
       });
     },
@@ -109,7 +117,7 @@ export default {
             this.$store.dispatch("setSnackbar", {
               text: "Xóa thành công",
             });
-            this.$router.push("/workexp");
+            location.reload();
           })
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
@@ -121,7 +129,7 @@ export default {
     },
   },
   created() {
-    this.getAllWorkExp(this.userId);
+    this.getAllWorkExp();
   },
 };
 </script>
