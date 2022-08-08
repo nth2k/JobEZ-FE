@@ -157,25 +157,25 @@ export default {
     return {
       userId: 1,
       position: "",
-      positionRules: [(v) => !!v || "Position must be required"],
+      positionRules: [(v) => !!v || "Vị trí công việc không được để trống"],
       companyName: "",
-      companyNameRules: [(v) => !!v || "Company Name must be required"],
+      companyNameRules: [(v) => !!v || "Tên công ty không được để trống"],
       startDate: "",
       startDateRules: [
-        (v) => !!v || "Start Date must be required",
+        (v) => !!v || "Ngày bắt đầu không được để trống",
         (v) =>
           /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-          "Invalid Start Date(dd/MM/yyyy)",
+          "Ngày bắt đầu không hợp lệ (dd/MM/yyyy)",
       ],
       endDate: "",
       endDateRules: [
-        (v) => !!v || "End Date must be required",
+        (v) => !!v || "Ngày kết thúc không được để trống",
         (v) =>
           /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-          "Invalid End Date(dd/MM/yyyy)",
+          "Ngày kết thúc không hợp lệ (dd/MM/yyyy)",
       ],
       description: "",
-      descriptionRules: [(v) => !!v || "Description must be required"],
+      descriptionRules: [(v) => !!v || "Mô tả công việc không được để trống"],
     };
   },
   methods: {
@@ -184,7 +184,10 @@ export default {
         var inputStartDate = new Date(this.startDate);
         var inputEndDate = new Date(this.endDate);
         if (inputStartDate.getTime() >= inputEndDate.getTime()) {
-          alert("EndDate can not greater than StartDate\nPlease check again!");
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Ngày bắt đầu không thể nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
+          });
         } else {
           var [day, month, year] = this.startDate.split("/");
           this.startDate = [year, month, day].join("-");

@@ -22,7 +22,7 @@
                       ><span>)Thông tin bắt buộc</span>
                     </div>
                   </div>
-                  <div>
+                  <div class="col-12">
                     <v-select
                       :items="language"
                       label="Chọn ngôn ngữ"
