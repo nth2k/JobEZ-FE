@@ -19,6 +19,7 @@
               </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
               <div v-if="!listSavedJob.length" class="pt-5">
                 Bạn chưa lưu công việc nào
               </div>
@@ -27,25 +28,31 @@
                   <span>{{ index + 1 }}</span>
                 </td>
 
+=======
+              <div v-if="!listSavedJob.length" class="pt-5">Bạn chưa lưu công việc nào</div>
+              <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="savedJob.id">
+                <td class="column"><span>{{ index + 1 }}</span></td>
+             
+>>>>>>> 6928e5a27e763b346a769c91688819d34792011e
                 <td>
                   <div>{{ savedJob.postingJobname }}</div>
 
                   <div><a href="#">(Xem chi tiết)</a></div>
                 </td>
-                <td class="column">
-                  <span>{{ savedJob.postingPosition }}</span>
-                </td>
+                <td class="column"><span>{{ savedJob.postingPosition }}</span></td>
                 <td>
                   <div>{{ savedJob.deadlineForSubmission }}</div>
-                  <div>
-                    <span>{{ countDays(savedJob.deadlineForSubmission) }}</span>
-                  </div>
+                  <div><span>{{ countDays(savedJob.deadlineForSubmission) }}</span></div>
                 </td>
                 <td class="column">
+<<<<<<< HEAD
                   <button
                     class="btn btn-danger btnDelete"
                     @click="deleteSavedJob(savedJob.savedJobKey.postingId)"
                   >
+=======
+                  <button class="btn btn-danger btnDelete" @click="deleteSavedJob(savedJob.id)">
+>>>>>>> 6928e5a27e763b346a769c91688819d34792011e
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -70,11 +77,9 @@
           </table>
         </div>
         <div class="update">
-          <span
-            >Hãy cập nhật thông tin về người tham chiếu hồ sơ của bạn để tăng chất lượng
-            hồ sơ và thu hút nhà tuyển dụng
-            <a href="#" class="text-danger">Cập nhật ngay</a></span
-          >
+          <span>Hãy cập nhật thông tin về người tham chiếu hồ sơ của bạn để tăng
+            chất lượng hồ sơ và thu hút nhà tuyển dụng
+            <a href="#" class="text-danger">Cập nhật ngay</a></span>
         </div>
       </div>
     </div>
@@ -82,17 +87,18 @@
 </template>
 
 <script>
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
-import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
-import SavedJobService from "@/services/SavedJobService.js";
+import SlideBar_candidate from '@/components/ProfileCandidate/slideBar_candidate.vue';
+import Header from '../ToanNT16/candidate/candidate_management/Header.vue';
+import SavedJobService from '@/services/SavedJobService.js'
 // import Header from "./components/views/Header.vue";
 // import SlideBar_candidate from "./components/ProfileCandidate/slideBar_candidate.vue";
 export default {
   name: "SavedJob",
   components: {
     SlideBar_candidate,
-    Header,
+    Header
   },
+<<<<<<< HEAD
   data() {
     return {
       userId: "",
@@ -107,42 +113,46 @@ export default {
       const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
       this.userId = theLoggedUser.user.id;
       SavedJobService.getSavedJobs(this.userId).then((res) => {
+=======
+data(){
+    return{
+      userId: 1,
+      listSavedJob: [],
+    };
+  },
+  methods:{
+    getSavedJobs(userId){
+      SavedJobService.getSavedJobs(userId).then((res) => {
+>>>>>>> 6928e5a27e763b346a769c91688819d34792011e
         this.listSavedJob = res.data;
-      });
+      })
     },
-    deleteSavedJob(savedJobId) {
+    deleteSavedJob(savedJobId){
       let textConfirm = "Press Ok to delete your saved job.";
-      if (confirm(textConfirm) == true) {
-        SavedJobService.deleteSavedJob(savedJobId)
-          .then(() => {
-            this.$store.dispatch("setSnackbar", {
-              text: "Xóa thành công",
-            });
-            location.reload();
-          })
-          .catch(() => {
-            this.$store.dispatch("setSnackbar", {
-              color: "error",
-              text: "Có lỗi xảy ra! Vui lòng thử lại",
-            });
-          });
+      if(confirm(textConfirm) == true){
+        SavedJobService.deleteSavedJob(savedJobId);
+        location.reload();
+        alert('Xóa thành công');
       }
     },
     countDays(date) {
       var datesplit = date.split("/");
       var date1 = new Date(datesplit[1] + "/" + datesplit[0] + "/" + datesplit[2]);
       var date2 = new Date();
-      var duration = Math.ceil(
-        (date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)
-      );
-      return duration < 0
-        ? "(" + Math.abs(duration) + " ngày trước)"
-        : "(Còn " + duration + " ngày)";
+      var duration = Math.ceil((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000));
+      return (duration) < 0 ? "(" + Math.abs(duration) + " ngày trước)" : "(Còn " + duration + " ngày)";
     },
+    
   },
+<<<<<<< HEAD
   created() {
     this.getSavedJobs();
   },
+=======
+  created(){
+    this.getSavedJobs(this.userId);
+  }
+>>>>>>> 6928e5a27e763b346a769c91688819d34792011e
 };
 </script>
 

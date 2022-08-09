@@ -155,27 +155,31 @@ export default {
   },
   data() {
     return {
+<<<<<<< HEAD
       userId: this.$route.params.userId,
+=======
+      userId: 1,
+>>>>>>> 6928e5a27e763b346a769c91688819d34792011e
       position: "",
-      positionRules: [(v) => !!v || "Vị trí công việc không được để trống"],
+      positionRules: [(v) => !!v || "Position must be required"],
       companyName: "",
-      companyNameRules: [(v) => !!v || "Tên công ty không được để trống"],
+      companyNameRules: [(v) => !!v || "Company Name must be required"],
       startDate: "",
       startDateRules: [
-        (v) => !!v || "Ngày bắt đầu không được để trống",
+        (v) => !!v || "Start Date must be required",
         (v) =>
           /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-          "Ngày bắt đầu không hợp lệ (dd/MM/yyyy)",
+          "Invalid Start Date(dd/MM/yyyy)",
       ],
       endDate: "",
       endDateRules: [
-        (v) => !!v || "Ngày kết thúc không được để trống",
+        (v) => !!v || "End Date must be required",
         (v) =>
           /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-          "Ngày kết thúc không hợp lệ (dd/MM/yyyy)",
+          "Invalid End Date(dd/MM/yyyy)",
       ],
       description: "",
-      descriptionRules: [(v) => !!v || "Mô tả công việc không được để trống"],
+      descriptionRules: [(v) => !!v || "Description must be required"],
     };
   },
   methods: {
@@ -184,10 +188,7 @@ export default {
         var inputStartDate = new Date(this.startDate);
         var inputEndDate = new Date(this.endDate);
         if (inputStartDate.getTime() >= inputEndDate.getTime()) {
-          this.$store.dispatch("setSnackbar", {
-            color: "error",
-            text: "Ngày bắt đầu không thể nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
-          });
+          alert("EndDate can not greater than StartDate\nPlease check again!");
         } else {
           var [day, month, year] = this.startDate.split("/");
           this.startDate = [year, month, day].join("-");
@@ -200,19 +201,9 @@ export default {
             startDate: this.startDate,
             endDate: this.endDate,
             userId: this.userId,
-          })
-            .then(() => {
-              this.$store.dispatch("setSnackbar", {
-                text: "Thêm thành công",
-              });
-              this.$router.push("/workexp");
-            })
-            .catch(() => {
-              this.$store.dispatch("setSnackbar", {
-                color: "error",
-                text: "Có lỗi xảy ra! Vui lòng thử lại",
-              });
-            });
+          });
+          window.location = "/workexp";
+          alert("Thêm thành công");
         }
       }
     },

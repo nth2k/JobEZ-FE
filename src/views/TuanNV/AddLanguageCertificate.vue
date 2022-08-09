@@ -22,7 +22,7 @@
                       ><span>)Thông tin bắt buộc</span>
                     </div>
                   </div>
-                  <div class="col-12">
+                  <div>
                     <v-select
                       :items="language"
                       label="Chọn ngôn ngữ"
@@ -122,19 +122,9 @@ export default {
           name: this.languageName,
           mark: this.grade,
           userId: this.userId,
-        })
-          .then(() => {
-            this.$store.dispatch("setSnackbar", {
-              text: "Thêm thành công",
-            });
-            this.$router.push("/language");
-          })
-          .catch(() => {
-            this.$store.dispatch("setSnackbar", {
-              color: "error",
-              text: "Có lỗi xảy ra! Vui lòng thử lại",
-            });
-          });
+        });
+        window.location = "/language";
+        alert("Thêm thành công");
       }
     },
   },

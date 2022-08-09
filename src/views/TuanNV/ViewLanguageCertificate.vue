@@ -169,6 +169,7 @@ export default {
     deleteLanguageCertificate(languageId) {
       let textConfirm = "Press Ok to delete your language certificate.";
       if (confirm(textConfirm) == true) {
+<<<<<<< HEAD
         LanguageCertificateService.deleteLanguageCertificate(languageId)
           .then(() => {
             this.$store.dispatch("setSnackbar", {
@@ -182,6 +183,11 @@ export default {
               text: "Có lỗi xảy ra! Vui lòng thử lại",
             });
           });
+=======
+        LanguageCertificateService.deleteLanguageCertificate(languageId);
+        alert("Xóa thành công");
+        location.reload();
+>>>>>>> 6928e5a27e763b346a769c91688819d34792011e
       }
     },
   },
