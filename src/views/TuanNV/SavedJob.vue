@@ -22,7 +22,7 @@
               <div v-if="!listSavedJob.length" class="pt-5">
                 Bạn chưa lưu công việc nào
               </div>
-              <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="savedJob.id">
+              <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="index">
                 <td class="column">
                   <span>{{ index + 1 }}</span>
                 </td>
@@ -44,7 +44,7 @@
                 <td class="column">
                   <button
                     class="btn btn-danger btnDelete"
-                    @click="deleteSavedJob(savedJob.id)"
+                    @click="deleteSavedJob(savedJob.savedJobKey.postingId)"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

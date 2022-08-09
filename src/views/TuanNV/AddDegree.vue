@@ -143,7 +143,7 @@
                       :items="ranks"
                       label="Chọn xếp loại"
                       outlined
-                      :rules="rankRules"
+                      :rules="rankNameRules"
                       v-model="rankName"
                       required
                     ></v-select>
@@ -173,7 +173,12 @@
                     ></v-textarea>
                   </div>
                   <div class="text-center container">
-                    <button class="btn btn-primary btnSave px-5">Lưu</button>
+                    <button
+                      class="btn btn-primary btnSave px-5"
+                      @click.prevent="addCertificate"
+                    >
+                      Lưu
+                    </button>
                   </div>
                 </div>
               </div>
@@ -189,7 +194,7 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
-// import CertificateService from "@/services/CertificateService.js";
+import DegreeService from "@/services/DegreeService";
 export default {
   name: "AddDegree",
   components: {
@@ -204,9 +209,19 @@ export default {
       teachingUnit: "",
       teachingUnitRules: [(v) => !!v || "Tên đơn vị giảng dạy không được để trống"],
       startDate: "",
-      startDateRules: [(v) => !!v || "Ngày bắt đầu không được để trống"],
+      startDateRules: [
+        (v) => !!v || "Ngày bắt đầu không được để trống",
+        (v) =>
+          /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
+          "Ngày bắt đầu không hợp lệ (dd/MM/yyyy)",
+      ],
       endDate: "",
-      endDateRules: [(v) => !!v || "Ngày kết thúc không được để trống"],
+      endDateRules: [
+        (v) => !!v || "Ngày kết thúc không được để trống",
+        (v) =>
+          /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
+          "Ngày kết thúc không hợp lệ (dd/MM/yyyy)",
+      ],
       majorName: "",
       majorNameRules: [(v) => !!v || "Tên chuyên ngành không được để trống"],
       rankName: "",
@@ -214,10 +229,11 @@ export default {
       ranks: ["Giỏi", "Khá", "Trung bình", "Yếu"],
       description: "",
       descriptionRules: [(v) => !!v || "Thông tin bổ sung không được để trống"],
+      userId: this.$route.params.userId,
     };
   },
   methods: {
-    addCertificate() {
+    async addCertificate() {
       if (this.$refs.form.validate()) {
         var inputStartDate = new Date(this.startDate);
         var inputEndDate = new Date(this.endDate);
@@ -231,12 +247,32 @@ export default {
           this.startDate = [year, month, day].join("-");
           [day, month, year] = this.endDate.split("/");
           this.endDate = [year, month, day].join("-");
-          // CertificateService.addCertificate({});
+          DegreeService.addCertificate({
+            certificateName: this.degree,
+            teachingUnit: this.teachingUnit,
+            startTime: this.startDate,
+            endTime: this.endDate,
+            major: this.majorName,
+            rank: this.rankName,
+            supplementaryInformation: this.description,
+            userId: this.userId,
+          })
+            .then(() => {
+              this.$store.dispatch("setSnackbar", {
+                text: "Thêm thành công",
+              });
+              this.$router.push("/degree");
+            })
+            .catch(() => {
+              this.$store.dispatch("setSnackbar", {
+                color: "error",
+                text: "Có lỗi xảy ra! Vui lòng thử lại",
+              });
+            });
         }
       }
     },
   },
-  created() {},
 };
 </script>
 

@@ -13,10 +13,10 @@
           <div class="titleRight">Học vấn - bằng cấp</div>
           <div class="container">
             <!-- <div v-if="!listWorkExp.length">Bạn chưa có bằng cấp học vấn</div> -->
-            <div class="block">
+            <div class="block" v-for="degree in listDegree" v-bind:key="degree.id">
               <span id="show" @click="showDetail">
                 <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i
-                ><span class="ml-1">Tốt nghiệp Đại học</span>
+                >{{ degree.certificateName }}
               </span>
               <div style="padding: 0; float: right">
                 <span class="icon_tt">
@@ -35,7 +35,7 @@
                     class="dropdown-menu dropdown-menu-right"
                     aria-labelledby="userDropdownMenuLink"
                   >
-                    <span class="dropdown-item"
+                    <span class="dropdown-item" @click="addDegree"
                       ><svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -53,7 +53,7 @@
                       </svg>
                       Thêm</span
                     >
-                    <span class="dropdown-item"
+                    <span class="dropdown-item" @click="editDegree(degree.id)"
                       ><svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -72,7 +72,7 @@
                       </svg>
                       Sửa</span
                     >
-                    <span class="dropdown-item remove"
+                    <span class="dropdown-item remove" @click="deleteDegree(degree.id)"
                       ><svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -93,14 +93,15 @@
               <div class="detail container p-3 mt-2" id="detailInfo">
                 <div>
                   <span class="font-weight-bold">Chuyên ngành: </span
-                  ><span>Kỹ thuật phần mềm</span>
+                  ><span>{{ degree.major }}</span>
                 </div>
                 <div>
-                  <span class="font-weight-bold">Tại: </span><span>Đại học FPT</span>
+                  <span class="font-weight-bold">Tại: </span
+                  ><span>{{ degree.teachingUnit }}</span>
                 </div>
                 <div>
                   <span class="font-weight-bold">Từ: </span
-                  ><span>20/07/2015 - 30/08/2022 (4 năm)</span>
+                  ><span>{{ countYear(degree.startTime, degree.endTime) }}</span>
                 </div>
               </div>
             </div>
@@ -115,6 +116,7 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
+import DegreeService from "@/services/DegreeService";
 export default {
   name: "ViewDegree",
   components: {
@@ -122,9 +124,15 @@ export default {
     Header,
     Profile_menu,
   },
+  data() {
+    return {
+      userId: "",
+      listDegree: [],
+    };
+  },
   methods: {
     showDetail(e) {
-      // console.log(e.target.nextElementSibling.nextElementSibling);
+      // console.log(e.target.nextElementSibling);
       const detail = e.target.nextElementSibling.nextElementSibling;
       const icon = e.target.firstChild;
       if (detail.style.display == "none") {
@@ -135,6 +143,66 @@ export default {
         icon.classList.toggle("rotate");
       }
     },
+    getDegree() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      this.userId = theLoggedUser.user.id;
+      DegreeService.getAllDegrees(this.userId).then((rs) => {
+        this.listDegree = rs.data;
+      });
+    },
+    countYear(date1, date2) {
+      var year1 = date1.substring(0, 4); // get only two digits
+      var month1 = date1.substring(5, 7);
+      var day1 = date1.substring(8, 10);
+      date1 = day1 + "/" + month1 + "/" + year1;
+      var year2 = date2.substring(0, 4); // get only two digits
+      var month2 = date2.substring(5, 7);
+      var day2 = date2.substring(8, 10);
+      date2 = day2 + "/" + month2 + "/" + year2;
+      if (year2 - year1 == 0) {
+        return (
+          date1 + " - " + date2 + "(" + (parseInt(month2) - parseInt(month1) + " tháng)")
+        );
+      } else if (month2 - month1 == 0) {
+        return date1 + " - " + date2 + "(" + (parseInt(day2) - parseInt(day1) + " ngày)");
+      } else
+        return (
+          date1 + " - " + date2 + "(" + (parseInt(year2) - parseInt(year1) + " năm)")
+        );
+    },
+    deleteDegree(id) {
+      let textConfirm = "Nhấn OK để xóa bằng cấp của bạn";
+      if (confirm(textConfirm) == true) {
+        DegreeService.deleteDegree(id, this.userId)
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Xóa thành công",
+            });
+            location.reload();
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
+      }
+    },
+    addDegree() {
+      this.$router.push({
+        name: "AddDegree",
+        params: { userId: this.userId },
+      });
+    },
+    editDegree(degreeId) {
+      this.$router.push({
+        name: "EditDegree",
+        params: { userId: this.userId, id: degreeId },
+      });
+    },
+  },
+  created() {
+    this.getDegree();
   },
 };
 </script>
