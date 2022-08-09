@@ -233,7 +233,7 @@ export default {
     };
   },
   methods: {
-    async addCertificate() {
+    addCertificate() {
       if (this.$refs.form.validate()) {
         var inputStartDate = new Date(this.startDate);
         var inputEndDate = new Date(this.endDate);

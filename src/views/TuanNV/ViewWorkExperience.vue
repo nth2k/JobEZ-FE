@@ -81,11 +81,7 @@ export default {
   data() {
     return {
       listWorkExp: [],
-<<<<<<< HEAD
       userId: "",
-=======
-      userId: 1,
->>>>>>> 6928e5a27e763b346a769c91688819d34792011e
     };
   },
   methods: {
@@ -116,7 +112,6 @@ export default {
     deleteWorkExp(id) {
       let textConfirm = "Press Ok to delete your work experience.";
       if (confirm(textConfirm) == true) {
-<<<<<<< HEAD
         WorkExperienceService.deleteWorkExp(id)
           .then(() => {
             this.$store.dispatch("setSnackbar", {
@@ -130,11 +125,6 @@ export default {
               text: "Có lỗi xảy ra! Vui lòng thử lại",
             });
           });
-=======
-        WorkExperienceService.deleteWorkExp(id);
-        location.reload();
-        alert("Xóa thành công");
->>>>>>> 6928e5a27e763b346a769c91688819d34792011e
       }
     },
   },

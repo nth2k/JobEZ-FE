@@ -25,12 +25,6 @@
                     </div>
                   </div>
                   <div class="col-12">
-                    <!-- <input
-                      class="form-control"
-                      type="text"
-                      id="bangcap"
-                      placeholder="Nhập bằng cấp chứng chỉ"
-                    /> -->
                     <v-textarea
                       label="Nhập bằng cấp chứng chỉ"
                       v-model="certificate"
@@ -49,12 +43,6 @@
                     <span>Nhập trường / đơn vị dạy <span class="star">*</span></span>
                   </div>
                   <div>
-                    <!-- <input
-                      class="form-control"
-                      type="text"
-                      id="donvigiangday"
-                      placeholder="Nhập tên trường / đơn vị giảng dạy"
-                    /> -->
                     <v-textarea
                       label="Nhập tên trường / đơn vị giảng dạy"
                       v-model="teachingUnit"
@@ -106,12 +94,6 @@
                     <span>Chuyền ngành <span class="star">*</span></span>
                   </div>
                   <div>
-                    <!-- <input
-                      class="form-control"
-                      type="text"
-                      id="tenchuyennganh"
-                      placeholder="Nhập tên chuyên ngành"
-                    /> -->
                     <v-textarea
                       label="Nhập tên chuyên ngành"
                       v-model="majorName"
@@ -130,15 +112,6 @@
                     <span>Xếp loại <span class="star">*</span></span>
                   </div>
                   <div>
-                    <!-- <label for="married">Xếp loại <span class="text-danger">*</span></label> -->
-                    <!-- <select name="married" id="married" class="form-control">
-                      <option value="-1">Chọn xếp loại</option>
-                      <option value="S">S</option>
-                      <option value="A">A</option>
-                      <option value="B">B</option>
-                      <option value="C">C</option>
-                      <option value="D">D</option>
-                    </select> -->
                     <v-select
                       :items="ranks"
                       label="Chọn xếp loại"
@@ -156,11 +129,6 @@
                     >
                   </div>
                   <div class="form-group shadow-textarea">
-                    <!-- <textarea
-                      class="form-control z-depth-1"
-                      rows="5"
-                      placeholder="Bổ sung các thông tin của bạn"
-                    ></textarea> -->
                     <v-textarea
                       v-model="description"
                       :rules="descriptionRules"

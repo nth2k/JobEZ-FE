@@ -123,7 +123,6 @@ export default {
     deleteAppliedJob(appliedjobId) {
       let textConfirm = "Press Ok to delete your applied job.";
       if (confirm(textConfirm) == true) {
-<<<<<<< HEAD
         AppliedJobService.deleteAppliedJob(appliedjobId)
           .then(() => {
             this.$store.dispatch("setSnackbar", {
@@ -137,11 +136,6 @@ export default {
               text: "Có lỗi xảy ra! Vui lòng thử lại",
             });
           });
-=======
-        AppliedJobService.deleteAppliedJob(appliedjobId);
-        location.reload();
-        alert("Xóa thành công");
->>>>>>> 6928e5a27e763b346a769c91688819d34792011e
       }
     },
     countDaysDeadlineForSubmission(date) {

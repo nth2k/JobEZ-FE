@@ -140,6 +140,15 @@ export const routes = [
     component: () => import("@/views/TuanNV/SelfSkill.vue"),
   },
   {
+    path: '/adddegree',
+    name: 'AddDegree',
+    component: () => import("@/views/TuanNV/AddDegree.vue")
+  }, {
+    path: '/degree',
+    name: 'ViewDegree',
+    component: () => import("@/views/TuanNV/ViewDegree.vue")
+  },
+  {
     path: "/recruiter-list",
     name: "RecruiterList",
     component: RecruiterList,
@@ -170,25 +179,6 @@ export const routes = [
     component: CoverLetter,
   },
   {
-<<<<<<< HEAD
-    path: '/appliedCandidate',
-    name: 'AppliedCandidate',
-    component: () => import("@/views/HiepViews/AppliedCandidate.vue")
-  },{
-    path: "/cv",
-    name: "CVs",
-    component: CVs,
-  },
-  {
-    path: "/job-application",
-    name: "JobApplication",
-    component: JobApplication,
-  },
-  {
-    path: "/cover-letter",
-    name: "CoverLetter",
-    component: CoverLetter,
-=======
     path: "/recruiterManagement",
     name: "RecruiterManagement",
     component: () => import("@/views/HiepViews/RecruiterManagement.vue"),
@@ -207,7 +197,6 @@ export const routes = [
     path: "/appliedCandidate",
     name: "AppliedCandidate",
     component: () => import("@/views/HiepViews/AppliedCandidate.vue"),
->>>>>>> 6928e5a27e763b346a769c91688819d34792011e
   },
 ];
 

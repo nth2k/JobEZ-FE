@@ -155,11 +155,7 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
       userId: this.$route.params.userId,
-=======
-      userId: 1,
->>>>>>> 6928e5a27e763b346a769c91688819d34792011e
       position: "",
       positionRules: [(v) => !!v || "Position must be required"],
       companyName: "",
@@ -183,12 +179,15 @@ export default {
     };
   },
   methods: {
-    async addWorkExp() {
+    addWorkExp() {
       if (this.$refs.form.validate()) {
         var inputStartDate = new Date(this.startDate);
         var inputEndDate = new Date(this.endDate);
         if (inputStartDate.getTime() >= inputEndDate.getTime()) {
-          alert("EndDate can not greater than StartDate\nPlease check again!");
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Ngày bắt đầu không thể nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
+          });
         } else {
           var [day, month, year] = this.startDate.split("/");
           this.startDate = [year, month, day].join("-");
@@ -201,9 +200,19 @@ export default {
             startDate: this.startDate,
             endDate: this.endDate,
             userId: this.userId,
-          });
-          window.location = "/workexp";
-          alert("Thêm thành công");
+          })
+            .then(() => {
+              this.$store.dispatch("setSnackbar", {
+                text: "Thêm thành công",
+              });
+              this.$router.push("/workexp");
+            })
+            .catch(() => {
+              this.$store.dispatch("setSnackbar", {
+                color: "error",
+                text: "Có lỗi xảy ra! Vui lòng thử lại",
+              });
+            });
         }
       }
     },

@@ -15,7 +15,6 @@
           </div>
           <v-form ref="form">
             <div class="form-group shadow-textarea">
-<<<<<<< HEAD
               <v-textarea
                 v-model="careerGoal"
                 filled
@@ -25,14 +24,12 @@
                 outlined
                 required
               ></v-textarea>
-=======
-              <v-textarea v-model="careerGoal" :rules="careerGoalRules" filled label="Mô tả ngắn ngọn mục tiêu nghề nghiệp" auto-grow
-                    background-color="white" outlined required></v-textarea>
->>>>>>> 6928e5a27e763b346a769c91688819d34792011e
             </div>
             <div class="row">
               <div class="d-flex col-12 justify-content-center">
-                <button class="btn btn-primary px-5" @click.prevent="updateCareerGoal">Lưu</button>
+                <button class="btn btn-primary px-5" @click.prevent="updateCareerGoal">
+                  Lưu
+                </button>
               </div>
             </div>
           </v-form>
@@ -48,7 +45,7 @@ import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import CareerGoalService from "@/services/CareerGoalService";
 export default {
-  name:"CareerGoal",
+  name: "CareerGoal",
   components: {
     profile_menu,
     SlideBar_candidate,
@@ -58,7 +55,6 @@ export default {
     return {
       id: "",
       careerGoal: "",
-<<<<<<< HEAD
       // careerGoalRules: [(v) => !!v || "Career Goal must be required"],
       userId: "",
     };
@@ -68,43 +64,21 @@ export default {
       const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
       this.userId = theLoggedUser.user.id;
       CareerGoalService.getCareerGoal(this.userId).then((rs) => {
-=======
-      careerGoalRules: [
-        (v) => !!v || "Career Goal must be required"
-      ],
-      userId: 1,
-    };
-  },
-  methods: {
-    getCareerGoal(id){
-      CareerGoalService.getCareerGoal(id).then((rs) => {
->>>>>>> 6928e5a27e763b346a769c91688819d34792011e
         this.id = rs.data.id;
         this.careerGoal = rs.data.careerGoal;
-      })
-<<<<<<< HEAD
-        .then(() => {
-          this.$store.dispatch("setSnackbar", {
-            text: "Cập nhật thành công",
-          });
-          location.reload();
-        })
-        .catch(() => {
-          this.$store.dispatch("setSnackbar", {
-            color: "error",
-            text: "Có lỗi xảy ra! Vui lòng thử lại",
-          });
-        });
-=======
->>>>>>> 6928e5a27e763b346a769c91688819d34792011e
+      });
     },
-    updateCareerGoal(){
-      CareerGoalService.updateCareerGoal({id: this.id, careerGoal: this.careerGoal, userId: this.userId});
-    }
+    updateCareerGoal() {
+      CareerGoalService.updateCareerGoal({
+        id: this.id,
+        careerGoal: this.careerGoal,
+        userId: this.userId,
+      });
+    },
   },
-  created(){
+  created() {
     this.getCareerGoal(this.userId);
-  }
+  },
 };
 </script>
 

@@ -71,7 +71,6 @@ export default {
       SelfSkillService.updateSelfSkill({
         selfSkill: this.selfSkill,
         userId: this.userId,
-<<<<<<< HEAD
       })
         .then(() => {
           this.$store.dispatch("setSnackbar", {
@@ -85,9 +84,6 @@ export default {
             text: "Có lỗi xảy ra! Vui lòng thử lại",
           });
         });
-=======
-      });
->>>>>>> 6928e5a27e763b346a769c91688819d34792011e
     },
   },
   created() {
