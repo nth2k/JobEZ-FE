@@ -30,6 +30,7 @@
           <v-select
             :items="workingForm"
             v-model="selectedWorkingForm"
+            item-value="last"
             @change="
               (e) => {
                 this.selectedWorkingForm = e;
@@ -176,7 +177,7 @@
             </template>
             <v-date-picker
               v-model="date"
-              :active-picker.sync="activePicker"              
+              :active-picker.sync="activePicker"
               min="1950-01-01"
               @change="save"
             ></v-date-picker> </v-menu
@@ -184,8 +185,8 @@
         </v-form>
       </div>
       <div class="text-center">
-        <button class="btn btn-primary active w-25" @click="addPosting">
-          Đăng tin
+        <button class="btn btn-primary active w-25" @click="updatePosting">
+          Sửa tin
         </button>
         <button class="btn btn-light w-25" @click="cancelAddPosting">
           Hủy tạo tin
@@ -200,7 +201,7 @@ import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import RecruiterNavigator from "@/components/HiepComponents/RecruiterNavigator.vue";
 import RecruiterManagementService from "@/services/RecruiterManagementService.js";
 export default {
-  name: "RecruiterAddNewPosting",
+  name: "RecruiterUpdatePosting",
   components: { Header, RecruiterNavigator },
   data() {
     return {
@@ -210,10 +211,10 @@ export default {
         (v) => (v && v.length > 5) || "position must be more than 5 characters",
       ],
       degreeRequired: ["Không yêu cầu", "Cao đẳng trở lên", "Đại học trở lên"],
-      selectedDegreeRequired: "",
+      selectedDegreeRequired: "Đại học trở lên",
       degreeRequiredRules: [(v) => !!v || "degreeRequiredRules is required"],
       workingForm: ["Onsite", "Remote"],
-      selectedWorkingForm: "",
+      selectedWorkingForm: "Onsite",
       workingFormRules: [(v) => !!v || "workingForm is required"],
       salary: [
         "3-5 triệu",
@@ -222,7 +223,7 @@ export default {
         "10-15 triệu",
         "15-20 triệu",
       ],
-      selectedSalary: "",
+      selectedSalary: "7-10 triệu",
       salaryRules: [(v) => !!v || "salary is required"],
       quantity: "",
       quantityRules: [
@@ -236,7 +237,7 @@ export default {
           (v && v.length > 5) || "description must be more than 5 characters",
       ],
       gender: ["Không yêu cầu", "Nam", "Nữ"],
-      selectedGender: "",
+      selectedGender: "Không yêu cầu",
       genderRules: [(v) => !!v || "gender is required"],
       benefits: "",
       benefitsRules: [
@@ -264,28 +265,23 @@ export default {
     cancelAddPosting() {
       this.$router.push("/recruiterPostedPosting");
     },
-    addPosting() {
+    updatePosting() {
       if (this.$refs.form.validate()) {
-        const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
-
-        RecruiterManagementService.addPosting({
-          email: theLoggedUser.user.email,
+        RecruiterManagementService.updatePosting(this.$route.params.id, {
           position: this.position,
-          workingForm: 1,
-          salary: 1,
           quantity: this.quantity,
           description: this.description,
           degreeRequired: this.selectedDegreeRequired,
           genderRequirement: this.selectedGender,
           benefits: this.benefits,
           file: this.files,
-          deadlineForSubmission: this.date,
+          deadlineForSubmission: this.date, 
         })
           .then(() => {
             this.$store.dispatch("setSnackbar", {
               text: "Thêm công việc thành công",
             });
-            this.$router.push("/recruiterManagement");
+            this.$router.push("/recruiterPostedPosting");
           })
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
@@ -296,6 +292,16 @@ export default {
       }
     },
   },
+  created(){
+    RecruiterManagementService.getPostingById(this.$route.params.id).then((rs) => {
+        this.position = rs.data.position;
+        this.quantity = rs.data.quantity;
+        this.description = rs.data.description;
+        this.benefits = rs.data.benefits;
+        this.files = rs.data.file;
+        this.date = rs.data.deadlineForSubmission;
+    })
+  }
 };
 </script>
 

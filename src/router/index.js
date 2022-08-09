@@ -180,9 +180,14 @@ export const routes = [
     component: () => import("@/views/HiepViews/RecruiterAddNewPosting.vue"),
   },
   {
-    path: "/postedPosting",
-    name: "PostedPosting",
-    component: () => import("@/views/HiepViews/PostedPosting.vue"),
+    path: "/recruiterUpdatePosting/:id",
+    name: "RecruiterUpdatePosting",
+    component: () => import("@/views/HiepViews/RecruiterUpdatePosting.vue"),
+  },
+  {
+    path: "/recruiterPostedPosting",
+    name: "RecruiterPostedPosting",
+    component: () => import("@/views/HiepViews/RecruiterPostedPosting.vue"),
   },
   {
     path: "/appliedCandidate",
