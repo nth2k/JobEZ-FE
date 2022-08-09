@@ -6,6 +6,9 @@ class DegreeService {
     getAllDegrees(userId){
         return axios.get(Base_URL + "/degree/"+ userId); 
     }
+    getDegree(id){
+        return axios.get(Base_URL + "/degree/edit/"+ id); 
+    }
     addCertificate(degree) {
         return axios.post(Base_URL + "/degree/add", degree);
     }

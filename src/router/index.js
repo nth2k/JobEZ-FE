@@ -147,6 +147,10 @@ export const routes = [
     path: '/degree',
     name: 'ViewDegree',
     component: () => import("@/views/TuanNV/ViewDegree.vue")
+  },{
+    path: '/editdegree',
+    name: 'EditDegree',
+    component: () => import("@/views/TuanNV/EditDegree.vue")
   },
   {
     path: "/recruiter-list",

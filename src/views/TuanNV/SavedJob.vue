@@ -22,15 +22,6 @@
               <div v-if="!listSavedJob.length" class="pt-5">
                 Bạn chưa lưu công việc nào
               </div>
-              <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="index">
-                <td class="column">
-                  <span>{{ index + 1 }}</span>
-                </td>
-                <div v-if="!listSavedJob.length" class="pt-5">
-                  Bạn chưa lưu công việc nào
-                </div>
-              </tr>
-
               <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="savedJob.id">
                 <td class="column">
                   <span>{{ index + 1 }}</span>
@@ -52,7 +43,7 @@
                 <td class="column">
                   <button
                     class="btn btn-danger btnDelete"
-                    @click="deleteSavedJob(savedJob.savedJobKey.postingId)"
+                    @click="deleteSavedJob(savedJob.postingId)"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -118,12 +109,23 @@ export default {
         this.listSavedJob = res.data;
       });
     },
-    deleteSavedJob(savedJobId) {
-      let textConfirm = "Press Ok to delete your saved job.";
+    deleteSavedJob(postingId) {
+      // console.log("postingId: " + postingId + "| userId: " + this.userId);
+      let textConfirm = "Click OK để xóa công việc đã lưu";
       if (confirm(textConfirm) == true) {
-        SavedJobService.deleteSavedJob(savedJobId);
-        location.reload();
-        alert("Xóa thành công");
+        SavedJobService.deleteSavedJob({ user_id: this.userId, posting_id: postingId })
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Xóa thành công",
+            });
+            location.reload();
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
       }
     },
     countDays(date) {

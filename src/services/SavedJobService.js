@@ -6,8 +6,8 @@ class SavedJobService{
     getSavedJobs(id){
         return axios.get(Base_URL + "/savedjob/" + id);
     }
-    deleteSavedJob(id){
-        return axios.delete(Base_URL + "/savedjob/delete/" + id)
+    deleteSavedJob(savedjobkey){
+        return axios.delete(Base_URL + "/savedjob/delete", savedjobkey);
     }
 }
 

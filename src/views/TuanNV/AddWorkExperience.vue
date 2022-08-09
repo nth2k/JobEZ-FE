@@ -186,7 +186,7 @@ export default {
         if (inputStartDate.getTime() >= inputEndDate.getTime()) {
           this.$store.dispatch("setSnackbar", {
             color: "error",
-            text: "Ngày bắt đầu không thể nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
+            text: "Ngày bắt đầu phải nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
           });
         } else {
           var [day, month, year] = this.startDate.split("/");

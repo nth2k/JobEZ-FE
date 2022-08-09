@@ -12,7 +12,7 @@
         <div class="right col-9">
           <div class="titleheader">Học vấn - Bằng cấp</div>
           <div class="container ml-3">
-            <v-form rel="form">
+            <v-form ref="form">
               <div class="row block2">
                 <div class="col-12">
                   <div class="title">
@@ -27,12 +27,12 @@
                   <div class="col-12">
                     <v-textarea
                       label="Nhập bằng cấp chứng chỉ"
-                      v-model="certificate"
+                      v-model="degree"
                       outlined
                       filled
                       no-resize
                       rows="1"
-                      :rules="certificateRules"
+                      :rules="degreeRules"
                       required
                       background-color="white"
                     ></v-textarea>
@@ -140,17 +140,11 @@
                       required
                     ></v-textarea>
                   </div>
-                  <div class="text-center container">
-                    <button
-                      class="btn btn-primary btnSave px-5"
-                      @click.prevent="saveDegree"
-                    >
-                      Lưu
-                    </button>
-                  </div>
+                  <div class="text-center container"></div>
                 </div>
               </div>
             </v-form>
+            <button class="btn btn-primary btnSave px-5" @click="saveDegree">Lưu</button>
           </div>
         </div>
       </div>
@@ -165,7 +159,7 @@ import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import DegreeService from "@/services/DegreeService";
 // import CertificateService from "@/services/CertificateService.js";
 export default {
-  name: "AddDegree",
+  name: "EditDegree",
   components: {
     SlideBar_candidate,
     Header,
@@ -203,6 +197,24 @@ export default {
     };
   },
   methods: {
+    getDegreeById(id) {
+      DegreeService.getDegree(id).then((res) => {
+        this.degree = res.data.certificateName;
+        this.teachingUnit = res.data.teachingUnit;
+        this.startDate = this.formatDate(res.data.startTime);
+        this.endDate = this.formatDate(res.data.endTime);
+        this.majorName = res.data.major;
+        this.rankName = res.data.rank;
+        this.description = res.data.supplementaryInformation;
+      });
+    },
+    formatDate(date) {
+      var [year, month, day] = date.split("-");
+      return [day, month, year].join("/");
+    },
+    validate() {
+      this.$refs.form.validate();
+    },
     saveDegree() {
       if (this.$refs.form.validate()) {
         var inputStartDate = new Date(this.startDate);
@@ -210,7 +222,7 @@ export default {
         if (inputStartDate.getTime() >= inputEndDate.getTime()) {
           this.$store.dispatch("setSnackbar", {
             color: "error",
-            text: "Ngày bắt đầu không thể nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
+            text: "Ngày bắt đầu phải nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
           });
         } else {
           var [day, month, year] = this.startDate.split("/");
@@ -244,7 +256,9 @@ export default {
       }
     },
   },
-  created() {},
+  created() {
+    this.getDegreeById(this.id);
+  },
 };
 </script>
 
