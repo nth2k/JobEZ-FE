@@ -18,6 +18,12 @@ class RecruiterManagementService {
   deletePostingById(postingId){
     return axios.delete(Base_URL + "/posting/updatePosting/" + postingId);
   }
+  getStatisticById(recruiterId){
+    return axios.post(Base_URL + "/recruiter/recruiter-management", recruiterId);
+  }
+  getAppliedCandidate(recruiterId){
+    return axios.post(Base_URL + "/recruiter/applied-candidate", recruiterId);
+  }
 }
 
 export default new RecruiterManagementService();
