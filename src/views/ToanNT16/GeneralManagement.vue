@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div v-if="isGetSuitablePostingFunction" class="container-fluid">
     <div class="row">
       <div class="col-2 p-0 position-sticky"><Navigator /></div>
       <div class="col-10">
@@ -19,11 +19,11 @@ import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import Navigator from "@/views/ToanNT16/candidate/candidate_management/Navigator.vue";
 import Suggesstions from "@/views/ToanNT16/candidate/cv_menu/Suggesstions.vue";
 import SuitableJobs from "@/views/ToanNT16/candidate/candidate_management/SuitableJobs.vue";
-// import CurriculumVitae from "@/components/ToanComponents/CurriculumVitae.vue";
 import InformationRecruitment from "@/views/ToanNT16/candidate/candidate_management/InformationRecruitment.vue";
 import News from "@/views/ToanNT16/candidate/candidate_management/News.vue";
 import LookupInformation from "@/views/ToanNT16/candidate/candidate_management/LookupInformation.vue";
-
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "GeneralManagement",
   components: {
@@ -34,6 +34,16 @@ export default {
     InformationRecruitment,
     News,
     LookupInformation,
+  },
+  async created() {
+    const email = "nguyenthịha@gmail.com";
+    this.getSuitablePosting({ email });
+  },
+  methods: {
+    ...mapActions(["getSuitablePosting"]),
+  },
+  computed: {
+    ...mapGetters(["isGetSuitablePostingFunction"]),
   },
 };
 </script>

@@ -12,11 +12,11 @@ const getters = {
 };
 
 const actions = {
-  getJobById: async ({ commit, state }, { userId, postingId }) => {
+  getJobById: async ({ commit, state }, { postingId }) => {
     state.isGetAPI = false;
     await axios
       .post("http://localhost:8080" + "/posting/" + postingId, {
-        user_id: userId,
+        // user_id: userId,
         posting_id: postingId,
       })
       .then((response) => {

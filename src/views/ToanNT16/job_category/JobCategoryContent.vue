@@ -14,8 +14,10 @@
             </div>
             <div class="col-11">
               <div class="text-left h5 font-weight-bold text-dark">
-                Tuyển Dụng, Tìm Việc Làm IT Phần Mềm Tháng 08/2022 (1035 Việc
-                Làm)
+                Tuyển Dụng, Tìm Việc Làm IT Phần Mềm Tháng 08/2022 ({{
+                  numberOfPage
+                }}
+                Việc Làm)
               </div>
             </div>
           </div>
@@ -24,7 +26,7 @@
           <div class="container">
             <div class="row">
               <div
-                v-for="(item, index) in getPostings"
+                v-for="(item, index) in getPostings.postings"
                 :key="index"
                 class="col-5 mr-5 mb-5 border"
               >
@@ -119,6 +121,73 @@
             </div>
           </div>
         </div>
+        <div class="col-12">
+          <div class="paging-container">
+            <div class="row">
+              <div class="col-5"></div>
+              <div class="col-2">
+                <div v-if="isPostingCategoryFunction" class="row">
+                  <div
+                    class="col-2"
+                    v-for="index in numberOfPage"
+                    :key="index"
+                    @click="
+                      getPostingByCategory({
+                        categoryId: getPostingByCategory.postingCategoryId,
+                        pageOffSet: index,
+                      })
+                    "
+                  >
+                    <span
+                      class="px-4 py-3 rounded text-center border"
+                      style="cursor: pointer"
+                      >{{ index }}
+                    </span>
+                  </div>
+                </div>
+                <div v-else-if="isProvinceFunction" class="row">
+                  <div
+                    class="col-2"
+                    v-for="index in 3"
+                    :key="index"
+                    @click="
+                      getPostingByProvince({
+                        provinceId: getPostingByProvince.provinceId,
+                        pageOffSet: index,
+                      })
+                    "
+                  >
+                    <span
+                      class="px-4 py-3 rounded text-center border"
+                      style="cursor: pointer"
+                      >{{ index }}
+                    </span>
+                  </div>
+                </div>
+                <div v-else-if="isCityFunction" class="row">
+                  <div
+                    class="col-2"
+                    v-for="index in numberOfPage"
+                    :key="index"
+                    @click="
+                      getPostingByCity({
+                        cityId: getPostings.cityId,
+                        pageOffSet: index,
+                      })
+                    "
+                  >
+                    <span
+                      class="px-4 py-3 rounded text-center border"
+                      style="cursor: pointer"
+                      >{{ index }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-5"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -132,7 +201,7 @@ export default {
     const provinceId = this.$route.params.provinceId;
     const cityId = this.$route.params.cityId;
     const categoryId = this.$route.params.postingCategory;
-    const pageOffSet = 1;
+    const pageOffSet = this.$route.params.pageOffSet;
     if (provinceId !== undefined) {
       await this.getPostingByProvince({ provinceId, pageOffSet });
     } else if (cityId !== undefined) {
@@ -149,10 +218,22 @@ export default {
     ]),
   },
   computed: {
-    ...mapGetters(["getPostings", "isGetPostingFunction"]),
+    ...mapGetters([
+      "getPostings",
+      "isGetPostingFunction",
+      "isPostingCategoryFunction",
+      "isProvinceFunction",
+      "isCityFunction",
+    ]),
     ...mapState(["isGetPosting"]),
+    numberOfPage() {
+      return Math.round(this.getPostings.numberOfRecords / 30) + 1;
+    },
   },
 };
 </script>
 <style>
+.page-number {
+  cursor: pointer;
+}
 </style>

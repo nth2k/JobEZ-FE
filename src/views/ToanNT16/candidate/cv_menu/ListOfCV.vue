@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row mx-auto">
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv02" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img class="img-fluid" src="@/assets/cv-it/cv_40.jpg" alt="QC/QA" />
           </div>
@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -58,7 +58,7 @@
 
     <div class="row mx-auto">
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -86,7 +86,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -100,7 +100,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -116,7 +116,7 @@
     </div>
     <div class="row mx-auto">
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -130,7 +130,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -144,7 +144,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -158,7 +158,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -174,7 +174,7 @@
     </div>
     <div class="row mx-auto">
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -188,7 +188,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -202,7 +202,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -216,7 +216,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -232,7 +232,7 @@
     </div>
     <div class="row mx-auto">
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -246,7 +246,7 @@
         </div>
       </div>
       <div class="col-3 p-5">
-        <div class="row select-cv">
+        <div @click="moveToCv01" class="row select-cv">
           <div class="col-12 p-0">
             <img
               class="img-fluid"
@@ -266,6 +266,14 @@
 <script>
 export default {
   name: "ListOfCV",
+  methods: {
+    moveToCv01() {
+      this.$router.push("/cv_01");
+    },
+    moveToCv02() {
+      this.$router.push("/cv_02");
+    },
+  },
 };
 </script>
 

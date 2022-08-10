@@ -3,27 +3,27 @@
     <header><strong>// Việc Làm Phù Hợp</strong></header>
     <div class="row px-5 py-3">
       <div
-        v-for="(job, index) in jobs"
+        v-for="(job, index) in getSuitablePosting.suitableJob"
         :key="index"
         class="col-12 col-sm-6 border mr-2 row mb-4"
       >
         <div class="col-2">
           <img
             class="img-fluid mx-0"
-            src="@/assets/no_img3.png"
-            alt="Hinh Anh Cong Ty"
+            :src="job.images"
+            :alt="job.companyName"
           />
         </div>
         <div class="col-8">
           <div class="row">
             <div class="col-12">{{ job.position }}</div>
-            <div class="col-12">{{ job.company_name }}</div>
+            <div class="col-12">{{ job.companyName }}</div>
           </div>
           <div class="col-12">
             <div class="row">
-              <div class="col-3">{{ job.address }}</div>
+              <div class="col-3">{{ job.province }}</div>
               <div class="col-4 text-danger">{{ job.salary }}</div>
-              <div class="col-4">{{ job.date_created }}</div>
+              <div class="col-4">{{ job.deadLineForSubmission }}</div>
             </div>
           </div>
         </div>
@@ -33,61 +33,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "SuitableJobs",
-  data() {
-    return {
-      jobs: [
-        {
-          logo: require("@/assets/no_img3.png"),
-          position: "Java Developer",
-          company_name: "Công ty Dịch vụ GPO",
-          address: "Hà Nội",
-          salary: "Thỏa Thuận",
-          date_created: "|  15/06/2022",
-        },
-        {
-          logo: require("@/assets/no_img3.png"),
-          position: "Java Developer",
-          company_name: "Công ty Dịch vụ GPO",
-          address: "Hà Nội",
-          salary: "20 - 30 triệu ",
-          date_created: "|  15/06/2022",
-        },
-        {
-          logo: require("@/assets/no_img3.png"),
-          position: "Java Developer",
-          company_name: "Công ty Dịch vụ GPO",
-          address: "Hà Nội",
-          salary: "10 - 15 triệu",
-          date_created: "|  15/06/2022",
-        },
-        {
-          logo: require("@/assets/no_img3.png"),
-          position: "Java Developer",
-          company_name: "Công ty Dịch vụ GPO",
-          address: "Hà Nội",
-          salary: "Trên 30 triệu ",
-          date_created: "|  15/06/2022",
-        },
-        {
-          logo: require("@/assets/no_img3.png"),
-          position: "Java Developer",
-          company_name: "Công ty Dịch vụ GPO",
-          address: "Hà Nội",
-          salary: "Thỏa Thuận",
-          date_created: "|  15/06/2022",
-        },
-        {
-          logo: require("@/assets/no_img3.png"),
-          position: "Java Developer",
-          company_name: "Công ty Dịch vụ GPO",
-          address: "Hà Nội",
-          salary: "Thỏa Thuận",
-          date_created: "|  15/06/2022",
-        },
-      ],
-    };
+  computed: {
+    ...mapGetters(["getSuitablePosting", "isGetSuitablePostingFunction"]),
   },
 };
 </script>
