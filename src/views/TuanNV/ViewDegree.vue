@@ -12,7 +12,7 @@
         <div class="blockright col-9">
           <div class="titleRight">Học vấn - bằng cấp</div>
           <div class="container">
-            <!-- <div v-if="!listWorkExp.length">Bạn chưa có bằng cấp học vấn</div> -->
+            <div v-if="!listDegree.length">Bạn chưa có bằng cấp học vấn</div>
             <div class="block" v-for="degree in listDegree" v-bind:key="degree.id">
               <span id="show" @click="showDetail">
                 <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i
@@ -87,8 +87,8 @@
                       </svg>
                       Xóa</span
                     >
-                  </div></span
-                >
+                  </div>
+                </span>
               </div>
               <div class="detail container p-3 mt-2" id="detailInfo">
                 <div>
@@ -208,15 +208,6 @@ export default {
 </script>
 
 <style scoped>
-.btnDelete {
-  background: red;
-  color: white;
-  border-radius: 50%;
-  border: none;
-  float: right;
-  width: 25px;
-  height: 25px;
-}
 .block {
   padding: 20px 0;
   border-bottom: 1px solid lightgray;
@@ -229,28 +220,11 @@ export default {
   background-color: #f2f2f2;
   transition: 0.5s;
 }
-a {
-  text-decoration: none;
-  font-size: 18px;
-}
 #show {
   color: #2a3563;
   margin-bottom: 20px;
   font-size: 20px;
   cursor: pointer;
-}
-.btnAdd {
-  background-color: #eceefa;
-  color: #333333;
-  border: 1px solid lightgray;
-  border-radius: 5px;
-}
-.tbody {
-  padding-top: 10px;
-}
-.title {
-  font-weight: bold;
-  font-size: 16px;
 }
 .titleRight {
   margin-bottom: 20px;

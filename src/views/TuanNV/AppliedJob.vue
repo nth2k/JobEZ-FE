@@ -90,13 +90,13 @@
             </tbody>
           </table>
         </div>
-        <div class="update">
+        <!-- <div class="update">
           <span
             >Hãy cập nhật thông tin về người tham chiếu hồ sơ của bạn để tăng chất lượng
             hồ sơ và thu hút nhà tuyển dụng
             <a href="#" class="text-danger">Cập nhật ngay</a></span
           >
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

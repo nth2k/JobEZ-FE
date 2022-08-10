@@ -70,13 +70,6 @@
                       >Số điện thoại <span class="text-danger">*</span></span
                     >
                   </div>
-                  <!-- <input
-                      type="number"
-                      class="form-control"
-                      name="phoneNumber"
-                      id="phoneNumber"
-                      placeholder="Nhập số điện thoại"
-                    /> -->
                   <div>
                     <v-textarea
                       label="Nhập số điện thoại"
@@ -94,13 +87,16 @@
                 <div class="col-2"></div>
 
                 <div class="col-5 text-center">
-                  <img src="@/assets/no_avatar.jpg" alt="avatar" />
+                  <img id="myImg" src="@/assets/no_avatar.jpg" alt="avatar" />
+                  <!-- <v-file-input v-model="image" label="Logo công ty"></v-file-input> -->
                   <v-file-input
-                    :rules="avatarRules"
+                    label="Avatar"
+                    :rules="imageRules"
                     accept="image/png, image/jpeg, image/bmp"
                     placeholder="Pick an avatar"
                     prepend-icon="mdi-camera"
                     span="Avatar"
+                    v-model="image"
                     v-on:change="showImage()"
                   ></v-file-input>
                 </div>
@@ -110,12 +106,6 @@
                   <div>
                     <span class="label">Ngày sinh<span class="text-danger">*</span></span>
                   </div>
-                  <!-- <input
-                    type="text"
-                    class="form-control"
-                    id="inputDOB"
-                    placeholder="Nhập ngày/tháng/năm"
-                  /> -->
                   <div>
                     <v-textarea
                       label="Nhập ngày/tháng/năm"
@@ -132,12 +122,6 @@
                   <div>
                     <span class="label">Địa chỉ<span class="text-danger">*</span></span>
                   </div>
-                  <!-- <input
-                    type="text"
-                    class="form-control"
-                    id="inputAddress"
-                    placeholder="Nhập địa chỉ hiện tại"
-                  /> -->
                   <div>
                     <v-textarea
                       label="Nhập địa chỉ hiện tại"
@@ -156,12 +140,6 @@
                       >Giới tính <span class="text-danger">*</span></span
                     >
                   </div>
-                  <!-- <select name="gender" id="gender" class="form-control">
-                    <option value="-1">Chọn giới tính</option>
-                    <option value="1">Nam</option>
-                    <option value="2">Nữ</option>
-                    <option value="3">Giới tính thứ 3</option>
-                  </select> -->
                   <v-select
                     :items="listGender"
                     label="Chọn giới tính"
@@ -174,11 +152,6 @@
                 <div class="col-2"></div>
                 <div class="col-5">
                   <span class="label">Hôn nhân <span class="text-danger">*</span></span>
-                  <!-- <select name="married" id="married" class="form-control">
-                    <option value="-1">Chọn tình trạng hôn nhân</option>
-                    <option value="1">Độc thân</option>
-                    <option value="2">Đã có gia đình</option>
-                  </select> -->
                   <v-select
                     :items="listMarried"
                     label="Chọn tình trạng hôn nhân"
@@ -189,21 +162,6 @@
                   ></v-select>
 
                   <div class="label">Tinh thành<span class="text-danger">*</span></div>
-                  <!-- <select name="country" id="country" class="form-control">
-                    <option value="-1">Chọn tỉnh thành</option>
-                    <option value="1">Hà Nội</option>
-                    <option value="2">TP. Hồ Chí Minh</option>
-                  </select> -->
-                  <select @change="onProvinceSelect" v-model="province" class="w-100">
-                    <option value="" disabled hidden>Chọn tỉnh thành</option>
-                    <option
-                      v-for="(item, index) in listProvince"
-                      :key="index"
-                      :value="item.province_id"
-                    >
-                      {{ item.province_name }}
-                    </option>
-                  </select>
 
                   <!-- <v-select
                     :items="listProvince"
@@ -211,28 +169,22 @@
                     outlined
                     :rules="provinceRules"
                     v-model="province"
+                    @change="onProvinceSelect()"
                     required
-                    @change="onProvinceSelect"
                   ></v-select> -->
+                  <select v-model="province_id" class="w-100">
+                    <option value="" disabled hidden>Chọn tỉnh thành</option>
+                    <option
+                      v-for="(item, index) in listProvince"
+                      :key="index"
+                      :value="item.id"
+                    >
+                      {{ item.name }}
+                    </option>
+                  </select>
                   <div class="label blockDistrict">
                     Quận Huyện<span class="text-danger">*</span>
                   </div>
-                  <!-- <select name="quanhuyen" id="quanhuyen" class="form-control">
-                    <option value="-1">Chọn quận huyện</option>
-                    <option value="1">Thạch Thất</option>
-                    <option value="2">Từ Liêm</option>
-                  </select> -->
-                  <select v-model="district" class="w-100">
-                    <option value="" disabled hidden>Chọn quận huyện</option>
-                    <option
-                      v-for="(item, index) in listDistrict"
-                      :key="index"
-                      :value="item.district_id"
-                    >
-                      {{ item.district_name }}
-                    </option>
-                  </select>
-
                   <!-- <v-select
                     :items="listDistrict"
                     label="Chọn quận huyện"
@@ -241,13 +193,20 @@
                     v-model="district"
                     required
                   ></v-select> -->
+                  <select v-model="district_id" class="w-100">
+                    <option value="" disabled hidden>Chọn quận huyện</option>
+                    <option
+                      v-for="(item, index) in listDistrict"
+                      :key="index"
+                      :value="item.id"
+                    >
+                      {{ item.name }}
+                    </option>
+                  </select>
                 </div>
               </div>
               <div class="text-center justify-content-center">
                 <button class="btn btn-primary px-5 mt-5">Lưu</button>
-                <!-- <button class="btn btn-primary px-4 mt-5 btnNotSave" type="button">
-                  Không Lưu
-                </button> -->
               </div>
             </v-form>
           </div>
@@ -261,7 +220,8 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
-import AddressService from "@/services/AddressService.js";
+import ProvinceDistrictService from "@/services/ProvinceDistrictService.js";
+import ContactInfoService from "@/services/ContactInfoService";
 
 export default {
   name: "EditContactInfo",
@@ -272,6 +232,7 @@ export default {
   },
   data() {
     return {
+      userId: this.$route.params.userId,
       fullname: "",
       fullnameRules: [(v) => !!v || "Họ và tên không được để trống"],
       email: "",
@@ -287,7 +248,7 @@ export default {
         (v) => !!v || "Số điện thoại không được để trống",
         (v) => /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
       ],
-      avatarRules: [
+      imageRules: [
         (v) => !v || v.size < 2000000 || "Avatar size should be less than 2 MB!",
       ],
       dateOfBirth: "",
@@ -301,30 +262,68 @@ export default {
       marriedRules: [(v) => !!v || "Vui lòng chọn tình trạng hôn nhân"],
       listMarried: ["Độc thân", "Đã kết hôn"],
       province: "",
+      province_id: "",
       provinceRules: [(v) => !!v || "Vui lòng chọn tỉnh thành"],
       listProvince: [],
       district: "",
+      district_id: "",
       districtRules: [(v) => !!v || "Vui lòng chọn quận huyện"],
       listDistrict: [],
+      image: null,
+      base64: null,
     };
   },
   methods: {
     showImage() {
-      console.log("change");
+      document.getElementById("myImg").src = this.image.name;
     },
-    onProvinceSelect() {
-      AddressService.getDistrict(this.province).then((rs) => {
-        this.listDistrict = rs.data.results;
+    // onProvinceSelect(event) {
+    //   ProvinceDistrictService.getAllDistrict(event.target.value).then((rs) => {
+    //     this.listDistrict = rs.data;
+    //   });
+    // },
+    getData() {
+      ProvinceDistrictService.getAllProvince().then((rs) => {
+        this.listProvince = rs.data;
+      });
+      ContactInfoService.getContactInfo(this.userId).then((rs) => {
+        this.fullname = rs.data.fullname;
+        this.email = rs.data.email;
+        this.phoneNumber = rs.data.phoneNumber;
+        this.dateOfBirth = rs.data.dateOfBirth;
+        this.address = rs.data.address;
+        this.gender = rs.data.gender;
+        this.married = rs.data.married;
+        this.province = rs.data.district;
+        this.district = rs.data.province;
+        this.district_id = rs.data.districtId;
+        this.province_id = rs.data.provinceId;
+      });
+      ProvinceDistrictService.getAllDistrict().then((rs) => {
+        this.listDistrict = rs.data;
+        // console.log(rs.data);
       });
     },
-    getProvince() {
-      AddressService.getProvince().then((rs) => {
-        this.listProvince = rs.data.results;
-      });
+    createBase64Image: function (FileObject) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.base64 = event.target.result;
+      };
+      reader.readAsDataURL(FileObject);
+    },
+  },
+  watch: {
+    image: function (newVal) {
+      if (newVal) {
+        this.createBase64Image(newVal);
+      } else {
+        this.base64 = null;
+      }
     },
   },
   created() {
-    this.getProvince();
+    this.getData();
+    // this.getContactInfo();
   },
 };
 </script>

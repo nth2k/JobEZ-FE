@@ -95,6 +95,7 @@ export default {
 <style scoped>
 .leftHoso {
   flex: 0 0 20%;
+  border-right: 1px solid lightgray;
 }
 .right {
   margin-left: 40px;
@@ -122,8 +123,5 @@ span {
 textarea {
   border-radius: 10px;
   resize: none;
-}
-.leftHoso {
-  border-right: 1px solid lightgray;
 }
 </style>

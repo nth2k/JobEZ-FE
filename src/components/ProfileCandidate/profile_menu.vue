@@ -5,7 +5,7 @@
       <div class="progress-hoso">50%</div>
     </div>
     <div class="bottom-left">
-      <div class="selected menu-items">
+      <div class="menu-items">
         <div class="menu-item">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +19,7 @@
               d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"
             />
           </svg>
-          <a href="#" class="items">Thông tin liên hệ</a>
+          <a @click="contactInfo()" class="items">Thông tin liên hệ</a>
         </div>
       </div>
       <div class="menu-items">
@@ -43,7 +43,7 @@
               fill-rule="evenodd"
               d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"
             /></svg
-          ><a href="#" class="items">Công việc mong muốn</a>
+          ><a @click="desiredJob()" class="items">Công việc mong muốn</a>
         </div>
       </div>
       <div class="menu-items">
@@ -101,7 +101,7 @@
             <path
               d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"
             /></svg
-          ><a href="#" class="items">Bằng cấp</a>
+          ><a @click="degreeCertificate()" class="items">Bằng cấp</a>
         </div>
       </div>
       <div class="menu-items">
@@ -139,22 +139,6 @@
           ><a @click="workExperience()" class="items">Kinh nghiệm</a>
         </div>
       </div>
-      <div class="menu-items">
-        <div class="menu-item">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-person-fill"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
-            /></svg
-          ><a href="#" class="items">Người tham chiếu</a>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -162,11 +146,20 @@
 <script>
 export default {
   methods: {
+    contactInfo() {
+      this.$router.push("/contactinfo");
+    },
+    desiredJob() {
+      this.$router.push("/desiredjob");
+    },
     careerGoal() {
       this.$router.push("/careergoal");
     },
     selfSkill() {
       this.$router.push("/selfskill");
+    },
+    degreeCertificate() {
+      this.$router.push("/degree");
     },
     languageCertificate() {
       this.$router.push("/language");
@@ -193,9 +186,7 @@ a {
   text-align: center;
   border-bottom: 1px solid gray;
 }
-.leftHoso {
-  /* border-right: 1px solid gray; */
-}
+
 .items {
   margin: 10px 20px;
 }
