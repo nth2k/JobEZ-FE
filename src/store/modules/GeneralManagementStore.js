@@ -11,12 +11,13 @@ const getters = {
   },
 
   isGetSuitablePostingFunction: function (state) {
-    return state.suitablePosting != [];
+    return state.isGetSuitablePosting;
   },
 };
 
 const actions = {
-  getSuitablePosting({ commit }, { email }) {
+  getSuitablePosting({ state, commit }, { email }) {
+    state.isGetSuitablePosting = false;
     GeneralManagementService.getSuitablePosting(commit, email);
   },
 };
@@ -24,6 +25,7 @@ const actions = {
 const mutations = {
   SET_SUITABLE_POSTING: function (state, newSuitablePosting) {
     state.suitablePosting = newSuitablePosting;
+    state.isGetSuitablePosting = true;
   },
 };
 

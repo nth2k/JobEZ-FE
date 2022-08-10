@@ -8,7 +8,6 @@ class GeneralManagementService {
       email: email,
     };
     await axios.post(Base_URL + "/posting/suitable", body).then((response) => {
-      console.log(response.data);
       commit("SET_SUITABLE_POSTING", response.data);
     });
   }

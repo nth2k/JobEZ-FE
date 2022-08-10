@@ -26,7 +26,7 @@
             <div class="">
               <div class="center_cate">
                 <div class="center_cate_l">
-                  <router-link
+                  <a
                     style="
                       color: #4c5bd5 !important;
                       font-size: 14px;
@@ -39,13 +39,10 @@
                       width: 100%;
                       font-weight: bold;
                     "
-                    tag="a"
-                    :to="{
-                      name: 'RecruiterLogin',
-                      params: { postingId: posting.id },
-                    }"
-                    >{{ posting.jobName }}</router-link
+                    @click="getJobById({ postingId: posting.postingId })"
                   >
+                    {{ posting.jobName }}
+                  </a>
                   <router-link
                     style="
                       color: #4c5bd5 !important;
@@ -62,7 +59,7 @@
                     "
                     tag="a"
                     :to="{
-                      name: 'RecruiterLogin',
+                      name: 'RecruiterProfile',
                       params: { recruiterId: posting.companyId },
                     }"
                     >{{ posting.companyName }}</router-link
@@ -107,13 +104,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-// import JobDetailService from "@/services/JobDetailService";
-
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "RelatedJob",
   computed: {
     ...mapGetters(["getJob", "isGetAPI"]),
+  },
+  methods: {
+    ...mapActions(["getJobById"]),
   },
 };
 </script>
