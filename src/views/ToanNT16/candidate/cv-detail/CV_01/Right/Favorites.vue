@@ -48,8 +48,7 @@
         <div class="row">
           <div class="col-10">
             <div contenteditable="true" class="custom-outline">
-              - CODE là đam mê
-              <br />- Tìm hiểu công nghệ mới <br />- Nghe nhạc <br />- Đá bóng
+              {{ getCV.hobbies }}
             </div>
           </div>
         </div>
@@ -59,6 +58,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Favorites",
   data() {
@@ -71,6 +71,9 @@ export default {
     hidden() {
       this.isHidden = !this.isHidden;
     },
+  },
+  computed: {
+    ...mapGetters(["getCV"]),
   },
 };
 </script>

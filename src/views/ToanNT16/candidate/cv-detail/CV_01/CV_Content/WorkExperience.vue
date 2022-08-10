@@ -48,21 +48,29 @@
         <div class="row">
           <div class="col-10">
             <div
-              v-for="experience in experiences"
-              :key="experience.companyName"
-              class="work-experience-content"
+              v-for="(experience, index) in getCV.workExperiences"
+              :key="index"
+              class="work-experience-content mb-3"
             >
               <div
                 class="company-name custom-outline py-1"
                 contenteditable="true"
               >
-                <strong>{{ experience.companyName }}</strong>
+                <strong class="text-primary">{{
+                  experience.companyName
+                }}</strong>
+              </div>
+              <div
+                class="skills custom-outline text-info"
+                contenteditable="true"
+              >
+                {{ experience.startDate }} - {{ experience.endDate }}
               </div>
               <div class="position custom-outline" contenteditable="true">
                 Ngành học: {{ experience.position }}
               </div>
               <div class="skills custom-outline" contenteditable="true">
-                {{ experience.skills }}
+                {{ experience.description }}
               </div>
             </div>
           </div>
@@ -73,6 +81,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "WorkExperience",
   data() {
@@ -103,6 +112,9 @@ export default {
     hidden() {
       this.isHidden = !this.isHidden;
     },
+  },
+  computed: {
+    ...mapGetters(["getCV"]),
   },
 };
 </script>

@@ -48,10 +48,7 @@
         <div class="row">
           <div class="col-10">
             <div contenteditable="true" class="custom-outline">
-              Không ngừng học hỏi trao dồi những kiến thức về lập trình để phát
-              triển kỹ năng chuyên môn.
-              <br />Mục tiêu trong 1 năm tới, tôi sẽ trở thành 1 lập trình viên
-              Android chuyên nghiệp và học thêm lập trình IOS.
+              {{ getCV.careerGoal }}
             </div>
           </div>
         </div>
@@ -61,6 +58,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "CareerGoal",
   data() {
@@ -74,6 +72,9 @@ export default {
       this.isHidden = !this.isHidden;
     },
     check: function () {},
+  },
+  computed: {
+    ...mapGetters(["getCV"]),
   },
 };
 </script>

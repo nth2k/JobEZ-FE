@@ -47,7 +47,7 @@
       <div class="col-12">
         <div class="row">
           <div class="col-10">
-            <div v-for="skill in skills" :key="skill.skillName">
+            <div v-for="(skill, index) in getCV.skills" :key="index">
               <div class="row">
                 <div
                   class="col-12 custom-outline px-0 ml-3"
@@ -56,17 +56,6 @@
                   <strong style="font-size: 1.1rem">
                     {{ skill.skillName }}
                   </strong>
-                </div>
-                <div class="col-12">
-                  <select class="custom-select">
-                    <option selected>YEARS OF EXPERIENCE</option>
-                    <option value="1">DƯỚI 6 THÁNG</option>
-                    <option value="2">6-12 THÁNG</option>
-                    <option value="3">1-2 NĂM</option>
-                    <option value="3">2-3 NĂM</option>
-                    <option value="3">3-4 NĂM</option>
-                    <option value="3">TRÊN 5 NĂM</option>
-                  </select>
                 </div>
               </div>
             </div>
@@ -78,37 +67,21 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Skills",
   data() {
     return {
-      skills: [
-        {
-          skillName: "Tìm kiếm, đọc hiểu tài liệu tiếng anh chuyên môn",
-          yearOfExperience: 1,
-        },
-        {
-          skillName: "Có tư duy logic tốt, nắm vững lập trình Java",
-          yearOfExperience: 2,
-        },
-        {
-          skillName: "Kỹ năng tổ chức code MVC, MVP trong Android",
-          yearOfExperience: 2,
-        },
-        {
-          skillName: "Thành thạo công cụ Android studio/ Eclipse",
-          yearOfExperience: 2,
-        },
-      ],
-      isHidden: false,
-      isHiddenOptions: true,
+      isHiddenOptions: false,
     };
   },
   methods: {
     hidden() {
       this.isHidden = !this.isHidden;
     },
-    check: function () {},
+  },
+  computed: {
+    ...mapGetters(["getCV"]),
   },
 };
 </script>

@@ -4,8 +4,12 @@
       <div class="pt-5">
         <div class="col-12">
           <div class="candidate-name font-weight-bold text-uppercase">
-            <div contenteditable="true" class="custom-outline">
-              Nguyễn Thế Toàn
+            <div
+              @change="updateData"
+              contenteditable="true"
+              class="custom-outline"
+            >
+              {{ getCV.name }}
             </div>
           </div>
         </div>
@@ -32,17 +36,10 @@
         </div>
         <div class="col-9 text-right px-0">
           <div
-            class="
-              candidate-position
-              font-weight-normal
-              text-uppercase
-              pl-5
-              pr-5
-              custom-outline
-            "
+            class="candidate-position font-weight-normal text-uppercase pl-5 pr-5 custom-outline"
             contenteditable="true"
           >
-            Lập trình viên android
+            {{ getCV.position }}
           </div>
           <div class="w-100 bg-primary" style="width: 2rem; height: 2rem"></div>
         </div>
@@ -52,11 +49,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Header",
   data() {
     return {
       previewImage: require("@/assets/no_avatar.jpg"),
+      name: "",
     };
   },
   methods: {
@@ -75,6 +74,10 @@ export default {
         this.$emit("input", file[0]);
       }
     },
+    updateData() {},
+  },
+  computed: {
+    ...mapGetters(["getCV"]),
   },
 };
 </script>

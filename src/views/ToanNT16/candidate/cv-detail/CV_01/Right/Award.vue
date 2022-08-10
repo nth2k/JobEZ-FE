@@ -50,9 +50,7 @@
             <div class="row">
               <div class="col-10">
                 <div contenteditable="true" class="custom-outline">
-                  - Thành viên trong team timviec365.vn có thành tích xuất sắc
-                  nhất
-                  <br />- Bằng khen TTS tài năng
+                  {{ getCV.awards }}
                 </div>
               </div>
             </div>
@@ -64,6 +62,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Award",
   data() {
@@ -76,6 +75,9 @@ export default {
     hidden() {
       this.isHidden = !this.isHidden;
     },
+  },
+  computed: {
+    ...mapGetters(["getCV"]),
   },
 };
 </script>

@@ -51,7 +51,7 @@
           </div>
           <div class="col-10">
             <div contenteditable="true" id="birthday" class="custom-outline">
-              01/01/1995
+              {{ getCV.dateOfBirth }}
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@
           <div class="col-1 px-0"><i class="fa fa-transgender"></i></div>
           <div class="col-10">
             <div contenteditable="true" id="gender" class="custom-outline">
-              Nam
+              {{ getCV.gender }}
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@
           <div class="col-1 px-0"><i class="fa fa-phone"></i></div>
           <div class="col-10">
             <div contenteditable="true" id="phone" class="custom-outline">
-              0845684888
+              {{ getCV.phone }}
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@
           <div class="col-1 px-0"><i class="material-icons">email</i></div>
           <div class="col-10">
             <div contenteditable="true" id="email" class="custom-outline">
-              nguyenthetoan1606@gmail.com
+              {{ getCV.email }}
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@
           </div>
           <div class="col-10">
             <div contenteditable="true" id="address" class="custom-outline">
-              131 Phan Đình Giót, Thanh Xuân, Hà Nội
+              {{ getCV.street }}, {{ getCV.city }}, {{ getCV.province }}
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@
           </div>
           <div class="col-10">
             <div contenteditable="true" id="facebook" class="custom-outline">
-              https://www.facebook.com/toanfptedu/
+              {{ getCV.facebook }}
             </div>
           </div>
         </div>
@@ -115,6 +115,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "BasicInfomation",
   data() {
@@ -127,6 +128,9 @@ export default {
     hidden() {
       this.isHidden = !this.isHidden;
     },
+  },
+  computed: {
+    ...mapGetters(["getCV"]),
   },
 };
 </script>

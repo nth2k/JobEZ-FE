@@ -48,17 +48,22 @@
         <div class="row">
           <div class="col-10">
             <div
-              v-for="activity in activities"
-              :key="activity.activityName"
-              class="work-experience-content"
+              v-for="(activity, index) in getCV.activities"
+              :key="index"
+              class="work-experience-content mb-3"
             >
               <div
                 class="activities-name custom-outline py-1"
                 contenteditable="true"
               >
-                <strong>{{ activity.activityName }}</strong>
+                <strong class="text-primary">{{
+                  activity.acitvityName
+                }}</strong>
               </div>
-              <div class="position custom-outline" contenteditable="true">
+              <div
+                class="position custom-outline text-info"
+                contenteditable="true"
+              >
                 {{ activity.position }}
               </div>
               <div class="description custom-outline" contenteditable="true">
@@ -73,6 +78,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Activities",
   data() {
@@ -100,6 +106,9 @@ export default {
     hidden() {
       this.isHidden = !this.isHidden;
     },
+  },
+  computed: {
+    ...mapGetters(["getCV"]),
   },
 };
 </script>

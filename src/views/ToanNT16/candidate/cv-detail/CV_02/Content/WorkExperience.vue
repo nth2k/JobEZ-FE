@@ -48,8 +48,8 @@
         <div class="row">
           <div class="col-10">
             <div
-              v-for="experience in experiences"
-              :key="experience.companyName"
+              v-for="(experience, index) in experiences"
+              :key="index"
               class="work-experience-content"
             >
               <div

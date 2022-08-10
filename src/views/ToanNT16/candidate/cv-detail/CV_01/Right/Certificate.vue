@@ -47,11 +47,14 @@
       <div class="col-12">
         <div class="row">
           <div class="col-10">
-            <div class="row">
+            <div
+              v-for="(item, index) in getCV.degrees"
+              :key="index"
+              class="row"
+            >
               <div class="col-10">
                 <div contenteditable="true" class="custom-outline">
-                  - Chứng chỉ hoàn thành khóa học lập trình Android tại Aptech
-                  <br />- Toeic 450
+                  {{ item.name }}
                 </div>
               </div>
             </div>
@@ -63,6 +66,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Certificate",
   data() {
@@ -75,6 +79,9 @@ export default {
     hidden() {
       this.isHidden = !this.isHidden;
     },
+  },
+  computed: {
+    ...mapGetters(["getCV"]),
   },
 };
 </script>

@@ -45,23 +45,23 @@
         </div>
       </div>
       <div class="col-12">
-        <div class="row">
+        <div v-for="(item, index) in getCV.educations" :key="index" class="row">
           <div class="col-10">
             <div class="education-content">
               <div
                 class="school-name custom-outline py-1"
                 contenteditable="true"
               >
-                <strong>{{ education.school }}</strong>
+                <strong>{{ item.universityName }}</strong>
               </div>
               <div class="school-major custom-outline" contenteditable="true">
-                Ngành học: {{ education.major }}
+                Ngành học: {{ item.major }}
               </div>
               <div
                 class="school-narrow-major custom-outline"
                 contenteditable="true"
               >
-                Chuyên ngành: {{ education.narrowMajors }}
+                Chuyên ngành: {{ item.major }}
               </div>
               <div
                 class="school-classification custom-outline"
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Education",
   data() {
@@ -96,6 +97,9 @@ export default {
     hidden() {
       this.isHidden = !this.isHidden;
     },
+  },
+  computed: {
+    ...mapGetters(["getCV"]),
   },
 };
 </script>
