@@ -151,6 +151,22 @@ export const routes = [
     path: '/editdegree',
     name: 'EditDegree',
     component: () => import("@/views/TuanNV/EditDegree.vue")
+  },{
+    path: '/desiredjob',
+    name: 'ViewDesiredJob',
+    component: () => import("@/views/TuanNV/ViewDesiredJob.vue")
+  },{
+    path: '/editdesiredjob',
+    name: 'EditDesiredJob',
+    component: () => import("@/views/TuanNV/EditDesiredJob.vue")
+  },{
+    path: '/contactinfo',
+    name: 'ContactInfo',
+    component: () => import("@/views/TuanNV/ContactInfo.vue")
+  },{
+    path: '/editcontactinfo',
+    name: 'EditContactInfo',
+    component: () => import("@/views/TuanNV/EditContactInfo.vue")
   },
   {
     path: "/recruiter-list",
