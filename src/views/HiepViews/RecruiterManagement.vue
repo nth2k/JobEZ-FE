@@ -10,50 +10,51 @@
             <p class="w-50" style="border-bottom: 7px solid #6d92f3">
               Hồ sơ ứng tuyển
             </p>
-            <p class="number">23</p>
+            <p class="number">{{ numberOfApplieds }}</p>
           </div>
           <div class="statistic w-50 p-3">
             <p class="w-50" style="border-bottom: 7px solid #6d92f3">
               Tin đã đăng
             </p>
-            <p class="number">23</p>
+            <p class="number">{{ numberOfPostings }}</p>
           </div>
         </div>
         <h3>// Hồ sơ ứng tuyển mới nhất</h3>
-        <table class="table table-striped mt-5">
+        <p
+          v-if="!isListCandidate"
+          style="margin: 50px; font-size: 27px; font-style: italic"
+        >
+          Bạn chưa có ứng viên nào ứng tuyển
+        </p>
+        <table v-if="isListCandidate" class="table table-striped mt-5">
           <thead>
             <tr>
               <th scope="col">STT</th>
               <th scope="col">Ứng viên</th>
-              <th scope="col">Vị trí ứng tuyển</th>
+              <th scope="col">Đại học</th>
               <th scope="col">Ngày nộp</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+            <tr v-for="(candidate, index) in appliedCandidate" :key="index">
+              <td>{{ ++index }}</td>
+              <td>{{ candidate.candidateName }}</td>
+              <td>{{ candidate.university }}</td>
+              <td>{{ candidate.dateSubmission }}</td>
             </tr>
           </tbody>
         </table>
         <h3>// Danh sách tin tuyển dụng mới nhất</h3>
-        <table class="table table-striped mt-5">
+        <p
+          v-if="!isListPosting"
+          style="margin: 50px; font-size: 27px; font-style: italic"
+        >
+          Bạn chưa có ứng viên nào ứng tuyển
+        </p>
+        <table v-if="isListPosting" class="table table-striped mt-5">
           <thead>
             <tr>
+              <th scope="col">STT</th>
               <th scope="col">Vị trí tuyển dụng</th>
               <th scope="col">Ngày hết hạn</th>
               <th scope="col">Bằng cấp</th>
@@ -61,23 +62,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+            <tr v-for="(post, index) in lastestPostings" :key="index">
+              <td>{{ ++index }}</td>
+              <td>{{ post.position }}</td>
+              <td>{{ post.deadlineForSubmission }}</td>
+              <td>{{ post.degreeRequired }}</td>
+              <td>{{ post.quantity }}</td>
             </tr>
           </tbody>
         </table>
@@ -89,11 +79,57 @@
 <script>
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import RecruiterNavigator from "@/components/HiepComponents/RecruiterNavigator.vue";
+import RecruiterManagementService from "@/services/RecruiterManagementService.js";
 export default {
   name: "RecruiterManagement",
   components: { Header, RecruiterNavigator },
   data() {
-    return {};
+    return {
+      numberOfApplieds: 0,
+      numberOfPostings: 0,
+      appliedCandidate: [],
+      lastestPostings: [],
+      isListCandidate: false,
+      isListPosting: false,
+    };
+  },
+  created() {
+    const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+    RecruiterManagementService.getStatisticById({
+      user_id: theLoggedUser.user.id,
+    }).then((rs) => {
+      (this.numberOfApplieds = rs.data.numberOfApplieds),
+        (this.numberOfPostings = rs.data.numberOfPostings),
+        (this.appliedCandidate = rs.data.appliedCandidate),
+        (this.lastestPostings = rs.data.lastestPostings);
+
+      if (rs.data.appliedCandidate.length > 0) {
+        this.isListCandidate = true;
+      } else this.isListCandidate = false;
+
+      if (rs.data.lastestPostings.length > 0) {
+        this.isListPosting = true;
+      } else this.isListPosting = false;
+    });
+  },
+  updated() {
+    const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+    RecruiterManagementService.getStatisticById({
+      user_id: theLoggedUser.user.id,
+    }).then((rs) => {
+      (this.numberOfApplieds = rs.data.numberOfApplieds),
+        (this.numberOfPostings = rs.data.numberOfPostings),
+        (this.appliedCandidate = rs.data.appliedCandidate),
+        (this.lastestPostings = rs.data.lastestPostings);
+
+      if (rs.data.appliedCandidate.length > 0) {
+        this.isListCandidate = true;
+      } else this.isListCandidate = false;
+
+      if (rs.data.lastestPostings.length > 0) {
+        this.isListPosting = true;
+      } else this.isListPosting = false;
+    });
   },
 };
 </script>
