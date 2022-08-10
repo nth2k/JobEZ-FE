@@ -4,8 +4,8 @@
       <v-btn color="red" dark v-bind="attrs" v-on="on"> Xóa </v-btn>
     </template>
     <v-card>
-      <v-card-title class="text-h5"> Xác nhận xóa? </v-card-title>
-      <v-card-text>Bạn có chắc chắn muốn xóa không</v-card-text>
+      <v-card-title class="text-h5"> Xác nhận xóa!!! </v-card-title>
+      <v-card-text>Bạn có chắc chắn muốn xóa công việc này không?</v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="green darken-1" text @click="dialog = false">
