@@ -98,6 +98,7 @@
         <div class="col-3 col-sm-6"></div>
         <div class="col-3 col-sm-6"></div>
         <span
+          @click="applyPosting"
           style="margin-right: 20px"
           class="btn_ungtuyen"
           data-id="0"
@@ -105,17 +106,15 @@
           data-nc="0"
           >Nộp hồ sơ</span
         >
-        <span class="save_job" data-id="812841" data-use="0" data-uid=""
+        <span
+          @click="savePosting"
+          class="save_job"
+          data-id="812841"
+          data-use="0"
+          data-uid=""
           >Lưu công việc</span
         >
         <span class="bcuv" data-use="0">Phản ánh NTD</span>
-        <a
-          class="btn_ssl"
-          rel="nofollow"
-          href="/ssl/so-sanh-luong.html"
-          target="_blank"
-          >So sánh lương</a
-        >
       </div>
     </div>
     <div class="tag_vl">
@@ -131,7 +130,7 @@
             <router-link
               tag="a"
               :to="{
-                name: 'RecruiterLogin',
+                name: 'JobCategory',
                 params: { provinceId: item.id },
               }"
               >Việc làm {{ item.name }}</router-link
@@ -145,6 +144,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import JobDetailService from "@/services/JobDetailService";
 export default {
   name: "JobDescription",
@@ -161,6 +161,33 @@ export default {
     },
     profileIncludedFormat: function () {
       return JobDetailService.filesFormat(this.getJob.profileIncluded);
+    },
+  },
+  methods: {
+    ...mapActions(["getAppliedJob", "getSavedJob"]),
+    applyPosting: function () {
+      const token = window.localStorage.getItem("user");
+      const data = JSON.parse(token);
+      const candidateEmail = data.user.email;
+      const postingId = this.getJob.id;
+      const recruiterEmail = this.getJob.recruiterEmail;
+
+      if (token == null) {
+        this.$router.push("/candidateLogin");
+      } else {
+        this.getAppliedJob({ candidateEmail, recruiterEmail, postingId });
+      }
+    },
+    savePosting: function () {
+      const token = window.localStorage.getItem("user");
+      const data = JSON.parse(token);
+      const email = data.user.email;
+      const postingId = this.getJob.id;
+      if (token == null) {
+        this.$router.push("/candidateLogin");
+      } else {
+        this.getSavedJob({ email, postingId });
+      }
     },
   },
 };

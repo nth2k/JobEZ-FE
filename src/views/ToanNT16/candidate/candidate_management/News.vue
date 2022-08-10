@@ -5,8 +5,8 @@
     </header>
     <div class="row">
       <div
-        v-for="news in newss"
-        :key="news.title"
+        v-for="(news, index) in newss"
+        :key="index"
         class="col-3 title-container"
       >
         <div class="mr-3">

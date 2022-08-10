@@ -22,11 +22,12 @@
 </template>
 
 <script>
-import Header from "./CV_01/Header.vue";
-import Right from "./CV_01/Right.vue";
-import CvContent from "./CV_01/CvContent.vue";
-import RelatedCV from "./CV_01/RelatedCV.vue";
-
+import Header from "@/views/ToanNT16/candidate/cv-detail/CV_01/Header.vue";
+import Right from "@/views/ToanNT16/candidate/cv-detail/CV_01/Right.vue";
+import CvContent from "@/views/ToanNT16/candidate/cv-detail/CV_01/CvContent.vue";
+import RelatedCV from "@/views/ToanNT16/candidate/cv-detail/CV_01/RelatedCV.vue";
+import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "CV_01",
   components: {
@@ -34,6 +35,13 @@ export default {
     Right,
     CvContent,
     RelatedCV,
+  },
+  async created() {},
+  methods: {
+    ...mapActions(["getSuitablePosting"]),
+  },
+  computed: {
+    ...mapGetters(["isGetSuitablePostingFunction"]),
   },
 };
 </script>

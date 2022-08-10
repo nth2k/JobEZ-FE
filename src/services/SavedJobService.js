@@ -11,4 +11,4 @@ class SavedJobService{
     }
 }
 
-export default new SavedJobService(); 
+export default new SavedJobService();

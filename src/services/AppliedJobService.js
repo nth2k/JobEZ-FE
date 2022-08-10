@@ -11,4 +11,4 @@ class AppliedJobService{
     }
 }
 
-export default new AppliedJobService(); 
+export default new AppliedJobService();

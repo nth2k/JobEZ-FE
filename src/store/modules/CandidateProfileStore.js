@@ -11,12 +11,13 @@ const getters = {
   },
 
   isGetCandidateFunction(state) {
-    return state.candidate != null;
+    return state.isGetCandidate;
   },
 };
 
 const actions = {
-  getCandiateById: async function ({ commit }, { candidateId }) {
+  getCandiateById: async function ({ state, commit }, { candidateId }) {
+    state.isGetCandidate = false;
     await CandidateProfileService.getCandidateById(commit, candidateId);
   },
 };
