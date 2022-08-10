@@ -179,7 +179,7 @@ export default {
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
               color: "error",
-              text: "Có lỗi xảy ra! Vui lòng thử lại",
+              text: "Không tìm thấy chứng chỉ",
             });
           });
       }

@@ -29,7 +29,9 @@
                 <td>
                   <div>{{ savedJob.postingJobname }}</div>
 
-                  <div><a href="#">(Xem chi tiết)</a></div>
+                  <div>
+                    <a @click="showPosting(savedJob.postingId)">(Xem chi tiết)</a>
+                  </div>
                 </td>
                 <td class="column">
                   <span>{{ savedJob.postingPosition }}</span>
@@ -123,7 +125,7 @@ export default {
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
               color: "error",
-              text: "Có lỗi xảy ra! Vui lòng thử lại",
+              text: "Xóa không thành công",
             });
           });
       }
@@ -138,6 +140,12 @@ export default {
       return duration < 0
         ? "(" + Math.abs(duration) + " ngày trước)"
         : "(Còn " + duration + " ngày)";
+    },
+    showPosting(postingId) {
+      this.$router.push({
+        name: "JobDetailsNoLogin",
+        params: { postingId: postingId },
+      });
     },
   },
   created() {

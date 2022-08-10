@@ -34,7 +34,9 @@
                 <td>
                   <div>{{ appliedjob.positionJobname }}</div>
 
-                  <div><a href="#">(Xem chi tiết)</a></div>
+                  <div>
+                    <a @click="showPosting(appliedjob.postingId)">(Xem chi tiết)</a>
+                  </div>
                 </td>
                 <td class="column">
                   <span>{{ appliedjob.postingPosition }}</span>
@@ -61,7 +63,9 @@
                 <td>
                   <button
                     class="btn btn-danger btnDelete"
-                    @click="deleteAppliedJob(appliedjob.id)"
+                    @click="
+                      deleteAppliedJob(appliedjob.postingId, appliedjob.recruiterId)
+                    "
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -110,20 +114,26 @@ export default {
   },
   data() {
     return {
-      userId: 1,
+      userId: "",
       listAppliedJob: [],
     };
   },
   methods: {
-    getAppliedJobs(userId) {
-      AppliedJobService.getAppliedJobs(userId).then((res) => {
+    getAppliedJobs() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      this.userId = theLoggedUser.user.id;
+      AppliedJobService.getAppliedJobs(this.userId).then((res) => {
         this.listAppliedJob = res.data;
       });
     },
-    deleteAppliedJob(appliedjobId) {
+    deleteAppliedJob(postingId, recruiterId) {
       let textConfirm = "Press Ok to delete your applied job.";
       if (confirm(textConfirm) == true) {
-        AppliedJobService.deleteAppliedJob(appliedjobId)
+        AppliedJobService.deleteAppliedJob({
+          candidate_id: this.userId,
+          recruiter_id: recruiterId,
+          posting_id: postingId,
+        })
           .then(() => {
             this.$store.dispatch("setSnackbar", {
               text: "Xóa thành công",
@@ -133,7 +143,7 @@ export default {
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
               color: "error",
-              text: "Có lỗi xảy ra! Vui lòng thử lại",
+              text: "Xóa không thành công",
             });
           });
       }
@@ -167,9 +177,15 @@ export default {
       var d = new Date(date);
       return d.toLocaleDateString();
     },
+    showPosting(postingId) {
+      this.$router.push({
+        name: "JobDetailsNoLogin",
+        params: { postingId: postingId },
+      });
+    },
   },
   created() {
-    this.getAppliedJobs(this.userId);
+    this.getAppliedJobs();
   },
 };
 </script>
