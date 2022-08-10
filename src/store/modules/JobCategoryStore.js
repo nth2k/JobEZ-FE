@@ -2,6 +2,9 @@ import JobCategoryService from "@/services/JobCategoryService";
 
 const state = {
   postings: [],
+  isPostingCategory: false,
+  isProvince: false,
+  isCity: false,
   isGetPosting: false,
 };
 
@@ -12,6 +15,16 @@ const getters = {
   isGetPostingFunction: function (state) {
     return state.isGetPosting;
   },
+
+  isPostingCategoryFunction: function (state) {
+    return state.isPostingCategory;
+  },
+  isProvinceFunction: function (state) {
+    return state.isProvince;
+  },
+  isCityFunction: function (state) {
+    return state.isCity;
+  },
 };
 
 const actions = {
@@ -20,18 +33,35 @@ const actions = {
     { categoryId, pageOffSet }
   ) => {
     state.isGetPosting = false;
-    JobCategoryService.getPostingByCategory(commit, categoryId, pageOffSet);
+    await JobCategoryService.getPostingByCategory(
+      commit,
+      categoryId,
+      pageOffSet
+    );
+    state.isPostingCategory = true;
+    state.isProvince = false;
+    state.isCity = false;
   },
   getPostingByProvince: async (
     { commit, state },
     { provinceId, pageOffSet }
   ) => {
     state.isGetPosting = false;
-    JobCategoryService.getPostingByProvince(commit, provinceId, pageOffSet);
+    await JobCategoryService.getPostingByProvince(
+      commit,
+      provinceId,
+      pageOffSet
+    );
+    state.isProvince = true;
+    state.isPostingCategory = false;
+    state.isCity = false;
   },
   getPostingByCity: async ({ commit, state }, { cityId, pageOffSet }) => {
     state.isGetPosting = false;
-    JobCategoryService.getPostingByCity(commit, cityId, pageOffSet);
+    await JobCategoryService.getPostingByCity(commit, cityId, pageOffSet);
+    state.isCity = true;
+    state.isPostingCategory = false;
+    state.isProvince = false;
   },
 };
 

@@ -11,7 +11,7 @@ const getters = {
   },
 
   isGetAllRecruitersFunction: async (state) => {
-    return state.recruiters === null;
+    return state.isGetAllRecruiters;
   },
 
   getStore(state) {
@@ -20,14 +20,16 @@ const getters = {
 };
 
 const actions = {
-  getAllRecruiter({ commit }) {
-    RecruiterListService.getAllRecruiter(commit);
+  async getAllRecruiter({ state, commit }) {
+    state.isGetAllRecruiters = false;
+    await RecruiterListService.getAllRecruiter(commit);
   },
 };
 
 const mutations = {
   SET_RECRUITERS: function (state, newRecruiters) {
     state.recruiters = newRecruiters;
+    state.isGetAllRecruiters = true;
   },
 };
 
