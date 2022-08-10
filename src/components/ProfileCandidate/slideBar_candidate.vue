@@ -91,7 +91,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 :root {
   --color_blue: #4757b9;
   --color_main: #232f87;

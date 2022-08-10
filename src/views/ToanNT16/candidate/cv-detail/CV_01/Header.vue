@@ -79,7 +79,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .imagePreviewWrapper {
   width: 8.75rem;
   height: 9.25rem;
