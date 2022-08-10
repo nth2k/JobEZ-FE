@@ -5,7 +5,7 @@
       <div class="col-12 header">
         <div class="mt-4 mb-4 text-center">Hoàn thiện hồ sơ :</div>
         <div class="d-flex justify-content-center mb-3">
-          <div class="row">
+          <div class="">
             <div class="col-md-9 col-sm-6">
               <div class="progress blue">
                 <span class="progress-left">

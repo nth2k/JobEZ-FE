@@ -87,7 +87,7 @@ export default {
       this.$router.push("/recruiterManagement");
     },
     postedPosting() {
-      this.$router.push("/postedPosting");
+      this.$router.push("/recruiterPostedPosting");
     },
     searchCandidate(){
       this.$router.push("/searchCandidate");

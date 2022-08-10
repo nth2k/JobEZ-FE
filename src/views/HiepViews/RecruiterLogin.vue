@@ -42,10 +42,10 @@
                 @click:append="show3 = !show3"
               ></v-text-field>
               <p>Quên mật khẩu?</p>
-              <button class="btn" :disabled="!valid" @click="submit">
-                Đăng nhập
-              </button>
             </v-form>
+            <button class="btn" :disabled="!valid" @click="submit">
+              Đăng nhập
+            </button>
           </div>
         </div>
       </div>
@@ -56,6 +56,8 @@
 <script>
 import ChooseRecruiter from "@/components/HiepComponents/ChooseRecruiter.vue";
 import TopHeaderComponent from "@/components/HiepComponents/TopHeaderComponent.vue";
+import LoginService from "@/services/LoginService.js";
+import axios from "axios";
 export default {
   name: "RecruiterLogin",
   components: {
@@ -82,7 +84,32 @@ export default {
 
   methods: {
     submit() {
-      this.validate();
+      if (this.$refs.form.validate()) {
+        LoginService.getUser({
+          email: this.email,
+          password: this.password,
+        })
+          .then((rs) => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Đăng nhập thành công",
+            });
+            axios.defaults.headers.common[
+              "Authorization"
+            ] = `Bearer ${rs.data.refreshToken.token}`;
+
+            if (rs.data.accessToken) {
+              localStorage.setItem("user", JSON.stringify(rs.data));
+            }
+
+            this.$router.push("/");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
+      }
     },
     validate() {
       this.$refs.form.validate();
