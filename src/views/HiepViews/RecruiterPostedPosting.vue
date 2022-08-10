@@ -38,9 +38,10 @@
                 </button>
               </td>
               <td>
-                <button class="btn btn-danger" @click="deletePosting(job.id)">
+                <!-- <button class="btn btn-danger" @click="deletePosting(job.id)">
                   Xóa
-                </button>
+                </button> -->
+                <ConfirmModal :jobId="job.id" />
               </td>
             </tr>
           </tbody>
@@ -54,10 +55,11 @@
 <script>
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import RecruiterNavigator from "@/components/HiepComponents/RecruiterNavigator.vue";
+import ConfirmModal from "@/components/HiepComponents/ConfirmModal.vue";
 import RecruiterManagementService from "@/services/RecruiterManagementService.js";
 export default {
   name: "RecruiterPostedPosting",
-  components: { Header, RecruiterNavigator },
+  components: { Header, RecruiterNavigator, ConfirmModal },
   data() {
     return {
       listJob: [],
@@ -70,23 +72,7 @@ export default {
         name: "RecruiterUpdatePosting",
         params: { id: postingId },
       });
-    },
-    deletePosting(postingId) {
-      RecruiterManagementService.deletePostingById(postingId)
-        .then(() => {
-          this.$store.dispatch("setSnackbar", {
-            text: "Xóa công việc thành công",
-          });
-        })
-        .catch(() => {
-          this.$store.dispatch("setSnackbar", {
-            color: "error",
-            text: "Có lỗi xảy ra! Vui lòng thử lại",
-          });
-        });
-      console.log(postingId);
-      this.$router.push("/recruiterManagement");
-    },
+    },   
   },
   created() {
     const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
