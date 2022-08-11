@@ -92,7 +92,7 @@ export default {
   margin-left: 15px;
   padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 136px;
+  width: 165px;
   color: #2a3563;
   font-weight: bold;
 }

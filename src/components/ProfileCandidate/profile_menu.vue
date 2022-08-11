@@ -194,6 +194,9 @@ a {
 .items {
   margin: 10px 20px;
 }
+.items:hover {
+  background-color: lightgray;
+}
 .menu-item {
   margin-left: 10px;
 }

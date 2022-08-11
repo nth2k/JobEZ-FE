@@ -231,7 +231,7 @@ export default {
   margin-left: 15px;
   padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 165px;
+  width: 150px;
   color: #2a3563;
   font-weight: bold;
 }

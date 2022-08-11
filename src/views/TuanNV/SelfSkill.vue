@@ -102,7 +102,7 @@ export default {
   margin-left: 15px;
   padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 165px;
+  width: 136px;
   color: #2a3563;
   font-weight: bold;
 }
