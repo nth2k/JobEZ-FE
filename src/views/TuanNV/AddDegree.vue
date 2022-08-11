@@ -10,31 +10,29 @@
           <Profile_menu />
         </div>
         <div class="right col-9">
-          <div class="titleheader">Kinh nghiệm làm việc</div>
-          <div class="container ml-2">
+          <div class="titleheader">Học vấn - Bằng cấp</div>
+          <div class="container ml-3">
             <v-form ref="form">
               <div class="row block2">
                 <div class="col-12">
                   <div class="title">
                     <span class="label"
-                      >Chức danh vị trí <span class="star">*</span></span
+                      >Bằng cấp chứng chỉ <span class="star">*</span></span
                     >
                     <div class="titleright">
                       <span>(</span><span class="star">*</span
                       ><span>)Thông tin bắt buộc</span>
                     </div>
                   </div>
-                  <div>
-                    <!-- <v-text-field class="mt-3" label="Nhập chức danh" outlined dense v-model="position"
-                      :rules="positionRules" required></v-text-field> -->
+                  <div class="col-12">
                     <v-textarea
-                      label="Nhập chức danh"
-                      v-model="position"
+                      label="Nhập bằng cấp chứng chỉ"
+                      v-model="degree"
                       outlined
                       filled
                       no-resize
                       rows="1"
-                      :rules="positionRules"
+                      :rules="degreeRules"
                       required
                       background-color="white"
                     ></v-textarea>
@@ -42,19 +40,17 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span class="label">Công ty <span class="star">*</span></span>
+                    <span>Nhập trường / đơn vị dạy <span class="star">*</span></span>
                   </div>
                   <div>
-                    <!-- <v-text-field class="mt-3" label="Nhập tên công ty" outlined dense v-model="companyName"
-                      :rules="companyNameRules" required></v-text-field> -->
                     <v-textarea
-                      label="Nhập tên công ty"
-                      v-model="companyName"
+                      label="Nhập tên trường / đơn vị giảng dạy"
+                      v-model="teachingUnit"
                       outlined
                       filled
                       no-resize
                       rows="1"
-                      :rules="companyNameRules"
+                      :rules="teachingUnitRules"
                       required
                       background-color="white"
                     ></v-textarea>
@@ -62,14 +58,10 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span class="label"
-                      >Thời gian (dd/mm/yyyy) <span class="star">*</span></span
-                    >
+                    <span>Thời gian (dd/mm/yyy) <span class="star">*</span></span>
                   </div>
                   <div class="d-flex justify-content-between">
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <!-- <v-text-field class="mt-3" label="Ngày bắt đầu" outlined dense v-model="startDate"
-                        :rules="startDateRules" required></v-text-field> -->
                       <v-textarea
                         label="Ngày bắt đầu"
                         v-model="startDate"
@@ -83,8 +75,6 @@
                       ></v-textarea>
                     </div>
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <!-- <v-text-field class="mt-3" label="Ngày kết thúc" outlined dense v-model="endDate"
-                        :rules="endDateRules" required value="asdasdasd"></v-text-field> -->
                       <v-textarea
                         label="Ngày kết thúc"
                         v-model="endDate"
@@ -101,35 +91,62 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span class="py-2 label"
-                      >Mô tả công việc <span class="star">*</span></span
+                    <span>Chuyền ngành <span class="star">*</span></span>
+                  </div>
+                  <div>
+                    <v-textarea
+                      label="Nhập tên chuyên ngành"
+                      v-model="majorName"
+                      outlined
+                      filled
+                      no-resize
+                      rows="1"
+                      :rules="majorNameRules"
+                      required
+                      background-color="white"
+                    ></v-textarea>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="title">
+                    <span>Xếp loại <span class="star">*</span></span>
+                  </div>
+                  <div>
+                    <v-select
+                      :items="ranks"
+                      label="Chọn xếp loại"
+                      outlined
+                      :rules="rankNameRules"
+                      v-model="rankName"
+                      required
+                    ></v-select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="title">
+                    <span class="py-2"
+                      >Thông tin bổ sung <span class="star">*</span></span
                     >
                   </div>
-                  <v-textarea
-                    v-model="description"
-                    :rules="descriptionRules"
-                    filled
-                    label="Mô tả công việc"
-                    auto-grow
-                    background-color="white"
-                    outlined
-                    required
-                  ></v-textarea>
-                  <!-- <div class="form-group shadow-textarea">
-                    <v-textarea v-model="description"
-                      class="form-control z-depth-1"
-                      label="Mô tả công việc"
-                      rows="5"
+                  <div class="form-group shadow-textarea">
+                    <v-textarea
+                      v-model="description"
                       :rules="descriptionRules"
+                      filled
+                      label="Bổ sung các thông tin của bạn"
+                      auto-grow
+                      background-color="white"
+                      outlined
                       required
-                      ></v-textarea>
-                  </div> -->
-                  <div class="row">
-                    <div class="col-12 text-center">
-                      <button class="btn btn-primary btnSave" @click.prevent="addWorkExp">
-                        Lưu
-                      </button>
-                    </div>
+                    ></v-textarea>
+                  </div>
+                  <div class="text-center container">
+                    <button
+                      class="btn btn-primary btnSave px-5"
+                      @click.prevent="addCertificate"
+                    >
+                      Lưu
+                    </button>
                   </div>
                 </div>
               </div>
@@ -145,9 +162,9 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
-import WorkExperienceService from "@/services/WorkExperienceService.js";
+import DegreeService from "@/services/DegreeService.js";
 export default {
-  name: "AddWorkExperience",
+  name: "AddDegree",
   components: {
     SlideBar_candidate,
     Header,
@@ -155,31 +172,36 @@ export default {
   },
   data() {
     return {
-      userId: this.$route.params.userId,
-      position: "",
-      positionRules: [(v) => !!v || "Position must be required"],
-      companyName: "",
-      companyNameRules: [(v) => !!v || "Company Name must be required"],
+      degree: "",
+      degreeRules: [(v) => !!v || "Tên bằng cấp không được để trống"],
+      teachingUnit: "",
+      teachingUnitRules: [(v) => !!v || "Tên đơn vị giảng dạy không được để trống"],
       startDate: "",
       startDateRules: [
-        (v) => !!v || "Start Date must be required",
+        (v) => !!v || "Ngày bắt đầu không được để trống",
         (v) =>
           /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-          "Invalid Start Date(dd/MM/yyyy)",
+          "Ngày bắt đầu không hợp lệ (dd/MM/yyyy)",
       ],
       endDate: "",
       endDateRules: [
-        (v) => !!v || "End Date must be required",
+        (v) => !!v || "Ngày kết thúc không được để trống",
         (v) =>
           /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-          "Invalid End Date(dd/MM/yyyy)",
+          "Ngày kết thúc không hợp lệ (dd/MM/yyyy)",
       ],
+      majorName: "",
+      majorNameRules: [(v) => !!v || "Tên chuyên ngành không được để trống"],
+      rankName: "",
+      rankNameRules: [(v) => !!v || "Vui lòng chọn xếp loại"],
+      ranks: ["Giỏi", "Khá", "Trung bình", "Yếu"],
       description: "",
-      descriptionRules: [(v) => !!v || "Description must be required"],
+      descriptionRules: [(v) => !!v || "Thông tin bổ sung không được để trống"],
+      userId: this.$route.params.userId,
     };
   },
   methods: {
-    addWorkExp() {
+    addCertificate() {
       if (this.$refs.form.validate()) {
         var inputStartDate = new Date(this.startDate);
         var inputEndDate = new Date(this.endDate);
@@ -190,45 +212,24 @@ export default {
           });
         } else {
           var [day, month, year] = this.startDate.split("/");
-          var startTime = [year, month, day].join("-");
+          this.startDate = [year, month, day].join("-");
           [day, month, year] = this.endDate.split("/");
-          var endTime = [year, month, day].join("-");
-          WorkExperienceService.isDuplicate({
-            companyName: this.companyName,
-            position: this.position,
-            description: this.description,
-            startDate: startTime,
-            endDate: endTime,
+          this.endDate = [year, month, day].join("-");
+          DegreeService.addCertificate({
+            certificateName: this.degree,
+            teachingUnit: this.teachingUnit,
+            startTime: this.startDate,
+            endTime: this.endDate,
+            major: this.majorName,
+            rank: this.rankName,
+            supplementaryInformation: this.description,
             userId: this.userId,
           })
-            .then((rs) => {
-              if (!rs.data) {
-                WorkExperienceService.addWorkExp({
-                  companyName: this.companyName,
-                  position: this.position,
-                  description: this.description,
-                  startDate: this.startDate,
-                  endDate: this.endDate,
-                  userId: this.userId,
-                })
-                  .then(() => {
-                    this.$store.dispatch("setSnackbar", {
-                      text: "Thêm thành công",
-                    });
-                    this.$router.push("/workexp");
-                  })
-                  .catch(() => {
-                    this.$store.dispatch("setSnackbar", {
-                      color: "error",
-                      text: "Có lỗi xảy ra! Vui lòng thử lại",
-                    });
-                  });
-              } else {
-                this.$store.dispatch("setSnackbar", {
-                  color: "error",
-                  text: "Kinh nghiệm làm việc đã tồn tại",
-                });
-              }
+            .then(() => {
+              this.$store.dispatch("setSnackbar", {
+                text: "Thêm thành công",
+              });
+              this.$router.push("/degree");
             })
             .catch(() => {
               this.$store.dispatch("setSnackbar", {
@@ -252,35 +253,33 @@ export default {
 .star {
   color: red;
 }
-.right {
-  border-left: 1px solid gray;
-}
 .titleright {
   float: right;
   font-weight: initial;
   font-size: 12px;
   font-style: italic;
 }
+.right {
+  border-left: 1px solid gray;
+}
 .title {
+  margin: 5px 0;
+  font-weight: bold;
+}
+.titleheader {
+  margin-left: 0.5rem;
+  margin-bottom: 20px;
+  border-bottom: 1px solid gray;
+  width: 167px;
+  color: #2a3563;
+  font-size: 20px;
   font-weight: bold;
 }
 .col-12 {
   margin: 0;
   padding: 0;
 }
-.titleheader {
-  margin-left: 0.5rem;
-  margin-bottom: 20px;
-  border-bottom: 1px solid gray;
-  width: 203px;
-  color: #2a3563;
-  font-size: 20px;
-  font-weight: bold;
-}
 .label {
   font-size: 15px;
-}
-.btnSave {
-  padding: 5px 70px;
 }
 </style>

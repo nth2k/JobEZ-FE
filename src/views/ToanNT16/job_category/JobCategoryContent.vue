@@ -14,9 +14,7 @@
             </div>
             <div class="col-11">
               <div class="text-left h5 font-weight-bold text-dark">
-                Tuyển Dụng, Tìm Việc Làm IT Phần Mềm Tháng 08/2022 ({{
-                  numberOfPage
-                }}
+                Tuyển Dụng, Tìm Việc Làm IT Phần Mềm Tháng 08/2022 ({{ numberOfPage }}
                 Việc Làm)
               </div>
             </div>
@@ -33,11 +31,7 @@
                 <div class="row">
                   <div class="col-4">
                     <div class="img_cate">
-                      <img
-                        class="img-fluid"
-                        :src="item.images"
-                        :alt="item.jobName"
-                      />
+                      <img class="img-fluid" :src="item.images" :alt="item.jobName" />
                     </div>
                   </div>
                   <div class="col-8">
@@ -211,11 +205,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      "getPostingByCategory",
-      "getPostingByProvince",
-      "getPostingByCity",
-    ]),
+    ...mapActions(["getPostingByCategory", "getPostingByProvince", "getPostingByCity"]),
   },
   computed: {
     ...mapGetters([

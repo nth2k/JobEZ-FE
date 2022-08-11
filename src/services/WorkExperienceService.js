@@ -12,5 +12,8 @@ class WorkExpService {
     addWorkExp(WorkExp) {
         return axios.post(Base_URL + "/workexp/add", WorkExp);
     }
+    isDuplicate(WorkExp){
+        return axios.post(Base_URL + "/workexp/isDuplicate", WorkExp);
+    }
 }
 export default new WorkExpService(); 

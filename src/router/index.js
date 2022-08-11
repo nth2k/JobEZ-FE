@@ -9,7 +9,7 @@ import ChooseCVType from "@/views/HiepViews/ChooseCVType.vue";
 import CandidateOnlineCVForm from "@/views/HiepViews/CandidateOnlineCVForm.vue";
 import CVFromPCForm from "@/views/HiepViews/CVFromPCForm.vue";
 import RecruiterOnlineCVForm from "@/views/HiepViews/RecruiterOnlineCVForm.vue";
-import JobDetailsNoLogin from "@/components/ToanComponents/JobDetailsNoLogin.vue";
+// import JobDetailsNoLogin from "@/components/ToanComponents/JobDetailsNoLogin.vue";
 import SearchJob from "@/views/HiepViews/SearchJob.vue";
 import RecruiterProfile from "@/components/ToanComponents/RecruiterProfile.vue";
 import JobCategory from "@/components/ToanComponents/JobCategory.vue";
@@ -75,7 +75,7 @@ export const routes = [
   {
     path: "/job-detail/:postingId",
     name: "JobDetailsNoLogin",
-    component: JobDetailsNoLogin,
+    component: () => import("@/components/ToanComponents/JobDetailsNoLogin.vue"),
   },
   {
     path: "/recruiter-detail/:name",
@@ -141,6 +141,35 @@ export const routes = [
     path: "/selfskill",
     name: "SelfSkill",
     component: () => import("@/views/TuanNV/SelfSkill.vue"),
+  },
+  {
+    path: '/adddegree',
+    name: 'AddDegree',
+    component: () => import("@/views/TuanNV/AddDegree.vue")
+  }, {
+    path: '/degree',
+    name: 'ViewDegree',
+    component: () => import("@/views/TuanNV/ViewDegree.vue")
+  },{
+    path: '/editdegree',
+    name: 'EditDegree',
+    component: () => import("@/views/TuanNV/EditDegree.vue")
+  },{
+    path: '/desiredjob',
+    name: 'ViewDesiredJob',
+    component: () => import("@/views/TuanNV/ViewDesiredJob.vue")
+  },{
+    path: '/editdesiredjob',
+    name: 'EditDesiredJob',
+    component: () => import("@/views/TuanNV/EditDesiredJob.vue")
+  },{
+    path: '/contactinfo',
+    name: 'ContactInfo',
+    component: () => import("@/views/TuanNV/ContactInfo.vue")
+  },{
+    path: '/editcontactinfo',
+    name: 'EditContactInfo',
+    component: () => import("@/views/TuanNV/EditContactInfo.vue")
   },
   {
     path: "/recruiter-list",

@@ -1,54 +1,61 @@
 <template>
-  <div :class="{ 'd-none': isHidden }">
-    <div class="row">
+  <div v-if="isGetCvFunction">
+    <div :class="{ 'd-none': isHidden }">
+      <div class="row">
+        <div
+          class="col-12 bg-secondary p-2 option-container"
+          :class="{ invisible: isHiddenOptions }"
+          @mouseover="isHiddenOptions = false"
+          @mouseleave="isHiddenOptions = true"
+        >
+          <i
+            class="fa fa-bars py-1 px-2 bg-white rounded mr-1"
+            id="move"
+            ref="move"
+          ></i
+          ><i
+            class="fa fa-arrow-up py-1 px-2 bg-white rounded mr-1"
+            aria-hidden="true"
+            id="moveUp"
+            ref="moveUp"
+          ></i>
+          <i
+            class="fa fa-arrow-down py-1 px-2 bg-white rounded mr-1"
+            aria-hidden="true"
+            id="moveDown"
+            ref="moveDown"
+          ></i>
+          <i
+            class="fa fa-minus py-1 px-5 bg-danger rounded mr-1"
+            aria-hidden="true"
+            id="hidden"
+            ref="hidden"
+            @click="hidden"
+            >Ẩn</i
+          >
+        </div>
+      </div>
       <div
-        class="col-12 bg-secondary p-2 option-container"
-        :class="{ invisible: isHiddenOptions }"
+        class="row career-goal"
         @mouseover="isHiddenOptions = false"
         @mouseleave="isHiddenOptions = true"
       >
-        <i
-          class="fa fa-bars py-1 px-2 bg-white rounded mr-1"
-          id="move"
-          ref="move"
-        ></i
-        ><i
-          class="fa fa-arrow-up py-1 px-2 bg-white rounded mr-1"
-          aria-hidden="true"
-          id="moveUp"
-          ref="moveUp"
-        ></i>
-        <i
-          class="fa fa-arrow-down py-1 px-2 bg-white rounded mr-1"
-          aria-hidden="true"
-          id="moveDown"
-          ref="moveDown"
-        ></i>
-        <i
-          class="fa fa-minus py-1 px-5 bg-danger rounded mr-1"
-          aria-hidden="true"
-          id="hidden"
-          ref="hidden"
-          @click="hidden"
-          >Ẩn</i
-        >
-      </div>
-    </div>
-    <div
-      class="row career-goal"
-      @mouseover="isHiddenOptions = false"
-      @mouseleave="isHiddenOptions = true"
-    >
-      <div class="col-12 text-left px-0">
-        <div class="header h4 font-weight-bold pl-3 text-uppercase">
-          MỤC TIÊU NGHỀ NGHIỆP
+        <div class="col-12 text-left px-0">
+          <div class="header h4 font-weight-bold pl-3 text-uppercase">
+            MỤC TIÊU NGHỀ NGHIỆP
+          </div>
         </div>
-      </div>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-10">
-            <div contenteditable="true" class="custom-outline">
-              {{ getCV.careerGoal }}
+        <div class="col-12">
+          <div class="row">
+            <div class="col-10">
+              <div
+                @click="updateCareerGoal"
+                ref="careerGoal"
+                contenteditable="true"
+                class="custom-outline"
+              >
+                {{ getCV.careerGoal }}
+              </div>
             </div>
           </div>
         </div>
@@ -58,7 +65,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "CareerGoal",
   data() {
@@ -68,13 +75,18 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["setCareerGoal"]),
     hidden() {
       this.isHidden = !this.isHidden;
     },
     check: function () {},
+    updateCareerGoal: function () {
+      const careerGoals = this.$refs.careerGoal.textContent;
+      this.setCareerGoal({ careerGoals: careerGoals });
+    },
   },
   computed: {
-    ...mapGetters(["getCV"]),
+    ...mapGetters(["isGetCvFunction", "getCV"]),
   },
 };
 </script>

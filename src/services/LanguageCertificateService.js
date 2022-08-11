@@ -18,6 +18,9 @@ class LanguageCertificateService{
     deleteLanguageCertificate(id){
         return axios.delete(Base_URL + "/language/delete/" + id);
     }
+    isDuplicate(language){
+        return axios.post(Base_URL + "/language/isDuplicate", language);
+    }
 }
 
 export default new LanguageCertificateService(); 
