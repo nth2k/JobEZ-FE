@@ -48,8 +48,8 @@
         <div class="row">
           <div class="col-10">
             <div
-              v-for="activity in activities"
-              :key="activity.activityName"
+              v-for="(activity, index) in activities"
+              :key="index"
               class="work-experience-content"
             >
               <div

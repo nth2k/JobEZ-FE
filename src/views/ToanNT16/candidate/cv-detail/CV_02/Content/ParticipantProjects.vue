@@ -47,7 +47,7 @@
       <div class="col-12">
         <div class="row">
           <div class="col-10">
-            <div v-for="project in projects" :key="project.projectName">
+            <div v-for="(project, index) in projects" :key="index">
               <div class="projects-name custom-outline">
                 <strong contenteditable="true">{{
                   project.projectName
