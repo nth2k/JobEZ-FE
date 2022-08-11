@@ -1,23 +1,30 @@
 <template>
-  <div class="container-fluid">
-    <div class="row cv-container">
-      <div class="col-12"></div>
-      <div class="col-8 px-0">
-        <div class="col-12"><Header /></div>
-        <!-- CV -->
-        <div class="row">
-          <!-- Right -->
-          <div class="col-5"><Right /></div>
-          <!-- Content -->
-          <div class="col-7 content-container"><CvContent /></div>
+  <div v-if="isGetCvFunction" class="container-fluid">
+    <v-form ref="form">
+      <div
+        @click="updateCandidateCv"
+        class="text-center btn-primary btn px-4 py-4"
+      >
+        Save CV
+      </div>
+      <div class="row cv-container">
+        <div class="col-12"></div>
+        <div class="col-8 px-0">
+          <div class="col-12"><Header /></div>
+          <!-- CV -->
+          <div class="row">
+            <!-- Right -->
+            <div class="col-5"><Right /></div>
+            <!-- Content -->
+            <div class="col-7 content-container"><CvContent /></div>
+          </div>
+        </div>
+        <!-- CV liên quan -->
+        <div class="col-4">
+          <RelatedCV />
         </div>
       </div>
-      <!-- CV liên quan -->
-      <div class="col-4">
-        <RelatedCV />
-        <div></div>
-      </div>
-    </div>
+    </v-form>
   </div>
 </template>
 
@@ -36,12 +43,20 @@ export default {
     CvContent,
     RelatedCV,
   },
-  async created() {},
+  async created() {
+    // const token = JSON.parse(window.localStorage.getItem("user"));
+    // const candidateId = token.user.id;
+    const candidateId = 4;
+    this.getCvByCandidateId({ candidateId: candidateId });
+  },
   methods: {
-    ...mapActions(["getSuitablePosting"]),
+    ...mapActions(["getCvByCandidateId", "updateCv"]),
+    updateCandidateCv() {
+      this.updateCv();
+    },
   },
   computed: {
-    ...mapGetters(["isGetSuitablePostingFunction"]),
+    ...mapGetters(["isGetCvFunction", "getCV", "getBase64"]),
   },
 };
 </script>
