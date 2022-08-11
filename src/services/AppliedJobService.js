@@ -7,6 +7,7 @@ class AppliedJobService{
         return axios.get(Base_URL + "/appliedjob/" + id);
     }
     deleteAppliedJob(AppliedJobKey){
+        console.log(AppliedJobKey);
         return axios.post(Base_URL + "/appliedjob/remove" , AppliedJobKey);
     }
 }

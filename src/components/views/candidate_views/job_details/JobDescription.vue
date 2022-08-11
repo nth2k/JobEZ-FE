@@ -62,36 +62,6 @@
       </div>
       <div class="box_quyenloi">
         <h2 class="descibe">Hình ảnh</h2>
-        <div class="d-flex flex-row">
-          <div class="mr-1">
-            <img
-              src="@/assets/company_image.jpg"
-              alt="company_image"
-              class="img-thumbnail"
-            />
-          </div>
-          <div>
-            <img
-              src="@/assets/company_image.jpg"
-              alt="company_image"
-              class="img-thumbnail"
-            />
-          </div>
-          <div class="mr-1">
-            <img
-              src="@/assets/company_image.jpg"
-              alt="company_image"
-              class="img-thumbnail"
-            />
-          </div>
-          <div>
-            <img
-              src="@/assets/company_image.jpg"
-              alt="company_image"
-              class="img-thumbnail"
-            />
-          </div>
-        </div>
       </div>
       <div class="span_ut">
         <div class="col-3 col-sm-6"></div>

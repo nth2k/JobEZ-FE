@@ -252,7 +252,7 @@
               <img style="width: 70px; height: 70px" :src="job.images" alt="" />
             </div>
             <div class="job-info w-75 h-auto pl-4">
-              <span style="color: red">{{ job.jobName }}</span
+              <span @click="jobDetail(job.id)" style="color: red">{{ job.jobName }}</span
               ><br />
               <br />
               <img src="@/assets/icn_location.png" alt="" />
@@ -358,6 +358,12 @@ export default {
         this.attractiveJob = res.data.attractiveJob.slice(1, 10);
         this.urgentRecruitment = res.data.urgentRecruitment.slice(10, 15);
       });
+    },
+    jobDetail(jobId){
+      this.$router.push({
+        name: "JobDetailsNoLogin",
+        params: { postingId: jobId },
+      })
     },
     submit() {
       console.log(this.searchText);
