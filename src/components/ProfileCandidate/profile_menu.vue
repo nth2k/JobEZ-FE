@@ -1,10 +1,10 @@
 <template>
   <div class="leftHoso">
-    <div class="top-left">
-      <span>Tien trinh ho so</span>
-      <div class="progress-hoso">50%</div>
+    <div class="top-left my-4">
+      <span>Hồ sơ Online</span>
+      <!-- <div class="progress-hoso">50%</div> -->
     </div>
-    <div class="bottom-left">
+    <div class="bottom-left pt-4">
       <div class="menu-items">
         <div class="menu-item">
           <svg
@@ -181,10 +181,14 @@ a {
 }
 .bottom-left {
   margin-top: 20px;
+  border-top: 1px solid gray;
 }
 .top-left {
   text-align: center;
-  border-bottom: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
+  color: #2a3563;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .items {

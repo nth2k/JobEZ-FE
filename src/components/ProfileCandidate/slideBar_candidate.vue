@@ -89,7 +89,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 :root {
   --color_blue: #4757b9;
   --color_main: #232f87;

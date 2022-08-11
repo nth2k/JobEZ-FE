@@ -5,8 +5,8 @@
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
-        <div class="leftHoso">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
+        <div>
           <Profile_menu />
         </div>
         <div class="blockright col-9">
@@ -50,9 +50,9 @@
               </div>
             </span>
           </div>
-          <div class="container">
+          <div class="container mt-4">
             <div class="row">
-              <div class="col-3 text-center">
+              <div class="col-3">
                 <img
                   class="img-avatar"
                   src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
@@ -144,7 +144,10 @@ export default {
 
 <style scoped>
 .body {
-  display: flex;
+  /* display: flex; */
+  border: 1px solid blue;
+  border-radius: 5px;
+  box-shadow: 5px 5px lightgray;
 }
 .label {
   margin-bottom: 15px;
@@ -160,13 +163,13 @@ a {
 }
 .titleRight {
   margin-bottom: 20px;
-  margin-left: 40px;
+  margin-left: 15px;
   padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 155px;
+  width: 130px;
   color: #2a3563;
   font-weight: bold;
-  font-size: 20px;
+  /* font-size: 20px; */
 }
 .blockright {
   border-left: 1px solid gray;

@@ -275,7 +275,7 @@ export default {
   },
   methods: {
     showImage() {
-      document.getElementById("myImg").src = this.image.name;
+      // document.getElementById("myImg").src = this.base64;
     },
     // onProvinceSelect(event) {
     //   ProvinceDistrictService.getAllDistrict(event.target.value).then((rs) => {

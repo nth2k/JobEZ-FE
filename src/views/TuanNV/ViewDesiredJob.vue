@@ -5,7 +5,7 @@
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
         <div class="leftHoso">
           <Profile_menu />
         </div>
@@ -105,7 +105,7 @@ export default {
   margin-left: 15px;
   padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 170px;
+  width: 173px;
   color: #2a3563;
   font-weight: bold;
 }

@@ -9,30 +9,30 @@
         <div class="leftHoso">
           <profile_menu />
         </div>
-        <div class="right ml-4">
-          <div class="title titleRight mb-3">
-            <span class="pb-2">Mục tiêu nghề nghiệp</span>
-          </div>
-          <v-form ref="form">
-            <div class="form-group shadow-textarea">
-              <v-textarea
-                v-model="careerGoal"
-                filled
-                label="Mô tả ngắn ngọn mục tiêu nghề nghiệp"
-                auto-grow
-                background-color="white"
-                outlined
-                required
-              ></v-textarea>
-            </div>
-            <div class="row">
-              <div class="d-flex col-12 justify-content-center">
-                <button class="btn btn-primary px-5" @click.prevent="updateCareerGoal">
-                  Lưu
-                </button>
+        <div class="blockright col-9">
+          <div class="titleRight">Mục tiêu nghề nghiệp</div>
+          <div class="container mt-4">
+            <v-form ref="form">
+              <div class="form-group shadow-textarea">
+                <v-textarea
+                  v-model="careerGoal"
+                  filled
+                  label="Mô tả ngắn gọn mục tiêu nghề nghiệp"
+                  auto-grow
+                  background-color="white"
+                  outlined
+                  required
+                ></v-textarea>
               </div>
-            </div>
-          </v-form>
+              <div class="row">
+                <div class="d-flex col-12 justify-content-center">
+                  <button class="btn btn-primary px-5" @click.prevent="updateCareerGoal">
+                    Lưu
+                  </button>
+                </div>
+              </div>
+            </v-form>
+          </div>
         </div>
       </div>
     </div>
@@ -83,27 +83,32 @@ export default {
 </script>
 
 <style scoped>
-.leftHoso {
-  flex: 0 0 20%;
-  border-right: 1px solid lightgray;
-}
 .right {
   margin-left: 40px;
   font-size: 14px;
 }
+.titleRight {
+  margin-bottom: 20px;
+  margin-left: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid gray;
+  width: 136px;
+  color: #2a3563;
+  font-weight: bold;
+}
 .title {
   font-weight: bold;
   margin-right: 5px;
+}
+.blockright {
+  border-left: 1px solid gray;
 }
 .body {
   border: 1px solid blue;
   border-radius: 5px;
   box-shadow: 5px 5px lightgray;
 }
-.right {
-  flex: 0 0 80%;
-  max-width: 70%;
-}
+
 span {
   border-bottom: 1px solid #2a3563cc;
   color: #2a3563cc;
