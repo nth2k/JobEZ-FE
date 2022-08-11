@@ -109,13 +109,13 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import moment from "moment";
+import moment from "moment";
 import JobDetailService from "@/services/JobDetailService";
 export default {
   name: "BoxTiki",
   data() {
     return {
-      // currentDate: moment().format("DD/MM/YYYY"),
+      currentDate: moment().format("DD/MM/YYYY"),
     };
   },
   computed: {
