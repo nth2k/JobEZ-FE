@@ -271,7 +271,7 @@ export default {
       this.$router.push("/cv_01");
     },
     moveToCv02() {
-      this.$router.push("/cv_02");
+      this.$router.push("/cv_01");
     },
   },
 };

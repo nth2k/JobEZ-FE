@@ -47,7 +47,7 @@
       <div class="col-12">
         <div class="row">
           <div class="col-10">
-            <div v-for="skill in skills" :key="skill.skillName">
+            <div v-for="(skill, index) in skills" :key="index">
               <div class="row">
                 <div
                   class="col-12 custom-outline px-0 ml-3"

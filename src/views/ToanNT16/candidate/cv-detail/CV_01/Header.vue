@@ -1,11 +1,16 @@
 <template>
-  <div class="row">
+  <div v-if="isGetCvFunction" class="row">
     <div class="col-12 text-right">
       <div class="pt-5">
         <div class="col-12">
           <div class="candidate-name font-weight-bold text-uppercase">
-            <div contenteditable="true" class="custom-outline">
-              Nguyễn Thế Toàn
+            <div
+              ref="candidateName"
+              @click="updateHeaderData"
+              contenteditable="true"
+              class="custom-outline"
+            >
+              {{ getCV.name }}
             </div>
           </div>
         </div>
@@ -24,6 +29,7 @@
             @click="selectImage"
           ></div>
           <input
+            @change="displayImage"
             style="display: none"
             ref="fileInput"
             type="file"
@@ -32,17 +38,12 @@
         </div>
         <div class="col-9 text-right px-0">
           <div
-            class="
-              candidate-position
-              font-weight-normal
-              text-uppercase
-              pl-5
-              pr-5
-              custom-outline
-            "
+            ref="position"
+            @click="updateHeaderData"
+            class="candidate-position font-weight-normal text-uppercase pl-5 pr-5 custom-outline"
             contenteditable="true"
           >
-            Lập trình viên android
+            {{ getCV.position }}
           </div>
           <div class="w-100 bg-primary" style="width: 2rem; height: 2rem"></div>
         </div>
@@ -52,14 +53,18 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Header",
   data() {
     return {
       previewImage: require("@/assets/no_avatar.jpg"),
+      candidateName: "",
+      image: null,
     };
   },
   methods: {
+    ...mapActions(["setHeaderData"]),
     selectImage() {
       this.$refs.fileInput.click();
     },
@@ -75,6 +80,22 @@ export default {
         this.$emit("input", file[0]);
       }
     },
+
+    displayImage: function () {},
+    updateHeaderData: function () {
+      const email = JSON.parse(window.localStorage.getItem("user")).user.email;
+      const candidateName = this.$refs.candidateName.textContent;
+      const desiredJobName = this.$refs.position.textContent;
+      this.setHeaderData({
+        candidateEmail: email,
+        candidateName: candidateName,
+        desiredJobName: desiredJobName,
+        images: this.previewImage,
+      });
+    },
+  },
+  computed: {
+    ...mapGetters(["getCV", "getImages", "getBase64", "isGetCvFunction"]),
   },
 };
 </script>

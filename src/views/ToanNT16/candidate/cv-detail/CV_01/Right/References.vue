@@ -48,9 +48,9 @@
         <div class="row">
           <div class="col-10">
             <div contenteditable="true" class="custom-outline">
-              Nguyễn Văn B – Team Leader
+              Nguyễn Hai Long – Team Leader
 
-              <br />Công ty CP CV365 <br />SĐT: 0123456789
+              <br />Công ty CP JobEZ <br />SĐT: 0123456789
             </div>
           </div>
         </div>
