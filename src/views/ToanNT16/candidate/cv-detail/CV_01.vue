@@ -1,6 +1,12 @@
 <template>
   <div v-if="isGetCvFunction" class="container-fluid">
     <v-form ref="form">
+      <div
+        @click="updateCandidateCv"
+        class="text-center btn-primary btn px-4 py-4"
+      >
+        Save CV
+      </div>
       <div class="row cv-container">
         <div class="col-12"></div>
         <div class="col-8 px-0">
@@ -16,7 +22,6 @@
         <!-- CV liên quan -->
         <div class="col-4">
           <RelatedCV />
-          <div></div>
         </div>
       </div>
     </v-form>
@@ -42,13 +47,16 @@ export default {
     // const token = JSON.parse(window.localStorage.getItem("user"));
     // const candidateId = token.user.id;
     const candidateId = 4;
-    this.getCvByCandidateId({ candidateId });
+    this.getCvByCandidateId({ candidateId: candidateId });
   },
   methods: {
-    ...mapActions(["getCvByCandidateId", "isGetCvFunction"]),
+    ...mapActions(["getCvByCandidateId", "updateCv"]),
+    updateCandidateCv() {
+      this.updateCv();
+    },
   },
   computed: {
-    ...mapGetters(["getCV"]),
+    ...mapGetters(["isGetCvFunction", "getCV", "getBase64"]),
   },
 };
 </script>

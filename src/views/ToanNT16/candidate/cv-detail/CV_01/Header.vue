@@ -1,11 +1,12 @@
 <template>
-  <div class="row">
+  <div v-if="isGetCvFunction" class="row">
     <div class="col-12 text-right">
       <div class="pt-5">
         <div class="col-12">
           <div class="candidate-name font-weight-bold text-uppercase">
             <div
-              @change="updateData"
+              ref="candidateName"
+              @click="updateHeaderData"
               contenteditable="true"
               class="custom-outline"
             >
@@ -28,6 +29,7 @@
             @click="selectImage"
           ></div>
           <input
+            @change="displayImage"
             style="display: none"
             ref="fileInput"
             type="file"
@@ -36,6 +38,8 @@
         </div>
         <div class="col-9 text-right px-0">
           <div
+            ref="position"
+            @click="updateHeaderData"
             class="candidate-position font-weight-normal text-uppercase pl-5 pr-5 custom-outline"
             contenteditable="true"
           >
@@ -49,16 +53,18 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Header",
   data() {
     return {
       previewImage: require("@/assets/no_avatar.jpg"),
-      name: "",
+      candidateName: "",
+      image: null,
     };
   },
   methods: {
+    ...mapActions(["setHeaderData"]),
     selectImage() {
       this.$refs.fileInput.click();
     },
@@ -74,15 +80,27 @@ export default {
         this.$emit("input", file[0]);
       }
     },
-    updateData() {},
+
+    displayImage: function () {},
+    updateHeaderData: function () {
+      const email = JSON.parse(window.localStorage.getItem("user")).user.email;
+      const candidateName = this.$refs.candidateName.textContent;
+      const desiredJobName = this.$refs.position.textContent;
+      this.setHeaderData({
+        candidateEmail: email,
+        candidateName: candidateName,
+        desiredJobName: desiredJobName,
+        images: this.previewImage,
+      });
+    },
   },
   computed: {
-    ...mapGetters(["getCV"]),
+    ...mapGetters(["getCV", "getImages", "getBase64", "isGetCvFunction"]),
   },
 };
 </script>
 
-<style>
+<style scoped>
 .imagePreviewWrapper {
   width: 8.75rem;
   height: 9.25rem;

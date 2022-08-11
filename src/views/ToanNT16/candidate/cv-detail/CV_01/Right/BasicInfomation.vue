@@ -1,111 +1,143 @@
 <template>
-  <div :class="{ 'd-none': isHidden }">
-    <div class="row">
+  <div v-if="isGetCvFunction">
+    <div :class="{ 'd-none': isHidden }">
+      <div class="row">
+        <div
+          class="col-12 bg-secondary p-2 option-container"
+          :class="{ invisible: isHiddenOptions }"
+          @mouseover="isHiddenOptions = false"
+          @mouseleave="isHiddenOptions = true"
+        >
+          <i
+            class="fa fa-bars py-1 px-2 bg-white rounded mr-1"
+            id="move"
+            ref="move"
+          ></i
+          ><i
+            class="fa fa-arrow-up py-1 px-2 bg-white rounded mr-1"
+            aria-hidden="true"
+            id="moveUp"
+            ref="moveUp"
+          ></i>
+          <i
+            class="fa fa-arrow-down py-1 px-2 bg-white rounded mr-1"
+            aria-hidden="true"
+            id="moveDown"
+            ref="moveDown"
+          ></i>
+          <i
+            class="fa fa-minus py-1 px-5 bg-danger rounded mr-1"
+            aria-hidden="true"
+            id="hidden"
+            ref="hidden"
+            @click="hidden"
+            >Ẩn</i
+          >
+        </div>
+      </div>
       <div
-        class="col-12 bg-secondary p-2 option-container"
-        :class="{ invisible: isHiddenOptions }"
+        class="row basic-information"
         @mouseover="isHiddenOptions = false"
         @mouseleave="isHiddenOptions = true"
       >
-        <i
-          class="fa fa-bars py-1 px-2 bg-white rounded mr-1"
-          id="move"
-          ref="move"
-        ></i
-        ><i
-          class="fa fa-arrow-up py-1 px-2 bg-white rounded mr-1"
-          aria-hidden="true"
-          id="moveUp"
-          ref="moveUp"
-        ></i>
-        <i
-          class="fa fa-arrow-down py-1 px-2 bg-white rounded mr-1"
-          aria-hidden="true"
-          id="moveDown"
-          ref="moveDown"
-        ></i>
-        <i
-          class="fa fa-minus py-1 px-5 bg-danger rounded mr-1"
-          aria-hidden="true"
-          id="hidden"
-          ref="hidden"
-          @click="hidden"
-          >Ẩn</i
-        >
-      </div>
-    </div>
-    <div
-      class="row basic-information"
-      @mouseover="isHiddenOptions = false"
-      @mouseleave="isHiddenOptions = true"
-    >
-      <div class="col-12 text-left px-0">
-        <div class="header h4 font-weight-bold pl-3 text-uppercase">
-          Thông tin cơ bản
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-1 px-0">
-            <i class="fa fa-birthday-cake"></i>
+        <div class="col-12 text-left px-0">
+          <div class="header h4 font-weight-bold pl-3 text-uppercase">
+            Thông tin cơ bản
           </div>
-          <div class="col-10">
-            <div contenteditable="true" id="birthday" class="custom-outline">
-              {{ getCV.dateOfBirth }}
+        </div>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-1 px-0">
+              <i class="fa fa-birthday-cake"></i>
+            </div>
+            <div class="col-10">
+              <div
+                @click="updateBasicInformationData"
+                ref="dateOfBirth"
+                contenteditable="true"
+                id="birthday"
+                class="custom-outline"
+              >
+                {{ getCV.dateOfBirth }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-1 px-0"><i class="fa fa-transgender"></i></div>
-          <div class="col-10">
-            <div contenteditable="true" id="gender" class="custom-outline">
-              {{ getCV.gender }}
+        <div class="col-12">
+          <div class="row">
+            <div class="col-1 px-0"><i class="fa fa-transgender"></i></div>
+            <div class="col-10">
+              <div
+                @click="updateBasicInformationData"
+                ref="gender"
+                contenteditable="true"
+                id="gender"
+                class="custom-outline"
+              >
+                {{ getCV.gender }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-12 text-left">
-        <div class="row">
-          <div class="col-1 px-0"><i class="fa fa-phone"></i></div>
-          <div class="col-10">
-            <div contenteditable="true" id="phone" class="custom-outline">
-              {{ getCV.phone }}
+        <div class="col-12 text-left">
+          <div class="row">
+            <div class="col-1 px-0"><i class="fa fa-phone"></i></div>
+            <div class="col-10">
+              <div
+                @click="updateBasicInformationData"
+                ref="phone"
+                contenteditable="true"
+                id="phone"
+                class="custom-outline"
+              >
+                {{ getCV.phone }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-12 text-left" style="margin-left: -0.2rem">
-        <div class="row">
-          <div class="col-1 px-0"><i class="material-icons">email</i></div>
-          <div class="col-10">
-            <div contenteditable="true" id="email" class="custom-outline">
-              {{ getCV.email }}
+        <div class="col-12 text-left" style="margin-left: -0.2rem">
+          <div class="row">
+            <div class="col-1 px-0"><i class="material-icons">email</i></div>
+            <div class="col-10">
+              <div
+                @click="updateBasicInformationData"
+                ref="email"
+                contenteditable="true"
+                id="email"
+                class="custom-outline"
+              >
+                {{ getCV.email }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-12 text-left" style="margin-left: -0.3rem">
-        <div class="row">
-          <div class="col-1 px-0">
-            <i class="material-icons">edit_location</i>
-          </div>
-          <div class="col-10">
-            <div contenteditable="true" id="address" class="custom-outline">
-              {{ getCV.street }}, {{ getCV.city }}, {{ getCV.province }}
+        <div class="col-12 text-left" style="margin-left: -0.3rem">
+          <div class="row">
+            <div class="col-1 px-0">
+              <i class="material-icons">edit_location</i>
+            </div>
+            <div class="col-10">
+              <div
+                @click="updateBasicInformationData"
+                ref="address"
+                contenteditable="true"
+                id="address"
+                class="custom-outline"
+              >
+                {{ getCV.street }}, {{ getCV.city }}, {{ getCV.province }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-12 text-left">
-        <div class="row">
-          <div class="col-1 px-0">
-            <i class="fa fa-facebook-official"></i>
-          </div>
-          <div class="col-10">
-            <div contenteditable="true" id="facebook" class="custom-outline">
-              {{ getCV.facebook }}
+        <div class="col-12 text-left">
+          <div class="row">
+            <div class="col-1 px-0">
+              <i class="fa fa-facebook-official"></i>
+            </div>
+            <div class="col-10">
+              <div contenteditable="true" id="facebook" class="custom-outline">
+                {{ getCV.facebook }}
+              </div>
             </div>
           </div>
         </div>
@@ -115,7 +147,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "BasicInfomation",
   data() {
@@ -125,12 +157,33 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["setBasicInformationData"]),
     hidden() {
       this.isHidden = !this.isHidden;
     },
+    updateBasicInformationData: function () {
+      const dateOfBirth = this.$refs.dateOfBirth.textContent;
+      const gender = this.$refs.gender.textContent;
+      const phone = this.$refs.phone.textContent;
+      const email = this.$refs.email.textContent;
+      const address = this.$refs.address.textContent.split(",");
+      const street = address[0].trim();
+      const city = address[1].trim();
+      const province = address[2].trim();
+      this.setBasicInformationData({
+        dateOfBirth: dateOfBirth,
+        gender: gender,
+        phone: phone,
+        email: email,
+        address: address,
+        province: province,
+        city: city,
+        street: street,
+      });
+    },
   },
   computed: {
-    ...mapGetters(["getCV"]),
+    ...mapGetters(["isGetCvFunction", "getCV"]),
   },
 };
 </script>

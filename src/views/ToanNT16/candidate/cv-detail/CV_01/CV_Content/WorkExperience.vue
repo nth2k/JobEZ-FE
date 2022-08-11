@@ -1,76 +1,89 @@
 <template>
-  <div :class="{ 'd-none': isHidden }">
-    <div class="row">
+  <div v-if="isGetCvFunction">
+    <div :class="{ 'd-none': isHidden }">
+      <div class="row">
+        <div
+          class="col-12 bg-secondary p-2 option-container"
+          :class="{ invisible: isHiddenOptions }"
+          @mouseover="isHiddenOptions = false"
+          @mouseleave="isHiddenOptions = true"
+        >
+          <i
+            class="fa fa-bars py-1 px-2 bg-white rounded mr-1"
+            id="move"
+            ref="move"
+          ></i
+          ><i
+            class="fa fa-arrow-up py-1 px-2 bg-white rounded mr-1"
+            aria-hidden="true"
+            id="moveUp"
+            ref="moveUp"
+          ></i>
+          <i
+            class="fa fa-arrow-down py-1 px-2 bg-white rounded mr-1"
+            aria-hidden="true"
+            id="moveDown"
+            ref="moveDown"
+          ></i>
+          <i
+            class="fa fa-minus py-1 px-5 bg-danger rounded mr-1"
+            aria-hidden="true"
+            id="hidden"
+            ref="hidden"
+            @click="hidden"
+            >Ẩn</i
+          >
+        </div>
+      </div>
       <div
-        class="col-12 bg-secondary p-2 option-container"
-        :class="{ invisible: isHiddenOptions }"
+        class="row work-experience-container"
         @mouseover="isHiddenOptions = false"
         @mouseleave="isHiddenOptions = true"
       >
-        <i
-          class="fa fa-bars py-1 px-2 bg-white rounded mr-1"
-          id="move"
-          ref="move"
-        ></i
-        ><i
-          class="fa fa-arrow-up py-1 px-2 bg-white rounded mr-1"
-          aria-hidden="true"
-          id="moveUp"
-          ref="moveUp"
-        ></i>
-        <i
-          class="fa fa-arrow-down py-1 px-2 bg-white rounded mr-1"
-          aria-hidden="true"
-          id="moveDown"
-          ref="moveDown"
-        ></i>
-        <i
-          class="fa fa-minus py-1 px-5 bg-danger rounded mr-1"
-          aria-hidden="true"
-          id="hidden"
-          ref="hidden"
-          @click="hidden"
-          >Ẩn</i
-        >
-      </div>
-    </div>
-    <div
-      class="row work-experience-container"
-      @mouseover="isHiddenOptions = false"
-      @mouseleave="isHiddenOptions = true"
-    >
-      <div class="col-12 text-left px-0 border-bottom">
-        <div class="header h4 font-weight-bold pl-3 text-uppercase">
-          Kinh nghiệm làm việc
+        <div class="col-12 text-left px-0 border-bottom">
+          <div class="header h4 font-weight-bold pl-3 text-uppercase">
+            Kinh nghiệm làm việc
+          </div>
         </div>
-      </div>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-10">
-            <div
-              v-for="(experience, index) in getCV.workExperiences"
-              :key="index"
-              class="work-experience-content mb-3"
-            >
+        <div class="col-12">
+          <div class="row">
+            <div class="col-10">
               <div
-                class="company-name custom-outline py-1"
-                contenteditable="true"
+                v-for="(experience, index) in getCV.workExperiences"
+                :key="index"
+                @click="updateWorkExperience(index)"
+                class="work-experience-content mb-3"
               >
-                <strong class="text-primary">{{
-                  experience.companyName
-                }}</strong>
-              </div>
-              <div
-                class="skills custom-outline text-info"
-                contenteditable="true"
-              >
-                {{ experience.startDate }} - {{ experience.endDate }}
-              </div>
-              <div class="position custom-outline" contenteditable="true">
-                Ngành học: {{ experience.position }}
-              </div>
-              <div class="skills custom-outline" contenteditable="true">
-                {{ experience.description }}
+                <div
+                  ref="companyName"
+                  class="company-name custom-outline py-1"
+                  contenteditable="true"
+                >
+                  <strong class="text-primary">{{
+                    experience.companyName
+                  }}</strong>
+                </div>
+                <div
+                  ref="date"
+                  class="skills custom-outline text-info"
+                  contenteditable="true"
+                >
+                  {{ experience.startDate }} - {{ experience.endDate }}
+                </div>
+                <div
+                  ref="position"
+                  class="position custom-outline"
+                  contenteditable="true"
+                >
+                  Vị trí: {{ experience.position }}
+                </div>
+                <div
+                  ref="description"
+                  class="skills custom-outline"
+                  contenteditable="true"
+                >
+                  {{ experience.description }}
+                </div>
               </div>
             </div>
           </div>
@@ -81,40 +94,51 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "WorkExperience",
   data() {
     return {
-      experiences: [
-        {
-          companyName: "Công ty cổ phần CV365",
-          position: "Vị trí: Lập trình viên Android (Từ ngày … đến hiện tại.)",
-          jobDescription:
-            "Lập trình ứng dụng di động theo kế hoạch của công ty: timviec365.vn, banthe24h.vn …",
-          skills:
-            "- Viết api của ứng dụng, làm việc với nhân viên thiết kế giao diện.- Duy trì và phát triển thêm tính năng của ứng dụng.,- Kỹ năng chuyên môn áp dụng trong công việc:, +/ Ngôn ngữ sử dụng: JAVA android +/ IDE: Android studio+/ Mô hình: MVP",
-        },
-        {
-          companyName: "Công ty cổ phần CV365",
-          position: "Vị trí: Thực tập sinh Android (Từ ngày … đến hiện tại.)",
-          jobDescription:
-            "Lập trình ứng dụng di động theo kế hoạch của công ty: timviec365.vn, banthe24h.vn …",
-          skills:
-            "-Học tập kiến thức của ngôn ngữ lập trình android <br />+/ Được học Android cơ bản, Activity, Fragment, Service, Custom view, Opengl, Canvas, Java native+/<br />Bổ sung thêm kiến thức nâng cao android, Increase performance application<br />Công việc thực tế được tham gia<br />Xây dựng các ứng dụng cơ bản: nghe nhạc, đọc báo, phần mềm quản lý.",
-        },
-      ],
+      experiences: [],
       isHidden: false,
       isHiddenOptions: true,
     };
   },
   methods: {
+    ...mapActions(["setWorkExperience"]),
     hidden() {
       this.isHidden = !this.isHidden;
     },
+    updateWorkExperience: function (index) {
+      const id = this.getCV.workExperiences[index].id;
+      const companyName = this.$refs["companyName"][index].textContent;
+      const date = this.$refs["date"][index].textContent;
+      const startDate = date.slice(0, 11);
+      const endDate = date.slice(14);
+      const position = this.$refs["position"][index].textContent;
+      const description = this.$refs["description"][index].textContent;
+
+      const experience = {
+        id: id,
+        companyName: companyName,
+        startDate: startDate,
+        endDate: endDate,
+        position: position,
+        description: description,
+      };
+
+      const indexOf = this.experiences.findIndex(
+        (ex) => ex.id == experience.id
+      );
+      if (indexOf == -1) {
+        this.experiences.push(experience);
+      }
+
+      this.setWorkExperience({ workExperience: this.experiences });
+    },
   },
   computed: {
-    ...mapGetters(["getCV"]),
+    ...mapGetters(["isGetCvFunction", "getCV"]),
   },
 };
 </script>
