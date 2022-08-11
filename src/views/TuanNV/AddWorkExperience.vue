@@ -190,22 +190,45 @@ export default {
           });
         } else {
           var [day, month, year] = this.startDate.split("/");
-          this.startDate = [year, month, day].join("-");
+          var startTime = [year, month, day].join("-");
           [day, month, year] = this.endDate.split("/");
-          this.endDate = [year, month, day].join("-");
-          WorkExperienceService.addWorkExp({
+          var endTime = [year, month, day].join("-");
+          WorkExperienceService.isDuplicate({
             companyName: this.companyName,
             position: this.position,
             description: this.description,
-            startDate: this.startDate,
-            endDate: this.endDate,
+            startDate: startTime,
+            endDate: endTime,
             userId: this.userId,
           })
-            .then(() => {
-              this.$store.dispatch("setSnackbar", {
-                text: "Thêm thành công",
-              });
-              this.$router.push("/workexp");
+            .then((rs) => {
+              if (!rs.data) {
+                WorkExperienceService.addWorkExp({
+                  companyName: this.companyName,
+                  position: this.position,
+                  description: this.description,
+                  startDate: this.startDate,
+                  endDate: this.endDate,
+                  userId: this.userId,
+                })
+                  .then(() => {
+                    this.$store.dispatch("setSnackbar", {
+                      text: "Thêm thành công",
+                    });
+                    this.$router.push("/workexp");
+                  })
+                  .catch(() => {
+                    this.$store.dispatch("setSnackbar", {
+                      color: "error",
+                      text: "Có lỗi xảy ra! Vui lòng thử lại",
+                    });
+                  });
+              } else {
+                this.$store.dispatch("setSnackbar", {
+                  color: "error",
+                  text: "Kinh nghiệm làm việc đã tồn tại",
+                });
+              }
             })
             .catch(() => {
               this.$store.dispatch("setSnackbar", {
