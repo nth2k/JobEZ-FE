@@ -34,7 +34,11 @@
                   :items="items"
                   label="Trạng thái"
                   outlined
-                  @change="changeStatus(candidate.candidateId)"
+                  @change="
+                    (e) => {
+                      this.status = e;
+                    }
+                  "
                 ></v-select>
               </td>
               <td><button class="btn btn-primary" @click="updateStatus">Cập nhật</button></td>
@@ -60,9 +64,6 @@ export default {
     status: "",
   }),
   methods: {
-    changeStatus(candidateId){
-      console.log(candidateId);
-    },
     updateStatus(){
       console.log(this.status);
     }
