@@ -13,11 +13,7 @@
               </div>
             </div>
             <div class="col-12">
-              <button
-                class="chat_call py-3 px-5"
-                rel="noindex,nofollow"
-                type="submit"
-              >
+              <button class="chat_call py-3 px-5" rel="noindex,nofollow" type="submit">
                 Chat ngay
               </button>
             </div>
@@ -38,7 +34,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 * {
   font-family: "Roboto";
   font-style: normal;

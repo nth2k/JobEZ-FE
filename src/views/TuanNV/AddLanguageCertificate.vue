@@ -117,14 +117,45 @@ export default {
   methods: {
     addLanguageCertificate() {
       if (this.$refs.form.validate()) {
-        LanguageCertificateService.addLanguageCertificate({
+        LanguageCertificateService.isDuplicate({
           certificate_name: this.certificateName,
           name: this.languageName,
           mark: this.grade,
           userId: this.userId,
-        });
-        window.location = "/language";
-        alert("Thêm thành công");
+        })
+          .then((rs) => {
+            if (!rs.data) {
+              LanguageCertificateService.addLanguageCertificate({
+                certificate_name: this.certificateName,
+                name: this.languageName,
+                mark: this.grade,
+                userId: this.userId,
+              })
+                .then(() => {
+                  this.$store.dispatch("setSnackbar", {
+                    text: "Thêm thành công",
+                  });
+                  this.$router.push("/language");
+                })
+                .catch(() => {
+                  this.$store.dispatch("setSnackbar", {
+                    color: "error",
+                    text: "Có lỗi xảy ra! Vui lòng thử lại",
+                  });
+                });
+            } else {
+              this.$store.dispatch("setSnackbar", {
+                color: "error",
+                text: "Chứng chỉ này đã tồn tại",
+              });
+            }
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
       }
     },
   },

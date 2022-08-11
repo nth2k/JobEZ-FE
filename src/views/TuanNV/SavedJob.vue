@@ -19,22 +19,34 @@
               </tr>
             </thead>
             <tbody>
-              <div v-if="!listSavedJob.length" class="pt-5">Bạn chưa lưu công việc nào</div>
+              <div v-if="!listSavedJob.length" class="pt-5">
+                Bạn chưa lưu công việc nào
+              </div>
               <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="savedJob.id">
-                <td class="column"><span>{{ index + 1 }}</span></td>
-             
+                <td class="column">
+                  <span>{{ index + 1 }}</span>
+                </td>
                 <td>
                   <div>{{ savedJob.postingJobname }}</div>
 
-                  <div><a href="#">(Xem chi tiết)</a></div>
-                </td>
-                <td class="column"><span>{{ savedJob.postingPosition }}</span></td>
-                <td>
-                  <div>{{ savedJob.deadlineForSubmission }}</div>
-                  <div><span>{{ countDays(savedJob.deadlineForSubmission) }}</span></div>
+                  <div>
+                    <a @click="showPosting(savedJob.postingId)">(Xem chi tiết)</a>
+                  </div>
                 </td>
                 <td class="column">
-                  <button class="btn btn-danger btnDelete" @click="deleteSavedJob(savedJob.id)">
+                  <span>{{ savedJob.postingPosition }}</span>
+                </td>
+                <td>
+                  <div>{{ savedJob.deadlineForSubmission }}</div>
+                  <div>
+                    <span>{{ countDays(savedJob.deadlineForSubmission) }}</span>
+                  </div>
+                </td>
+                <td class="column">
+                  <button
+                    class="btn btn-danger btnDelete"
+                    @click="deleteSavedJob(savedJob.postingId)"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -58,60 +70,87 @@
             </tbody>
           </table>
         </div>
-        <div class="update">
-          <span>Hãy cập nhật thông tin về người tham chiếu hồ sơ của bạn để tăng
-            chất lượng hồ sơ và thu hút nhà tuyển dụng
-            <a href="#" class="text-danger">Cập nhật ngay</a></span>
-        </div>
+        <!-- <div class="update">
+          <span
+            >Hãy cập nhật thông tin về người tham chiếu hồ sơ của bạn để tăng chất lượng
+            hồ sơ và thu hút nhà tuyển dụng
+            <a href="#" class="text-danger">Cập nhật ngay</a></span
+          >
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import SlideBar_candidate from '@/components/ProfileCandidate/slideBar_candidate.vue';
-import Header from '../ToanNT16/candidate/candidate_management/Header.vue';
-import SavedJobService from '@/services/SavedJobService.js'
+import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
+import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
+import SavedJobService from "@/services/SavedJobService.js";
 // import Header from "./components/views/Header.vue";
 // import SlideBar_candidate from "./components/ProfileCandidate/slideBar_candidate.vue";
 export default {
   name: "SavedJob",
   components: {
     SlideBar_candidate,
-    Header
+    Header,
   },
-data(){
-    return{
-      userId: 1,
+  data() {
+    return {
+      userId: "",
       listSavedJob: [],
     };
   },
-  methods:{
-    getSavedJobs(userId){
-      SavedJobService.getSavedJobs(userId).then((res) => {
+  // computed: {
+  //   this.
+  // },
+  methods: {
+    getSavedJobs() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      this.userId = theLoggedUser.user.id;
+      SavedJobService.getSavedJobs(this.userId).then((res) => {
         this.listSavedJob = res.data;
-      })
+      });
     },
-    deleteSavedJob(savedJobId){
-      let textConfirm = "Press Ok to delete your saved job.";
-      if(confirm(textConfirm) == true){
-        SavedJobService.deleteSavedJob(savedJobId);
-        location.reload();
-        alert('Xóa thành công');
+    deleteSavedJob(postingId) {
+      // console.log("postingId: " + postingId + "| userId: " + this.userId);
+      let textConfirm = "Click OK để xóa công việc đã lưu";
+      if (confirm(textConfirm) == true) {
+        SavedJobService.deleteSavedJob({ user_id: this.userId, posting_id: postingId })
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Xóa thành công",
+            });
+            location.reload();
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Xóa không thành công",
+            });
+          });
       }
     },
     countDays(date) {
       var datesplit = date.split("/");
       var date1 = new Date(datesplit[1] + "/" + datesplit[0] + "/" + datesplit[2]);
       var date2 = new Date();
-      var duration = Math.ceil((date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000));
-      return (duration) < 0 ? "(" + Math.abs(duration) + " ngày trước)" : "(Còn " + duration + " ngày)";
+      var duration = Math.ceil(
+        (date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)
+      );
+      return duration < 0
+        ? "(" + Math.abs(duration) + " ngày trước)"
+        : "(Còn " + duration + " ngày)";
     },
-    
+    showPosting(postingId) {
+      this.$router.push({
+        name: "JobDetailsNoLogin",
+        params: { postingId: postingId },
+      });
+    },
   },
-  created(){
-    this.getSavedJobs(this.userId);
-  }
+  created() {
+    this.getSavedJobs();
+  },
 };
 </script>
 
