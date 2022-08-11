@@ -13,6 +13,9 @@
           <div class="titleRight">Học vấn - bằng cấp</div>
           <div class="container">
             <div v-if="!listDegree.length">Bạn chưa có bằng cấp học vấn</div>
+            <div class="mb-3">
+              <button class="btnAdd py-1 px-3" @click="addDegree">+ Thêm</button>
+            </div>
             <div class="block" v-for="degree in listDegree" v-bind:key="degree.id">
               <span id="show" @click="showDetail">
                 <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i

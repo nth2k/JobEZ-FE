@@ -87,7 +87,8 @@
                 <div class="col-2"></div>
 
                 <div class="col-5 text-center">
-                  <img id="myImg" src="@/assets/no_avatar.jpg" alt="avatar" />
+                  <!-- <img id="myImg" src="@/assets/no_avatar.jpg" alt="avatar" /> -->
+                  <v-img src:image alt="" />
                   <!-- <v-file-input v-model="image" label="Logo công ty"></v-file-input> -->
                   <v-file-input
                     label="Avatar"
@@ -97,7 +98,6 @@
                     prepend-icon="mdi-camera"
                     span="Avatar"
                     v-model="image"
-                    v-on:change="showImage()"
                   ></v-file-input>
                 </div>
               </div>
