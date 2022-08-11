@@ -2,24 +2,13 @@ import axios from "axios";
 
 const Base_URL = "http://localhost:8081";
 
-class SavedJobService {
-  getSavedJobs(id) {
-    return axios.get(Base_URL + "/savedjob/" + id);
-  }
-
-  deleteSavedJob(id) {
-    return axios.delete(Base_URL + "/savedjob/delete/" + id);
-  }
-
-  async addSavedJob(commit, email, postingId) {
-    const body = {
-      email: email,
-      posting_id: postingId,
-    };
-    await axios.post(Base_URL + "/savedjob/add", body).then((response) => {
-      commit("SET_SAVED_JOB", response.data);
-    });
-  }
+class SavedJobService{
+    getSavedJobs(id){
+        return axios.get(Base_URL + "/savedjob/" + id);
+    }
+    deleteSavedJob(savedjobkey){
+        return axios.post(Base_URL + "/savedjob/remove", savedjobkey);
+    }
 }
 
 export default new SavedJobService();

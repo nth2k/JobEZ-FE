@@ -5,7 +5,7 @@
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
         <div class="leftHoso">
           <Profile_menu />
         </div>
@@ -13,7 +13,7 @@
           <div class="titleRight">Kinh nghiệm làm việc</div>
           <div class="container">
             <div class="mb-3">
-              <router-link class="btnAdd py-1 px-3" to="/addworkexp">+ Thêm</router-link>
+              <button class="btnAdd py-1 px-3" @click="addWorkExp()">+ Thêm</button>
             </div>
             <div v-if="!listWorkExp.length">Không có kinh nghiệm làm việc</div>
             <div class="block" v-for="workexp in listWorkExp" v-bind:key="workexp.id">
@@ -81,7 +81,7 @@ export default {
   data() {
     return {
       listWorkExp: [],
-      userId: 1,
+      userId: "",
     };
   },
   methods: {
@@ -96,22 +96,40 @@ export default {
         icon.classList.toggle("rotate");
       }
     },
-    getAllWorkExp(userId) {
-      WorkExperienceService.getWorkExps(userId).then((res) => {
+    addWorkExp() {
+      this.$router.push({
+        name: "AddWorkExperience",
+        params: { userId: this.userId },
+      });
+    },
+    getAllWorkExp() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      this.userId = theLoggedUser.user.id;
+      WorkExperienceService.getWorkExps(this.userId).then((res) => {
         this.listWorkExp = res.data;
       });
     },
     deleteWorkExp(id) {
       let textConfirm = "Press Ok to delete your work experience.";
       if (confirm(textConfirm) == true) {
-        WorkExperienceService.deleteWorkExp(id);
-        location.reload();
-        alert("Xóa thành công");
+        WorkExperienceService.deleteWorkExp(id)
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Xóa thành công",
+            });
+            location.reload();
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Không tìm thấy kinh nghiệm làm việc",
+            });
+          });
       }
     },
   },
   created() {
-    this.getAllWorkExp(this.userId);
+    this.getAllWorkExp();
   },
 };
 </script>

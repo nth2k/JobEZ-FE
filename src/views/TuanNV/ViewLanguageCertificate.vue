@@ -5,8 +5,8 @@
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
-        <div class="leftHoso">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
+        <div>
           <Profile_menu />
         </div>
         <div class="blockright col-9">
@@ -141,12 +141,14 @@ export default {
   data() {
     return {
       listLanguage: [],
-      userId: 1,
+      userId: "",
     };
   },
   methods: {
-    getLanguageCertificate(userId) {
-      LanguageCertificateService.getLanguageCertificate(userId).then((res) => {
+    getLanguageCertificate() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      this.userId = theLoggedUser.user.id;
+      LanguageCertificateService.getLanguageCertificate(this.userId).then((res) => {
         this.listLanguage = res.data;
       });
     },
@@ -167,14 +169,24 @@ export default {
     deleteLanguageCertificate(languageId) {
       let textConfirm = "Press Ok to delete your language certificate.";
       if (confirm(textConfirm) == true) {
-        LanguageCertificateService.deleteLanguageCertificate(languageId);
-        alert("Xóa thành công");
-        location.reload();
+        LanguageCertificateService.deleteLanguageCertificate(languageId)
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Xóa thành công",
+            });
+            location.reload();
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Không tìm thấy chứng chỉ",
+            });
+          });
       }
     },
   },
   created() {
-    this.getLanguageCertificate(this.userId);
+    this.getLanguageCertificate();
   },
 };
 </script>
@@ -214,9 +226,6 @@ export default {
   box-shadow: 5px 5px lightgray;
 }
 
-.nav_link {
-  padding: 0;
-}
 .btnAdd {
   background-color: #eceefa;
   color: #333333;
