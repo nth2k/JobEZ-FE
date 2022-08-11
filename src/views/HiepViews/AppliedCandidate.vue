@@ -20,51 +20,24 @@
               <th scope="col">Vị trí</th>
               <th scope="col">Ngày nộp</th>
               <th scope="col">Kết quả</th>
-              <th scope="col">Xóa ứng viên</th>
+              <th scope="col">Cập nhật kết quả</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Nguyễn Trung Hiếu</td>
-              <td>Trông quán net</td>
-              <td>15/03/2020</td>
+            <tr v-for="(candidate, index) in listCandidate" :key="index">
+              <td>{{ candidate.candidateName }}</td>
+              <td>{{ candidate.postingPosition }}</td>
+              <td>{{ candidate.appliedDate }}</td>
               <td>
                 <v-select
                   class="w-75"
                   :items="items"
                   label="Trạng thái"
                   outlined
+                  @change="changeStatus(candidate.candidateId)"
                 ></v-select>
               </td>
-              <td><button class="btn btn-danger">Xóa</button></td>
-            </tr>
-            <tr>
-              <td>Nguyễn Trung Hiếu</td>
-              <td>Trông quán net</td>
-              <td>15/03/2020</td>
-              <td>
-                <v-select
-                  class="w-75"
-                  :items="items"
-                  label="Trạng thái"
-                  outlined
-                ></v-select>
-              </td>
-              <td><button class="btn btn-danger">Xóa</button></td>
-            </tr>
-           <tr>
-              <td>Nguyễn Trung Hiếu</td>
-              <td>Trông quán net</td>
-              <td>15/03/2020</td>
-              <td>
-                <v-select
-                  class="w-75"
-                  :items="items"
-                  label="Trạng thái"
-                  outlined
-                ></v-select>
-              </td>
-              <td><button class="btn btn-danger">Xóa</button></td>
+              <td><button class="btn btn-primary" @click="updateStatus">Cập nhật</button></td>
             </tr>
           </tbody>
         </table>
@@ -76,12 +49,32 @@
 <script>
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import RecruiterNavigator from "@/components/HiepComponents/RecruiterNavigator.vue";
+import RecruiterManagementService from "@/services/RecruiterManagementService.js";
 export default {
   name: "AppliedCandidate",
   components: { Header, RecruiterNavigator },
   data: () => ({
     items: ["Đến phỏng vấn", "Hồ sơ đạt yêu cầu", "Không đạt yêu cầu"],
+    listCandidate: [],
+    isListCandidate: false,
+    status: "",
   }),
+  methods: {
+    changeStatus(candidateId){
+      console.log(candidateId);
+    },
+    updateStatus(){
+      console.log(this.status);
+    }
+  },
+  created() {
+    const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+    RecruiterManagementService.getAppliedCandidate({
+      user_id: theLoggedUser.user.id,
+    }).then((rs) => {
+      this.listCandidate = rs.data;
+    });
+  },
 };
 </script>
 

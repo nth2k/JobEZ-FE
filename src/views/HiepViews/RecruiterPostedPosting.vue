@@ -16,6 +16,7 @@
         <table class="table table-striped mt-5">
           <thead>
             <tr>
+              <th scope="col">STT</th>
               <th scope="col">Vị trí tuyển dụng</th>
               <th scope="col">Thống kê</th>
               <th scope="col">Trạng thái</th>
@@ -26,7 +27,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="job in listJob" :key="job.id">
+            <tr v-for="(job, index) in listJob" :key="job.id">
+              <td>{{ ++index }}</td>
               <td>{{ job.position }}</td>
               <td>{{ job.view }} lượt xem</td>
               <td>Tin đã được đăng</td>
@@ -34,19 +36,22 @@
               <td>Miễn phí</td>
               <td>
                 <button class="btn btn-primary" @click="updatePosting(job.id)">
-                  Sửa
+                  SỬA
                 </button>
               </td>
               <td>
-                <button class="btn btn-danger" @click="deletePosting(job.id)">
+                <!-- <button class="btn btn-danger" @click="deletePosting(job.id)">
                   Xóa
-                </button>
+                </button> -->
+                <ConfirmModal :jobId="job.id" />
               </td>
             </tr>
           </tbody>
-        </table>        
+        </table>
       </div>
-      <p v-if="!isListJob" style="margin: 100px; font-size: 27px">Bạn chưa có tin đăng nào</p>
+      <p v-if="!isListJob" style="margin: 100px; font-size: 27px">
+        Bạn chưa có tin đăng nào
+      </p>
     </div>
   </div>
 </template>
@@ -54,12 +59,14 @@
 <script>
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import RecruiterNavigator from "@/components/HiepComponents/RecruiterNavigator.vue";
+import ConfirmModal from "@/components/HiepComponents/ConfirmModal.vue";
 import RecruiterManagementService from "@/services/RecruiterManagementService.js";
 export default {
   name: "RecruiterPostedPosting",
-  components: { Header, RecruiterNavigator },
+  components: { Header, RecruiterNavigator, ConfirmModal },
   data() {
     return {
+      number: 0,
       listJob: [],
       isListJob: false,
     };
@@ -71,22 +78,6 @@ export default {
         params: { id: postingId },
       });
     },
-    deletePosting(postingId) {
-      RecruiterManagementService.deletePostingById(postingId)
-        .then(() => {
-          this.$store.dispatch("setSnackbar", {
-            text: "Xóa công việc thành công",
-          });
-        })
-        .catch(() => {
-          this.$store.dispatch("setSnackbar", {
-            color: "error",
-            text: "Có lỗi xảy ra! Vui lòng thử lại",
-          });
-        });
-      console.log(postingId);
-      this.$router.push("/recruiterManagement");
-    },
   },
   created() {
     const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
@@ -96,7 +87,6 @@ export default {
         if (res.data) {
           this.isListJob = true;
         } else this.isListJob = false;
-        console.log(this.listJob);
       }
     );
   },

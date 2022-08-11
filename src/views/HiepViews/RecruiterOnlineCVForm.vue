@@ -149,6 +149,7 @@ export default {
     image: function (newVal) {
       if (newVal) {
         this.createBase64Image(newVal);
+        console.log(newVal);
       } else {
         this.base64 = null;
       }
