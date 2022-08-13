@@ -19,10 +19,8 @@
               </tr>
             </thead>
             <tbody>
-              <div v-if="!listSavedJob.length" class="pt-5">
-                Bạn chưa lưu công việc nào
-              </div>
-              <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="savedJob.id">
+              <div v-if="!isSavedJobList" class="pt-5">Bạn chưa lưu công việc nào</div>
+              <tr v-for="(savedJob, index) in listSavedJob" v-bind:key="index">
                 <td class="column">
                   <span>{{ index + 1 }}</span>
                 </td>
@@ -43,40 +41,15 @@
                   </div>
                 </td>
                 <td class="column">
-                  <button
-                    class="btn btn-danger btnDelete"
-                    @click="deleteSavedJob(savedJob.postingId)"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-trash"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                      />
-                      <path
-                        fill-rule="evenodd"
-                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                      />
-                    </svg>
-                    Xóa
-                  </button>
+                  <DeleteSavedJobModal
+                    :postingId="savedJob.postingId"
+                    :userId="savedJob.userId"
+                  />
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <!-- <div class="update">
-          <span
-            >Hãy cập nhật thông tin về người tham chiếu hồ sơ của bạn để tăng chất lượng
-            hồ sơ và thu hút nhà tuyển dụng
-            <a href="#" class="text-danger">Cập nhật ngay</a></span
-          >
-        </div> -->
       </div>
     </div>
   </div>
@@ -86,6 +59,7 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import SavedJobService from "@/services/SavedJobService.js";
+import DeleteSavedJobModal from "./modal/DeleteSavedJobModal.vue";
 // import Header from "./components/views/Header.vue";
 // import SlideBar_candidate from "./components/ProfileCandidate/slideBar_candidate.vue";
 export default {
@@ -93,43 +67,27 @@ export default {
   components: {
     SlideBar_candidate,
     Header,
+    DeleteSavedJobModal,
   },
   data() {
     return {
       userId: "",
       listSavedJob: [],
+      isSavedJobList: false,
     };
   },
-  // computed: {
-  //   this.
-  // },
   methods: {
     getSavedJobs() {
-      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
-      this.userId = theLoggedUser.user.id;
       SavedJobService.getSavedJobs(this.userId).then((res) => {
         this.listSavedJob = res.data;
+        if (res.data) {
+          this.isSavedJobList = true;
+        } else {
+          this.isSavedJobList = false;
+        }
       });
     },
-    deleteSavedJob(postingId) {
-      // console.log("postingId: " + postingId + "| userId: " + this.userId);
-      let textConfirm = "Click OK để xóa công việc đã lưu";
-      if (confirm(textConfirm) == true) {
-        SavedJobService.deleteSavedJob({ user_id: this.userId, posting_id: postingId })
-          .then(() => {
-            this.$store.dispatch("setSnackbar", {
-              text: "Xóa thành công",
-            });
-            location.reload();
-          })
-          .catch(() => {
-            this.$store.dispatch("setSnackbar", {
-              color: "error",
-              text: "Xóa không thành công",
-            });
-          });
-      }
-    },
+
     countDays(date) {
       var datesplit = date.split("/");
       var date1 = new Date(datesplit[1] + "/" + datesplit[0] + "/" + datesplit[2]);
@@ -149,6 +107,8 @@ export default {
     },
   },
   created() {
+    const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+    this.userId = theLoggedUser.user.id;
     this.getSavedJobs();
   },
 };

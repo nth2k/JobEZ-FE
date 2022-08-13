@@ -193,7 +193,17 @@ export default {
           var startTime = [year, month, day].join("-");
           [day, month, year] = this.endDate.split("/");
           var endTime = [year, month, day].join("-");
-          WorkExperienceService.isDuplicate({
+          // WorkExperienceService.isDuplicate({
+          //   companyName: this.companyName,
+          //   position: this.position,
+          //   description: this.description,
+          //   startDate: startTime,
+          //   endDate: endTime,
+          //   userId: this.userId,
+          // })
+          //   .then((rs) => {
+          //     if (!rs.data) {
+          WorkExperienceService.addWorkExp({
             companyName: this.companyName,
             position: this.position,
             description: this.description,
@@ -201,41 +211,31 @@ export default {
             endDate: endTime,
             userId: this.userId,
           })
-            .then((rs) => {
-              if (!rs.data) {
-                WorkExperienceService.addWorkExp({
-                  companyName: this.companyName,
-                  position: this.position,
-                  description: this.description,
-                  startDate: this.startDate,
-                  endDate: this.endDate,
-                  userId: this.userId,
-                })
-                  .then(() => {
-                    this.$store.dispatch("setSnackbar", {
-                      text: "Thêm thành công",
-                    });
-                    this.$router.push("/workexp");
-                  })
-                  .catch(() => {
-                    this.$store.dispatch("setSnackbar", {
-                      color: "error",
-                      text: "Có lỗi xảy ra! Vui lòng thử lại",
-                    });
-                  });
-              } else {
-                this.$store.dispatch("setSnackbar", {
-                  color: "error",
-                  text: "Kinh nghiệm làm việc đã tồn tại",
-                });
-              }
+            .then(() => {
+              this.$store.dispatch("setSnackbar", {
+                text: "Thêm thành công",
+              });
+              this.$router.push("/workexp");
             })
             .catch(() => {
               this.$store.dispatch("setSnackbar", {
                 color: "error",
-                text: "Có lỗi xảy ra! Vui lòng thử lại",
+                text: "Kinh nghiệm làm việc đã tồn tại",
               });
             });
+          //   } else {
+          //     this.$store.dispatch("setSnackbar", {
+          //       color: "error",
+          //       text: "Kinh nghiệm làm việc đã tồn tại",
+          //     });
+          //   }
+          // })
+          // .catch(() => {
+          //   this.$store.dispatch("setSnackbar", {
+          //     color: "error",
+          //     text: "Có lỗi xảy ra! Vui lòng thử lại",
+          //   });
+          // });
         }
       }
     },

@@ -5,15 +5,15 @@
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
         <div class="leftHoso">
           <Profile_menu />
         </div>
-        <div class="right col-9">
-          <div class="titleheader">Học vấn - Bằng cấp</div>
+        <div class="blockright col-9">
+          <div class="titleRight">Học vấn - Bằng cấp</div>
           <div class="container ml-3">
             <v-form ref="form">
-              <div class="row block2">
+              <div class="row">
                 <div class="col-12">
                   <div class="title">
                     <span class="label"
@@ -40,7 +40,9 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span>Nhập trường / đơn vị dạy <span class="star">*</span></span>
+                    <span class="label"
+                      >Nhập trường / đơn vị dạy <span class="star">*</span></span
+                    >
                   </div>
                   <div>
                     <v-textarea
@@ -58,7 +60,9 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span>Thời gian (dd/mm/yyy) <span class="star">*</span></span>
+                    <span class="label"
+                      >Thời gian (dd/mm/yyy) <span class="star">*</span></span
+                    >
                   </div>
                   <div class="d-flex justify-content-between">
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
@@ -91,7 +95,7 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span>Chuyền ngành <span class="star">*</span></span>
+                    <span class="label">Chuyền ngành <span class="star">*</span></span>
                   </div>
                   <div>
                     <v-textarea
@@ -109,7 +113,7 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span>Xếp loại <span class="star">*</span></span>
+                    <span class="label">Xếp loại <span class="star">*</span></span>
                   </div>
                   <div>
                     <v-select
@@ -124,7 +128,7 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span class="py-2"
+                    <span class="py-2 label"
                       >Thông tin bổ sung <span class="star">*</span></span
                     >
                   </div>
@@ -140,11 +144,14 @@
                       required
                     ></v-textarea>
                   </div>
-                  <div class="text-center container"></div>
+                  <div class="text-center container">
+                    <button class="btn btn-primary btnSave px-5" @click="saveDegree">
+                      Lưu
+                    </button>
+                  </div>
                 </div>
               </div>
             </v-form>
-            <button class="btn btn-primary btnSave px-5" @click="saveDegree">Lưu</button>
           </div>
         </div>
       </div>
@@ -270,6 +277,18 @@ export default {
 }
 .star {
   color: red;
+}
+.blockright {
+  border-left: 1px solid gray;
+}
+.titleRight {
+  margin-bottom: 20px;
+  margin-left: 14px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid gray;
+  width: 150px;
+  color: #2a3563;
+  font-weight: bold;
 }
 .titleright {
   float: right;

@@ -5,12 +5,12 @@
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
         <div class="leftHoso">
           <Profile_menu />
         </div>
         <div class="blockright col-9">
-          <div class="titleheader">Ngoại ngữ- Tin học</div>
+          <div class="titleheader">Ngoại ngữ - Tin học</div>
           <div class="container ml-3">
             <v-form ref="form">
               <div class="row">
@@ -117,43 +117,22 @@ export default {
   methods: {
     addLanguageCertificate() {
       if (this.$refs.form.validate()) {
-        LanguageCertificateService.isDuplicate({
+        LanguageCertificateService.addLanguageCertificate({
           certificate_name: this.certificateName,
           name: this.languageName,
           mark: this.grade,
           userId: this.userId,
         })
-          .then((rs) => {
-            if (!rs.data) {
-              LanguageCertificateService.addLanguageCertificate({
-                certificate_name: this.certificateName,
-                name: this.languageName,
-                mark: this.grade,
-                userId: this.userId,
-              })
-                .then(() => {
-                  this.$store.dispatch("setSnackbar", {
-                    text: "Thêm thành công",
-                  });
-                  this.$router.push("/language");
-                })
-                .catch(() => {
-                  this.$store.dispatch("setSnackbar", {
-                    color: "error",
-                    text: "Có lỗi xảy ra! Vui lòng thử lại",
-                  });
-                });
-            } else {
-              this.$store.dispatch("setSnackbar", {
-                color: "error",
-                text: "Chứng chỉ này đã tồn tại",
-              });
-            }
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Thêm thành công",
+            });
+            this.$router.push("/language");
           })
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
               color: "error",
-              text: "Có lỗi xảy ra! Vui lòng thử lại",
+              text: "Chứng chỉ đã tồn tại",
             });
           });
       }
@@ -190,12 +169,12 @@ export default {
   font-style: italic;
 }
 .titleheader {
-  margin-left: 0.5rem;
   margin-bottom: 20px;
+  margin-left: 15px;
+  padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 183px;
+  width: 155px;
   color: #2a3563;
-  font-size: 20px;
   font-weight: bold;
 }
 

@@ -5,12 +5,12 @@
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
-        <div class="leftHoso">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
+        <div>
           <Profile_menu />
         </div>
         <div class="blockright col-9">
-          <div class="titleheader">Thông tin liên hệ</div>
+          <div class="titleRight">Thông tin liên hệ</div>
           <div class="container ml-3">
             <v-form ref="form">
               <div class="row">
@@ -87,8 +87,13 @@
                 <div class="col-2"></div>
 
                 <div class="col-5 text-center">
-                  <!-- <img id="myImg" src="@/assets/no_avatar.jpg" alt="avatar" /> -->
-                  <v-img src:image alt="" />
+                  <img
+                    id="myImg"
+                    v-if="base64 == null"
+                    src="@/assets/no_avatar.jpg"
+                    alt="avatar"
+                  />
+                  <img id="myImg1" v-if="base64 != null" :src="base64" alt="avatar" />
                   <!-- <v-file-input v-model="image" label="Logo công ty"></v-file-input> -->
                   <v-file-input
                     label="Avatar"
@@ -98,6 +103,7 @@
                     prepend-icon="mdi-camera"
                     span="Avatar"
                     v-model="image"
+                    @change="showImage"
                   ></v-file-input>
                 </div>
               </div>
@@ -274,9 +280,7 @@ export default {
     };
   },
   methods: {
-    showImage() {
-      // document.getElementById("myImg").src = this.base64;
-    },
+    showImage() {},
     // onProvinceSelect(event) {
     //   ProvinceDistrictService.getAllDistrict(event.target.value).then((rs) => {
     //     this.listDistrict = rs.data;
@@ -298,6 +302,7 @@ export default {
         this.district = rs.data.province;
         this.district_id = rs.data.districtId;
         this.province_id = rs.data.provinceId;
+        this.base64 = rs.data.imageBase64;
       });
       ProvinceDistrictService.getAllDistrict().then((rs) => {
         this.listDistrict = rs.data;
@@ -310,6 +315,23 @@ export default {
         this.base64 = event.target.result;
       };
       reader.readAsDataURL(FileObject);
+    },
+    saveContactInfo() {
+      ContactInfoService.saveContactInfo({
+        userId: this.userId,
+        fullname: this.fullname,
+        email: this.email,
+        phoneNumber: this.phoneNumber,
+        dateOfBirth: this.dateOfBirth,
+        address: this.address,
+        gender: this.gender,
+        // province,
+        // district,
+        married: this.married,
+        imageBase64: this.base64,
+        provinceId: this.provinceId,
+        districtId: this.districtId,
+      });
     },
   },
   watch: {
@@ -364,14 +386,15 @@ select {
   height: 57px;
   padding-left: 13px;
 }
-.titleheader {
-  margin-left: 0.5rem;
+.titleRight {
   margin-bottom: 20px;
+  margin-left: 15px;
+  padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 183px;
+  width: 130px;
   color: #2a3563;
-  font-size: 20px;
   font-weight: bold;
+  /* font-size: 20px; */
 }
 
 .blockright {

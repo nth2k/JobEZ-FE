@@ -5,12 +5,12 @@
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
         <div class="leftHoso">
           <Profile_menu />
         </div>
         <div class="blockright col-9">
-          <div class="titleRight">Ngoại ngữ- Tin học</div>
+          <div class="titleRight">Ngoại ngữ - Tin học</div>
 
           <div class="container">
             <v-form ref="form">
@@ -27,6 +27,7 @@
                     <v-select
                       :items="language"
                       label="Chọn ngôn ngữ"
+                      outlined
                       :rules="languageNameRules"
                       required
                       v-model="languageName"
@@ -163,11 +164,11 @@ export default {
   box-shadow: 5px 5px lightgray;
 }
 .titleRight {
-  margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 15px;
+  padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 150px;
+  width: 155px;
   color: #2a3563;
   font-weight: bold;
 }

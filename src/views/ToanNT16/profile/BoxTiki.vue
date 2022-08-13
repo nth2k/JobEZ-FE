@@ -40,9 +40,7 @@
 
               <p class="mt-1 mb-1">
                 Lượt xem: {{ getJob.view }}. |
-                <span class="date_update"
-                  >Ngày cập nhật: {{ currentDate }}
-                </span>
+                <span class="date_update">Ngày cập nhật: {{ currentDate }} </span>
               </p>
               <p class="dd_tuyen">
                 Tỉnh thành tuyển dụng:
@@ -80,9 +78,7 @@
             <div
               class="right_tit_2 col-3 d-flex justify-content-center align-items-center pl-5"
             >
-              <div
-                class="d-flex flex-column justify-content-center align-items-center"
-              >
+              <div class="d-flex flex-column justify-content-center align-items-center">
                 <p class="dd_tuyen">
                   Mức lương:
                   <span style="color: #ff4d43">{{ getJob.salary }}</span>
@@ -109,13 +105,13 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import moment from "moment";
+import moment from "moment";
 import JobDetailService from "@/services/JobDetailService";
 export default {
   name: "BoxTiki",
   data() {
     return {
-      // currentDate: moment().format("DD/MM/YYYY"),
+      currentDate: moment().format("DD/MM/YYYY"),
     };
   },
   computed: {

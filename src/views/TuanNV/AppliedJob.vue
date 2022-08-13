@@ -21,7 +21,7 @@
               </tr>
             </thead>
             <tbody>
-              <div v-if="!listAppliedJob.length" class="text-center">
+              <div v-if="!isListAppliedJob" class="text-center">
                 Bạn chưa ứng tuyển công việc nào
               </div>
               <tr
@@ -61,7 +61,7 @@
                   <span>{{ appliedjob.commentFromEmployer }}</span>
                 </td>
                 <td>
-                  <button
+                  <!-- <button
                     class="btn btn-danger btnDelete"
                     @click="
                       deleteAppliedJob(appliedjob.postingId, appliedjob.recruiterId)
@@ -84,7 +84,12 @@
                       />
                     </svg>
                     Xóa
-                  </button>
+                  </button> -->
+                  <DeleteAppliedJobModal
+                    :postingId="appliedjob.postingId"
+                    :userId="appliedjob.userId"
+                    :recruiterId="appliedjob.recruiterId"
+                  />
                 </td>
               </tr>
             </tbody>
@@ -106,47 +111,31 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import AppliedJobService from "@/services/AppliedJobService.js";
+import DeleteAppliedJobModal from "./modal/DeleteAppliedJobModal.vue";
 export default {
   name: "AppliedJob",
   components: {
     SlideBar_candidate,
     Header,
+    DeleteAppliedJobModal,
   },
   data() {
     return {
       userId: "",
       listAppliedJob: [],
+      isListAppliedJob: false,
     };
   },
   methods: {
     getAppliedJobs() {
-      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
-      this.userId = theLoggedUser.user.id;
       AppliedJobService.getAppliedJobs(this.userId).then((res) => {
         this.listAppliedJob = res.data;
+        if (res.data) {
+          this.isListAppliedJob = true;
+        } else {
+          this.isListAppliedJob = false;
+        }
       });
-    },
-    deleteAppliedJob(postingId, recruiterId) {
-      let textConfirm = "Press Ok to delete your applied job.";
-      if (confirm(textConfirm) == true) {
-        AppliedJobService.deleteAppliedJob({
-          candidate_id: this.userId,
-          recruiter_id: recruiterId,
-          posting_id: postingId,
-        })
-          .then(() => {
-            this.$store.dispatch("setSnackbar", {
-              text: "Xóa thành công",
-            });
-            location.reload();
-          })
-          .catch(() => {
-            this.$store.dispatch("setSnackbar", {
-              color: "error",
-              text: "Xóa không thành công",
-            });
-          });
-      }
     },
     countDaysDeadlineForSubmission(date) {
       var datesplit = date.split("/");
@@ -185,6 +174,8 @@ export default {
     },
   },
   created() {
+    const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+    this.userId = theLoggedUser.user.id;
     this.getAppliedJobs();
   },
 };

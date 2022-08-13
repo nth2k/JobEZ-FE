@@ -76,7 +76,7 @@ export default {
           this.$store.dispatch("setSnackbar", {
             text: "Cập nhật thành công",
           });
-          location.reload();
+          // location.reload();
         })
         .catch(() => {
           this.$store.dispatch("setSnackbar", {
