@@ -7,7 +7,7 @@ class CVService {
     const body = {
       candiate_id: candidateId,
     };
-    await axios.put(Base_URL + "/cv/id", body).then((response) => {
+    await axios.post(Base_URL + "/cv/id", body).then((response) => {
       commit("SET_CV", response.data);
     });
   }

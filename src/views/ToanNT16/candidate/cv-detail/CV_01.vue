@@ -44,9 +44,10 @@ export default {
     RelatedCV,
   },
   async created() {
-    // const token = JSON.parse(window.localStorage.getItem("user"));
-    // const candidateId = token.user.id;
-    const candidateId = 4;
+    const token = JSON.parse(window.localStorage.getItem("user"));
+    const candidateId = token.user.id;
+    console.log(candidateId);
+    // const candidateId = 4;
     this.getCvByCandidateId({ candidateId: candidateId });
   },
   methods: {
