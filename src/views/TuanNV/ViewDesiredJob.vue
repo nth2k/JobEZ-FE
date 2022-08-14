@@ -13,7 +13,9 @@
           <div class="titleRight">Công việc mong muốn</div>
           <div class="container">
             <div class="label">
-              <span class="label-title">Công việc: </span><span>Thiết kế</span>
+              <span class="label-title">Công việc: </span
+              ><span>{{ desiredjob.major }}</span>
+              <span v-if="!isNull"></span>
               <div style="padding: 0; float: right">
                 <span class="icon_tt">
                   <a
@@ -56,26 +58,29 @@
             </div>
             <div class="label">
               <span class="label-title">Ngành nghề: </span>
-              <span class="careerItem">IT phần cứng</span>
+              <!-- <span class="careerItem">{{desiredjob.}}</span> -->
               <span class="careerItem">Công nghệ sinh học</span>
               <span class="careerItem">IT phần mềm</span>
             </div>
             <div class="label">
               <span class="label-title">Cấp bậc mong muốn : </span
-              ><span>Trưởng phòng</span>
+              ><span>{{ desiredjob.rank }}</span>
             </div>
             <div class="label">
-              <span class="label-title">Hình thức : </span><span>Fulltime</span>
+              <span class="label-title">Hình thức : </span
+              ><span>{{ desiredjob.workingForm }}</span>
             </div>
             <div class="label">
               <span class="label-title">Địa điểm : </span
               ><span>Số 499 Ngọc Lân, Long biên Hà Nội</span>
             </div>
             <div class="label">
-              <span class="label-title">Kinh nghiệm : </span><span>3 năm</span>
+              <span class="label-title">Kinh nghiệm : </span
+              ><span>{{ desiredjob.yearOfExperience }}</span>
             </div>
             <div class="label">
-              <span class="label-title">Mức lương : </span><span>10.000.000 VNĐ</span>
+              <span class="label-title">Mức lương : </span
+              ><span>{{ desiredjob.salary }}</span>
             </div>
           </div>
         </div>
@@ -88,6 +93,7 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
+import DesiredJobService from "@/services/DesiredJobService";
 export default {
   name: "ViewDesiredJob",
   components: {
@@ -95,7 +101,31 @@ export default {
     Header,
     Profile_menu,
   },
-  methods: {},
+  data() {
+    return {
+      userId: "",
+      desiredjob: null,
+      isNull: false,
+    };
+  },
+  methods: {
+    getDesiredJob() {
+      DesiredJobService.getDesiredJobByUserId(this.userId).then((rs) => {
+        this.desiredjob = rs.data;
+        console.log(this.desiredjob);
+        if (rs.data) {
+          this.isNull = true;
+        } else {
+          this.isNull = false;
+        }
+      });
+    },
+  },
+  created() {
+    const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+    this.userId = theLoggedUser.user.id;
+    this.getDesiredJob();
+  },
 };
 </script>
 

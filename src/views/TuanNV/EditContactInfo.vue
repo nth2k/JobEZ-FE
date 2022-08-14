@@ -212,7 +212,12 @@
                 </div>
               </div>
               <div class="text-center justify-content-center">
-                <button class="btn btn-primary px-5 mt-5">Lưu</button>
+                <button
+                  class="btn btn-primary px-5 mt-5"
+                  @click.prevent="saveContactInfo"
+                >
+                  Lưu
+                </button>
               </div>
             </v-form>
           </div>
@@ -298,15 +303,12 @@ export default {
         this.address = rs.data.address;
         this.gender = rs.data.gender;
         this.married = rs.data.married;
-        this.province = rs.data.district;
-        this.district = rs.data.province;
         this.district_id = rs.data.districtId;
         this.province_id = rs.data.provinceId;
         this.base64 = rs.data.imageBase64;
       });
       ProvinceDistrictService.getAllDistrict().then((rs) => {
         this.listDistrict = rs.data;
-        // console.log(rs.data);
       });
     },
     createBase64Image: function (FileObject) {
@@ -322,16 +324,30 @@ export default {
         fullname: this.fullname,
         email: this.email,
         phoneNumber: this.phoneNumber,
-        dateOfBirth: this.dateOfBirth,
+        dateOfBirth: this.formatDate(this.dateOfBirth),
         address: this.address,
         gender: this.gender,
-        // province,
-        // district,
         married: this.married,
         imageBase64: this.base64,
-        provinceId: this.provinceId,
-        districtId: this.districtId,
-      });
+        provinceId: this.province_id,
+        districtId: this.district_id,
+      })
+        .then(() => {
+          this.$store.dispatch("setSnackbar", {
+            text: "Cập nhật thành công",
+          });
+          this.$router.push("/contactinfo");
+        })
+        .catch(() => {
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Có lỗi xảy ra! Vui lòng thử lại",
+          });
+        });
+    },
+    formatDate(date) {
+      var [day, month, year] = date.split("/");
+      return [year, month, day].join("-");
     },
   },
   watch: {
@@ -345,7 +361,6 @@ export default {
   },
   created() {
     this.getData();
-    // this.getContactInfo();
   },
 };
 </script>

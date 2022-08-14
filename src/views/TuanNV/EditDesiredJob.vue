@@ -11,17 +11,11 @@
         </div>
         <div class="right col-9">
           <div class="titleheader">Công việc mong muốn</div>
-          <div class="container ml-3">
+          <div class="container">
             <v-form ref="form">
-              <div class="row block2">
+              <div class="row">
                 <div class="col-5">
                   <span class="label">Công việc<span class="text-danger">*</span></span>
-                  <!-- <input
-                      type="text"
-                      class="form-control mb-3"
-                      id="inputJob"
-                      placeholder="Công việc mong muốn"
-                    /> -->
                   <v-textarea
                     label="Công việc mong muốn"
                     v-model="desiredJob"
@@ -34,29 +28,7 @@
                     background-color="white"
                   ></v-textarea>
 
-                  <span class="label">Địa Điểm<span class="text-danger">*</span></span>
-                  <!-- <select name="married" id="place" class="form-control mb-3">
-                      <option value="-1">Chọn từ 1 -3 tinh thành</option>
-                      <option value="1">Hà Nội</option>
-                      <option value="2">TP. Hồ Chí Minh</option>
-                    </select> -->
-                  <v-textarea
-                    label="Chọn từ 1 -3 tinh thành, ngăn cách bởi dấu ';'"
-                    v-model="place"
-                    outlined
-                    filled
-                    no-resize
-                    rows="1"
-                    :rules="placeRules"
-                    required
-                    background-color="white"
-                  ></v-textarea>
                   <span class="label">Hình thức<span class="text-danger">*</span></span>
-                  <!-- <select name="married" id="hinhthuc" class="form-control mb-3">
-                      <option value="-1">Chọn hình thức</option>
-                      <option value="1">Online</option>
-                      <option value="2">Offline</option>
-                    </select> -->
                   <v-select
                     :items="listWorkingForm"
                     label="Chọn hình thức làm việc"
@@ -79,20 +51,7 @@
                     v-model="rankName"
                     required
                   ></v-select>
-                  <span class="label">Mức lương<span class="text-danger">*</span></span>
-                  <!-- <select name="married" id="salary" class="form-control mb-3">
-                      <option value="-1">Chọn mức lương</option>
-                      <option value="1">10tr</option>
-                      <option value="2">20tr</option>
-                    </select> -->
-                  <v-select
-                    :items="listSalary"
-                    label="Chọn mức lương"
-                    outlined
-                    :rules="salaryRules"
-                    v-model="salary"
-                    required
-                  ></v-select>
+
                   <span class="label">Kinh nghiệm<span class="text-danger">*</span></span>
                   <v-select
                     :items="listexp"
@@ -106,26 +65,70 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <span class="label">Ngành nghề<span class="text-danger">*</span></span>
-                  <!-- <select name="married" id="exp" class="form-control mb-3">
-                      <option value="-1">Chọn ngành nghề</option>
-                      <option value="1">IT</option>
-                      <option value="2">AI</option>
-                    </select> -->
+                  <span class="label">Mức lương<span class="text-danger">*</span></span>
                   <v-select
-                    :items="listMajor"
-                    label="Chọn ngành nghề"
+                    :items="listSalary"
+                    label="Chọn mức lương"
                     outlined
-                    :rules="majorRules"
-                    v-model="major"
+                    :rules="salaryRules"
+                    v-model="salary"
                     required
                   ></v-select>
+                </div>
+              </div>
+              <!-- <div>
+                <multiselect
+                  v-model="major"
+                  tag-placeholder="Add this as new tag"
+                  placeholder="Search or add a tag"
+                  label="name"
+                  track-by="id"
+                  options="listMajor"
+                  :multiple="true"
+                  :taggable="true"
+                  @tag="addTag"
+                >
+                </multiselect>
+              </div> -->
+              <div class="row">
+                <div class="col-12">
+                  <span class="label">Địa Điểm<span class="text-danger">*</span></span>
+                  <div>
+                    <multiselect
+                      v-model="place"
+                      tag-placeholder="Chọn 1 - 3 địa điểm"
+                      placeholder="Chọn 1 - 3 địa điểm"
+                      label="name"
+                      track-by="id"
+                      :options="listPlace"
+                      :multiple="true"
+                      :taggable="true"
+                      @tag="addTag"
+                    >
+                    </multiselect>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="margin-top: 40px">
+                <div class="col-12">
+                  <span class="label">Ngành nghề<span class="text-danger">*</span></span>
+                  <div>
+                    <multiselect
+                      v-model="major"
+                      tag-placeholder="Chọn ngành nghề"
+                      placeholder="Chọn ngành nghề"
+                      :options="listMajor"
+                      :multiple="true"
+                      :taggable="true"
+                      @tag="addTag"
+                    ></multiselect>
+                  </div>
                 </div>
               </div>
               <div class="row">
                 <div class="d-flex col-12 justify-content-end">
                   <button class="btn btn-primary px-5">Luu</button>
-                  <!-- <button class="btn btn-secondary px-3 ms-1">Khong luu</button> -->
                 </div>
               </div>
             </v-form>
@@ -139,19 +142,93 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
+import Multiselect from "vue-multiselect";
+import ProvinceDistrictService from "@/services/ProvinceDistrictService";
 export default {
   name: "EditDesiredJob",
   components: {
     SlideBar_candidate,
     Header,
     Profile_menu,
+    Multiselect,
   },
   data() {
     return {
       desiredJob: "",
       desiredJobRules: [(v) => !!v || "Tên công việc mong muốn không được để trống"],
-      place: "",
+      place: [],
       placeRules: [(v) => !!v || "Tên địa điểm không được để trống"],
+      listPlace: [
+        // "Thành phố Hà Nội",
+        // "Tỉnh Hà Giang",
+        // "Tỉnh Tuyên Quang",
+        // "Tỉnh Điện Biên",
+      ],
+      // listPlace: [
+      //   { id: 1, name: "Thành phố Hà Nội" },
+      //   { id: 2, name: "Tỉnh Hà Giang" },
+      //   { id: 3, name: "Tỉnh Cao Bằng" },
+      //   { id: 4, name: "Tỉnh Bắc Kạn" },
+      //   { id: 5, name: "Tỉnh Tuyên Quang" },
+      //   { id: 6, name: "Tỉnh Lào Cai" },
+      //   { id: 7, name: "Tỉnh Điện Biên" },
+      //   { id: 8, name: "Tỉnh Lai Châu" },
+      //   { id: 9, name: "Tỉnh Sơn La" },
+      //   { id: 10, name: "Tỉnh Yên Bái" },
+      //   { id: 11, name: "Tỉnh Hoà Bình" },
+      //   { id: 12, name: "Tỉnh Thái Nguyên" },
+      //   { id: 13, name: "Tỉnh Lạng Sơn" },
+      //   { id: 14, name: "Tỉnh Quảng Ninh" },
+      //   { id: 15, name: "Tỉnh Bắc Giang" },
+      //   { id: 16, name: "Tỉnh Phú Thọ" },
+      //   { id: 17, name: "Tỉnh Vĩnh Phúc" },
+      //   { id: 18, name: "Tỉnh Bắc Ninh" },
+      //   { id: 19, name: "Tỉnh Hải Dương" },
+      //   { id: 20, name: "Thành phố Hải Phòng" },
+      //   { id: 21, name: "Tỉnh Hưng Yên" },
+      //   { id: 22, name: "Tỉnh Thái Bình" },
+      //   { id: 23, name: "Tỉnh Hà Nam" },
+      //   { id: 24, name: "Tỉnh Nam Định" },
+      //   { id: 25, name: "Tỉnh Ninh Bình" },
+      //   { id: 26, name: "Tỉnh Thanh Hóa" },
+      //   { id: 27, name: "Tỉnh Nghệ An" },
+      //   { id: 28, name: "Tỉnh Hà Tĩnh" },
+      //   { id: 29, name: "Tỉnh Quảng Bình" },
+      //   { id: 30, name: "Tỉnh Quảng Trị" },
+      //   { id: 31, name: "Tỉnh Thừa Thiên Huế" },
+      //   { id: 32, name: "Thành phố Đà Nẵng" },
+      //   { id: 33, name: "Tỉnh Quảng Nam" },
+      //   { id: 34, name: "Tỉnh Quảng Ngãi" },
+      //   { id: 35, name: "Tỉnh Bình Định" },
+      //   { id: 36, name: "Tỉnh Phú Yên" },
+      //   { id: 37, name: "Tỉnh Khánh Hòa" },
+      //   { id: 38, name: "Tỉnh Ninh Thuận" },
+      //   { id: 39, name: "Tỉnh Bình Thuận" },
+      //   { id: 40, name: "Tỉnh Kon Tum" },
+      //   { id: 41, name: "Tỉnh Gia Lai" },
+      //   { id: 42, name: "Tỉnh Đắk Lắk" },
+      //   { id: 43, name: "Tỉnh Đắk Nông" },
+      //   { id: 44, name: "Tỉnh Lâm Đồng" },
+      //   { id: 45, name: "Tỉnh Bình Phước" },
+      //   { id: 46, name: "Tỉnh Tây Ninh" },
+      //   { id: 47, name: "Tỉnh Bình Dương" },
+      //   { id: 48, name: "Tỉnh Đồng Nai" },
+      //   { id: 49, name: "Tỉnh Bà Rịa - Vũng Tàu" },
+      //   { id: 50, name: "Thành phố Hồ Chí Minh" },
+      //   { id: 51, name: "Tỉnh Long An" },
+      //   { id: 52, name: "Tỉnh Tiền Giang" },
+      //   { id: 53, name: "Tỉnh Bến Tre" },
+      //   { id: 54, name: "Tỉnh Trà Vinh" },
+      //   { id: 55, name: "Tỉnh Vĩnh Long" },
+      //   { id: 56, name: "Tỉnh Đồng Tháp" },
+      //   { id: 57, name: "Tỉnh An Giang" },
+      //   { id: 58, name: "Tỉnh Kiên Giang" },
+      //   { id: 59, name: "Thành phố Cần Thơ" },
+      //   { id: 60, name: "Tỉnh Hậu Giang" },
+      //   { id: 61, name: "Tỉnh Sóc Trăng" },
+      //   { id: 62, name: "Tỉnh Bạc Liêu" },
+      //   { id: 63, name: "Tỉnh Cà Mau" },
+      // ],
       workingForm: "",
       workingFormRules: [(v) => !!v || "Vui lòng chọn hình thức làm việc"],
       listWorkingForm: ["Online", "Offline"],
@@ -169,14 +246,14 @@ export default {
       experience: "",
       experienceRules: [(v) => !!v || "Vui lòng chọn kinh nghiệm"],
       listexp: [
-        "Chưa có kinh nghiệm",
-        "0 - 1 năm",
-        "1 - 2 năm",
-        "2 - 5 năm",
-        "5 - 10 năm",
-        "trên 10 năm",
+        // "Chưa có kinh nghiệm",
+        // "0 - 1 năm",
+        // "1 - 2 năm",
+        // "2 - 5 năm",
+        // "5 - 10 năm",
+        // "trên 10 năm",
       ],
-      major: "",
+      major: [],
       majorRules: [(v) => !!v || "Vui lòng chọn ngành nghề"],
       listMajor: [
         "IT phần mềm",
@@ -184,19 +261,46 @@ export default {
         "Project manager",
         "An toàn thông tin",
       ],
+
+      // value: [
+      //   { name: 'Javascript', code: 'js' }
+      // ],
+      // options: [
+      //   { name: 'Vue.js', code: 'vu' },
+      //   { name: 'Javascript', code: 'js' },
+      //   { name: 'Open Source', code: 'os' }
+      // ]
     };
+  },
+  methods: {
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.options.push(tag);
+      this.value.push(tag);
+    },
+    getProvince() {
+      ProvinceDistrictService.getAllProvince().then((rs) => {
+        this.listPlace = rs.data;
+      });
+    },
+  },
+  created() {
+    this.getProvince();
   },
 };
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 .body {
   border: 1px solid blue;
   border-radius: 5px;
   box-shadow: 5px 5px lightgray;
 }
-.star {
-  color: red;
+select {
+  font-size: 14px;
 }
 .titleright {
   float: right;
@@ -220,10 +324,17 @@ export default {
   font-size: 20px;
   font-weight: bold;
 }
-.col-12 {
-  margin: 0;
-  padding: 0;
+.multiselect {
+  border: 1px solid gray;
+  border-radius: 5px;
+  /* font-size: 16px;  */
+  /* margin-left: 12px; */
 }
+.col-12 {
+  padding: 0;
+  margin-left: 12px;
+}
+
 .label {
   font-size: 15px;
 }

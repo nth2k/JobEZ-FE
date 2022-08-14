@@ -137,9 +137,19 @@ export default {
           name: this.languageName,
           mark: this.grade,
           userId: this.userId,
-        });
-        alert("Cập nhật thành công");
-        window.location = "/language";
+        })
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Cập nhật thành công",
+            });
+            this.$router.push("/language");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Chứng chỉ đã tồn tại",
+            });
+          });
       }
     },
   },

@@ -145,7 +145,10 @@
                     ></v-textarea>
                   </div>
                   <div class="text-center container">
-                    <button class="btn btn-primary btnSave px-5" @click="saveDegree">
+                    <button
+                      class="btn btn-primary btnSave px-5"
+                      @click.prevent="saveDegree"
+                    >
                       Lưu
                     </button>
                   </div>
@@ -231,35 +234,47 @@ export default {
             color: "error",
             text: "Ngày bắt đầu phải nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
           });
-        } else {
-          var [day, month, year] = this.startDate.split("/");
-          this.startDate = [year, month, day].join("-");
-          [day, month, year] = this.endDate.split("/");
-          this.endDate = [year, month, day].join("-");
-          DegreeService.updateDegree({
-            id: this.id,
-            certificateName: this.degree,
-            teachingUnit: this.teachingUnit,
-            startTime: this.startDate,
-            endTime: this.endDate,
-            major: this.majorName,
-            rank: this.rankName,
-            supplementaryInformation: this.description,
-            userId: this.userId,
-          })
-            .then(() => {
-              this.$store.dispatch("setSnackbar", {
-                text: "Cập nhật thành công",
-              });
-              this.$router.push("/degree");
-            })
-            .catch(() => {
-              this.$store.dispatch("setSnackbar", {
-                color: "error",
-                text: "Có lỗi xảy ra! Vui lòng thử lại",
-              });
-            });
+          return false;
         }
+        if (inputStartDate.getTime() >= Date.now) {
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Ngày bắt đầu phải nhỏ hơn ngày hiện tại.\n Xin hãy kiểm tra lại",
+          });
+          return false;
+        }
+        if (inputEndDate.getTime() >= Date.now) {
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Ngày kết thúc phải nhỏ hơn ngày hiện tại.\n Xin hãy kiểm tra lại",
+          });
+          return false;
+        }
+        // var startDate = this.formatDate(this.startDate);
+        // var endDate = this.formatDate(this.endDate);
+        DegreeService.updateDegree({
+          id: this.id,
+          certificateName: this.degree,
+          teachingUnit: this.teachingUnit,
+          startTime: this.formatDate(this.startDate),
+          endTime: this.formatDate(this.endDate),
+          major: this.majorName,
+          rank: this.rankName,
+          supplementaryInformation: this.description,
+          userId: this.userId,
+        })
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Cập nhật thành công",
+            });
+            this.$router.push("/degree");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
+          });
       }
     },
   },

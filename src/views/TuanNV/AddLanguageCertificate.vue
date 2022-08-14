@@ -97,7 +97,7 @@ export default {
       userId: this.$route.params.userId,
       grade: "",
       inputGradeRules: [
-        (v) => !!v || "Số điểm không được để trống",
+        (v) => v.length != 0 || "Số điểm không được để trống",
         (v) => v > 0 || "Số điểm phải lớn hơn 0",
       ],
       certificateName: "",

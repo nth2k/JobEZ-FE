@@ -54,10 +54,22 @@
             <div class="row">
               <div class="col-3">
                 <img
+                  id="myImg"
+                  v-if="contactInfo.imageBase64 == null"
+                  src="@/assets/no_avatar.jpg"
+                  alt="avatar"
+                />
+                <img
+                  id="myImg1"
+                  v-if="contactInfo.imageBase64 != null"
+                  :src="contactInfo.imageBase64"
+                  alt="avatar"
+                />
+                <!-- <img
                   class="img-avatar"
                   src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                   alt=""
-                />
+                /> -->
               </div>
               <div class="col-5">
                 <div class="data">
@@ -154,7 +166,7 @@ export default {
   font-size: 16px;
   font-weight: bold;
 }
-.img-avatar {
+img {
   width: 65%;
   border-radius: 50%;
 }

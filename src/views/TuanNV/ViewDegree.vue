@@ -127,7 +127,6 @@ export default {
   },
   methods: {
     showDetail(e) {
-      // console.log(e.target.nextElementSibling);
       const detail = e.target.nextElementSibling.nextElementSibling;
       const icon = e.target.firstChild;
       if (detail.style.display == "none") {
@@ -151,17 +150,16 @@ export default {
       });
     },
     countYear(date1, date2) {
-      var year1 = date1.substring(0, 4); // get only two digits
-      var month1 = date1.substring(5, 7);
-      var day1 = date1.substring(8, 10);
-      date1 = day1 + "/" + month1 + "/" + year1;
-      var year2 = date2.substring(0, 4); // get only two digits
-      var month2 = date2.substring(5, 7);
-      var day2 = date2.substring(8, 10);
-      date2 = day2 + "/" + month2 + "/" + year2;
+      date1 = this.formatDate(date1);
+      date2 = this.formatDate(date2);
       return date1 + " - " + date2;
     },
-
+    formatDate(date) {
+      var year = date.substring(0, 4);
+      var month = date.substring(5, 7);
+      var day = date.substring(8, 10);
+      return day + "/" + month + "/" + year;
+    },
     addDegree() {
       this.$router.push({
         name: "AddDegree",

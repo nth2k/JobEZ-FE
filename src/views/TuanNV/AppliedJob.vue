@@ -12,7 +12,7 @@
             <thead>
               <tr>
                 <th>&nbsp;</th>
-                <th>Công ty</th>
+                <th>Công việc</th>
                 <th>Vị trí công việc</th>
                 <th>Hạn nộp</th>
                 <th>Ngày nộp</th>
