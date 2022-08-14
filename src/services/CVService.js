@@ -1,7 +1,5 @@
 import axios from "axios";
 
-// const Base_URL = "http://localhost:8081";
-
 class CVService {
   async getCvByCandidateId(commit, candidateId) {
     const body = {

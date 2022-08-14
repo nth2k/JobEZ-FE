@@ -102,6 +102,8 @@ export default {
       console.log(indexOf);
       if (indexOf == -1) {
         this.certificates.push(certificate);
+      } else {
+        this.certificates[index] = certificate;
       }
 
       this.setCertificate({ certificate: this.certificates });

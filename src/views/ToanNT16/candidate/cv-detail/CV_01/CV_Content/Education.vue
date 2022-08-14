@@ -123,6 +123,8 @@ export default {
       const indexOf = this.educations.findIndex((ed) => ed.id == education.id);
       if (indexOf == -1) {
         this.educations.push(education);
+      } else {
+        this.educations[index] = education;
       }
 
       this.setEducation({ education: this.educations });

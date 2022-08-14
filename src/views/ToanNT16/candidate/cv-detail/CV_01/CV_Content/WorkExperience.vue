@@ -132,6 +132,8 @@ export default {
       );
       if (indexOf == -1) {
         this.experiences.push(experience);
+      } else {
+        this.experiences[index] = experience;
       }
 
       this.setWorkExperience({ workExperience: this.experiences });
