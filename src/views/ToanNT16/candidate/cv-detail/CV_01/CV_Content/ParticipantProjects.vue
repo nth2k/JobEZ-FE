@@ -51,7 +51,7 @@
               <div
                 v-for="(project, index) in getCV.involvedProjects"
                 :key="index"
-                @click="updateParticipantProjects(index)"
+                @keyup="updateParticipantProjects(index)"
               >
                 <div ref="name" class="projects-name custom-outline">
                   <strong contenteditable="true">{{

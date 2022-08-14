@@ -49,7 +49,7 @@
           <div
             v-for="(item, index) in getCV.educations"
             :key="index"
-            @click="updateEducation(index)"
+            @keyup="updateEducation(index)"
             class="row"
           >
             <div class="col-10">

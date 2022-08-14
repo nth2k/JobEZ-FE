@@ -16,7 +16,6 @@ const actions = {
     state.isGetAPI = false;
     await axios
       .post("http://localhost:8080" + "/posting/" + postingId, {
-        // user_id: userId,
         posting_id: postingId,
       })
       .then((response) => {

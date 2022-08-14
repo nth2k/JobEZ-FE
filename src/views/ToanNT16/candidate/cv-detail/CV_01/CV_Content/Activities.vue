@@ -51,7 +51,7 @@
               <div
                 v-for="(activity, index) in getCV.activities"
                 :key="index"
-                @click="updateActivities(index)"
+                @keyup="updateActivities(index)"
                 class="work-experience-content mb-3"
               >
                 <div
