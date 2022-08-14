@@ -9,7 +9,7 @@ import ChooseCVType from "@/views/HiepViews/ChooseCVType.vue";
 import CandidateOnlineCVForm from "@/views/HiepViews/CandidateOnlineCVForm.vue";
 import CVFromPCForm from "@/views/HiepViews/CVFromPCForm.vue";
 import RecruiterOnlineCVForm from "@/views/HiepViews/RecruiterOnlineCVForm.vue";
-import JobDetailsNoLogin from "@/components/ToanComponents/JobDetailsNoLogin.vue";
+// import JobDetailsNoLogin from "@/components/ToanComponents/JobDetailsNoLogin.vue";
 import SearchJob from "@/views/HiepViews/SearchJob.vue";
 import RecruiterProfile from "@/components/ToanComponents/RecruiterProfile.vue";
 import JobCategory from "@/components/ToanComponents/JobCategory.vue";

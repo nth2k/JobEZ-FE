@@ -51,7 +51,7 @@
               <div
                 v-for="(item, index) in getCV.degrees"
                 :key="index"
-                @click="updateCertificate(index)"
+                @keyup="updateCertificate(index)"
                 class="row"
               >
                 <div class="col-10">

@@ -6,9 +6,9 @@
           <div class="candidate-name font-weight-bold text-uppercase">
             <div
               ref="candidateName"
-              @click="updateHeaderData"
-              contenteditable="true"
+              @keyup="updateHeaderData"
               class="custom-outline"
+              :value="getCV.image"
             >
               {{ getCV.name }}
             </div>
@@ -39,7 +39,7 @@
         <div class="col-9 text-right px-0">
           <div
             ref="position"
-            @click="updateHeaderData"
+            @keyup="updateHeaderData"
             class="candidate-position font-weight-normal text-uppercase pl-5 pr-5 custom-outline"
             contenteditable="true"
           >
@@ -79,6 +79,7 @@ export default {
         reader.readAsDataURL(file[0]);
         this.$emit("input", file[0]);
       }
+      this.updateHeaderData();
     },
 
     displayImage: function () {},
