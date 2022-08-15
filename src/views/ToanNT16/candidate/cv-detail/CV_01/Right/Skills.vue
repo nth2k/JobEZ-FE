@@ -51,7 +51,7 @@
               <div
                 v-for="(skill, index) in getCV.skills"
                 :key="index"
-                @click="updateSkills(index)"
+                @keyup="updateSkills(index)"
               >
                 <div class="row">
                   <div

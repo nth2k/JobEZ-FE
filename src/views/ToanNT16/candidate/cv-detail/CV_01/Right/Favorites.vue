@@ -49,7 +49,7 @@
           <div class="row">
             <div class="col-10">
               <div
-                @click="updateHobbies"
+                @keyup="updateHobbies"
                 ref="hobbies"
                 contenteditable="true"
                 class="custom-outline"
