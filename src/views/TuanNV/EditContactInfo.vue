@@ -103,7 +103,6 @@
                     prepend-icon="mdi-camera"
                     span="Avatar"
                     v-model="image"
-                    @change="showImage"
                   ></v-file-input>
                 </div>
               </div>
@@ -169,46 +168,47 @@
 
                   <div class="label">Tinh thành<span class="text-danger">*</span></div>
 
-                  <!-- <v-select
-                    :items="listProvince"
-                    label="Chọn tỉnh thành"
-                    outlined
-                    :rules="provinceRules"
-                    v-model="province"
-                    @change="onProvinceSelect()"
-                    required
-                  ></v-select> -->
-                  <select v-model="province_id" class="w-100">
+                  <!-- <select class="w-100" @change="onProvinceSelect" v-model="province_id">
                     <option value="" disabled hidden>Chọn tỉnh thành</option>
                     <option
                       v-for="(item, index) in listProvince"
                       :key="index"
-                      :value="item.id"
+                      :value="item.province_id"
                     >
-                      {{ item.name }}
+                      {{ item.province_name }}
                     </option>
-                  </select>
+                  </select> -->
+                  <v-select
+                    v-model="province_id"
+                    @change="onProvinceSelect"
+                    :items="listProvince"
+                    label="Chọn tỉnh thành"
+                    item-text="province_name"
+                    item-value="province_id"
+                    :rules="provinceRules"
+                  ></v-select>
                   <div class="label blockDistrict">
                     Quận Huyện<span class="text-danger">*</span>
                   </div>
-                  <!-- <v-select
-                    :items="listDistrict"
-                    label="Chọn quận huyện"
-                    outlined
-                    :rules="districtRules"
-                    v-model="district"
-                    required
-                  ></v-select> -->
-                  <select v-model="district_id" class="w-100">
+
+                  <!-- <select class="w-100" v-model="district_id">
                     <option value="" disabled hidden>Chọn quận huyện</option>
                     <option
                       v-for="(item, index) in listDistrict"
                       :key="index"
-                      :value="item.id"
+                      :value="item.district_id"
                     >
-                      {{ item.name }}
+                      {{ item.district_name }}
                     </option>
-                  </select>
+                  </select> -->
+                  <v-select
+                    v-model="district_id"
+                    :items="listDistrict"
+                    label="Chọn quận huyện"
+                    item-text="district_name"
+                    item-value="district_id"
+                    :rules="districtRules"
+                  ></v-select>
                 </div>
               </div>
               <div class="text-center justify-content-center">
@@ -231,8 +231,9 @@
 import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
-import ProvinceDistrictService from "@/services/ProvinceDistrictService.js";
+// import ProvinceDistrictService from "@/services/ProvinceDistrictService.js";
 import ContactInfoService from "@/services/ContactInfoService";
+import AddressService from "@/services/AddressService";
 
 export default {
   name: "EditContactInfo",
@@ -285,17 +286,14 @@ export default {
     };
   },
   methods: {
-    showImage() {},
-    // onProvinceSelect(event) {
-    //   ProvinceDistrictService.getAllDistrict(event.target.value).then((rs) => {
-    //     this.listDistrict = rs.data;
-    //   });
-    // },
-    getData() {
-      ProvinceDistrictService.getAllProvince().then((rs) => {
-        this.listProvince = rs.data;
+    onProvinceSelect() {
+      AddressService.getDistrict(this.province_id).then((rs) => {
+        this.listDistrict = rs.data.results;
       });
+    },
+    getData() {
       ContactInfoService.getContactInfo(this.userId).then((rs) => {
+        // console.log(rs.data);
         this.fullname = rs.data.fullname;
         this.email = rs.data.email;
         this.phoneNumber = rs.data.phoneNumber;
@@ -303,12 +301,20 @@ export default {
         this.address = rs.data.address;
         this.gender = rs.data.gender;
         this.married = rs.data.married;
-        this.district_id = rs.data.districtId;
-        this.province_id = rs.data.provinceId;
+
         this.base64 = rs.data.imageBase64;
-      });
-      ProvinceDistrictService.getAllDistrict().then((rs) => {
-        this.listDistrict = rs.data;
+        AddressService.getProvince().then((res) => {
+          this.listProvince = res.data.results;
+          const province = this.listProvince.find(
+            (element) => element.province_name == rs.data.province
+          );
+          this.province_id = province.province_id;
+          // this.onProvinceSelect();
+          AddressService.getDistrict(this.province_id).then((response) => {
+            this.listDistrict = response.data.results;
+            this.district_id = rs.data.districtId;
+          });
+        });
       });
     },
     createBase64Image: function (FileObject) {
@@ -319,6 +325,14 @@ export default {
       reader.readAsDataURL(FileObject);
     },
     saveContactInfo() {
+      // console.log(this.listProvince.find((x) => x.id === this.province_id));
+      // console.log(this.listDistrict.find((element) => element.id == this.district_id));
+      const district = this.listDistrict.find(
+        (element) => element.district_id == this.district_id
+      );
+      const province = this.listProvince.find(
+        (element) => element.province_id == this.province_id
+      );
       ContactInfoService.saveContactInfo({
         userId: this.userId,
         fullname: this.fullname,
@@ -331,6 +345,8 @@ export default {
         imageBase64: this.base64,
         provinceId: this.province_id,
         districtId: this.district_id,
+        province: province.province_name,
+        district: district.district_name,
       })
         .then(() => {
           this.$store.dispatch("setSnackbar", {

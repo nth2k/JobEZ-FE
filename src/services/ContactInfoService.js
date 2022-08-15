@@ -7,6 +7,7 @@ class ContactInfoService{
         return axios.get(Base_URL + "/contactinfo/" + userId);
     }
     saveContactInfo(contact){
+        // console.log(contact);
         return axios.post(Base_URL + "/contactinfo/save" ,contact);
     }
 }

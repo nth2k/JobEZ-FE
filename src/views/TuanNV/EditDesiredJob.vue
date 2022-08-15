@@ -114,7 +114,15 @@
                 <div class="col-12">
                   <span class="label">Ngành nghề<span class="text-danger">*</span></span>
                   <div>
-                    <multiselect
+                    <v-select
+                      :items="listSalary"
+                      label="Chọn ngành nghề"
+                      outlined
+                      :rules="salaryRules"
+                      v-model="salary"
+                      required
+                    ></v-select>
+                    <!-- <multiselect
                       v-model="major"
                       tag-placeholder="Chọn ngành nghề"
                       placeholder="Chọn ngành nghề"
@@ -122,7 +130,7 @@
                       :multiple="true"
                       :taggable="true"
                       @tag="addTag"
-                    ></multiselect>
+                    ></multiselect> -->
                   </div>
                 </div>
               </div>
