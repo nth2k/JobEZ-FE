@@ -102,84 +102,64 @@ const mutations = {
     state.numberOfEffectColumn = effectColumn;
   },
   SET_IMAGE: function (state, newImages) {
-    console.log(newImages);
     state.images = newImages;
   },
   SET_CANDIDATE_NAME: function (state, newCandidateName) {
-    console.log(newCandidateName);
     state.candidateName = newCandidateName;
   },
   SET_DESIRED_JOB_NAME: function (state, newJobName) {
-    console.log(newJobName);
     state.desiredJobName = newJobName;
   },
 
   SET_DATE_OF_BIRTH: function (state, newDateOfBirth) {
-    console.log(newDateOfBirth);
     state.dateOfBirth = newDateOfBirth;
   },
   SET_GENDER: function (state, newGender) {
-    console.log(newGender);
     state.gender = newGender;
   },
   SET_PHONE: function (state, newPhone) {
-    console.log(newPhone);
     state.phone = newPhone;
   },
   SET_EMAIL: function (state, newEmail) {
-    console.log(newEmail);
     state.email = newEmail;
   },
   SET_ADDRESS: function (state, newAddress) {
-    console.log(newAddress);
     state.address = newAddress;
   },
   SET_PROVINCE: function (state, newProvince) {
-    console.log(newProvince);
     state.province = newProvince;
   },
   SET_CITY: function (state, newCity) {
-    console.log(newCity);
     state.city = newCity;
   },
   SET_STREET: function (state, newStreet) {
-    console.log(newStreet);
     state.street = newStreet;
   },
   SET_CAREER_GOAL: function (state, newCareerGoal) {
-    console.log(newCareerGoal);
     state.careerGoal = newCareerGoal;
   },
   SET_SKILL: function (state, newSkill) {
-    console.log(newSkill);
     state.skills = newSkill;
   },
   SET_AWARDS: function (state, newAwards) {
-    console.log(newAwards);
     state.awards = newAwards;
   },
   SET_CERTIFICATE: function (state, newCertificate) {
-    console.log(newCertificate);
     state.degrees = newCertificate;
   },
   SET_HOBBIES: function (state, newHobbies) {
-    console.log(newHobbies);
     state.hobbies = newHobbies;
   },
   SET_EDUCATION: function (state, newEducation) {
-    console.log(newEducation);
     state.educations = newEducation;
   },
   SET_ACTIVITY: function (state, newActivities) {
-    console.log(newActivities);
     state.activities = newActivities;
   },
   SET_WORK_EXPERIENCE: function (state, newWorkExperience) {
-    console.log(newWorkExperience);
     state.workExperiences = newWorkExperience;
   },
   SET_PROJECT: function (state, newProject) {
-    console.log(newProject);
     state.involvedProjects = newProject;
   },
 };
