@@ -13,7 +13,8 @@
         >
           Hồ sơ đã ứng tuyển
         </h3>
-        <table class="table table-striped mt-5">
+        <p v-if="!isListCandidate" style="margin: 100px; font-size: 27px">Bạn không có ứng viên nào ứng tuyển</p>
+        <table v-if="isListCandidate" class="table table-striped mt-5">
           <thead>
             <tr>
               <th scope="col">Tên ứng viên</th>
@@ -101,6 +102,9 @@ export default {
         return e.commentFromEmployer != "Hồ sơ đạt yêu cầu"
       })
       console.log(this.listCandidate);
+      if(this.listCandidate.length > 0){
+        this.isListCandidate = true;
+      } else this.isListCandidate = false;
     });
   },
 };
