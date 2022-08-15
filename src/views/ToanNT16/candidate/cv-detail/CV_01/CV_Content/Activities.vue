@@ -51,7 +51,7 @@
               <div
                 v-for="(activity, index) in getCV.activities"
                 :key="index"
-                @click="updateActivities(index)"
+                @keyup="updateActivities(index)"
                 class="work-experience-content mb-3"
               >
                 <div
@@ -120,6 +120,8 @@ export default {
       const indexOf = this.activities.findIndex((ac) => ac.id == activity.id);
       if (indexOf == -1) {
         this.activities.push(activity);
+      } else {
+        this.activities[index] = activity;
       }
       this.setActivity({ activities: this.activities });
     },

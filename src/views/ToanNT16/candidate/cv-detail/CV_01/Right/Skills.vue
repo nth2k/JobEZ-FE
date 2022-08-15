@@ -51,7 +51,7 @@
               <div
                 v-for="(skill, index) in getCV.skills"
                 :key="index"
-                @click="updateSkills(index)"
+                @keyup="updateSkills(index)"
               >
                 <div class="row">
                   <div
@@ -91,6 +91,7 @@ export default {
     },
     updateSkills: function (index) {
       const skillName = this.$refs["skill"][index].textContent;
+      console.log(skillName, index);
       const skill = {
         id: this.getCV.skills[index].id,
         skillName: skillName,
@@ -99,6 +100,8 @@ export default {
       console.log(indexOf);
       if (indexOf == -1) {
         this.skills.push(skill);
+      } else {
+        this.skills[index] = skill;
       }
       this.setSkills({ skills: this.skills });
     },

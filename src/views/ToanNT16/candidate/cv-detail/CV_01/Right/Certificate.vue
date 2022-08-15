@@ -51,7 +51,7 @@
               <div
                 v-for="(item, index) in getCV.degrees"
                 :key="index"
-                @click="updateCertificate(index)"
+                @keyup="updateCertificate(index)"
                 class="row"
               >
                 <div class="col-10">
@@ -102,6 +102,8 @@ export default {
       console.log(indexOf);
       if (indexOf == -1) {
         this.certificates.push(certificate);
+      } else {
+        this.certificates[index] = certificate;
       }
 
       this.setCertificate({ certificate: this.certificates });

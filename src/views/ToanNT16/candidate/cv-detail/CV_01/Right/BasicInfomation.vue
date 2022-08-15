@@ -51,13 +51,7 @@
               <i class="fa fa-birthday-cake"></i>
             </div>
             <div class="col-10">
-              <div
-                @click="updateBasicInformationData"
-                ref="dateOfBirth"
-                contenteditable="true"
-                id="birthday"
-                class="custom-outline"
-              >
+              <div ref="dateOfBirth" id="birthday" class="custom-outline">
                 {{ getCV.dateOfBirth }}
               </div>
             </div>
@@ -67,13 +61,7 @@
           <div class="row">
             <div class="col-1 px-0"><i class="fa fa-transgender"></i></div>
             <div class="col-10">
-              <div
-                @click="updateBasicInformationData"
-                ref="gender"
-                contenteditable="true"
-                id="gender"
-                class="custom-outline"
-              >
+              <div ref="gender" id="gender" class="custom-outline">
                 {{ getCV.gender }}
               </div>
             </div>
@@ -83,13 +71,7 @@
           <div class="row">
             <div class="col-1 px-0"><i class="fa fa-phone"></i></div>
             <div class="col-10">
-              <div
-                @click="updateBasicInformationData"
-                ref="phone"
-                contenteditable="true"
-                id="phone"
-                class="custom-outline"
-              >
+              <div ref="phone" id="phone" class="custom-outline">
                 {{ getCV.phone }}
               </div>
             </div>
@@ -99,13 +81,7 @@
           <div class="row">
             <div class="col-1 px-0"><i class="material-icons">email</i></div>
             <div class="col-10">
-              <div
-                @click="updateBasicInformationData"
-                ref="email"
-                contenteditable="true"
-                id="email"
-                class="custom-outline"
-              >
+              <div ref="email" id="email" class="custom-outline">
                 {{ getCV.email }}
               </div>
             </div>
@@ -117,13 +93,7 @@
               <i class="material-icons">edit_location</i>
             </div>
             <div class="col-10">
-              <div
-                @click="updateBasicInformationData"
-                ref="address"
-                contenteditable="true"
-                id="address"
-                class="custom-outline"
-              >
+              <div ref="address" id="address" class="custom-outline">
                 {{ getCV.street }}, {{ getCV.city }}, {{ getCV.province }}
               </div>
             </div>
@@ -135,7 +105,7 @@
               <i class="fa fa-facebook-official"></i>
             </div>
             <div class="col-10">
-              <div contenteditable="true" id="facebook" class="custom-outline">
+              <div id="facebook" class="custom-outline">
                 {{ getCV.facebook }}
               </div>
             </div>
@@ -160,26 +130,6 @@ export default {
     ...mapActions(["setBasicInformationData"]),
     hidden() {
       this.isHidden = !this.isHidden;
-    },
-    updateBasicInformationData: function () {
-      const dateOfBirth = this.$refs.dateOfBirth.textContent;
-      const gender = this.$refs.gender.textContent;
-      const phone = this.$refs.phone.textContent;
-      const email = this.$refs.email.textContent;
-      const address = this.$refs.address.textContent.split(",");
-      const street = address[0].trim();
-      const city = address[1].trim();
-      const province = address[2].trim();
-      this.setBasicInformationData({
-        dateOfBirth: dateOfBirth,
-        gender: gender,
-        phone: phone,
-        email: email,
-        address: address,
-        province: province,
-        city: city,
-        street: street,
-      });
     },
   },
   computed: {

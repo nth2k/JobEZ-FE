@@ -51,7 +51,7 @@
               <div
                 v-for="(experience, index) in getCV.workExperiences"
                 :key="index"
-                @click="updateWorkExperience(index)"
+                @keyup="updateWorkExperience(index)"
                 class="work-experience-content mb-3"
               >
                 <div
@@ -132,6 +132,8 @@ export default {
       );
       if (indexOf == -1) {
         this.experiences.push(experience);
+      } else {
+        this.experiences[index] = experience;
       }
 
       this.setWorkExperience({ workExperience: this.experiences });

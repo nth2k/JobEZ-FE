@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="menu" v-on:click="isClicked = !isClicked">
+    <div class="menu" v-on:click="isMenuClicked = !isMenuClicked">
       <img src="@/assets/sub_icon2.png" alt="" class="w-100 h-100" />
     </div>
     <div v-if="!currentUser" class="login-regist">
@@ -12,14 +12,29 @@
       Xin chào {{ this.handleUser() }}
       <button @click="logout">| Đăng xuất</button>
     </div>
-
-    <div v-if="isClicked" class="menu-container">
+    <img
+      v-if="currentUser"
+      class="mr-5"
+      style="width: 30px; height: 30px"
+      src="@/assets/icn_bell.png"
+      v-on:click="isNoti = !isNoti"
+    />
+    <img
+      v-if="currentUser"
+      v-on:click="isProfileClicked = !isProfileClicked"
+      style="border-radius: 50px"
+      class="mr-5"
+      src="@/assets/ic_ava1.png"
+      alt=""
+    />
+    <div v-if="isMenuClicked" class="menu-container">
       <div>
         <img src="@/assets/ic_new6.png" alt="" /><span>Nhà tuyển dụng</span>
       </div>
       <div><img src="@/assets/ic_new5.png" alt="" /><span>Ứng viên</span></div>
       <div>
-        <img src="@/assets/icon_vlquanhday.png" alt="" /><span @click="searchCandidate"
+        <img src="@/assets/icon_vlquanhday.png" alt="" /><span
+          @click="searchCandidate"
           >Tìm ứng viên</span
         >
       </div>
@@ -39,6 +54,18 @@
         >
       </div>
     </div>
+
+    <div v-if="isProfileClicked" class="profile-container">
+      <div class="profile" @click="profile">
+        <img src="@/assets/ic_new5.png" alt="" /><span>Quản lý hồ sơ</span>
+      </div>
+    </div>
+
+    <div v-if="isNoti" class="profile-container">
+      <div class="noti">
+        <span>Bạn đã trượt phỏng vấn</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -48,7 +75,9 @@ export default {
   name: "HeaderComponent",
   data() {
     return {
-      isClicked: false,
+      isMenuClicked: false,
+      isProfileClicked: false,
+      isNoti: false,
     };
   },
   methods: {
@@ -60,9 +89,18 @@ export default {
       const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
       return theLoggedUser.user.name;
     },
-    searchCandidate(){
+    searchCandidate() {
       this.$router.push("/searchCandidate");
-    }    
+    },
+    profile() {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      if (theLoggedUser.user.roles[0].id == 2) {
+        this.$router.push("/general-management");
+      }
+      if (theLoggedUser.user.roles[0].id == 3) {
+        this.$router.push("/recruiterManagement");
+      }
+    },
   },
   computed: {
     currentUser() {
@@ -94,12 +132,35 @@ export default {
   position: absolute;
   width: 210px;
   height: 200px;
-  right: 50px;
+  right: 100px;
   top: 52px;
   background: #ffffff;
   box-shadow: 0px 2px 19px rgba(51, 51, 51, 0.5);
   border-radius: 10px;
   color: #4c5bd4;
+}
+
+.profile-container {
+  background: #ffffff;
+  color: #4c5bd4;
+  width: 210px;
+  height: 60px;
+  top: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 15px 15px;
+  position: absolute;
+  box-shadow: 0px 2px 19px rgba(51, 51, 51, 0.5);
+  border-radius: 10px;
+}
+
+.profile :hover{
+  cursor: pointer;
+}
+
+.noti :hover{
+  cursor: pointer;
 }
 
 .menu-container svg {

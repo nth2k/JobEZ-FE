@@ -49,7 +49,7 @@
           <div class="row">
             <div class="col-10">
               <div class="row">
-                <div @click="updateAwards" ref="awards" class="col-10">
+                <div @keyup="updateAwards" ref="awards" class="col-10">
                   <div contenteditable="true" class="custom-outline">
                     {{ getCV.awards }}
                   </div>

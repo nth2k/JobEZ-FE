@@ -75,7 +75,8 @@ export const routes = [
   {
     path: "/job-detail/:postingId",
     name: "JobDetailsNoLogin",
-    component: () => import("@/components/ToanComponents/JobDetailsNoLogin.vue"),
+    component: () =>
+      import("@/components/ToanComponents/JobDetailsNoLogin.vue"),
   },
   {
     path: "/recruiter-detail/:name",
@@ -145,7 +146,6 @@ export const routes = [
   {
     path: '/adddegree',
     name: 'AddDegree',
-    // component: AddDegree
     component: () => import("@/views/TuanNV/AddDegree.vue"),
   }, {
     path: '/degree',
