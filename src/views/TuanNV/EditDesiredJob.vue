@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
@@ -11,17 +11,11 @@
         </div>
         <div class="right col-9">
           <div class="titleheader">Công việc mong muốn</div>
-          <div class="container ml-3">
+          <div class="container">
             <v-form ref="form">
-              <div class="row block2">
+              <div class="row">
                 <div class="col-5">
                   <span class="label">Công việc<span class="text-danger">*</span></span>
-                  <!-- <input
-                      type="text"
-                      class="form-control mb-3"
-                      id="inputJob"
-                      placeholder="Công việc mong muốn"
-                    /> -->
                   <v-textarea
                     label="Công việc mong muốn"
                     v-model="desiredJob"
@@ -33,37 +27,15 @@
                     required
                     background-color="white"
                   ></v-textarea>
-
-                  <span class="label">Địa Điểm<span class="text-danger">*</span></span>
-                  <!-- <select name="married" id="place" class="form-control mb-3">
-                      <option value="-1">Chọn từ 1 -3 tinh thành</option>
-                      <option value="1">Hà Nội</option>
-                      <option value="2">TP. Hồ Chí Minh</option>
-                    </select> -->
-                  <v-textarea
-                    label="Chọn từ 1 -3 tinh thành, ngăn cách bởi dấu ';'"
-                    v-model="place"
-                    outlined
-                    filled
-                    no-resize
-                    rows="1"
-                    :rules="placeRules"
-                    required
-                    background-color="white"
-                  ></v-textarea>
                   <span class="label">Hình thức<span class="text-danger">*</span></span>
-                  <!-- <select name="married" id="hinhthuc" class="form-control mb-3">
-                      <option value="-1">Chọn hình thức</option>
-                      <option value="1">Online</option>
-                      <option value="2">Offline</option>
-                    </select> -->
                   <v-select
+                    v-model="workingForm_id"
                     :items="listWorkingForm"
-                    label="Chọn hình thức làm việc"
-                    outlined
                     :rules="workingFormRules"
-                    v-model="workingForm"
-                    required
+                    label="Chọn hình thức làm việc"
+                    item-text="name"
+                    item-value="id"
+                    outlined
                   ></v-select>
                 </div>
                 <div class="col-2"></div>
@@ -72,60 +44,64 @@
                     >Cấp bậc mong muốn<span class="text-danger">*</span></span
                   >
                   <v-select
+                    v-model="rank_id"
                     :items="listRank"
-                    label="Chọn cấp bậc mong muốn"
-                    outlined
                     :rules="rankNameRules"
-                    v-model="rankName"
-                    required
-                  ></v-select>
-                  <span class="label">Mức lương<span class="text-danger">*</span></span>
-                  <!-- <select name="married" id="salary" class="form-control mb-3">
-                      <option value="-1">Chọn mức lương</option>
-                      <option value="1">10tr</option>
-                      <option value="2">20tr</option>
-                    </select> -->
-                  <v-select
-                    :items="listSalary"
-                    label="Chọn mức lương"
+                    label="Chọn cấp bậc mong muốn"
+                    item-text="name"
+                    item-value="id"
                     outlined
-                    :rules="salaryRules"
-                    v-model="salary"
-                    required
                   ></v-select>
                   <span class="label">Kinh nghiệm<span class="text-danger">*</span></span>
                   <v-select
+                    outlined
+                    v-model="experience_id"
                     :items="listexp"
                     label="Chọn kinh nghiệm"
-                    outlined
+                    item-text="name"
+                    item-value="id"
                     :rules="experienceRules"
-                    v-model="experience"
-                    required
                   ></v-select>
                 </div>
               </div>
               <div class="row">
                 <div class="col-12">
-                  <span class="label">Ngành nghề<span class="text-danger">*</span></span>
-                  <!-- <select name="married" id="exp" class="form-control mb-3">
-                      <option value="-1">Chọn ngành nghề</option>
-                      <option value="1">IT</option>
-                      <option value="2">AI</option>
-                    </select> -->
+                  <span class="label">Mức lương<span class="text-danger">*</span></span>
                   <v-select
-                    :items="listMajor"
-                    label="Chọn ngành nghề"
+                    v-model="salary_id"
+                    :items="listSalary"
+                    :rules="salaryRules"
+                    label="Chọn mức lương"
+                    item-text="name"
+                    item-value="id"
                     outlined
-                    :rules="majorRules"
-                    v-model="major"
-                    required
                   ></v-select>
                 </div>
               </div>
               <div class="row">
-                <div class="d-flex col-12 justify-content-end">
-                  <button class="btn btn-primary px-5">Luu</button>
-                  <!-- <button class="btn btn-secondary px-3 ms-1">Khong luu</button> -->
+                <div class="col-12">
+                  <span class="label">Địa Điểm<span class="text-danger">*</span></span>
+                  <div>
+                    <multiselect
+                      v-model="place"
+                      tag-placeholder="Chọn 1 - 3 địa điểm"
+                      placeholder="Chọn 1 - 3 địa điểm"
+                      label="name"
+                      track-by="id"
+                      :options="listPlace"
+                      :multiple="true"
+                      :taggable="true"
+                      @tag="addTag"
+                    >
+                    </multiselect>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="d-flex col-12 text-center">
+                  <button class="btn btn-primary px-5" @click.prevent="saveDesiredJob">
+                    Luu
+                  </button>
                 </div>
               </div>
             </v-form>
@@ -136,67 +112,107 @@
   </div>
 </template>
 <script>
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
+import Multiselect from "vue-multiselect";
+import ProvinceDistrictService from "@/services/ProvinceDistrictService";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
+import DesiredJobService from "@/services/DesiredJobService.js";
 export default {
   name: "EditDesiredJob",
   components: {
-    SlideBar_candidate,
     Header,
     Profile_menu,
+    Multiselect,
+    Navigator,
   },
   data() {
     return {
+      userId: this.$route.params.userId,
+      desiredJob_id: "",
       desiredJob: "",
       desiredJobRules: [(v) => !!v || "Tên công việc mong muốn không được để trống"],
-      place: "",
+      place: [],
       placeRules: [(v) => !!v || "Tên địa điểm không được để trống"],
-      workingForm: "",
+      listPlace: [],
+      workingForm_id: "",
       workingFormRules: [(v) => !!v || "Vui lòng chọn hình thức làm việc"],
-      listWorkingForm: ["Online", "Offline"],
-      rankName: "",
+      listWorkingForm: [],
+      rank_id: "",
       rankNameRules: [(v) => !!v || "Vui lòng chọn cấp bậc mong muốn"],
-      listRank: ["Mới Tốt nghiệp", "Thực tập sinh", "Trưởng phòng", "Giám đốc"],
-      salary: "",
+      listRank: [],
+      salary_id: "",
       salaryRules: [(v) => !!v || "Vui lòng chọn mức lương"],
-      listSalary: [
-        "5.000.000VNĐ - 10.000.000VNĐ",
-        "10.000.000VNĐ - 15.000.000VNĐ",
-        "15.000.000VNĐ - 20.000.000VNĐ",
-        "trên 20trVNĐ",
-      ],
-      experience: "",
+      listSalary: [],
+      experience_id: "",
       experienceRules: [(v) => !!v || "Vui lòng chọn kinh nghiệm"],
-      listexp: [
-        "Chưa có kinh nghiệm",
-        "0 - 1 năm",
-        "1 - 2 năm",
-        "2 - 5 năm",
-        "5 - 10 năm",
-        "trên 10 năm",
-      ],
-      major: "",
-      majorRules: [(v) => !!v || "Vui lòng chọn ngành nghề"],
-      listMajor: [
-        "IT phần mềm",
-        "IT phần cứng - mạng",
-        "Project manager",
-        "An toàn thông tin",
-      ],
+      listexp: [],
     };
+  },
+  methods: {
+    addTag(newTag) {
+      const tag = {
+        name: newTag,
+        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000),
+      };
+      this.options.push(tag);
+      this.value.push(tag);
+    },
+    getData() {
+      ProvinceDistrictService.getAllProvince().then((rs) => {
+        this.listPlace = rs.data.provinces;
+        this.listSalary = rs.data.salaries;
+        this.listexp = rs.data.yearOfExperiences;
+        this.listRank = rs.data.ranks;
+        this.listWorkingForm = rs.data.workingForms;
+      });
+      DesiredJobService.getDesiredJobByUserId(this.userId).then((rs) => {
+        this.desiredJob_id = rs.data.id;
+        this.desiredJob = rs.data.jobName;
+        this.workingForm_id = rs.data.workingFormId;
+        this.experience_id = rs.data.yearOfExpId;
+        this.rank_id = rs.data.rankId;
+        this.salary_id = rs.data.salaryId;
+        this.place = rs.data.address;
+      });
+    },
+    saveDesiredJob() {
+      DesiredJobService.updateDesiredJob({
+        rankId: this.rank_id,
+        WorkingFormId: this.workingForm_id,
+        yearOfExperienceId: this.experience_id,
+        salaryId: this.salary_id,
+        addresssId: this.place.map((rs) => rs.id),
+        desiredJobName: this.desiredJob,
+        desiredId: this.desiredJob_id,
+        postingCategoryId: 1,
+      });
+      // console.log({
+      //   rankId: this.rank_id,
+      //   WorkingFormId: this.workingForm_id,
+      //   yearOfExperienceId: this.experience_id,
+      //   salaryId: this.salary_id,
+      //   addresssId: this.place.map((rs) => rs.id),
+      //   desiredJobName: this.desiredJob,
+      //   desiredId: this.desiredJob_id,
+      //   postingCategoryId: 1,
+      // });
+    },
+  },
+  created() {
+    this.getData();
   },
 };
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 .body {
   border: 1px solid blue;
   border-radius: 5px;
   box-shadow: 5px 5px lightgray;
 }
-.star {
-  color: red;
+select {
+  font-size: 14px;
 }
 .titleright {
   float: right;
@@ -220,10 +236,17 @@ export default {
   font-size: 20px;
   font-weight: bold;
 }
-.col-12 {
-  margin: 0;
-  padding: 0;
+.multiselect {
+  border: 1px solid gray;
+  border-radius: 5px;
+  /* font-size: 16px;  */
+  /* margin-left: 12px; */
 }
+.col-12 {
+  padding: 0;
+  margin-left: 12px;
+}
+
 .label {
   font-size: 15px;
 }

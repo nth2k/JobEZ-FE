@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
@@ -10,9 +10,15 @@
           <Profile_menu />
         </div>
         <div class="blockright col-9">
-          <div class="titleRight">Học vấn - bằng cấp</div>
+          <div class="titleRight">Học vấn - Bằng cấp</div>
           <div class="container">
-            <div v-if="!listDegree.length">Bạn chưa có bằng cấp học vấn</div>
+            <div v-if="!isListDegree" style="margin-bottom: 20px">
+              Bạn chưa có bằng cấp học vấn
+              <div class="mb-3">
+                <button class="btnAdd py-1 px-3" @click="addDegree">+ Thêm</button>
+              </div>
+            </div>
+
             <div class="block" v-for="degree in listDegree" v-bind:key="degree.id">
               <span id="show" @click="showDetail">
                 <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i
@@ -72,21 +78,7 @@
                       </svg>
                       Sửa</span
                     >
-                    <span class="dropdown-item remove" @click="deleteDegree(degree.id)"
-                      ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-trash3"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
-                        />
-                      </svg>
-                      Xóa</span
-                    >
+                    <DeleteDegreeModal :id="degree.id" :userId="degree.userId" />
                   </div>
                 </span>
               </div>
@@ -113,26 +105,28 @@
 </template>
 
 <script>
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import DegreeService from "@/services/DegreeService";
+import DeleteDegreeModal from "./modal/DeleteDegreeModal.vue";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
 export default {
   name: "ViewDegree",
   components: {
-    SlideBar_candidate,
     Header,
     Profile_menu,
+    DeleteDegreeModal,
+    Navigator,
   },
   data() {
     return {
       userId: "",
       listDegree: [],
+      isListDegree: false,
     };
   },
   methods: {
     showDetail(e) {
-      // console.log(e.target.nextElementSibling);
       const detail = e.target.nextElementSibling.nextElementSibling;
       const icon = e.target.firstChild;
       if (detail.style.display == "none") {
@@ -148,45 +142,23 @@ export default {
       this.userId = theLoggedUser.user.id;
       DegreeService.getAllDegrees(this.userId).then((rs) => {
         this.listDegree = rs.data;
+        if (rs.data) {
+          this.isListDegree = true;
+        } else {
+          this.isListDegree = false;
+        }
       });
     },
     countYear(date1, date2) {
-      var year1 = date1.substring(0, 4); // get only two digits
-      var month1 = date1.substring(5, 7);
-      var day1 = date1.substring(8, 10);
-      date1 = day1 + "/" + month1 + "/" + year1;
-      var year2 = date2.substring(0, 4); // get only two digits
-      var month2 = date2.substring(5, 7);
-      var day2 = date2.substring(8, 10);
-      date2 = day2 + "/" + month2 + "/" + year2;
-      if (year2 - year1 == 0) {
-        return (
-          date1 + " - " + date2 + "(" + (parseInt(month2) - parseInt(month1) + " tháng)")
-        );
-      } else if (month2 - month1 == 0) {
-        return date1 + " - " + date2 + "(" + (parseInt(day2) - parseInt(day1) + " ngày)");
-      } else
-        return (
-          date1 + " - " + date2 + "(" + (parseInt(year2) - parseInt(year1) + " năm)")
-        );
+      date1 = this.formatDate(date1);
+      date2 = this.formatDate(date2);
+      return date1 + " - " + date2;
     },
-    deleteDegree(id) {
-      let textConfirm = "Nhấn OK để xóa bằng cấp của bạn";
-      if (confirm(textConfirm) == true) {
-        DegreeService.deleteDegree(id, this.userId)
-          .then(() => {
-            this.$store.dispatch("setSnackbar", {
-              text: "Xóa thành công",
-            });
-            location.reload();
-          })
-          .catch(() => {
-            this.$store.dispatch("setSnackbar", {
-              color: "error",
-              text: "Có lỗi xảy ra! Vui lòng thử lại",
-            });
-          });
-      }
+    formatDate(date) {
+      var year = date.substring(0, 4);
+      var month = date.substring(5, 7);
+      var day = date.substring(8, 10);
+      return day + "/" + month + "/" + year;
     },
     addDegree() {
       this.$router.push({
@@ -234,6 +206,12 @@ export default {
   width: 150px;
   color: #2a3563;
   font-weight: bold;
+}
+.btnAdd {
+  background-color: #eceefa;
+  color: #333333;
+  border: 1px solid lightgray;
+  border-radius: 5px;
 }
 .blockright {
   border-left: 1px solid gray;

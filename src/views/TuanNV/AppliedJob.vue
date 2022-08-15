@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
@@ -12,7 +12,7 @@
             <thead>
               <tr>
                 <th>&nbsp;</th>
-                <th>Công ty</th>
+                <th>Công việc</th>
                 <th>Vị trí công việc</th>
                 <th>Hạn nộp</th>
                 <th>Ngày nộp</th>
@@ -21,7 +21,7 @@
               </tr>
             </thead>
             <tbody>
-              <div v-if="!listAppliedJob.length" class="text-center">
+              <div v-if="!isListAppliedJob" class="text-center">
                 Bạn chưa ứng tuyển công việc nào
               </div>
               <tr
@@ -61,30 +61,11 @@
                   <span>{{ appliedjob.commentFromEmployer }}</span>
                 </td>
                 <td>
-                  <button
-                    class="btn btn-danger btnDelete"
-                    @click="
-                      deleteAppliedJob(appliedjob.postingId, appliedjob.recruiterId)
-                    "
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-trash"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                      />
-                      <path
-                        fill-rule="evenodd"
-                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                      />
-                    </svg>
-                    Xóa
-                  </button>
+                  <DeleteAppliedJobModal
+                    :postingId="appliedjob.postingId"
+                    :userId="appliedjob.userId"
+                    :recruiterId="appliedjob.recruiterId"
+                  />
                 </td>
               </tr>
             </tbody>
@@ -103,50 +84,34 @@
 </template>
 
 <script>
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import AppliedJobService from "@/services/AppliedJobService.js";
+import DeleteAppliedJobModal from "./modal/DeleteAppliedJobModal.vue";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
 export default {
   name: "AppliedJob",
   components: {
-    SlideBar_candidate,
     Header,
+    DeleteAppliedJobModal,
+    Navigator,
   },
   data() {
     return {
       userId: "",
       listAppliedJob: [],
+      isListAppliedJob: false,
     };
   },
   methods: {
     getAppliedJobs() {
-      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
-      this.userId = theLoggedUser.user.id;
       AppliedJobService.getAppliedJobs(this.userId).then((res) => {
         this.listAppliedJob = res.data;
+        if (res.data) {
+          this.isListAppliedJob = true;
+        } else {
+          this.isListAppliedJob = false;
+        }
       });
-    },
-    deleteAppliedJob(postingId, recruiterId) {
-      let textConfirm = "Press Ok to delete your applied job.";
-      if (confirm(textConfirm) == true) {
-        AppliedJobService.deleteAppliedJob({
-          candidate_id: this.userId,
-          recruiter_id: recruiterId,
-          posting_id: postingId,
-        })
-          .then(() => {
-            this.$store.dispatch("setSnackbar", {
-              text: "Xóa thành công",
-            });
-            location.reload();
-          })
-          .catch(() => {
-            this.$store.dispatch("setSnackbar", {
-              color: "error",
-              text: "Xóa không thành công",
-            });
-          });
-      }
     },
     countDaysDeadlineForSubmission(date) {
       var datesplit = date.split("/");
@@ -185,6 +150,8 @@ export default {
     },
   },
   created() {
+    const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+    this.userId = theLoggedUser.user.id;
     this.getAppliedJobs();
   },
 };

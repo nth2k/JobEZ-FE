@@ -1,16 +1,16 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
         <div class="leftHoso">
           <Profile_menu />
         </div>
         <div class="blockright col-9">
-          <div class="titleRight">Ngoại ngữ- Tin học</div>
+          <div class="titleRight">Ngoại ngữ - Tin học</div>
 
           <div class="container">
             <v-form ref="form">
@@ -27,6 +27,7 @@
                     <v-select
                       :items="language"
                       label="Chọn ngôn ngữ"
+                      outlined
                       :rules="languageNameRules"
                       required
                       v-model="languageName"
@@ -86,16 +87,16 @@
 </template>
 
 <script>
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import LanguageCertificateService from "@/services/LanguageCertificateService";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
 export default {
   name: "EditLanguageCertificate",
   components: {
-    SlideBar_candidate,
     Header,
     Profile_menu,
+    Navigator,
   },
   data() {
     return {
@@ -136,9 +137,19 @@ export default {
           name: this.languageName,
           mark: this.grade,
           userId: this.userId,
-        });
-        alert("Cập nhật thành công");
-        window.location = "/language";
+        })
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Cập nhật thành công",
+            });
+            this.$router.push("/language");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Chứng chỉ đã tồn tại",
+            });
+          });
       }
     },
   },
@@ -163,11 +174,11 @@ export default {
   box-shadow: 5px 5px lightgray;
 }
 .titleRight {
-  margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 15px;
+  padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 150px;
+  width: 155px;
   color: #2a3563;
   font-weight: bold;
 }

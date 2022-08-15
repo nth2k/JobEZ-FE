@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
@@ -54,10 +54,22 @@
             <div class="row">
               <div class="col-3">
                 <img
+                  id="myImg"
+                  v-if="contactInfo.imageBase64 == null"
+                  src="@/assets/no_avatar.jpg"
+                  alt="avatar"
+                />
+                <img
+                  id="myImg1"
+                  v-if="contactInfo.imageBase64 != null"
+                  :src="contactInfo.imageBase64"
+                  alt="avatar"
+                />
+                <!-- <img
                   class="img-avatar"
                   src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                   alt=""
-                />
+                /> -->
               </div>
               <div class="col-5">
                 <div class="data">
@@ -109,12 +121,12 @@
 
 <script>
 import ContactInfoService from "@/services/ContactInfoService.js";
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
 export default {
   name: "ContactInfo",
-  components: { SlideBar_candidate, Profile_menu, Header },
+  components: { Profile_menu, Header, Navigator },
   data() {
     return {
       contactInfo: "",
@@ -154,7 +166,7 @@ export default {
   font-size: 16px;
   font-weight: bold;
 }
-.img-avatar {
+img {
   width: 65%;
   border-radius: 50%;
 }
