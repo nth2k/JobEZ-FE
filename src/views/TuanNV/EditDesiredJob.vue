@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
@@ -27,15 +27,15 @@
                     required
                     background-color="white"
                   ></v-textarea>
-
                   <span class="label">Hình thức<span class="text-danger">*</span></span>
                   <v-select
+                    v-model="workingForm_id"
                     :items="listWorkingForm"
-                    label="Chọn hình thức làm việc"
-                    outlined
                     :rules="workingFormRules"
-                    v-model="workingForm"
-                    required
+                    label="Chọn hình thức làm việc"
+                    item-text="name"
+                    item-value="id"
+                    outlined
                   ></v-select>
                 </div>
                 <div class="col-2"></div>
@@ -44,22 +44,23 @@
                     >Cấp bậc mong muốn<span class="text-danger">*</span></span
                   >
                   <v-select
+                    v-model="rank_id"
                     :items="listRank"
-                    label="Chọn cấp bậc mong muốn"
-                    outlined
                     :rules="rankNameRules"
-                    v-model="rankName"
-                    required
+                    label="Chọn cấp bậc mong muốn"
+                    item-text="name"
+                    item-value="id"
+                    outlined
                   ></v-select>
-
                   <span class="label">Kinh nghiệm<span class="text-danger">*</span></span>
                   <v-select
+                    outlined
+                    v-model="experience_id"
                     :items="listexp"
                     label="Chọn kinh nghiệm"
-                    outlined
+                    item-text="name"
+                    item-value="id"
                     :rules="experienceRules"
-                    v-model="experience"
-                    required
                   ></v-select>
                 </div>
               </div>
@@ -67,29 +68,16 @@
                 <div class="col-12">
                   <span class="label">Mức lương<span class="text-danger">*</span></span>
                   <v-select
+                    v-model="salary_id"
                     :items="listSalary"
-                    label="Chọn mức lương"
-                    outlined
                     :rules="salaryRules"
-                    v-model="salary"
-                    required
+                    label="Chọn mức lương"
+                    item-text="name"
+                    item-value="id"
+                    outlined
                   ></v-select>
                 </div>
               </div>
-              <!-- <div>
-                <multiselect
-                  v-model="major"
-                  tag-placeholder="Add this as new tag"
-                  placeholder="Search or add a tag"
-                  label="name"
-                  track-by="id"
-                  options="listMajor"
-                  :multiple="true"
-                  :taggable="true"
-                  @tag="addTag"
-                >
-                </multiselect>
-              </div> -->
               <div class="row">
                 <div class="col-12">
                   <span class="label">Địa Điểm<span class="text-danger">*</span></span>
@@ -109,34 +97,11 @@
                   </div>
                 </div>
               </div>
-
-              <div class="row" style="margin-top: 40px">
-                <div class="col-12">
-                  <span class="label">Ngành nghề<span class="text-danger">*</span></span>
-                  <div>
-                    <v-select
-                      :items="listSalary"
-                      label="Chọn ngành nghề"
-                      outlined
-                      :rules="salaryRules"
-                      v-model="salary"
-                      required
-                    ></v-select>
-                    <!-- <multiselect
-                      v-model="major"
-                      tag-placeholder="Chọn ngành nghề"
-                      placeholder="Chọn ngành nghề"
-                      :options="listMajor"
-                      :multiple="true"
-                      :taggable="true"
-                      @tag="addTag"
-                    ></multiselect> -->
-                  </div>
-                </div>
-              </div>
               <div class="row">
-                <div class="d-flex col-12 justify-content-end">
-                  <button class="btn btn-primary px-5">Luu</button>
+                <div class="d-flex col-12 text-center">
+                  <button class="btn btn-primary px-5" @click.prevent="saveDesiredJob">
+                    Luu
+                  </button>
                 </div>
               </div>
             </v-form>
@@ -147,137 +112,41 @@
   </div>
 </template>
 <script>
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import Multiselect from "vue-multiselect";
 import ProvinceDistrictService from "@/services/ProvinceDistrictService";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
+import DesiredJobService from "@/services/DesiredJobService.js";
 export default {
   name: "EditDesiredJob",
   components: {
-    SlideBar_candidate,
     Header,
     Profile_menu,
     Multiselect,
+    Navigator,
   },
   data() {
     return {
+      userId: this.$route.params.userId,
+      desiredJob_id: "",
       desiredJob: "",
       desiredJobRules: [(v) => !!v || "Tên công việc mong muốn không được để trống"],
       place: [],
       placeRules: [(v) => !!v || "Tên địa điểm không được để trống"],
-      listPlace: [
-        // "Thành phố Hà Nội",
-        // "Tỉnh Hà Giang",
-        // "Tỉnh Tuyên Quang",
-        // "Tỉnh Điện Biên",
-      ],
-      // listPlace: [
-      //   { id: 1, name: "Thành phố Hà Nội" },
-      //   { id: 2, name: "Tỉnh Hà Giang" },
-      //   { id: 3, name: "Tỉnh Cao Bằng" },
-      //   { id: 4, name: "Tỉnh Bắc Kạn" },
-      //   { id: 5, name: "Tỉnh Tuyên Quang" },
-      //   { id: 6, name: "Tỉnh Lào Cai" },
-      //   { id: 7, name: "Tỉnh Điện Biên" },
-      //   { id: 8, name: "Tỉnh Lai Châu" },
-      //   { id: 9, name: "Tỉnh Sơn La" },
-      //   { id: 10, name: "Tỉnh Yên Bái" },
-      //   { id: 11, name: "Tỉnh Hoà Bình" },
-      //   { id: 12, name: "Tỉnh Thái Nguyên" },
-      //   { id: 13, name: "Tỉnh Lạng Sơn" },
-      //   { id: 14, name: "Tỉnh Quảng Ninh" },
-      //   { id: 15, name: "Tỉnh Bắc Giang" },
-      //   { id: 16, name: "Tỉnh Phú Thọ" },
-      //   { id: 17, name: "Tỉnh Vĩnh Phúc" },
-      //   { id: 18, name: "Tỉnh Bắc Ninh" },
-      //   { id: 19, name: "Tỉnh Hải Dương" },
-      //   { id: 20, name: "Thành phố Hải Phòng" },
-      //   { id: 21, name: "Tỉnh Hưng Yên" },
-      //   { id: 22, name: "Tỉnh Thái Bình" },
-      //   { id: 23, name: "Tỉnh Hà Nam" },
-      //   { id: 24, name: "Tỉnh Nam Định" },
-      //   { id: 25, name: "Tỉnh Ninh Bình" },
-      //   { id: 26, name: "Tỉnh Thanh Hóa" },
-      //   { id: 27, name: "Tỉnh Nghệ An" },
-      //   { id: 28, name: "Tỉnh Hà Tĩnh" },
-      //   { id: 29, name: "Tỉnh Quảng Bình" },
-      //   { id: 30, name: "Tỉnh Quảng Trị" },
-      //   { id: 31, name: "Tỉnh Thừa Thiên Huế" },
-      //   { id: 32, name: "Thành phố Đà Nẵng" },
-      //   { id: 33, name: "Tỉnh Quảng Nam" },
-      //   { id: 34, name: "Tỉnh Quảng Ngãi" },
-      //   { id: 35, name: "Tỉnh Bình Định" },
-      //   { id: 36, name: "Tỉnh Phú Yên" },
-      //   { id: 37, name: "Tỉnh Khánh Hòa" },
-      //   { id: 38, name: "Tỉnh Ninh Thuận" },
-      //   { id: 39, name: "Tỉnh Bình Thuận" },
-      //   { id: 40, name: "Tỉnh Kon Tum" },
-      //   { id: 41, name: "Tỉnh Gia Lai" },
-      //   { id: 42, name: "Tỉnh Đắk Lắk" },
-      //   { id: 43, name: "Tỉnh Đắk Nông" },
-      //   { id: 44, name: "Tỉnh Lâm Đồng" },
-      //   { id: 45, name: "Tỉnh Bình Phước" },
-      //   { id: 46, name: "Tỉnh Tây Ninh" },
-      //   { id: 47, name: "Tỉnh Bình Dương" },
-      //   { id: 48, name: "Tỉnh Đồng Nai" },
-      //   { id: 49, name: "Tỉnh Bà Rịa - Vũng Tàu" },
-      //   { id: 50, name: "Thành phố Hồ Chí Minh" },
-      //   { id: 51, name: "Tỉnh Long An" },
-      //   { id: 52, name: "Tỉnh Tiền Giang" },
-      //   { id: 53, name: "Tỉnh Bến Tre" },
-      //   { id: 54, name: "Tỉnh Trà Vinh" },
-      //   { id: 55, name: "Tỉnh Vĩnh Long" },
-      //   { id: 56, name: "Tỉnh Đồng Tháp" },
-      //   { id: 57, name: "Tỉnh An Giang" },
-      //   { id: 58, name: "Tỉnh Kiên Giang" },
-      //   { id: 59, name: "Thành phố Cần Thơ" },
-      //   { id: 60, name: "Tỉnh Hậu Giang" },
-      //   { id: 61, name: "Tỉnh Sóc Trăng" },
-      //   { id: 62, name: "Tỉnh Bạc Liêu" },
-      //   { id: 63, name: "Tỉnh Cà Mau" },
-      // ],
-      workingForm: "",
+      listPlace: [],
+      workingForm_id: "",
       workingFormRules: [(v) => !!v || "Vui lòng chọn hình thức làm việc"],
-      listWorkingForm: ["Online", "Offline"],
-      rankName: "",
+      listWorkingForm: [],
+      rank_id: "",
       rankNameRules: [(v) => !!v || "Vui lòng chọn cấp bậc mong muốn"],
-      listRank: ["Mới Tốt nghiệp", "Thực tập sinh", "Trưởng phòng", "Giám đốc"],
-      salary: "",
+      listRank: [],
+      salary_id: "",
       salaryRules: [(v) => !!v || "Vui lòng chọn mức lương"],
-      listSalary: [
-        "5.000.000VNĐ - 10.000.000VNĐ",
-        "10.000.000VNĐ - 15.000.000VNĐ",
-        "15.000.000VNĐ - 20.000.000VNĐ",
-        "trên 20trVNĐ",
-      ],
-      experience: "",
+      listSalary: [],
+      experience_id: "",
       experienceRules: [(v) => !!v || "Vui lòng chọn kinh nghiệm"],
-      listexp: [
-        // "Chưa có kinh nghiệm",
-        // "0 - 1 năm",
-        // "1 - 2 năm",
-        // "2 - 5 năm",
-        // "5 - 10 năm",
-        // "trên 10 năm",
-      ],
-      major: [],
-      majorRules: [(v) => !!v || "Vui lòng chọn ngành nghề"],
-      listMajor: [
-        "IT phần mềm",
-        "IT phần cứng - mạng",
-        "Project manager",
-        "An toàn thông tin",
-      ],
-
-      // value: [
-      //   { name: 'Javascript', code: 'js' }
-      // ],
-      // options: [
-      //   { name: 'Vue.js', code: 'vu' },
-      //   { name: 'Javascript', code: 'js' },
-      //   { name: 'Open Source', code: 'os' }
-      // ]
+      listexp: [],
     };
   },
   methods: {
@@ -289,14 +158,49 @@ export default {
       this.options.push(tag);
       this.value.push(tag);
     },
-    getProvince() {
+    getData() {
       ProvinceDistrictService.getAllProvince().then((rs) => {
-        this.listPlace = rs.data;
+        this.listPlace = rs.data.provinces;
+        this.listSalary = rs.data.salaries;
+        this.listexp = rs.data.yearOfExperiences;
+        this.listRank = rs.data.ranks;
+        this.listWorkingForm = rs.data.workingForms;
       });
+      DesiredJobService.getDesiredJobByUserId(this.userId).then((rs) => {
+        this.desiredJob_id = rs.data.id;
+        this.desiredJob = rs.data.jobName;
+        this.workingForm_id = rs.data.workingFormId;
+        this.experience_id = rs.data.yearOfExpId;
+        this.rank_id = rs.data.rankId;
+        this.salary_id = rs.data.salaryId;
+        this.place = rs.data.address;
+      });
+    },
+    saveDesiredJob() {
+      DesiredJobService.updateDesiredJob({
+        rankId: this.rank_id,
+        WorkingFormId: this.workingForm_id,
+        yearOfExperienceId: this.experience_id,
+        salaryId: this.salary_id,
+        addresssId: this.place.map((rs) => rs.id),
+        desiredJobName: this.desiredJob,
+        desiredId: this.desiredJob_id,
+        postingCategoryId: 1,
+      });
+      // console.log({
+      //   rankId: this.rank_id,
+      //   WorkingFormId: this.workingForm_id,
+      //   yearOfExperienceId: this.experience_id,
+      //   salaryId: this.salary_id,
+      //   addresssId: this.place.map((rs) => rs.id),
+      //   desiredJobName: this.desiredJob,
+      //   desiredId: this.desiredJob_id,
+      //   postingCategoryId: 1,
+      // });
     },
   },
   created() {
-    this.getProvince();
+    this.getData();
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
@@ -41,15 +41,15 @@
 
 <script>
 import profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
 import CareerGoalService from "@/services/CareerGoalService";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
 export default {
   name: "CareerGoal",
   components: {
     profile_menu,
-    SlideBar_candidate,
     Header,
+    Navigator,
   },
   data() {
     return {

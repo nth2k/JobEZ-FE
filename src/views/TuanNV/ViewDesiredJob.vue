@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
@@ -14,7 +14,7 @@
           <div class="container">
             <div class="label">
               <span class="label-title">Công việc: </span
-              ><span>{{ desiredjob.major }}</span>
+              ><span>{{ desiredjob.jobName }}</span>
               <span v-if="!isNull"></span>
               <div style="padding: 0; float: right">
                 <span class="icon_tt">
@@ -33,7 +33,7 @@
                     class="dropdown-menu dropdown-menu-right"
                     aria-labelledby="userDropdownMenuLink"
                   >
-                    <span class="dropdown-item"
+                    <span class="dropdown-item" @click="editDesiredJob"
                       ><svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -56,12 +56,11 @@
                 </span>
               </div>
             </div>
-            <div class="label">
+            <!-- <div class="label">
               <span class="label-title">Ngành nghề: </span>
-              <!-- <span class="careerItem">{{desiredjob.}}</span> -->
               <span class="careerItem">Công nghệ sinh học</span>
               <span class="careerItem">IT phần mềm</span>
-            </div>
+            </div> -->
             <div class="label">
               <span class="label-title">Cấp bậc mong muốn : </span
               ><span>{{ desiredjob.rank }}</span>
@@ -71,12 +70,19 @@
               ><span>{{ desiredjob.workingForm }}</span>
             </div>
             <div class="label">
-              <span class="label-title">Địa điểm : </span
-              ><span>Số 499 Ngọc Lân, Long biên Hà Nội</span>
+              <span class="label-title">Địa điểm : </span>
+              <span v-if="desiredjob.address != null">
+                <span
+                  class="careerItem"
+                  v-for="(address, index) in desiredjob.address"
+                  v-bind:key="index"
+                  >{{ address.name }}</span
+                >
+              </span>
             </div>
             <div class="label">
               <span class="label-title">Kinh nghiệm : </span
-              ><span>{{ desiredjob.yearOfExperience }}</span>
+              ><span>{{ desiredjob.yearOfExp }}</span>
             </div>
             <div class="label">
               <span class="label-title">Mức lương : </span
@@ -90,29 +96,35 @@
 </template>
 
 <script>
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import DesiredJobService from "@/services/DesiredJobService";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
 export default {
   name: "ViewDesiredJob",
   components: {
-    SlideBar_candidate,
     Header,
     Profile_menu,
+    Navigator,
   },
   data() {
     return {
       userId: "",
-      desiredjob: null,
+      desiredjob: "",
       isNull: false,
     };
   },
   methods: {
+    editDesiredJob() {
+      this.$router.push({
+        name: "EditDesiredJob",
+        params: { userId: this.userId },
+      });
+    },
     getDesiredJob() {
       DesiredJobService.getDesiredJobByUserId(this.userId).then((rs) => {
         this.desiredjob = rs.data;
-        console.log(this.desiredjob);
+        console.log(rs.data);
         if (rs.data) {
           this.isNull = true;
         } else {

@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
@@ -25,8 +25,6 @@
                     </div>
                   </div>
                   <div>
-                    <!-- <v-text-field class="mt-3" label="Nhập chức danh" outlined dense v-model="position"
-                      :rules="positionRules" required></v-text-field> -->
                     <v-textarea
                       label="Nhập chức danh"
                       v-model="position"
@@ -45,8 +43,6 @@
                     <span class="label">Công ty <span class="star">*</span></span>
                   </div>
                   <div>
-                    <!-- <v-text-field class="mt-3" label="Nhập tên công ty" outlined dense v-model="companyName"
-                      :rules="companyNameRules" required></v-text-field> -->
                     <v-textarea
                       label="Nhập tên công ty"
                       v-model="companyName"
@@ -68,8 +64,6 @@
                   </div>
                   <div class="d-flex justify-content-between">
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <!-- <v-text-field class="mt-3" label="Ngày bắt đầu" outlined dense v-model="startDate"
-                        :rules="startDateRules" required></v-text-field> -->
                       <v-textarea
                         label="Ngày bắt đầu"
                         v-model="startDate"
@@ -83,8 +77,6 @@
                       ></v-textarea>
                     </div>
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <!-- <v-text-field class="mt-3" label="Ngày kết thúc" outlined dense v-model="endDate"
-                        :rules="endDateRules" required value="asdasdasd"></v-text-field> -->
                       <v-textarea
                         label="Ngày kết thúc"
                         v-model="endDate"
@@ -115,15 +107,6 @@
                     outlined
                     required
                   ></v-textarea>
-                  <!-- <div class="form-group shadow-textarea">
-                    <v-textarea v-model="description"
-                      class="form-control z-depth-1"
-                      label="Mô tả công việc"
-                      rows="5"
-                      :rules="descriptionRules"
-                      required
-                      ></v-textarea>
-                  </div> -->
                   <div class="row">
                     <div class="col-12 text-center">
                       <button class="btn btn-primary btnSave" @click.prevent="addWorkExp">
@@ -142,16 +125,16 @@
 </template>
 
 <script>
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import WorkExperienceService from "@/services/WorkExperienceService.js";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
 export default {
   name: "AddWorkExperience",
   components: {
-    SlideBar_candidate,
     Header,
     Profile_menu,
+    Navigator,
   },
   data() {
     return {
