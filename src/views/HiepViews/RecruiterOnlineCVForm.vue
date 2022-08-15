@@ -6,9 +6,11 @@
       <v-form ref="form">
         <div class="row mt-5">
           <div class="col-3"></div>
-          <div class="col-3 left-form">
+          <div class="col-3 left-form">          
             <span>Logo công ty <span style="color: red">*</span></span
             ><br />
+            <img :src=base64 alt="" style="width: 150px; height: 100px;">
+            <br />
             <v-file-input v-model="image" label="Logo công ty"></v-file-input
             ><br />
             <span>Số điện thoại <span style="color: red">*</span></span
