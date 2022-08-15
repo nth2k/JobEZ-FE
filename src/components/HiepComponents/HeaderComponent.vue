@@ -56,7 +56,7 @@
     </div>
 
     <div v-if="isProfileClicked" class="profile-container">
-      <div class="profile" @click="profile">
+      <div class="profile w-100" @click="profile">
         <img src="@/assets/ic_new5.png" alt="" /><span>Quản lý hồ sơ</span>
       </div>
     </div>
@@ -70,7 +70,6 @@
 </template>
 
 <script>
-// import LoginService from "@/services/LoginService.js";
 export default {
   name: "HeaderComponent",
   data() {
@@ -155,8 +154,9 @@ export default {
   border-radius: 10px;
 }
 
-.profile :hover{
+.profile-container :hover{
   cursor: pointer;
+  background-color: rgb(225, 221, 221);
 }
 
 .noti :hover{

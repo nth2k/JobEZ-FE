@@ -28,7 +28,8 @@ export default {
   },
   async created() {
     const postingId = this.$route.params.postingId;
-    const userId = 1;
+    const token = JSON.parse(window.localStorage.getItem("user"));
+    const userId = token.user.id;
     await this.getJobById({ userId, postingId });
   },
   components: {
