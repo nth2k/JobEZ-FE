@@ -114,6 +114,8 @@ export default {
       const indexOf = this.projects.findIndex((pr) => pr.id == project.id);
       if (indexOf == -1) {
         this.projects.push(project);
+      } else {
+        this.projects[index] = project;
       }
 
       this.setParticipantProject({ participantProject: this.projects });

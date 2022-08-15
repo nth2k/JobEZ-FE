@@ -120,6 +120,8 @@ export default {
       const indexOf = this.activities.findIndex((ac) => ac.id == activity.id);
       if (indexOf == -1) {
         this.activities.push(activity);
+      } else {
+        this.activities[index] = activity;
       }
       this.setActivity({ activities: this.activities });
     },
