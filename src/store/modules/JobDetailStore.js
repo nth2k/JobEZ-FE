@@ -15,7 +15,7 @@ const actions = {
   getJobById: async ({ commit, state }, { postingId }) => {
     state.isGetAPI = false;
     await axios
-      .post("http://localhost:8080" + "/posting/" + postingId, {
+      .post("http://localhost:8081" + "/posting/" + postingId, {
         posting_id: postingId,
       })
       .then((response) => {
