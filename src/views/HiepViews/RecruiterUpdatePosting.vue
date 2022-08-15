@@ -300,6 +300,7 @@ export default {
         this.benefits = rs.data.benefits;
         this.files = rs.data.file;
         this.date = rs.data.deadlineForSubmission;
+         console.log(rs);
     })
   }
 };
