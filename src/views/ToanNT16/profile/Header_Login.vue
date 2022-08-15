@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="d-flex flex-row banner">
     <div class="mr-auto p-2">
       <router-link tag="a" :to="'/'">
