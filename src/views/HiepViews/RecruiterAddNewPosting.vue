@@ -278,10 +278,11 @@ export default {
           degreeRequired: this.selectedDegreeRequired,
           genderRequirement: this.selectedGender,
           benefits: this.benefits,
-          file: this.files,
-          deadlineForSubmission: this.date,
+          files: this.files,
+          deadlineForSubmission: this.date,       
         })
           .then(() => {
+            console.log(this.files),
             this.$store.dispatch("setSnackbar", {
               text: "Thêm công việc thành công",
             });

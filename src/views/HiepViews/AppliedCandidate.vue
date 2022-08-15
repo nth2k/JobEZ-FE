@@ -34,14 +34,19 @@
                   :items="items"
                   label="Trạng thái"
                   outlined
-                  @change="
-                    (e) => {
-                      this.status = e;
-                    }
-                  "
+                  v-model="status"
                 ></v-select>
               </td>
-              <td><button class="btn btn-primary" @click="updateStatus">Cập nhật</button></td>
+              <td>
+                <button
+                  class="btn btn-primary"
+                  @click="
+                    updateStatus(candidate.candidateId, candidate.postingId)
+                  "
+                >
+                  Cập nhật
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -58,22 +63,44 @@ export default {
   name: "AppliedCandidate",
   components: { Header, RecruiterNavigator },
   data: () => ({
-    items: ["Đến phỏng vấn", "Hồ sơ đạt yêu cầu", "Không đạt yêu cầu"],
+    items: ["Hồ sơ đạt yêu cầu", "Không đạt yêu cầu"],
     listCandidate: [],
     isListCandidate: false,
-    status: "",
+    status: "Không đạt yêu cầu",
   }),
   methods: {
-    updateStatus(){
-      console.log(this.status);
-    }
+    updateStatus(candidateId, postingId) {
+      const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+      RecruiterManagementService.updateCandidateStatus({
+        candidate_id: candidateId,
+        recruiter_id: theLoggedUser.user.id,
+        posting_id: postingId,
+        status: this.status,
+      })
+        .then(() => {
+          this.$store.dispatch("setSnackbar", {
+            text: "Cập nhật status ứng viên thành công",
+          });
+          location.reload();
+        })
+        .catch(() => {
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Có lỗi xảy ra! Vui lòng thử lại",
+          });
+        });
+      console.log(candidateId, postingId , theLoggedUser.user.id, this.status);
+    },
   },
   created() {
     const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
     RecruiterManagementService.getAppliedCandidate({
       user_id: theLoggedUser.user.id,
     }).then((rs) => {
-      this.listCandidate = rs.data;
+      this.listCandidate = rs.data.filter((e) => {
+        return e.commentFromEmployer != "Hồ sơ đạt yêu cầu"
+      })
+      console.log(this.listCandidate);
     });
   },
 };

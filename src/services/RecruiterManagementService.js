@@ -24,6 +24,9 @@ class RecruiterManagementService {
   getAppliedCandidate(recruiterId){
     return axios.post(Base_URL + "/recruiter/applied-candidate", recruiterId);
   }
+  updateCandidateStatus(response){
+    return axios.put(Base_URL + "/appliedjob/updateStatus", response);
+  }
 }
 
 export default new RecruiterManagementService();
