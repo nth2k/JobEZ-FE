@@ -8,7 +8,7 @@
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 150
+            ever since the 15
           </p>
         </div>
         <div class="col-6" style="padding: 150px">
