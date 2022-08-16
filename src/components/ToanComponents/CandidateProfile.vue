@@ -24,7 +24,7 @@ export default {
     CandidateSummary,
   },
   async created() {
-    const candidateId = 4;
+    const candidateId = this.$route.params.id;
     this.getCandiateById({ candidateId });
   },
   methods: {

@@ -252,7 +252,7 @@
               <img style="width: 70px; height: 70px" :src="job.images" alt="" />
             </div>
             <div class="job-info w-75 h-auto pl-4">
-              <span @click="jobDetail(job.id)" style="color: red">{{ job.jobName }}</span
+              <span @click="jobDetail(job.id)" style="color: red; cursor:pointer">{{ job.jobName }}</span
               ><br />
               <br />
               <img src="@/assets/icn_location.png" alt="" />
