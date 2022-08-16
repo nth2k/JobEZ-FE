@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
@@ -41,16 +41,16 @@
 
 <script>
 import profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import SelfSkillService from "@/services/SelfSkillService";
 import Header from "@/views/ToanNT16/candidate/candidate_management/Header.vue";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
 // import profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 export default {
   name: "SelfSkill",
   components: {
     profile_menu,
-    SlideBar_candidate,
     Header,
+    Navigator,
   },
   data() {
     return {
@@ -76,7 +76,7 @@ export default {
           this.$store.dispatch("setSnackbar", {
             text: "Cập nhật thành công",
           });
-          location.reload();
+          // location.reload();
         })
         .catch(() => {
           this.$store.dispatch("setSnackbar", {

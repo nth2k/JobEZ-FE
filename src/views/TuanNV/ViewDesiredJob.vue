@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
@@ -13,7 +13,9 @@
           <div class="titleRight">Công việc mong muốn</div>
           <div class="container">
             <div class="label">
-              <span class="label-title">Công việc: </span><span>Thiết kế</span>
+              <span class="label-title">Công việc: </span
+              ><span>{{ desiredjob.jobName }}</span>
+              <span v-if="!isNull"></span>
               <div style="padding: 0; float: right">
                 <span class="icon_tt">
                   <a
@@ -31,7 +33,7 @@
                     class="dropdown-menu dropdown-menu-right"
                     aria-labelledby="userDropdownMenuLink"
                   >
-                    <span class="dropdown-item"
+                    <span class="dropdown-item" @click="editDesiredJob"
                       ><svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -54,28 +56,37 @@
                 </span>
               </div>
             </div>
-            <div class="label">
+            <!-- <div class="label">
               <span class="label-title">Ngành nghề: </span>
-              <span class="careerItem">IT phần cứng</span>
               <span class="careerItem">Công nghệ sinh học</span>
               <span class="careerItem">IT phần mềm</span>
-            </div>
+            </div> -->
             <div class="label">
               <span class="label-title">Cấp bậc mong muốn : </span
-              ><span>Trưởng phòng</span>
+              ><span>{{ desiredjob.rank }}</span>
             </div>
             <div class="label">
-              <span class="label-title">Hình thức : </span><span>Fulltime</span>
+              <span class="label-title">Hình thức : </span
+              ><span>{{ desiredjob.workingForm }}</span>
             </div>
             <div class="label">
-              <span class="label-title">Địa điểm : </span
-              ><span>Số 499 Ngọc Lân, Long biên Hà Nội</span>
+              <span class="label-title">Địa điểm : </span>
+              <span v-if="desiredjob.address != null">
+                <span
+                  class="careerItem"
+                  v-for="(address, index) in desiredjob.address"
+                  v-bind:key="index"
+                  >{{ address.name }}</span
+                >
+              </span>
             </div>
             <div class="label">
-              <span class="label-title">Kinh nghiệm : </span><span>3 năm</span>
+              <span class="label-title">Kinh nghiệm : </span
+              ><span>{{ desiredjob.yearOfExp }}</span>
             </div>
             <div class="label">
-              <span class="label-title">Mức lương : </span><span>10.000.000 VNĐ</span>
+              <span class="label-title">Mức lương : </span
+              ><span>{{ desiredjob.salary }}</span>
             </div>
           </div>
         </div>
@@ -85,17 +96,48 @@
 </template>
 
 <script>
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
+import DesiredJobService from "@/services/DesiredJobService";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
 export default {
   name: "ViewDesiredJob",
   components: {
-    SlideBar_candidate,
     Header,
     Profile_menu,
+    Navigator,
   },
-  methods: {},
+  data() {
+    return {
+      userId: "",
+      desiredjob: "",
+      isNull: false,
+    };
+  },
+  methods: {
+    editDesiredJob() {
+      this.$router.push({
+        name: "EditDesiredJob",
+        params: { userId: this.userId },
+      });
+    },
+    getDesiredJob() {
+      DesiredJobService.getDesiredJobByUserId(this.userId).then((rs) => {
+        this.desiredjob = rs.data;
+        console.log(rs.data);
+        if (rs.data) {
+          this.isNull = true;
+        } else {
+          this.isNull = false;
+        }
+      });
+    },
+  },
+  created() {
+    const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
+    this.userId = theLoggedUser.user.id;
+    this.getDesiredJob();
+  },
 };
 </script>
 

@@ -1,16 +1,16 @@
 <template>
   <div id="app" class="row">
     <div class="col-sm-2" id="slide_bar">
-      <SlideBar_candidate />
+      <Navigator />
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
-        <div class="leftHoso">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
+        <div>
           <Profile_menu />
         </div>
         <div class="blockright col-9">
-          <div class="titleheader">Thông tin liên hệ</div>
+          <div class="titleRight">Thông tin liên hệ</div>
           <div class="container ml-3">
             <v-form ref="form">
               <div class="row">
@@ -87,7 +87,13 @@
                 <div class="col-2"></div>
 
                 <div class="col-5 text-center">
-                  <img id="myImg" :src="base64" alt="avatar" />
+                  <img
+                    id="myImg"
+                    v-if="base64 == null"
+                    src="@/assets/no_avatar.jpg"
+                    alt="avatar"
+                  />
+                  <img id="myImg1" v-if="base64 != null" :src="base64" alt="avatar" />
                   <!-- <v-file-input v-model="image" label="Logo công ty"></v-file-input> -->
                   <v-file-input
                     label="Avatar"
@@ -97,7 +103,6 @@
                     prepend-icon="mdi-camera"
                     span="Avatar"
                     v-model="image"
-                    v-on:change="showImage()"
                   ></v-file-input>
                 </div>
               </div>
@@ -163,50 +168,56 @@
 
                   <div class="label">Tinh thành<span class="text-danger">*</span></div>
 
-                  <!-- <v-select
-                    :items="listProvince"
-                    label="Chọn tỉnh thành"
-                    outlined
-                    :rules="provinceRules"
-                    v-model="province"
-                    @change="onProvinceSelect()"
-                    required
-                  ></v-select> -->
-                  <select v-model="province_id" class="w-100">
+                  <!-- <select class="w-100" @change="onProvinceSelect" v-model="province_id">
                     <option value="" disabled hidden>Chọn tỉnh thành</option>
                     <option
                       v-for="(item, index) in listProvince"
                       :key="index"
-                      :value="item.id"
+                      :value="item.province_id"
                     >
-                      {{ item.name }}
+                      {{ item.province_name }}
                     </option>
-                  </select>
+                  </select> -->
+                  <v-select
+                    v-model="province_id"
+                    @change="onProvinceSelect"
+                    :items="listProvince"
+                    label="Chọn tỉnh thành"
+                    item-text="province_name"
+                    item-value="province_id"
+                    :rules="provinceRules"
+                  ></v-select>
                   <div class="label blockDistrict">
                     Quận Huyện<span class="text-danger">*</span>
                   </div>
-                  <!-- <v-select
-                    :items="listDistrict"
-                    label="Chọn quận huyện"
-                    outlined
-                    :rules="districtRules"
-                    v-model="district"
-                    required
-                  ></v-select> -->
-                  <select v-model="district_id" class="w-100">
+
+                  <!-- <select class="w-100" v-model="district_id">
                     <option value="" disabled hidden>Chọn quận huyện</option>
                     <option
                       v-for="(item, index) in listDistrict"
                       :key="index"
-                      :value="item.id"
+                      :value="item.district_id"
                     >
-                      {{ item.name }}
+                      {{ item.district_name }}
                     </option>
-                  </select>
+                  </select> -->
+                  <v-select
+                    v-model="district_id"
+                    :items="listDistrict"
+                    label="Chọn quận huyện"
+                    item-text="district_name"
+                    item-value="district_id"
+                    :rules="districtRules"
+                  ></v-select>
                 </div>
               </div>
               <div class="text-center justify-content-center">
-                <button class="btn btn-primary px-5 mt-5">Lưu</button>
+                <button
+                  class="btn btn-primary px-5 mt-5"
+                  @click.prevent="saveContactInfo"
+                >
+                  Lưu
+                </button>
               </div>
             </v-form>
           </div>
@@ -217,18 +228,19 @@
 </template>
 
 <script>
-import SlideBar_candidate from "@/components/ProfileCandidate/slideBar_candidate.vue";
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
-import ProvinceDistrictService from "@/services/ProvinceDistrictService.js";
+// import ProvinceDistrictService from "@/services/ProvinceDistrictService.js";
 import ContactInfoService from "@/services/ContactInfoService";
+import AddressService from "@/services/AddressService";
+import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
 
 export default {
   name: "EditContactInfo",
   components: {
-    SlideBar_candidate,
     Header,
     Profile_menu,
+    Navigator,
   },
   data() {
     return {
@@ -274,19 +286,14 @@ export default {
     };
   },
   methods: {
-    showImage() {
-      // document.getElementById("myImg").src = this.base64;
-    },
-    // onProvinceSelect(event) {
-    //   ProvinceDistrictService.getAllDistrict(event.target.value).then((rs) => {
-    //     this.listDistrict = rs.data;
-    //   });
-    // },
-    getData() {
-      ProvinceDistrictService.getAllProvince().then((rs) => {
-        this.listProvince = rs.data;
+    onProvinceSelect() {
+      AddressService.getDistrict(this.province_id).then((rs) => {
+        this.listDistrict = rs.data.results;
       });
+    },
+    getData() {
       ContactInfoService.getContactInfo(this.userId).then((rs) => {
+        // console.log(rs.data);
         this.fullname = rs.data.fullname;
         this.email = rs.data.email;
         this.phoneNumber = rs.data.phoneNumber;
@@ -294,14 +301,20 @@ export default {
         this.address = rs.data.address;
         this.gender = rs.data.gender;
         this.married = rs.data.married;
-        this.province = rs.data.district;
-        this.district = rs.data.province;
-        this.district_id = rs.data.districtId;
-        this.province_id = rs.data.provinceId;
-      });
-      ProvinceDistrictService.getAllDistrict().then((rs) => {
-        this.listDistrict = rs.data;
-        // console.log(rs.data);
+
+        this.base64 = rs.data.imageBase64;
+        AddressService.getProvince().then((res) => {
+          this.listProvince = res.data.results;
+          const province = this.listProvince.find(
+            (element) => element.province_name == rs.data.province
+          );
+          this.province_id = province.province_id;
+          // this.onProvinceSelect();
+          AddressService.getDistrict(this.province_id).then((response) => {
+            this.listDistrict = response.data.results;
+            this.district_id = rs.data.districtId;
+          });
+        });
       });
     },
     createBase64Image: function (FileObject) {
@@ -310,6 +323,47 @@ export default {
         this.base64 = event.target.result;
       };
       reader.readAsDataURL(FileObject);
+    },
+    saveContactInfo() {
+      // console.log(this.listProvince.find((x) => x.id === this.province_id));
+      // console.log(this.listDistrict.find((element) => element.id == this.district_id));
+      const district = this.listDistrict.find(
+        (element) => element.district_id == this.district_id
+      );
+      const province = this.listProvince.find(
+        (element) => element.province_id == this.province_id
+      );
+      ContactInfoService.saveContactInfo({
+        userId: this.userId,
+        fullname: this.fullname,
+        email: this.email,
+        phoneNumber: this.phoneNumber,
+        dateOfBirth: this.formatDate(this.dateOfBirth),
+        address: this.address,
+        gender: this.gender,
+        married: this.married,
+        imageBase64: this.base64,
+        provinceId: this.province_id,
+        districtId: this.district_id,
+        province: province.province_name,
+        district: district.district_name,
+      })
+        .then(() => {
+          this.$store.dispatch("setSnackbar", {
+            text: "Cập nhật thành công",
+          });
+          this.$router.push("/contactinfo");
+        })
+        .catch(() => {
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Có lỗi xảy ra! Vui lòng thử lại",
+          });
+        });
+    },
+    formatDate(date) {
+      var [day, month, year] = date.split("/");
+      return [year, month, day].join("-");
     },
   },
   watch: {
@@ -323,7 +377,6 @@ export default {
   },
   created() {
     this.getData();
-    // this.getContactInfo();
   },
 };
 </script>
@@ -364,14 +417,15 @@ select {
   height: 57px;
   padding-left: 13px;
 }
-.titleheader {
-  margin-left: 0.5rem;
+.titleRight {
   margin-bottom: 20px;
+  margin-left: 15px;
+  padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 183px;
+  width: 130px;
   color: #2a3563;
-  font-size: 20px;
   font-weight: bold;
+  /* font-size: 20px; */
 }
 
 .blockright {

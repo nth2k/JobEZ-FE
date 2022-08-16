@@ -25,24 +25,21 @@
       </div>
       <div class="body col-12 text-left border-bottom">
         <div class="row">
-          <div
-            @click="moveToGeneralManagement"
-            class="col-12 navigator-element active"
-          >
+          <div @click="moveToGeneralManagement" class="col-12 navigator-element active">
             Quản lý chung
           </div>
           <div class="col-12 dropdown-items pr-0">
             <ul class="col-12 p-0 m-0">
-              <div
-                @click="isDropdownProfileVisible = !isDropdownProfileVisible"
-              >
+              <div @click="isDropdownProfileVisible = !isDropdownProfileVisible">
                 Bộ hồ sơ xin việc
                 <span class="ml-5 icon-items">
                   <img src="@/assets/ic_uv.png" />
                 </span>
               </div>
               <li :class="{ 'd-none': isDropdownProfileVisible }">
-                <div class="navigator-element">Hồ sơ online</div>
+                <div class="navigator-element" @click="moveToContactInfo">
+                  Hồ sơ online
+                </div>
               </li>
               <li
                 @click="moveToCV"
@@ -69,8 +66,12 @@
           </div>
           <div class="col-12 navigator-element">Việc làm</div>
           <div class="col-12 navigator-element">Tìm việc làm quanh đây</div>
-          <div class="col-12 navigator-element">Việc làm đã ứng tuyển</div>
-          <div class="col-12 navigator-element">Việc làm đã lưu</div>
+          <div class="col-12 navigator-element" @click="moveToAppliedJob">
+            Việc làm đã ứng tuyển
+          </div>
+          <div class="col-12 navigator-element" @click="moveToSavedJob">
+            Việc làm đã lưu
+          </div>
           <div class="col-12 navigator-element">Tin nhắn từ NTD</div>
           <div class="col-12 navigator-element">Biểu mẫu nhân viên</div>
           <div class="col-12 navigator-element">Cẩm nang tìm việc</div>
@@ -78,14 +79,10 @@
             <ul class="col-12 mt-1">
               <div
                 class="last-element"
-                @click="
-                  isDropdownAccountManageable = !isDropdownAccountManageable
-                "
+                @click="isDropdownAccountManageable = !isDropdownAccountManageable"
               >
                 Quản lý tài khoản
-                <span class="ml-5"
-                  ><img src="@/assets/ic_uv.png" alt=""
-                /></span>
+                <span class="ml-5"><img src="@/assets/ic_uv.png" alt="" /></span>
               </div>
 
               <li
@@ -124,6 +121,15 @@ export default {
   },
   components: {},
   methods: {
+    moveToAppliedJob: function () {
+      this.$router.push("/appliedjob");
+    },
+    moveToSavedJob: function () {
+      this.$router.push("/savedjobs");
+    },
+    moveToContactInfo: function () {
+      this.$router.push("/contactinfo");
+    },
     moveToCV: function () {
       this.$router.push("/cv");
     },

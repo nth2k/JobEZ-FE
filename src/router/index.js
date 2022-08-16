@@ -144,39 +144,33 @@ export const routes = [
     component: () => import("@/views/TuanNV/SelfSkill.vue"),
   },
   {
-    path: "/adddegree",
-    name: "AddDegree",
+    path: '/adddegree',
+    name: 'AddDegree',
     component: () => import("@/views/TuanNV/AddDegree.vue"),
-  },
-  {
-    path: "/degree",
-    name: "ViewDegree",
+  }, {
+    path: '/degree',
+    name: 'ViewDegree',
     component: () => import("@/views/TuanNV/ViewDegree.vue"),
-  },
-  {
-    path: "/editdegree",
-    name: "EditDegree",
-    component: () => import("@/views/TuanNV/EditDegree.vue"),
-  },
-  {
-    path: "/desiredjob",
-    name: "ViewDesiredJob",
-    component: () => import("@/views/TuanNV/ViewDesiredJob.vue"),
-  },
-  {
-    path: "/editdesiredjob",
-    name: "EditDesiredJob",
-    component: () => import("@/views/TuanNV/EditDesiredJob.vue"),
-  },
-  {
-    path: "/contactinfo",
-    name: "ContactInfo",
-    component: () => import("@/views/TuanNV/ContactInfo.vue"),
-  },
-  {
-    path: "/editcontactinfo",
-    name: "EditContactInfo",
-    component: () => import("@/views/TuanNV/EditContactInfo.vue"),
+  },{
+    path: '/editdegree',
+    name: 'EditDegree',
+    component: () => import("@/views/TuanNV/EditDegree.vue")
+  },{
+    path: '/desiredjob',
+    name: 'ViewDesiredJob',
+    component: () => import("@/views/TuanNV/ViewDesiredJob.vue")
+  },{
+    path: '/editdesiredjob',
+    name: 'EditDesiredJob',
+    component: () => import("@/views/TuanNV/EditDesiredJob.vue")
+  },{
+    path: '/contactinfo',
+    name: 'ContactInfo',
+    component: () => import("@/views/TuanNV/ContactInfo.vue")
+  },{
+    path: '/editcontactinfo',
+    name: 'EditContactInfo',
+    component: () => import("@/views/TuanNV/EditContactInfo.vue")
   },
   {
     path: "/recruiter-list",
