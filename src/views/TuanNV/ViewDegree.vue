@@ -18,82 +18,84 @@
                 <button class="btnAdd py-1 px-3" @click="addDegree">+ Thêm</button>
               </div>
             </div>
-
-            <div class="block" v-for="degree in listDegree" v-bind:key="degree.id">
-              <span id="show" @click="showDetail">
-                <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i
-                >{{ degree.certificateName }}
-              </span>
-              <div style="padding: 0; float: right">
-                <span class="icon_tt">
-                  <a
-                    class="nav-link"
-                    href="#"
-                    id="userDropdownMenuLink"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <img src="@/assets/icon_dot.png" class="rounded-circle" />
-                  </a>
-                  <div
-                    class="dropdown-menu dropdown-menu-right"
-                    aria-labelledby="userDropdownMenuLink"
-                  >
-                    <span class="dropdown-item" @click="addDegree"
-                      ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-plus-circle"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                        />
-                        <path
-                          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-                        />
-                      </svg>
-                      Thêm</span
-                    >
-                    <span class="dropdown-item" @click="editDegree(degree.id)"
-                      ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-pencil-square"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
-                        />
-                        <path
-                          fill-rule="evenodd"
-                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
-                        />
-                      </svg>
-                      Sửa</span
-                    >
-                    <DeleteDegreeModal :id="degree.id" :userId="degree.userId" />
-                  </div>
+            <div v-if="isListDegree">
+              <div class="block" v-for="degree in listDegree" v-bind:key="degree.id">
+                <span id="show" @click="showDetail">
+                  <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i
+                  >{{ degree.certificateName }}
                 </span>
-              </div>
-              <div class="detail container p-3 mt-2" id="detailInfo">
-                <div>
-                  <span class="font-weight-bold">Chuyên ngành: </span
-                  ><span>{{ degree.major }}</span>
+                <div style="padding: 0; float: right">
+                  <span class="icon_tt">
+                    <a
+                      class="nav-link"
+                      href="#"
+                      id="userDropdownMenuLink"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <img src="@/assets/icon_dot.png" class="rounded-circle" />
+                    </a>
+                    <div
+                      class="dropdown-menu dropdown-menu-right"
+                      aria-labelledby="userDropdownMenuLink"
+                    >
+                      <span class="dropdown-item" @click="addDegree"
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-plus-circle"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                          />
+                          <path
+                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                          />
+                        </svg>
+                        Thêm</span
+                      >
+                      <span class="dropdown-item" @click="editDegree(degree.id)"
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-pencil-square"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                          />
+                          <path
+                            fill-rule="evenodd"
+                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                          />
+                        </svg>
+                        Sửa</span
+                      >
+                      <DeleteDegreeModal :id="degree.id" :userId="degree.userId" />
+                    </div>
+                  </span>
                 </div>
-                <div>
-                  <span class="font-weight-bold">Tại: </span
-                  ><span>{{ degree.teachingUnit }}</span>
-                </div>
-                <div>
-                  <span class="font-weight-bold">Từ: </span
-                  ><span>{{ countYear(degree.startTime, degree.endTime) }}</span>
+                <div class="detail container p-3 mt-2" id="detailInfo">
+                  <div>
+                    <span class="font-weight-bold">Chuyên ngành: </span
+                    ><span>{{ degree.major }}</span>
+                  </div>
+                  <div>
+                    <span class="font-weight-bold">Tại: </span
+                    ><span>{{ degree.teachingUnit }}</span>
+                  </div>
+                  <div>
+                    <span class="font-weight-bold">Từ: </span>
+                    <span>{{ new Date(degree.startTime).toLocaleDateString() }}</span> -
+                    <span>{{ new Date(degree.endTime).toLocaleDateString() }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -148,17 +150,6 @@ export default {
           this.isListDegree = false;
         }
       });
-    },
-    countYear(date1, date2) {
-      date1 = this.formatDate(date1);
-      date2 = this.formatDate(date2);
-      return date1 + " - " + date2;
-    },
-    formatDate(date) {
-      var year = date.substring(0, 4);
-      var month = date.substring(5, 7);
-      var day = date.substring(8, 10);
-      return day + "/" + month + "/" + year;
     },
     addDegree() {
       this.$router.push({

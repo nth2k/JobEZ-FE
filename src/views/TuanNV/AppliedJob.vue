@@ -125,11 +125,7 @@ export default {
         : "(Còn " + duration + " ngày)";
     },
     countDaysDateSubmission(date) {
-      var year = Number(date.substring(0, 4));
-      var month = Number(date.substring(5, 7));
-      var day = Number(date.substring(8, 10));
-      var dateformat = month + "/" + day + "/" + year;
-      var date1 = new Date(dateformat);
+      var date1 = new Date(date);
       var date2 = new Date();
       var duration = Math.ceil(
         (date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)

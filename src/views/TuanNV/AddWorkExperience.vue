@@ -58,36 +58,74 @@
                 </div>
                 <div class="col-12">
                   <div class="title">
-                    <span class="label"
-                      >Thời gian (dd/mm/yyyy) <span class="star">*</span></span
-                    >
+                    <span class="label">Thời gian <span class="star">*</span></span>
                   </div>
                   <div class="d-flex justify-content-between">
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <v-textarea
-                        label="Ngày bắt đầu"
-                        v-model="startDate"
-                        outlined
-                        filled
-                        no-resize
-                        rows="1"
-                        :rules="startDateRules"
-                        required
-                        background-color="white"
-                      ></v-textarea>
+                      <v-menu
+                        ref="menu"
+                        v-model="menu1"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-text-field
+                            v-model="startDate"
+                            label="Ngày bắt đầu"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            required
+                            :rules="startDateRules"
+                          ></v-text-field>
+                        </template>
+                        <v-date-picker
+                          v-model="startDate"
+                          :active-picker.sync="activePicker1"
+                          :max="
+                            new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+                              .toISOString()
+                              .substr(0, 10)
+                          "
+                          min="1950-01-01"
+                        ></v-date-picker> </v-menu
+                      ><br />
                     </div>
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <v-textarea
-                        label="Ngày kết thúc"
-                        v-model="endDate"
-                        outlined
-                        filled
-                        no-resize
-                        rows="1"
-                        :rules="endDateRules"
-                        required
-                        background-color="white"
-                      ></v-textarea>
+                      <v-menu
+                        ref="menu"
+                        v-model="menu2"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-text-field
+                            v-model="endDate"
+                            label="Ngày kết thúc"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            required
+                            :rules="endDateRules"
+                          ></v-text-field>
+                        </template>
+                        <v-date-picker
+                          v-model="endDate"
+                          :active-picker.sync="activePicker2"
+                          :max="
+                            new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+                              .toISOString()
+                              .substr(0, 10)
+                          "
+                          min="1950-01-01"
+                        ></v-date-picker>
+                      </v-menu>
                     </div>
                   </div>
                 </div>
@@ -143,22 +181,17 @@ export default {
       positionRules: [(v) => !!v || "Position must be required"],
       companyName: "",
       companyNameRules: [(v) => !!v || "Company Name must be required"],
-      startDate: "",
-      startDateRules: [
-        (v) => !!v || "Start Date must be required",
-        (v) =>
-          /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-          "Invalid Start Date(dd/MM/yyyy)",
-      ],
+      startDate: null,
+      startDateRules: [(v) => !!v || "Start Date must be required"],
       endDate: "",
-      endDateRules: [
-        (v) => !!v || "End Date must be required",
-        (v) =>
-          /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-          "Invalid End Date(dd/MM/yyyy)",
-      ],
+      endDateRules: [(v) => !!v || "End Date must be required"],
       description: "",
       descriptionRules: [(v) => !!v || "Description must be required"],
+      // date: null,
+      activePicker1: null,
+      menu1: false,
+      activePicker2: null,
+      menu2: false,
     };
   },
   methods: {
@@ -172,26 +205,12 @@ export default {
             text: "Ngày bắt đầu phải nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
           });
         } else {
-          var [day, month, year] = this.startDate.split("/");
-          var startTime = [year, month, day].join("-");
-          [day, month, year] = this.endDate.split("/");
-          var endTime = [year, month, day].join("-");
-          // WorkExperienceService.isDuplicate({
-          //   companyName: this.companyName,
-          //   position: this.position,
-          //   description: this.description,
-          //   startDate: startTime,
-          //   endDate: endTime,
-          //   userId: this.userId,
-          // })
-          //   .then((rs) => {
-          //     if (!rs.data) {
           WorkExperienceService.addWorkExp({
             companyName: this.companyName,
             position: this.position,
             description: this.description,
-            startDate: startTime,
-            endDate: endTime,
+            startDate: this.startDate,
+            endDate: this.endDate,
             userId: this.userId,
           })
             .then(() => {
@@ -203,22 +222,9 @@ export default {
             .catch(() => {
               this.$store.dispatch("setSnackbar", {
                 color: "error",
-                text: "Kinh nghiệm làm việc đã tồn tại",
+                text: "Có lỗi xảy ra vui lòng thử lại",
               });
             });
-          //   } else {
-          //     this.$store.dispatch("setSnackbar", {
-          //       color: "error",
-          //       text: "Kinh nghiệm làm việc đã tồn tại",
-          //     });
-          //   }
-          // })
-          // .catch(() => {
-          //   this.$store.dispatch("setSnackbar", {
-          //     color: "error",
-          //     text: "Có lỗi xảy ra! Vui lòng thử lại",
-          //   });
-          // });
         }
       }
     },

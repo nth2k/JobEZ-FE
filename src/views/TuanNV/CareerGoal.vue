@@ -55,7 +55,6 @@ export default {
     return {
       id: "",
       careerGoal: "",
-      // careerGoalRules: [(v) => !!v || "Career Goal must be required"],
       userId: "",
     };
   },
@@ -77,7 +76,6 @@ export default {
           this.$store.dispatch("setSnackbar", {
             text: "Cập nhật thành công",
           });
-          // this.$router.push("/degree");
         })
         .catch(() => {
           this.$store.dispatch("setSnackbar", {
