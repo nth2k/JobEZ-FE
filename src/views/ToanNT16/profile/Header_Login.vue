@@ -88,7 +88,14 @@
     <div class="mr-3 p-2 justify-content-center align-items-center">
       <div
         v-if="isAuthenticated"
-        class="pt-1 pb-1 pl-3 pr-3 d-flex flex-row flex-sm-row flex-md-row flex-lg-row flex-xl-row"
+        class="
+          pt-1
+          pb-1
+          pl-3
+          pr-3
+          d-flex
+          flex-row flex-sm-row flex-md-row flex-lg-row flex-xl-row
+        "
       >
         <div class="mr-4">
           <div class="dropdown">
@@ -193,21 +200,29 @@
                       >
                     </div>
                     <div class="col-12">
-                      <a href="#" class="text-decoration-none text-dark">
+                      <router-link
+                        tag="a"
+                        :to="'/appliedjob'"
+                        class="text-decoration-none text-dark"
+                      >
                         <img
                           class="mb-2 mr-3"
                           src="@/assets/ic_3.png"
                           alt=""
-                        />việc làm đã ứng tuyển</a
+                        />việc làm đã ứng tuyển</router-link
                       >
                     </div>
                     <div class="col-12">
-                      <a href="#" class="text-decoration-none text-dark">
+                      <router-link
+                        tag="a"
+                        :to="'/savedjobs'"
+                        class="text-decoration-none text-dark"
+                      >
                         <img
                           class="mb-2 mr-3"
                           src="@/assets/ic_4.png"
                           alt=""
-                        />việc làm đã lưu</a
+                        />việc làm đã lưu</router-link
                       >
                     </div>
                     <div class="col-12">
