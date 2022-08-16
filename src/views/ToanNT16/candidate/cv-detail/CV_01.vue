@@ -5,7 +5,7 @@
         @click="updateCandidateCv"
         class="text-center btn-primary btn px-4 py-4"
       >
-        Save CV
+        Lưu CV
       </div>
       <div class="row cv-container">
         <div class="col-12"></div>

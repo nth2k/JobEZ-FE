@@ -6,7 +6,6 @@ class CVService {
       candiate_id: candidateId,
     };
     await axios.post("http://localhost:8081/cv/id", body).then((response) => {
-      console.log(response);
       commit("SET_CV", response.data);
     });
   }
