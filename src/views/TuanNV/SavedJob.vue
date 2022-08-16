@@ -60,8 +60,6 @@ import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import SavedJobService from "@/services/SavedJobService.js";
 import DeleteSavedJobModal from "./modal/DeleteSavedJobModal.vue";
 import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
-// import Header from "./components/views/Header.vue";
-// import SlideBar_candidate from "./components/ProfileCandidate/slideBar_candidate.vue";
 export default {
   name: "SavedJob",
   components: {

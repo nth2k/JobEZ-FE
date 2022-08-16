@@ -19,7 +19,9 @@
               d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"
             />
           </svg>
-          <a @click="contactInfo()" class="items">Thông tin liên hệ</a>
+          <span class="items"
+            ><router-link to="/contactinfo">Thông tin liên hệ</router-link></span
+          >
         </div>
       </div>
       <div class="menu-items">
@@ -43,7 +45,9 @@
               fill-rule="evenodd"
               d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"
             /></svg
-          ><a @click="desiredJob()" class="items">Công việc mong muốn</a>
+          ><span class="items"
+            ><router-link to="/desiredjob">Công việc mong muốn</router-link></span
+          >
         </div>
       </div>
       <div class="menu-items">
@@ -65,8 +69,11 @@
             />
             <path
               d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"
-            /></svg
-          ><a @click="careerGoal()" class="items">Mục tiêu nghề nghiệp</a>
+            />
+          </svg>
+          <span class="items"
+            ><router-link to="/careergoal">Mục tiêu nghề nghiệp</router-link></span
+          >
         </div>
       </div>
       <div class="menu-items">
@@ -81,8 +88,11 @@
           >
             <path
               d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"
-            /></svg
-          ><a @click="selfSkill()" class="items">Kỹ năng bản thân</a>
+            />
+          </svg>
+          <span class="items"
+            ><router-link to="/selfskill">Kỹ năng bản thân</router-link></span
+          >
         </div>
       </div>
       <div class="menu-items">
@@ -100,8 +110,11 @@
             />
             <path
               d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"
-            /></svg
-          ><a @click="degreeCertificate()" class="items">Bằng cấp</a>
+            />
+          </svg>
+          <span class="items"
+            ><router-link to="/degree">Học vấn - Bằng cấp</router-link></span
+          >
         </div>
       </div>
       <div class="menu-items">
@@ -116,8 +129,11 @@
           >
             <path
               d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"
-            /></svg
-          ><a @click="languageCertificate()" class="items">Ngoại ngữ tin học</a>
+            />
+          </svg>
+          <span class="items"
+            ><router-link to="/language">Ngoại ngữ tin học</router-link></span
+          >
         </div>
       </div>
       <div class="menu-items">
@@ -135,8 +151,11 @@
             />
             <path
               d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"
-            /></svg
-          ><a @click="workExperience()" class="items">Kinh nghiệm</a>
+            />
+          </svg>
+          <span class="items"
+            ><router-link to="/workexp">Kinh nghiệm làm việc</router-link></span
+          >
         </div>
       </div>
     </div>
@@ -145,29 +164,7 @@
 
 <script>
 export default {
-  methods: {
-    contactInfo() {
-      this.$router.push("/contactinfo");
-    },
-    desiredJob() {
-      this.$router.push("/desiredjob");
-    },
-    careerGoal() {
-      this.$router.push("/careergoal");
-    },
-    selfSkill() {
-      this.$router.push("/selfskill");
-    },
-    degreeCertificate() {
-      this.$router.push("/degree");
-    },
-    languageCertificate() {
-      this.$router.push("/language");
-    },
-    workExperience() {
-      this.$router.push("/workexp");
-    },
-  },
+  methods: {},
 };
 </script>
 

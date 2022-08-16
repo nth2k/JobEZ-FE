@@ -147,7 +147,7 @@ export default {
           .catch(() => {
             this.$store.dispatch("setSnackbar", {
               color: "error",
-              text: "Chứng chỉ đã tồn tại",
+              text: "Có lỗi xảy ra vui lòng thử lại",
             });
           });
       }

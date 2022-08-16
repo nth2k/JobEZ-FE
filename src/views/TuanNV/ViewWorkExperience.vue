@@ -17,21 +17,18 @@
             </div>
             <div v-if="!isListWorkExp">Không có kinh nghiệm làm việc</div>
             <div class="block" v-for="workexp in listWorkExp" v-bind:key="workexp.id">
+              <DeleteWorkExperienceModal :id="workexp.id" />
               <span id="show" @click="showDetail">
                 <i class="animate-icon fa fa-chevron-up" aria-hidden="true"></i>Công ty
                 {{ workexp.companyName }}
               </span>
-              <DeleteWorkExperienceModal :id="workexp.id" />
+
               <div class="detail container p-3" id="detailInfo">
                 <div>
                   <span class="font-weight-bold">Thời gian từ: </span
-                  ><span>{{
-                    new Date(workexp.startDate.slice(0, 10)).toLocaleDateString()
-                  }}</span
+                  ><span>{{ new Date(workexp.startDate).toLocaleDateString() }}</span
                   ><span class="font-weight-bold"> Đến </span
-                  ><span>{{
-                    new Date(workexp.endDate.slice(0, 10)).toLocaleDateString()
-                  }}</span>
+                  ><span>{{ new Date(workexp.endDate).toLocaleDateString() }}</span>
                 </div>
                 <div>
                   <span class="font-weight-bold">Chức danh: </span
@@ -72,7 +69,8 @@ export default {
   },
   methods: {
     showDetail(e) {
-      const detail = e.target.nextElementSibling.nextElementSibling;
+      // console.log(e.target.nextElementSibling);
+      const detail = e.target.nextElementSibling;
       const icon = e.target.firstChild;
       if (detail.style.display == "none") {
         detail.style.display = "block";

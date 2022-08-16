@@ -124,7 +124,6 @@ export default {
     getDesiredJob() {
       DesiredJobService.getDesiredJobByUserId(this.userId).then((rs) => {
         this.desiredjob = rs.data;
-        console.log(rs.data);
         if (rs.data) {
           this.isNull = true;
         } else {

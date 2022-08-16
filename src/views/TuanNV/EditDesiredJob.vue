@@ -187,16 +187,6 @@ export default {
         desiredId: this.desiredJob_id,
         postingCategoryId: 1,
       });
-      // console.log({
-      //   rankId: this.rank_id,
-      //   WorkingFormId: this.workingForm_id,
-      //   yearOfExperienceId: this.experience_id,
-      //   salaryId: this.salary_id,
-      //   addresssId: this.place.map((rs) => rs.id),
-      //   desiredJobName: this.desiredJob,
-      //   desiredId: this.desiredJob_id,
-      //   postingCategoryId: 1,
-      // });
     },
   },
   created() {

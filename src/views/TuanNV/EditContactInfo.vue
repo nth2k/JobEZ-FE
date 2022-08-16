@@ -23,13 +23,6 @@
                     </div>
                   </div>
                   <div>
-                    <!-- <input
-                      type="text"
-                      class="form-control"
-                      name="fullname"
-                      id="fullname"
-                      placeholder="Họ và tên"
-                    /> -->
                     <v-textarea
                       label="Họ và tên"
                       v-model="fullname"
@@ -45,13 +38,6 @@
                   <div>
                     <span class="label">Email <span class="text-danger">*</span></span>
                   </div>
-                  <!-- <input
-                      type="text"
-                      class="form-control"
-                      name="email"
-                      id="email"
-                      placeholder="Nhậo địa chỉ email tại đây"
-                    /> -->
                   <div>
                     <v-textarea
                       label="Email"
@@ -112,7 +98,7 @@
                     <span class="label">Ngày sinh<span class="text-danger">*</span></span>
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Nhập ngày/tháng/năm"
                       v-model="dateOfBirth"
                       outlined
@@ -122,7 +108,39 @@
                       :rules="dateOfBirthRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-menu
+                      ref="menu"
+                      v-model="menu"
+                      :close-on-content-click="false"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="dateOfBirth"
+                          label="Ngày sinh"
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                          required
+                          :rules="dateOfBirthRules"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="dateOfBirth"
+                        :active-picker.sync="activePicker"
+                        :max="
+                          new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+                            .toISOString()
+                            .substr(0, 10)
+                        "
+                        min="1950-01-01"
+                        @change="save"
+                      ></v-date-picker>
+                    </v-menu>
                   </div>
                   <div>
                     <span class="label">Địa chỉ<span class="text-danger">*</span></span>
@@ -167,17 +185,6 @@
                   ></v-select>
 
                   <div class="label">Tinh thành<span class="text-danger">*</span></div>
-
-                  <!-- <select class="w-100" @change="onProvinceSelect" v-model="province_id">
-                    <option value="" disabled hidden>Chọn tỉnh thành</option>
-                    <option
-                      v-for="(item, index) in listProvince"
-                      :key="index"
-                      :value="item.province_id"
-                    >
-                      {{ item.province_name }}
-                    </option>
-                  </select> -->
                   <v-select
                     v-model="province_id"
                     @change="onProvinceSelect"
@@ -190,17 +197,6 @@
                   <div class="label blockDistrict">
                     Quận Huyện<span class="text-danger">*</span>
                   </div>
-
-                  <!-- <select class="w-100" v-model="district_id">
-                    <option value="" disabled hidden>Chọn quận huyện</option>
-                    <option
-                      v-for="(item, index) in listDistrict"
-                      :key="index"
-                      :value="item.district_id"
-                    >
-                      {{ item.district_name }}
-                    </option>
-                  </select> -->
                   <v-select
                     v-model="district_id"
                     :items="listDistrict"
@@ -230,7 +226,6 @@
 <script>
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
-// import ProvinceDistrictService from "@/services/ProvinceDistrictService.js";
 import ContactInfoService from "@/services/ContactInfoService";
 import AddressService from "@/services/AddressService";
 import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
@@ -283,9 +278,14 @@ export default {
       listDistrict: [],
       image: null,
       base64: null,
+      activePicker: null,
+      menu: false,
     };
   },
   methods: {
+    save(date) {
+      this.$refs.menu.save(date);
+    },
     onProvinceSelect() {
       AddressService.getDistrict(this.province_id).then((rs) => {
         this.listDistrict = rs.data.results;
@@ -293,7 +293,6 @@ export default {
     },
     getData() {
       ContactInfoService.getContactInfo(this.userId).then((rs) => {
-        // console.log(rs.data);
         this.fullname = rs.data.fullname;
         this.email = rs.data.email;
         this.phoneNumber = rs.data.phoneNumber;
@@ -301,7 +300,6 @@ export default {
         this.address = rs.data.address;
         this.gender = rs.data.gender;
         this.married = rs.data.married;
-
         this.base64 = rs.data.imageBase64;
         AddressService.getProvince().then((res) => {
           this.listProvince = res.data.results;
@@ -309,10 +307,12 @@ export default {
             (element) => element.province_name == rs.data.province
           );
           this.province_id = province.province_id;
-          // this.onProvinceSelect();
           AddressService.getDistrict(this.province_id).then((response) => {
             this.listDistrict = response.data.results;
-            this.district_id = rs.data.districtId;
+            const district = this.listDistrict.find(
+              (resp) => resp.district_name == rs.data.district
+            );
+            this.district_id = district.district_id;
           });
         });
       });
@@ -325,45 +325,41 @@ export default {
       reader.readAsDataURL(FileObject);
     },
     saveContactInfo() {
-      // console.log(this.listProvince.find((x) => x.id === this.province_id));
-      // console.log(this.listDistrict.find((element) => element.id == this.district_id));
-      const district = this.listDistrict.find(
-        (element) => element.district_id == this.district_id
-      );
-      const province = this.listProvince.find(
-        (element) => element.province_id == this.province_id
-      );
-      ContactInfoService.saveContactInfo({
-        userId: this.userId,
-        fullname: this.fullname,
-        email: this.email,
-        phoneNumber: this.phoneNumber,
-        dateOfBirth: this.formatDate(this.dateOfBirth),
-        address: this.address,
-        gender: this.gender,
-        married: this.married,
-        imageBase64: this.base64,
-        provinceId: this.province_id,
-        districtId: this.district_id,
-        province: province.province_name,
-        district: district.district_name,
-      })
-        .then(() => {
-          this.$store.dispatch("setSnackbar", {
-            text: "Cập nhật thành công",
-          });
-          this.$router.push("/contactinfo");
+      if (this.$refs.form.validate()) {
+        const district = this.listDistrict.find(
+          (element) => element.district_id == this.district_id
+        );
+        const province = this.listProvince.find(
+          (element) => element.province_id == this.province_id
+        );
+        ContactInfoService.saveContactInfo({
+          userId: this.userId,
+          fullname: this.fullname,
+          email: this.email,
+          phoneNumber: this.phoneNumber,
+          dateOfBirth: this.dateOfBirth,
+          address: this.address,
+          gender: this.gender,
+          married: this.married,
+          imageBase64: this.base64,
+          provinceId: this.province_id,
+          districtId: this.district_id,
+          province: province.province_name,
+          district: district.district_name,
         })
-        .catch(() => {
-          this.$store.dispatch("setSnackbar", {
-            color: "error",
-            text: "Có lỗi xảy ra! Vui lòng thử lại",
+          .then(() => {
+            this.$store.dispatch("setSnackbar", {
+              text: "Cập nhật thành công",
+            });
+            this.$router.push("/contactinfo");
+          })
+          .catch(() => {
+            this.$store.dispatch("setSnackbar", {
+              color: "error",
+              text: "Có lỗi xảy ra! Vui lòng thử lại",
+            });
           });
-        });
-    },
-    formatDate(date) {
-      var [day, month, year] = date.split("/");
-      return [year, month, day].join("-");
+      }
     },
   },
   watch: {
@@ -411,12 +407,6 @@ export default {
   font-size: 12px;
   font-style: italic;
 }
-select {
-  border: 1px solid gray;
-  border-radius: 5px;
-  height: 57px;
-  padding-left: 13px;
-}
 .titleRight {
   margin-bottom: 20px;
   margin-left: 15px;
@@ -425,9 +415,7 @@ select {
   width: 130px;
   color: #2a3563;
   font-weight: bold;
-  /* font-size: 20px; */
 }
-
 .blockright {
   border-left: 1px solid gray;
 }
@@ -439,9 +427,6 @@ select {
 .btnSave {
   color: white;
   padding: 5px 70px;
-}
-.blockDistrict {
-  margin-top: 32px;
 }
 .label {
   font-size: 15px;

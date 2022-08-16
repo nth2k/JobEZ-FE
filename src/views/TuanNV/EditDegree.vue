@@ -66,30 +66,70 @@
                   </div>
                   <div class="d-flex justify-content-between">
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <v-textarea
-                        label="Ngày bắt đầu"
-                        v-model="startDate"
-                        outlined
-                        filled
-                        no-resize
-                        rows="1"
-                        :rules="startDateRules"
-                        required
-                        background-color="white"
-                      ></v-textarea>
+                      <v-menu
+                        ref="menu"
+                        v-model="menu1"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-text-field
+                            v-model="startDate"
+                            label="Ngày sinh"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            required
+                            :rules="startDateRules"
+                          ></v-text-field>
+                        </template>
+                        <v-date-picker
+                          v-model="startDate"
+                          :active-picker.sync="activePicker1"
+                          :max="
+                            new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+                              .toISOString()
+                              .substr(0, 10)
+                          "
+                          min="1950-01-01"
+                        ></v-date-picker>
+                      </v-menu>
                     </div>
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <v-textarea
-                        label="Ngày kết thúc"
-                        v-model="endDate"
-                        outlined
-                        filled
-                        no-resize
-                        rows="1"
-                        :rules="endDateRules"
-                        required
-                        background-color="white"
-                      ></v-textarea>
+                      <v-menu
+                        ref="menu"
+                        v-model="menu2"
+                        :close-on-content-click="false"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-text-field
+                            v-model="endDate"
+                            label="Ngày kết thúc"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                            required
+                            :rules="endDateRules"
+                          ></v-text-field>
+                        </template>
+                        <v-date-picker
+                          v-model="endDate"
+                          :active-picker.sync="activePicker2"
+                          :max="
+                            new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+                              .toISOString()
+                              .substr(0, 10)
+                          "
+                          min="1950-01-01"
+                        ></v-date-picker>
+                      </v-menu>
                     </div>
                   </div>
                 </div>
@@ -167,7 +207,6 @@ import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import DegreeService from "@/services/DegreeService";
 import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
-// import CertificateService from "@/services/CertificateService.js";
 export default {
   name: "EditDegree",
   components: {
@@ -184,19 +223,9 @@ export default {
       teachingUnit: "",
       teachingUnitRules: [(v) => !!v || "Tên đơn vị giảng dạy không được để trống"],
       startDate: "",
-      startDateRules: [
-        (v) => !!v || "Ngày bắt đầu không được để trống",
-        (v) =>
-          /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-          "Ngày bắt đầu không hợp lệ (dd/MM/yyyy)",
-      ],
+      startDateRules: [(v) => !!v || "Ngày bắt đầu không được để trống"],
       endDate: "",
-      endDateRules: [
-        (v) => !!v || "Ngày kết thúc không được để trống",
-        (v) =>
-          /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-          "Ngày kết thúc không hợp lệ (dd/MM/yyyy)",
-      ],
+      endDateRules: [(v) => !!v || "Ngày kết thúc không được để trống"],
       majorName: "",
       majorNameRules: [(v) => !!v || "Tên chuyên ngành không được để trống"],
       rankName: "",
@@ -204,6 +233,10 @@ export default {
       ranks: ["Giỏi", "Khá", "Trung bình", "Yếu"],
       description: "",
       descriptionRules: [(v) => !!v || "Thông tin bổ sung không được để trống"],
+      activePicker1: null,
+      menu1: false,
+      activePicker2: null,
+      menu2: false,
     };
   },
   methods: {
@@ -211,16 +244,12 @@ export default {
       DegreeService.getDegree(id).then((res) => {
         this.degree = res.data.certificateName;
         this.teachingUnit = res.data.teachingUnit;
-        this.startDate = this.formatDate(res.data.startTime);
-        this.endDate = this.formatDate(res.data.endTime);
+        this.startDate = res.data.startTime;
+        this.endDate = res.data.endTime;
         this.majorName = res.data.major;
         this.rankName = res.data.rank;
         this.description = res.data.supplementaryInformation;
       });
-    },
-    formatDate(date) {
-      var [year, month, day] = date.split("-");
-      return [day, month, year].join("/");
     },
     validate() {
       this.$refs.form.validate();
@@ -250,14 +279,12 @@ export default {
           });
           return false;
         }
-        // var startDate = this.formatDate(this.startDate);
-        // var endDate = this.formatDate(this.endDate);
         DegreeService.updateDegree({
           id: this.id,
           certificateName: this.degree,
           teachingUnit: this.teachingUnit,
-          startTime: this.formatDate(this.startDate),
-          endTime: this.formatDate(this.endDate),
+          startTime: this.startDate,
+          endTime: this.endDate,
           major: this.majorName,
           rank: this.rankName,
           supplementaryInformation: this.description,

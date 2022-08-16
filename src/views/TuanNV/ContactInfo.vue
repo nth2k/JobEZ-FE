@@ -65,11 +65,6 @@
                   :src="contactInfo.imageBase64"
                   alt="avatar"
                 />
-                <!-- <img
-                  class="img-avatar"
-                  src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                  alt=""
-                /> -->
               </div>
               <div class="col-5">
                 <div class="data">
@@ -156,7 +151,6 @@ export default {
 
 <style scoped>
 .body {
-  /* display: flex; */
   border: 1px solid blue;
   border-radius: 5px;
   box-shadow: 5px 5px lightgray;
