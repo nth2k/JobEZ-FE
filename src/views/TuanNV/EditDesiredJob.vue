@@ -185,9 +185,10 @@ export default {
         addresssId: this.place.map((rs) => rs.id),
         desiredJobName: this.desiredJob,
         desiredId: this.desiredJob_id,
-        postingCategoryId: 1,
+        postingCategoryId: 1,     
       })
         .then(() => {
+          console.log(this.desiredJob_id);
           this.$store.dispatch("setSnackbar", {
             text: "Cập nhật thành công",
           });

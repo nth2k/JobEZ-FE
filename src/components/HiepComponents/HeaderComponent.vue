@@ -59,6 +59,15 @@
       <div class="profile w-100" @click="profile">
         <img src="@/assets/ic_new5.png" alt="" /><span>Quản lý hồ sơ</span>
       </div>
+      <div class="profile w-100" @click="account">
+        <img src="@/assets/ic_2.png" alt="" /><span>Quản lý tài khoản</span>
+      </div>
+      <div class="profile w-100" @click="appliedJob">
+        <img src="@/assets/ic_3.png" alt="" /><span>Việc làm đã ứng tuyển</span>
+      </div>
+      <div class="profile w-100" @click="savedJob">
+        <img src="@/assets/ic_4.png" alt="" /><span>Việc làm đã lưu</span>
+      </div>
     </div>
 
     <div v-if="isNoti" class="profile-container">
@@ -100,6 +109,15 @@ export default {
         this.$router.push("/recruiterManagement");
       }
     },
+    account(){
+      this.$router.push("/contactinfo");
+    },
+    appliedJob(){
+      this.$router.push("/appliedjob");
+    },
+    savedJob(){
+      this.$router.push("/savedjobs");
+    }
   },
   computed: {
     currentUser() {
@@ -143,7 +161,7 @@ export default {
   background: #ffffff;
   color: #4c5bd4;
   width: 210px;
-  height: 60px;
+  height: auto;
   top: 52px;
   display: flex;
   flex-direction: column;
