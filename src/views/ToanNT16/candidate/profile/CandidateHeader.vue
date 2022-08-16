@@ -81,7 +81,6 @@
         </div>
       </div>
     </div>
-    <button @click="checkLocalStorage">Check checkLocalStorage</button>
   </div>
 </template>
 

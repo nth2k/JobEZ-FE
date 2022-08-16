@@ -34,7 +34,10 @@
             <img style="width: 170px; height: 100px" :src="job.images" alt="" />
           </div>
           <div class="job-info pl-4">
-            <span style="color: red">{{ job.jobName }}</span
+            <span
+              style="color: red; cursor: pointer"
+              @click="jobProfile(job.id)"
+              >{{ job.jobName }}</span
             ><br />
             <span>Vị trí: {{ job.position }}</span
             ><br />
@@ -122,6 +125,12 @@ export default {
     };
   },
   methods: {
+    jobProfile(jobId) {
+      this.$router.push({
+        name: "JobDetailsNoLogin",
+        params: { postingId: jobId },
+      });
+    },
     paging(selectedPage) {
       SearchJobService.getJobByTextField(this.searchText, selectedPage).then(
         (rs) => {

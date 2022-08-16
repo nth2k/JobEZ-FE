@@ -38,7 +38,7 @@
               />
             </div>
             <div class="pl-4">
-              <span style="color: #4c5bd4; font-weight: bold">{{
+              <span style="color: #4c5bd4; font-weight: bold; cursor: pointer" @click="candidateProfile(candidate.id)">{{
                 candidate.name
               }}</span
               ><br />
@@ -134,6 +134,13 @@ export default {
     };
   },
   methods: {
+    candidateProfile(candidateId){
+      console.log(candidateId);
+      this.$router.push({
+        name: "CandidateProfile",
+        params: { id: candidateId },
+      })
+    },
     submit() {
       SearchCandidateService.getCandidateByTextField(
         this.searchText,
