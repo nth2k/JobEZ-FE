@@ -98,9 +98,9 @@
                 </div>
               </div>
               <div class="row">
-                <div class="d-flex col-12 text-center">
+                <div class="text-center container">
                   <button class="btn btn-primary px-5" @click.prevent="saveDesiredJob">
-                    Luu
+                    Lưu
                   </button>
                 </div>
               </div>
@@ -186,7 +186,19 @@ export default {
         desiredJobName: this.desiredJob,
         desiredId: this.desiredJob_id,
         postingCategoryId: 1,
-      });
+      })
+        .then(() => {
+          this.$store.dispatch("setSnackbar", {
+            text: "Cập nhật thành công",
+          });
+          this.$router.push("/desiredjob");
+        })
+        .catch(() => {
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Có lỗi xảy ra vui lòng thử lại",
+          });
+        });
     },
   },
   created() {

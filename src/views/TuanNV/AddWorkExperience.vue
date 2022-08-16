@@ -62,17 +62,6 @@
                   </div>
                   <div class="d-flex justify-content-between">
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <!-- <v-textarea
-                        label="Ngày bắt đầu"
-                        v-model="startDate"
-                        outlined
-                        filled
-                        no-resize
-                        rows="1"
-                        :rules="startDateRules"
-                        required
-                        background-color="white"
-                      ></v-textarea> -->
                       <v-menu
                         ref="menu"
                         v-model="menu1"
@@ -106,17 +95,6 @@
                       ><br />
                     </div>
                     <div class="col-5" style="padding-left: 0; padding-right: 0">
-                      <!-- <v-textarea
-                        label="Ngày kết thúc"
-                        v-model="endDate"
-                        outlined
-                        filled
-                        no-resize
-                        rows="1"
-                        :rules="endDateRules"
-                        required
-                        background-color="white"
-                      ></v-textarea> -->
                       <v-menu
                         ref="menu"
                         v-model="menu2"
@@ -204,19 +182,9 @@ export default {
       companyName: "",
       companyNameRules: [(v) => !!v || "Company Name must be required"],
       startDate: null,
-      startDateRules: [
-        (v) => !!v || "Start Date must be required",
-        // (v) =>
-        //   /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-        //   "Invalid Start Date(dd/MM/yyyy)",
-      ],
+      startDateRules: [(v) => !!v || "Start Date must be required"],
       endDate: "",
-      endDateRules: [
-        (v) => !!v || "End Date must be required",
-        // (v) =>
-        //   /^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\d{4}$/.test(v) ||
-        //   "Invalid End Date(dd/MM/yyyy)",
-      ],
+      endDateRules: [(v) => !!v || "End Date must be required"],
       description: "",
       descriptionRules: [(v) => !!v || "Description must be required"],
       // date: null,
@@ -224,16 +192,9 @@ export default {
       menu1: false,
       activePicker2: null,
       menu2: false,
-      // dateRules: [(v) => !!v || "date is required"],
     };
   },
   methods: {
-    // saveEndDate(date) {
-    //   this.$refs.menu2.save(date);
-    // },
-    // saveStartDate(date) {
-    //   this.$refs.menu1.save(date);
-    // },
     addWorkExp() {
       if (this.$refs.form.validate()) {
         var inputStartDate = new Date(this.startDate);
@@ -244,20 +205,6 @@ export default {
             text: "Ngày bắt đầu phải nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
           });
         } else {
-          // var [day, month, year] = this.startDate.split("/");
-          // var startTime = [year, month, day].join("-");
-          // [day, month, year] = this.endDate.split("/");
-          // var endTime = [year, month, day].join("-");
-          // WorkExperienceService.isDuplicate({
-          //   companyName: this.companyName,
-          //   position: this.position,
-          //   description: this.description,
-          //   startDate: startTime,
-          //   endDate: endTime,
-          //   userId: this.userId,
-          // })
-          //   .then((rs) => {
-          //     if (!rs.data) {
           WorkExperienceService.addWorkExp({
             companyName: this.companyName,
             position: this.position,
@@ -278,19 +225,6 @@ export default {
                 text: "Có lỗi xảy ra vui lòng thử lại",
               });
             });
-          //   } else {
-          //     this.$store.dispatch("setSnackbar", {
-          //       color: "error",
-          //       text: "Kinh nghiệm làm việc đã tồn tại",
-          //     });
-          //   }
-          // })
-          // .catch(() => {
-          //   this.$store.dispatch("setSnackbar", {
-          //     color: "error",
-          //     text: "Có lỗi xảy ra! Vui lòng thử lại",
-          //   });
-          // });
         }
       }
     },
