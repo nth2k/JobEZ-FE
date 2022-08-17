@@ -68,16 +68,16 @@ export default {
     valid: true,
     email: "",
     emailRules: [
-      (v) => !!v || "E-mail is required",
+      (v) => !!v || "E-mail không được trống",
       (v) =>
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           v
-        ) || "E-mail must be valid",
+        ) || "E-mail phải đúng fomat",
     ],
     password: "",
     passwordRules: [
-      (v) => !!v || "Password is required",
-      (v) => (v && v.length > 5) || "Password must be more than 5 characters",
+      (v) => !!v || "Password không được trống",
+      (v) => (v && v.length > 5) || "Password phải lớn hơn 5 kí tự",
     ],
     show3: false,
   }),
