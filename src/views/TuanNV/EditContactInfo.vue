@@ -138,7 +138,6 @@
                             .substr(0, 10)
                         "
                         min="1950-01-01"
-                        @change="save"
                       ></v-date-picker>
                     </v-menu>
                   </div>
@@ -190,8 +189,8 @@
                     @change="onProvinceSelect"
                     :items="listProvince"
                     label="Chọn tỉnh thành"
-                    item-text="province_name"
-                    item-value="province_id"
+                    item-text="name"
+                    item-value="id"
                     :rules="provinceRules"
                   ></v-select>
                   <div class="label blockDistrict">
@@ -201,8 +200,8 @@
                     v-model="district_id"
                     :items="listDistrict"
                     label="Chọn quận huyện"
-                    item-text="district_name"
-                    item-value="district_id"
+                    item-text="name"
+                    item-value="id"
                     :rules="districtRules"
                   ></v-select>
                 </div>
@@ -227,8 +226,9 @@
 import Header from "../ToanNT16/candidate/candidate_management/Header.vue";
 import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import ContactInfoService from "@/services/ContactInfoService";
-import AddressService from "@/services/AddressService";
+// import AddressService from "@/services/AddressService";
 import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
+import VietNamAddressService from "@/services/VietNamAddressService";
 
 export default {
   name: "EditContactInfo",
@@ -268,11 +268,9 @@ export default {
       married: "",
       marriedRules: [(v) => !!v || "Vui lòng chọn tình trạng hôn nhân"],
       listMarried: ["Độc thân", "Đã kết hôn"],
-      province: "",
       province_id: "",
       provinceRules: [(v) => !!v || "Vui lòng chọn tỉnh thành"],
       listProvince: [],
-      district: "",
       district_id: "",
       districtRules: [(v) => !!v || "Vui lòng chọn quận huyện"],
       listDistrict: [],
@@ -283,12 +281,9 @@ export default {
     };
   },
   methods: {
-    save(date) {
-      this.$refs.menu.save(date);
-    },
     onProvinceSelect() {
-      AddressService.getDistrict(this.province_id).then((rs) => {
-        this.listDistrict = rs.data.results;
+      VietNamAddressService.getAllDistrict(this.province_id).then((rs) => {
+        this.listDistrict = rs.data;
       });
     },
     getData() {
@@ -301,18 +296,12 @@ export default {
         this.gender = rs.data.gender;
         this.married = rs.data.married;
         this.base64 = rs.data.imageBase64;
-        AddressService.getProvince().then((res) => {
-          this.listProvince = res.data.results;
-          const province = this.listProvince.find(
-            (element) => element.province_name == rs.data.province
-          );
-          this.province_id = province.province_id;
-          AddressService.getDistrict(this.province_id).then((response) => {
-            this.listDistrict = response.data.results;
-            const district = this.listDistrict.find(
-              (resp) => resp.district_name == rs.data.district
-            );
-            this.district_id = district.district_id;
+        VietNamAddressService.getAllProvince().then((res) => {
+          this.listProvince = res.data;
+          this.province_id = rs.data.provinceId;
+          VietNamAddressService.getAllDistrict(this.province_id).then((response) => {
+            this.listDistrict = response.data;
+            this.district_id = rs.data.districtId;
           });
         });
       });
@@ -326,12 +315,19 @@ export default {
     },
     saveContactInfo() {
       if (this.$refs.form.validate()) {
-        const district = this.listDistrict.find(
-          (element) => element.district_id == this.district_id
-        );
-        const province = this.listProvince.find(
-          (element) => element.province_id == this.province_id
-        );
+        console.log({
+          userId: this.userId,
+          fullname: this.fullname,
+          email: this.email,
+          phoneNumber: this.phoneNumber,
+          dateOfBirth: this.dateOfBirth,
+          address: this.address,
+          gender: this.gender,
+          married: this.married,
+          imageBase64: this.base64,
+          provinceId: this.province_id,
+          districtId: this.district_id,
+        });
         ContactInfoService.saveContactInfo({
           userId: this.userId,
           fullname: this.fullname,
@@ -344,8 +340,6 @@ export default {
           imageBase64: this.base64,
           provinceId: this.province_id,
           districtId: this.district_id,
-          province: province.province_name,
-          district: district.district_name,
         })
           .then(() => {
             this.$store.dispatch("setSnackbar", {

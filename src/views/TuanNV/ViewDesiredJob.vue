@@ -122,14 +122,16 @@ export default {
       });
     },
     getDesiredJob() {
-      DesiredJobService.getDesiredJobByUserId(this.userId).then((rs) => {
-        this.desiredjob = rs.data;
-        if (rs.data) {
-          this.isNull = true;
-        } else {
-          this.isNull = false;
-        }
-      });
+      DesiredJobService.getDesiredJobByUserId(this.userId)
+        .then((rs) => {
+          this.desiredjob = rs.data;
+        })
+        .catch(() => {
+          this.$store.dispatch("setSnackbar", {
+            color: "error",
+            text: "Bạn chưa có công việc mong muốn",
+          });
+        });
     },
   },
   created() {
