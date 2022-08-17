@@ -118,25 +118,25 @@ export default {
     valid: true,
     companyName: "",
     companyNameRules: [
-      (v) => !!v || "FullName is required",
-      (v) => (v && v.length > 5) || "Password must be more than 5 characters",
+      (v) => !!v || "FullName bắt buộc",
+      (v) => (v && v.length > 5) || "FullName phải hơn 5 kí tự",
     ],
     email: "",
     emailRules: [
-      (v) => !!v || "E-mail is required",
+      (v) => !!v || "E-mail bắt buộc",
       (v) =>
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           v
-        ) || "E-mail must be valid",
+        ) || "E-mail phải đúng format",
     ],
     password: "",
     passwordRules: [
-      (v) => !!v || "Password is required",
-      (v) => (v && v.length > 5) || "Password must be more than 5 characters",
+      (v) => !!v || "Password bắt buộc",
+      (v) => (v && v.length > 5) || "Password phải hơn 5 kí tự",
     ],
     confirmPassword: "",
     confirmPasswordRules: [
-      (v) => !!v || "ConfirmPassword is required",
+      (v) => !!v || "ConfirmPassword bắt buộc",
     ],
   }),
 };

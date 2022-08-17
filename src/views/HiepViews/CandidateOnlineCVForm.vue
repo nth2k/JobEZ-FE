@@ -192,25 +192,25 @@ export default {
       date: null,
       activePicker: null,
       menu: false,
-      dateRules: [(v) => !!v || "date is required"],
+      dateRules: [(v) => !!v || "Ngày sinh bắt buộc"],
       gender: ["Nam", "Nữ"],
-      genderRules: [(v) => !!v || "gender is required"],
+      genderRules: [(v) => !!v || "Giới tính bắt buộc"],
       maritalStatus: ["Độc thân", "Đã có gia đình"],
-      maritalStatusRules: [(v) => !!v || "maritalStatus is required"],
+      maritalStatusRules: [(v) => !!v || "Tình trạng hôn nhân bắt buộc"],
       university: "",
       universityRules: [
-        (v) => !!v || "University is required",
+        (v) => !!v || "Đại học bắt buộc",
         (v) =>
-          (v && v.length > 5) || "University must be more than 5 characters",
+          (v && v.length > 5) || "Đại học phải lớn hơn 5 kí tự",
       ],
       rating: ["Giỏi", "Khá", "Trung Bình", "Chưa ra trường"],
-      ratingRules: [(v) => !!v || "rating is required"],
-      experience: ["1 năm", "2 năm", "3 năm"],
-      experienceRules: [(v) => !!v || "experience is required"],
+      ratingRules: [(v) => !!v || "Xếp loại bắt buộc"],
+      experience: ["Chưa có kinh nghiệm", "0 - 1 năm kinh nghiệm", "Hơn 1 năm kinh nghiệm", "Hơn 2 năm kinh nghiệm", "Hơn 5 năm kinh nghiệm", "Hơn 10 năm kinh nghiệm"],
+      experienceRules: [(v) => !!v || "Kinh nghiệm bắt buộc"],
       salary: ["3-5 triệu", "5-7 triệu", "7-10 triệu", "10-15 triệu", "15-20 triệu"],
-      salaryRules: [(v) => !!v || "salary is required"],
+      salaryRules: [(v) => !!v || "Lương mong muốn bắt buộc"],
       workingForm: ["Toàn thời gian cố định", "Toàn thời gian tạm thời", "Bán thời gian", "Bán thời gian tạm thời", "Hợp đồng", "Việc làm từ xa"],
-      workingFormRules: [(v) => !!v || "workingForm is required"],
+      workingFormRules: [(v) => !!v || "Hình thức làm việc bắt buộc"],
       careerGoals: "",
       personalSkills: "",
 
@@ -253,15 +253,6 @@ export default {
           });
       }
     },
-    // getCombobox() {
-    //   CandidateRegisterService.getCombobox().then((rs) => {
-    //     this.experience = rs.data.yearOfExperience.map((result) => result.name);
-    //     this.workingForm = rs.data.workingForm.map((result) => result.name);
-    //   });
-    // },
-  },
-  created() {
-    // this.getCombobox();
   },
 };
 </script>
