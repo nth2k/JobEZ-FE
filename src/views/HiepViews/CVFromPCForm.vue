@@ -106,17 +106,17 @@ export default {
       date: null,
       activePicker: null,
       menu: false,
-      dateRules: [(v) => !!v || "date is required"],
+      dateRules: [(v) => !!v || "Date bắt buộc"],
       university: "",
       universityRules: [
-        (v) => !!v || "University is required",
+        (v) => !!v || "University bắt buộc",
         (v) =>
-          (v && v.length > 5) || "University must be more than 5 characters",
+          (v && v.length > 5) || "University phải hơn 5 kí tự",
       ],
       rating: ["Giỏi", "Khá", "Trung Bình", "Chưa ra trường"],
-      ratingRules: [(v) => !!v || "rating is required"],
-      experience: ["1 năm", "2 năm", "3 năm"],
-      experienceRules: [(v) => !!v || "experience is required"],
+      ratingRules: [(v) => !!v || "Rating bắt buộc"],
+      experience: ["Chưa có kinh nghiệm", "0 - 1 năm kinh nghiệm", "Hơn 1 năm kinh nghiệm", "Hơn 2 năm kinh nghiệm", "Hơn 5 năm kinh nghiệm", "Hơn 10 năm kinh nghiệm"],
+      experienceRules: [(v) => !!v || "Experience bắt buộc"],
 
       selectedRating: "",
       image: null,

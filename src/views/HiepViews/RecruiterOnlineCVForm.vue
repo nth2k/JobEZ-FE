@@ -13,7 +13,7 @@
             <br />
             <v-file-input v-model="image" label="Logo công ty"></v-file-input
             ><br />
-            <span>Số điện thoại <span style="color: red">*</span></span
+            <span>Số điện thoại người đại diện <span style="color: red">*</span></span
             ><br />
             <v-text-field
               label="Nhập số điện thoại"
@@ -35,9 +35,9 @@
               <option
                 v-for="(item, index) in province"
                 :key="index"
-                :value="item.province_id"
+                :value="item.id"
               >
-                {{ item.province_name }}
+                {{ item.name }}
               </option></select
             ><br />
             <span>Quận huyện <span style="color: red">*</span></span
@@ -51,9 +51,9 @@
               <option
                 v-for="(item, index) in district"
                 :key="index"
-                :value="item.district_id"
+                :value="item.id"
               >
-                {{ item.district_name }}
+                {{ item.name }}
               </option></select
             ><br />
           </div>
@@ -121,27 +121,27 @@ export default {
       base64: null,
       phone: "",
       phoneRules: [
-        (v) => !!v || "Phone is required",
+        (v) => !!v || "Phone bắt buộc",
         (v) =>
-          /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
+          /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone phải đúng format",
       ],
       province: [],
       district: [],
       address: "",
       addressRules: [
-        (v) => !!v || "Address is required",
-        (v) => (v && v.length > 5) || "Address must be more than 5 characters",
+        (v) => !!v || "Address bắt buộc",
+        (v) => (v && v.length > 5) || "Address phải hơn 5 kí tự",
       ],
       taxCode: "",
       taxCodeRules: [
-        (v) => !!v || "TaxCode is required",
-        (v) => /(^[0-9]{10,13}$)\b/.test(v) || "TaxCode must be valid",
+        (v) => !!v || "TaxCode bắt buộc",
+        (v) => /(^[0-9]{10,13}$)\b/.test(v) || "TaxCode phải đúng format",
       ],
       description: "",
       descriptionRules: [
-        (v) => !!v || "Description is required",
+        (v) => !!v || "Description bắt buộc",
         (v) =>
-          (v && v.length > 5) || "Description must be more than 5 characters",
+          (v && v.length > 5) || "Description phải hơn 5 kí tự",
       ],
       selectedProvince: "",
       selectedDistrict: "",
@@ -167,12 +167,12 @@ export default {
     },
     getProvince() {
       AddressService.getProvince().then((rs) => {
-        this.province = rs.data.results;
+        this.province = rs.data;
       });
     },
     onProvinceSelect(event) {
       AddressService.getDistrict(event.target.value).then((rs) => {
-        this.district = rs.data.results;
+        this.district = rs.data;
       });
     },
     onDistrictSelect(event) {

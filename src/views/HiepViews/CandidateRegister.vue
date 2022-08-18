@@ -91,9 +91,9 @@
                     <option
                       v-for="(item, index) in province"
                       :key="index"
-                      :value="item.province_id"
+                      :value="item.id"
                     >
-                      {{ item.province_name }}
+                      {{ item.name }}
                     </option>
                   </select>
                 </v-col>
@@ -107,9 +107,9 @@
                     <option
                       v-for="(item, index) in district"
                       :key="index"
-                      :value="item.district_id"
+                      :value="item.id"
                     >
-                      {{ item.district_name }}
+                      {{ item.name }}
                     </option>
                   </select>
                 </v-col>
@@ -148,7 +148,7 @@ export default {
           email: this.email,
           password: this.password,
           province_id: 1,
-          city_id: 1,
+          city_id: 2,
           phone_number: this.phone,
           // role: {
           //   id: 1,
@@ -174,12 +174,13 @@ export default {
     },
     getProvince() {
       AddressService.getProvince().then((rs) => {
-        this.province = rs.data.results;
+        this.province = rs.data;
+        console.log(rs);
       });
     },
     onProvinceSelect(event) {
       AddressService.getDistrict(event.target.value).then((rs) => {
-        this.district = rs.data.results;
+        this.district = rs.data;
       });
     },
     onDistrictSelect(event) {
@@ -194,34 +195,34 @@ export default {
     valid: true,
     fullName: "",
     fullNameRules: [
-      (v) => !!v || "FullName is required",
-      (v) => (v && v.length > 5) || "Password must be more than 5 characters",
+      (v) => !!v || "Tên đầy đủ bắt buộc",
+      (v) => (v && v.length > 5) || "Tên đầy đủ phải lớn hơn 5 kí tự",
     ],
     email: "",
     emailRules: [
-      (v) => !!v || "E-mail is required",
+      (v) => !!v || "E-mail bắt buộc",
       (v) =>
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           v
-        ) || "E-mail must be valid",
+        ) || "E-mail phải đúng format",
     ],
     password: "",
     passwordRules: [
-      (v) => !!v || "Password is required",
-      (v) => (v && v.length > 5) || "Password must be more than 5 characters",
+      (v) => !!v || "Password bắt buộc",
+      (v) => (v && v.length > 5) || "Password phải hơn 5 kí tự",
     ],
     confirmPassword: "",
-    confirmPasswordRules: [(v) => !!v || "ConfirmPassword is required"],
+    confirmPasswordRules: [(v) => !!v || "ConfirmPassword bắt buộc"],
     phone: "",
     phoneRules: [
       (v) => !!v || "Phone is required",
-      (v) => /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone must be valid",
+      (v) => /(84|0[3|5|7|8|9])+([0-9]{8})\b/.test(v) || "Phone phải đúng định dạng",
     ],
     listProvince: [],
     province: [],
-    provinceRules: [(v) => !!v || "province is required"],
+    provinceRules: [(v) => !!v || "province bắt buộc"],
     district: [],
-    districtRules: [(v) => !!v || "district is required"],
+    districtRules: [(v) => !!v || "district bắt buộc"],
     selectedProvince: "",
     selectedDistrict: "",
   }),
