@@ -147,6 +147,9 @@ export default {
       } else {
         this.getAppliedJob({ candidateEmail, recruiterEmail, postingId });
       }
+      this.$store.dispatch("setSnackbar", {
+        text: "Nộp Hồ Sơ Thành Công",
+      });
     },
     savePosting: function () {
       const token = window.localStorage.getItem("user");
@@ -158,6 +161,9 @@ export default {
       } else {
         this.getSavedJob({ email, postingId });
       }
+      this.$store.dispatch("setSnackbar", {
+        text: "Lưu Công Việc Thành Công",
+      });
     },
   },
 };
