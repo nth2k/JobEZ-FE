@@ -84,7 +84,6 @@
           data-uid=""
           >Lưu công việc</span
         >
-        <span class="bcuv" data-use="0">Phản ánh NTD</span>
       </div>
     </div>
     <div class="tag_vl">
