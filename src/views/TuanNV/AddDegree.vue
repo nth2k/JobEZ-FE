@@ -239,7 +239,7 @@ export default {
     };
   },
   methods: {
-    addCertificate() {
+    addDegree() {
       if (this.$refs.form.validate()) {
         var inputStartDate = new Date(this.startDate);
         var inputEndDate = new Date(this.endDate);
@@ -249,7 +249,7 @@ export default {
             text: "Ngày bắt đầu phải nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
           });
         } else {
-          DegreeService.addCertificate({
+          DegreeService.addDegree({
             certificateName: this.degree,
             teachingUnit: this.teachingUnit,
             startTime: this.startDate,
