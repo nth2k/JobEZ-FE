@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderLogin />
+    <HeaderComponent />
     <SearchHeader />
     <CandidateHeader />
     <CandidateSummary />
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import HeaderLogin from "@/views/ToanNT16/profile/Header_Login.vue";
+import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
 import SearchHeader from "@/views/ToanNT16/profile/SearchHeader.vue";
 import CandidateHeader from "@/views/ToanNT16/candidate/profile/CandidateHeader.vue";
 import CandidateSummary from "@/views/ToanNT16/candidate/profile/candidate_summary/CandidateSummary.vue";
@@ -18,7 +18,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "CandidateProfile",
   components: {
-    HeaderLogin,
+    HeaderComponent,
     SearchHeader,
     CandidateHeader,
     CandidateSummary,

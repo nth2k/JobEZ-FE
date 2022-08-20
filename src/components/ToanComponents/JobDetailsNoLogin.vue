@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderLogin />
+    <HeaderComponent />
     <SearchHeader />
     <CandidateNavigator />
     <BoxTiki />
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import HeaderLogin from "@/views/ToanNT16/profile/Header_Login.vue";
+import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
 import SearchHeader from "@/views/ToanNT16/profile/SearchHeader.vue";
 import CandidateNavigator from "@/views/ToanNT16/profile/CandidateNavigator.vue";
 import BoxTiki from "@/views/ToanNT16/profile/BoxTiki.vue";
@@ -33,7 +33,7 @@ export default {
     await this.getJobById({ userId, postingId });
   },
   components: {
-    HeaderLogin,
+    HeaderComponent,
     SearchHeader,
     CandidateNavigator,
     BoxTiki,
