@@ -277,9 +277,8 @@ export default {
   margin-left: 0.5rem;
   margin-bottom: 20px;
   border-bottom: 1px solid gray;
-  width: 203px;
+  width: 165px;
   color: #2a3563;
-  font-size: 20px;
   font-weight: bold;
 }
 .label {

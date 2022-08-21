@@ -12,8 +12,15 @@
             type="text"
             placeholder="Nhập công việc, vị trí, ..."
           />
-          <select>
-            <option value="">---Chọn tỉnh thành---</option>
+          <select v-model="selectedProvince">
+            <option value="" disabled hidden>Chọn tỉnh thành</option>
+            <option
+              v-for="(item, index) in listProvince"
+              :key="index"
+              :value="item.id"
+            >
+              {{ item.name }}
+            </option>
           </select>
           <button @click="submit">Tìm kiếm</button>
         </div>
@@ -252,7 +259,10 @@
               <img style="width: 70px; height: 70px" :src="job.images" alt="" />
             </div>
             <div class="job-info w-75 h-auto pl-4">
-              <span @click="jobDetail(job.id)" style="color: red; cursor:pointer">{{ job.jobName }}</span
+              <span
+                @click="jobDetail(job.id)"
+                style="color: red; cursor: pointer"
+                >{{ job.jobName }}</span
               ><br />
               <br />
               <img src="@/assets/icn_location.png" alt="" />
@@ -284,7 +294,10 @@
                 />
               </div>
               <div class="job-info w-75 h-auto pl-4">
-                <span @click="jobDetail(job.id)" style="color: red; cursor:pointer">{{ job.jobName }}</span
+                <span
+                  @click="jobDetail(job.id)"
+                  style="color: red; cursor: pointer"
+                  >{{ job.jobName }}</span
                 ><br />
                 <br />
                 <img src="@/assets/icn_location.png" alt="" />
@@ -339,6 +352,7 @@
 <script>
 import LandingPageService from "@/services/LandingPageService.js";
 import HeaderComponent from "@/components/HiepComponents/HeaderComponent.vue";
+import AddressService from "@/services/AddressService.js";
 
 export default {
   name: "LandingPage",
@@ -350,6 +364,8 @@ export default {
       attractiveJob: [],
       urgentRecruitment: [],
       searchText: "",
+      listProvince: [],
+      selectedProvince: "",
     };
   },
   methods: {
@@ -359,11 +375,16 @@ export default {
         this.urgentRecruitment = res.data.urgentRecruitment.slice(90, 100);
       });
     },
-    jobDetail(jobId){
+    getProvince() {
+      AddressService.getProvince().then((res) => {
+        this.listProvince = res.data;
+      });
+    },
+    jobDetail(jobId) {
       this.$router.push({
         name: "JobDetailsNoLogin",
         params: { postingId: jobId },
-      })
+      });
     },
     submit() {
       console.log(this.searchText);
@@ -375,6 +396,7 @@ export default {
   },
   created() {
     this.getJobs();
+    this.getProvince();
   },
 };
 </script>
