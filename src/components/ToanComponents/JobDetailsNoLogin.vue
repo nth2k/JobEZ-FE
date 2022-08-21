@@ -28,9 +28,9 @@ export default {
   },
   async created() {
     const postingId = this.$route.params.postingId;
-    const token = JSON.parse(window.localStorage.getItem("user"));
-    const userId = token.user.id;
-    await this.getJobById({ userId, postingId });
+    // const token = JSON.parse(window.localStorage.getItem("user"));
+    // const userId = token.user.id;
+    await this.getJobById({ postingId });
   },
   components: {
     HeaderComponent,

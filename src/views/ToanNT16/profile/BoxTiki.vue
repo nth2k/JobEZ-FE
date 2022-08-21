@@ -8,7 +8,7 @@
               <div class="img_detail mb-3">
                 <img
                   class="lazyloaded img-fluid"
-                  src="https://timviec365.vn/pictures/2021/05/15/avatar211635.jpg"
+                  :src="getJob.images"
                   :data-src="getJob.companyName"
                   :alt="getJob.companyName"
                 />

@@ -35,7 +35,9 @@
                   <div>{{ appliedjob.positionJobname }}</div>
 
                   <div>
-                    <a @click="showPosting(appliedjob.postingId)">(Xem chi tiết)</a>
+                    <a @click="showPosting(appliedjob.postingId)"
+                      >(Xem chi tiết)</a
+                    >
                   </div>
                 </td>
                 <td class="column">
@@ -46,7 +48,9 @@
                   <div>{{ appliedjob.deadlineForSubmission }}</div>
                   <div>
                     <span>{{
-                      countDaysDeadlineForSubmission(appliedjob.deadlineForSubmission)
+                      countDaysDeadlineForSubmission(
+                        appliedjob.deadlineForSubmission
+                      )
                     }}</span>
                   </div>
                 </td>
@@ -54,7 +58,9 @@
                   <div>{{ formatDate(appliedjob.dateSubmission) }}</div>
 
                   <div>
-                    <span>{{ countDaysDateSubmission(appliedjob.dateSubmission) }}</span>
+                    <!-- <span>{{
+                      countDaysDateSubmission(appliedjob.dateSubmission)
+                    }}</span> -->
                   </div>
                 </td>
                 <td>
@@ -115,7 +121,9 @@ export default {
     },
     countDaysDeadlineForSubmission(date) {
       var datesplit = date.split("/");
-      var date1 = new Date(datesplit[1] + "/" + datesplit[0] + "/" + datesplit[2]);
+      var date1 = new Date(
+        datesplit[1] + "/" + datesplit[0] + "/" + datesplit[2]
+      );
       var date2 = new Date();
       var duration = Math.ceil(
         (date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000)
@@ -136,7 +144,13 @@ export default {
     },
     formatDate(date) {
       var d = new Date(date);
-      return d.toLocaleDateString();
+      return d
+        .toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "numeric",
+          year: "numeric",
+        })
+        .replace(/ /g, "/");
     },
     showPosting(postingId) {
       this.$router.push({

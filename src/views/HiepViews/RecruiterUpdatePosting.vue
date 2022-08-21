@@ -211,10 +211,10 @@ export default {
         (v) => (v && v.length > 5) || "Position phải hơn 5 kí tự",
       ],
       degreeRequired: ["Không yêu cầu", "Cao đẳng trở lên", "Đại học trở lên"],
-      selectedDegreeRequired: "",
+      selectedDegreeRequired: "Không yêu cầu",
       degreeRequiredRules: [(v) => !!v || "DegreeRequired bắt buộc"],
       workingForm: ["Toàn thời gian cố định", "Toàn thời gian tạm thời", "Bán thời gian", "Bán thời gian tạm thời", "Hợp đồng", "Việc làm từ xa"],
-      selectedWorkingForm: "",
+      selectedWorkingForm: "Toàn thời gian tạm thời",
       workingFormRules: [(v) => !!v || "WorkingForm bắt buộc"],
       salary: [
         "3-5 triệu",
@@ -223,7 +223,7 @@ export default {
         "10-15 triệu",
         "15-20 triệu",
       ],
-      selectedSalary: "",
+      selectedSalary: "5-7 triệu",
       salaryRules: [(v) => !!v || "Salary bắt buộc"],
       quantity: "",
       quantityRules: [
@@ -237,7 +237,7 @@ export default {
           (v && v.length > 5) || "Description phải hơn 5 kí tự",
       ],
       gender: ["Không yêu cầu", "Nam", "Nữ"],
-      selectedGender: "",
+      selectedGender: "Không yêu cầu",
       genderRules: [(v) => !!v || "Giới tính bắt buộc"],
       benefits: "",
       benefitsRules: [

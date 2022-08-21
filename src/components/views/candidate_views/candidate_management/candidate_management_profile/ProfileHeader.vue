@@ -74,10 +74,10 @@
         <div class="col-9 row b-0">
           <img
             class="col-3 avatar rounded-circle"
-            src="@/assets/no_img3.png"
-            alt="Hình ảnh ứng viên"
+            :src="avatar"
+            alt="Hình ảnh ứng viên"           
           />
-          <span class="col-7 my-auto p-0">Nguyễn Thế Toàn</span>
+          <span class="col-7 my-auto p-0">{{ userName }}</span>
           <span class="col-2 icon_tt">
             <a
               class="nav-link"
@@ -140,6 +140,8 @@ export default {
           ago: 10,
         },
       ],
+      userName: JSON.parse(window.localStorage.getItem("user")).user.name,
+      avatar: JSON.parse(window.localStorage.getItem("user")).user.images,
     };
   },
 };
