@@ -9,7 +9,7 @@ class DegreeService {
     getDegree(id){
         return axios.get(Base_URL + "/degree/edit/"+ id); 
     }
-    addCertificate(degree) {
+    addDegree(degree) {
         return axios.post(Base_URL + "/degree/add", degree);
     }
     updateDegree(degree) {
