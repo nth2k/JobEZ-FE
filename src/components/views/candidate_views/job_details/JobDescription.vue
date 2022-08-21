@@ -136,6 +136,7 @@ export default {
     ...mapActions(["getAppliedJob", "getSavedJob"]),
     applyPosting: function () {
       const token = window.localStorage.getItem("user");
+      console.log(token);
       const data = JSON.parse(token);
       const candidateEmail = data.user.email;
       const postingId = this.getJob.id;
