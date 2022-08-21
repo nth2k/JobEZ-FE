@@ -25,7 +25,7 @@
                     </div>
                   </div>
                   <div class="col-12">
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Nhập bằng cấp chứng chỉ"
                       v-model="degree"
                       outlined
@@ -35,7 +35,15 @@
                       :rules="degreeRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Nhập bằng cấp chứng chỉ"
+                      outlined
+                      dense
+                      v-model="degree"
+                      :rules="degreeRules"
+                      required
+                    ></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
@@ -45,7 +53,15 @@
                     >
                   </div>
                   <div>
-                    <v-textarea
+                    <v-text-field
+                      label="Nhập tên trường / đơn vị giảng dạy"
+                      outlined
+                      dense
+                      v-model="teachingUnit"
+                      :rules="teachingUnitRules"
+                      required
+                    ></v-text-field>
+                    <!-- <v-textarea
                       label="Nhập tên trường / đơn vị giảng dạy"
                       v-model="teachingUnit"
                       outlined
@@ -55,7 +71,7 @@
                       :rules="teachingUnitRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
                   </div>
                 </div>
                 <div class="col-12">
@@ -138,7 +154,7 @@
                     <span class="label">Chuyền ngành <span class="star">*</span></span>
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Nhập tên chuyên ngành"
                       v-model="majorName"
                       outlined
@@ -148,7 +164,15 @@
                       :rules="majorNameRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Nhập tên chuyên ngành"
+                      outlined
+                      dense
+                      v-model="majorName"
+                      :rules="majorNameRules"
+                      required
+                    ></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
@@ -239,7 +263,7 @@ export default {
     };
   },
   methods: {
-    addCertificate() {
+    addDegree() {
       if (this.$refs.form.validate()) {
         var inputStartDate = new Date(this.startDate);
         var inputEndDate = new Date(this.endDate);
@@ -249,7 +273,7 @@ export default {
             text: "Ngày bắt đầu phải nhỏ hơn ngày kết thúc.\n Xin hãy kiểm tra lại",
           });
         } else {
-          DegreeService.addCertificate({
+          DegreeService.addDegree({
             certificateName: this.degree,
             teachingUnit: this.teachingUnit,
             startTime: this.startDate,

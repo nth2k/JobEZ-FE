@@ -8,10 +8,7 @@
               <img class="img-fluid" src="@/assets/cc1.png" alt="" />
             </div>
             <div class="col-12 text-left h5 mt-3">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Đã ứng tuyển:
-              {{
-                getSuitablePosting.numberOfAppliedJob
-              }}&nbsp;&nbsp;&nbsp;&nbsp;
+              Đã ứng tuyển: {{ getSuitablePosting.numberOfAppliedJob }}
             </div>
           </div>
         </div>
@@ -22,8 +19,7 @@
               <img class="img-fluid" src="@/assets/cc2.png" alt="" />
             </div>
             <div class="col-12 text-left h5 mt-3">
-              &nbsp;&nbsp;Việc làm phù hợp:
-              {{ getSuitablePosting.numberOfSuitableJob }}
+              Việc làm phù hợp: {{ getSuitablePosting.numberOfSuitableJob }}
             </div>
           </div>
         </div>
@@ -32,10 +28,7 @@
             <div class="col-12">
               <img class="img-fluid" src="@/assets/cc3.png" alt="" />
             </div>
-            <div class="col-12 text-left h5 mt-3">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mẫu CV
-              đã tạo
-            </div>
+            <div class="col-12 text-left h5 mt-3">Mẫu CV đã tạo</div>
           </div>
         </div>
         <div class="col-1"></div>
@@ -45,8 +38,7 @@
               <img class="img-fluid" src="@/assets/cc4.png" alt="" />
             </div>
             <div class="col-12 text-left h5 mt-3">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NTD xem hồ sơ:
-              {{ getSuitablePosting.view }}
+              NTD xem hồ sơ: {{ getSuitablePosting.view }}
             </div>
           </div>
         </div>
@@ -66,6 +58,10 @@ export default {
 </script>
 
 <style scoped>
+img{
+  width: 150px;
+}
+
 .information-recruitment-container {
   background: #ffffff;
   box-shadow: 4px 1px 20px rgba(0, 0, 0, 0.1);

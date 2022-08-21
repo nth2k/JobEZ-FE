@@ -13,6 +13,7 @@
               id="fts_id"
               placeholder="Nhập tên công việc, vị trí ..."
               autocomplete="off"
+              v-model="textSearch"
             />
           </div>
 
@@ -35,7 +36,7 @@
             </select>
           </div>
           <div class="mobi-bor order-2 job-search-btn">
-            <input type="submit" class="btn_search" value="Tìm kiếm" />
+            <input @click="searchJob" class="btn_search" value="Tìm kiếm" />
           </div>
         </form>
       </div>
@@ -242,6 +243,7 @@ export default {
       provinces: [],
       districts: [],
       isClickProvince: false,
+      textSearch: "",
     };
   },
   methods: {
@@ -267,6 +269,13 @@ export default {
         })
       );
     },
+    searchJob(){
+      this.$router.push({
+        name: "SearchJob",
+        params: { searchText: this.textSearch },
+      });
+      console.log();
+    }
   },
   async created() {
     await this.fetProvinceData();

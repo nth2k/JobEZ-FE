@@ -26,7 +26,7 @@
           </thead>
           <tbody>
             <tr v-for="(candidate, index) in listCandidate" :key="index">
-              <td>{{ candidate.candidateName }}</td>
+              <td @click="candidateProfile(candidate.candidateId)">{{ candidate.candidateName }}</td>
               <td>{{ candidate.postingPosition }}</td>
               <td>{{ candidate.appliedDate }}</td>
               <td>
@@ -91,6 +91,13 @@ export default {
           });
         });
       console.log(candidateId, postingId , theLoggedUser.user.id, this.status);
+    },
+    candidateProfile(candidateId){
+      console.log(candidateId);
+      this.$router.push({
+        name: "CandidateProfile",
+        params: { candidateId: candidateId },
+      })
     },
   },
   created() {

@@ -14,6 +14,17 @@
           Thông tin đăng tuyển
         </h3>
         <v-form ref="form" lazy-validation>
+          <span>Tên công việc <span style="color: red">*</span></span
+          ><br />
+          <v-text-field
+            class="mt-5"
+            label="Tên công việc"
+            outlined
+            dense
+            v-model="jobName"
+            :rules="jobNameRules"
+            required
+          ></v-text-field>
           <span>Vị trí đăng tuyển <span style="color: red">*</span></span
           ><br />
           <v-text-field
@@ -90,6 +101,14 @@
           >
             Yêu cầu công việc
           </h3>
+          <span>Yêu cầu công việc<span style="color: red">*</span></span
+          ><br />
+          <v-textarea
+            outlined
+            label="Yêu cầu công việc"
+            v-model="jobRequirement"
+            :rules="jobRequirementRules"
+          ></v-textarea>
           <span>Yêu cầu bằng cấp<span style="color: red">*</span></span
           ><br />
           <v-select
@@ -204,6 +223,16 @@ export default {
   components: { Header, RecruiterNavigator },
   data() {
     return {
+      jobName: "",
+      jobNameRules: [
+        (v) => !!v || "JobName bắt buộc",
+        (v) => (v && v.length > 5) || "Position phải hơn 5 kí tự",
+      ],
+      jobRequirement: "",
+      jobRequirementRules: [
+        (v) => !!v || "JobRequirement bắt buộc",
+        (v) => (v && v.length > 5) || "Position phải hơn 5 kí tự",
+      ],
       position: "",
       positionRules: [
         (v) => !!v || "Position bắt buộc",
@@ -247,7 +276,7 @@ export default {
       activePicker: null,
       menu: false,
       dateRules: [(v) => !!v || "Ngày bắt buộc"],
-      files: "",
+      files: "Đơn xin việc. \n- Sơ yếu lý lịch. \n- Các bằng cấp có liên quan",
       filesRules: [
         (v) => !!v || "Files bắt buộc",
         (v) => (v && v.length > 5) || "Files phải hơn 5 kí tự",
@@ -270,6 +299,8 @@ export default {
 
         RecruiterManagementService.addPosting({
           email: theLoggedUser.user.email,
+          jobRequirement: this.jobRequirement,
+          jobName:this.jobName,
           position: this.position,
           workingForm: 1,
           salary: 1,

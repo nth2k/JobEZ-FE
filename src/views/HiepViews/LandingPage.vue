@@ -284,7 +284,7 @@
                 />
               </div>
               <div class="job-info w-75 h-auto pl-4">
-                <span style="color: red">{{ job.jobName }}</span
+                <span @click="jobDetail(job.id)" style="color: red; cursor:pointer">{{ job.jobName }}</span
                 ><br />
                 <br />
                 <img src="@/assets/icn_location.png" alt="" />
@@ -356,7 +356,7 @@ export default {
     async getJobs() {
       await LandingPageService.getHomePage().then((res) => {
         this.attractiveJob = res.data.attractiveJob.slice(1, 10);
-        this.urgentRecruitment = res.data.urgentRecruitment.slice(10, 15);
+        this.urgentRecruitment = res.data.urgentRecruitment.slice(90, 100);
       });
     },
     jobDetail(jobId){

@@ -138,7 +138,7 @@ export default {
       console.log(candidateId);
       this.$router.push({
         name: "CandidateProfile",
-        params: { id: candidateId },
+        params: { candidateId: candidateId },
       })
     },
     submit() {
