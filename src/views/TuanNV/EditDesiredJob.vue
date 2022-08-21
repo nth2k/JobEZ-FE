@@ -100,6 +100,7 @@
                       :multiple="true"
                       :taggable="true"
                       @tag="addTag"
+                      :rules="provinceRules"
                     >
                     </multiselect>
                   </div>
@@ -155,6 +156,8 @@ export default {
       experience_id: "",
       experienceRules: [(v) => !!v || "Vui lòng chọn kinh nghiệm"],
       listexp: [],
+      postingCategory_id: "",
+      provinceRules: [(v) => !!v || "Vui lòng chọn địa điểm"],
     };
   },
   methods: {

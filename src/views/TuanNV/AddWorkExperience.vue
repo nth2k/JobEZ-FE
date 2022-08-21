@@ -5,15 +5,15 @@
     </div>
     <div class="col-sm-10">
       <Header />
-      <div class="mx-2 my-2 body mt-3 py-3 row">
+      <div class="body mx-2 pl-2 py-2 d-flex mt-4 row">
         <div class="leftHoso">
           <Profile_menu />
         </div>
-        <div class="right col-9">
-          <div class="titleheader">Kinh nghiệm làm việc</div>
-          <div class="container ml-2">
+        <div class="blockright col-9">
+          <div class="titleRight">Kinh nghiệm làm việc</div>
+          <div class="container ml-3">
             <v-form ref="form">
-              <div class="row block2">
+              <div class="row">
                 <div class="col-12">
                   <div class="title">
                     <span class="label"
@@ -257,9 +257,6 @@ export default {
 .star {
   color: red;
 }
-.right {
-  border-left: 1px solid gray;
-}
 .titleright {
   float: right;
   font-weight: initial;
@@ -273,13 +270,13 @@ export default {
   margin: 0;
   padding: 0;
 }
-.titleheader {
-  margin-left: 0.5rem;
+.titleRight {
   margin-bottom: 20px;
+  margin-left: 14px;
+  padding-bottom: 5px;
   border-bottom: 1px solid gray;
-  width: 203px;
+  width: 165px;
   color: #2a3563;
-  font-size: 20px;
   font-weight: bold;
 }
 .label {
@@ -287,5 +284,8 @@ export default {
 }
 .btnSave {
   padding: 5px 70px;
+}
+.blockright {
+  border-left: 1px solid gray;
 }
 </style>
