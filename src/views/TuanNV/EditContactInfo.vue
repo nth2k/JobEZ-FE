@@ -23,7 +23,7 @@
                     </div>
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Họ và tên"
                       v-model="fullname"
                       outlined
@@ -33,13 +33,21 @@
                       :rules="fullnameRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Họ và tên"
+                      outlined
+                      dense
+                      v-model="fullname"
+                      :rules="fullnameRules"
+                      required
+                    ></v-text-field>
                   </div>
                   <div>
                     <span class="label">Email <span class="text-danger">*</span></span>
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Email"
                       v-model="email"
                       outlined
@@ -49,7 +57,15 @@
                       :rules="emailRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Email"
+                      outlined
+                      dense
+                      v-model="email"
+                      :rules="emailRules"
+                      required
+                    ></v-text-field>
                   </div>
                   <div>
                     <span class="label"
@@ -57,7 +73,7 @@
                     >
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Nhập số điện thoại"
                       v-model="phoneNumber"
                       outlined
@@ -67,7 +83,15 @@
                       :rules="phoneNumberRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Nhập số điện thoại"
+                      outlined
+                      dense
+                      v-model="phoneNumber"
+                      :rules="phoneNumberRules"
+                      required
+                    ></v-text-field>
                   </div>
                 </div>
                 <div class="col-2"></div>
@@ -145,7 +169,7 @@
                     <span class="label">Địa chỉ<span class="text-danger">*</span></span>
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Nhập địa chỉ hiện tại"
                       v-model="address"
                       outlined
@@ -155,7 +179,15 @@
                       :rules="addressRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Nhập địa chỉ hiện tại"
+                      outlined
+                      dense
+                      v-model="address"
+                      :rules="addressRules"
+                      required
+                    ></v-text-field>
                   </div>
                   <div>
                     <span class="label"

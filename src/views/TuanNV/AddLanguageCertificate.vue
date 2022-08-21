@@ -38,7 +38,7 @@
                     <span class="label">Chứng chỉ <span class="star">*</span></span>
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Chứng chỉ"
                       v-model="certificateName"
                       outlined
@@ -48,10 +48,28 @@
                       :rules="certificateNameRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Chứng chỉ"
+                      outlined
+                      dense
+                      v-model="certificateName"
+                      :rules="certificateNameRules"
+                      required
+                    ></v-text-field>
+                  </div>
+                  <div class="title">
                     <span class="label">Số điểm <span class="star">*</span></span>
                   </div>
-                  <v-textarea
+                  <v-text-field
+                    label="Số điểm"
+                    outlined
+                    dense
+                    v-model="grade"
+                    :rules="inputGradeRules"
+                    required
+                  ></v-text-field>
+                  <!-- <v-textarea
                     label="Số điểm"
                     v-model.number="grade"
                     outlined
@@ -61,7 +79,7 @@
                     :rules="inputGradeRules"
                     required
                     background-color="white"
-                  ></v-textarea>
+                  ></v-textarea> -->
                 </div>
                 <div class="text-center container">
                   <button

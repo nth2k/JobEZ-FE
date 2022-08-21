@@ -25,7 +25,7 @@
                     </div>
                   </div>
                   <div class="col-12">
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Nhập bằng cấp chứng chỉ"
                       v-model="degree"
                       outlined
@@ -35,7 +35,15 @@
                       :rules="degreeRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Nhập bằng cấp chứng chỉ"
+                      outlined
+                      dense
+                      v-model="degree"
+                      :rules="degreeRules"
+                      required
+                    ></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
@@ -45,7 +53,7 @@
                     >
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Nhập tên trường / đơn vị giảng dạy"
                       v-model="teachingUnit"
                       outlined
@@ -55,7 +63,15 @@
                       :rules="teachingUnitRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Nhập tên trường / đơn vị giảng dạy"
+                      outlined
+                      dense
+                      v-model="teachingUnit"
+                      :rules="teachingUnitRules"
+                      required
+                    ></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
@@ -138,7 +154,7 @@
                     <span class="label">Chuyền ngành <span class="star">*</span></span>
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Nhập tên chuyên ngành"
                       v-model="majorName"
                       outlined
@@ -148,7 +164,15 @@
                       :rules="majorNameRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Nhập tên chuyên ngành"
+                      outlined
+                      dense
+                      v-model="majorName"
+                      :rules="majorNameRules"
+                      required
+                    ></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
