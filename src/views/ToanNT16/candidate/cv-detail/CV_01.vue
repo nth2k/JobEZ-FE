@@ -54,6 +54,9 @@ export default {
       const token = JSON.parse(window.localStorage.getItem("user"));
       const email = token.user.email;
       this.updateCv({ email });
+      this.$store.dispatch("setSnackbar", {
+        text: "Cập nhập CV thành công",
+      });
     },
   },
   computed: {

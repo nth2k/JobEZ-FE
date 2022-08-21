@@ -54,34 +54,18 @@
                 @keyup="updateWorkExperience(index)"
                 class="work-experience-content mb-3"
               >
-                <div
-                  ref="companyName"
-                  class="company-name custom-outline py-1"
-                  contenteditable="true"
-                >
+                <div ref="companyName" class="company-name custom-outline py-1">
                   <strong class="text-primary">{{
                     experience.companyName
                   }}</strong>
                 </div>
-                <div
-                  ref="date"
-                  class="skills custom-outline text-info"
-                  contenteditable="true"
-                >
+                <div ref="date" class="skills custom-outline text-info">
                   {{ experience.startDate }} - {{ experience.endDate }}
                 </div>
-                <div
-                  ref="position"
-                  class="position custom-outline"
-                  contenteditable="true"
-                >
+                <div ref="position" class="position custom-outline">
                   Vị trí: {{ experience.position }}
                 </div>
-                <div
-                  ref="description"
-                  class="skills custom-outline"
-                  contenteditable="true"
-                >
+                <div ref="description" class="skills custom-outline">
                   {{ experience.description }}
                 </div>
               </div>

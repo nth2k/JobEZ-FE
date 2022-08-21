@@ -136,6 +136,13 @@ export default {
     ...mapActions(["getAppliedJob", "getSavedJob"]),
     applyPosting: function () {
       const token = window.localStorage.getItem("user");
+      if (!token) {
+        this.$store.dispatch("setSnackbar", {
+          color: "error",
+          text: "Bạn cần đăng nhập trước",
+        });
+        return;
+      }
       const data = JSON.parse(token);
       const candidateEmail = data.user.email;
       const postingId = this.getJob.id;
@@ -152,6 +159,13 @@ export default {
     },
     savePosting: function () {
       const token = window.localStorage.getItem("user");
+      if (!token) {
+        this.$store.dispatch("setSnackbar", {
+          color: "error",
+          text: "Bạn cần đăng nhập trước",
+        });
+        return;
+      }
       const data = JSON.parse(token);
       const email = data.user.email;
       const postingId = this.getJob.id;
