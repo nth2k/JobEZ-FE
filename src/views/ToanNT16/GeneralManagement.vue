@@ -36,7 +36,7 @@ export default {
     LookupInformation,
   },
   async created() {
-    const email =  JSON.parse(window.localStorage.getItem("user")).user.email;
+    const email = JSON.parse(window.localStorage.getItem("user")).user.email;
     this.getSuitablePosting({ email });
   },
   methods: {
