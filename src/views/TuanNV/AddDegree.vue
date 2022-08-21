@@ -93,7 +93,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-text-field
                             v-model="startDate"
-                            label="Ngày sinh"
+                            label="Ngày bắt đầu"
                             prepend-icon="mdi-calendar"
                             readonly
                             v-bind="attrs"
@@ -211,7 +211,7 @@
                   <div class="text-center container">
                     <button
                       class="btn btn-primary btnSave px-5"
-                      @click.prevent="addCertificate"
+                      @click.prevent="addDegree"
                     >
                       Lưu
                     </button>
