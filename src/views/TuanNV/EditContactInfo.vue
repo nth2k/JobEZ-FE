@@ -260,7 +260,7 @@ import Profile_menu from "@/components/ProfileCandidate/profile_menu.vue";
 import ContactInfoService from "@/services/ContactInfoService";
 // import AddressService from "@/services/AddressService";
 import Navigator from "../ToanNT16/candidate/candidate_management/Navigator.vue";
-import VietNamAddressService from "@/services/VietNamAddressService";
+import VietNameAddressService from "@/services/VietNamAddressService";
 
 export default {
   name: "EditContactInfo",
@@ -314,7 +314,7 @@ export default {
   },
   methods: {
     onProvinceSelect() {
-      VietNamAddressService.getAllDistrict(this.province_id).then((rs) => {
+      VietNameAddressService.getAllDistrict(this.province_id).then((rs) => {
         this.listDistrict = rs.data;
       });
     },
@@ -328,10 +328,10 @@ export default {
         this.gender = rs.data.gender;
         this.married = rs.data.married;
         this.base64 = rs.data.imageBase64;
-        VietNamAddressService.getAllProvince().then((res) => {
+        VietNameAddressService.getAllProvince().then((res) => {
           this.listProvince = res.data;
           this.province_id = rs.data.provinceId;
-          VietNamAddressService.getAllDistrict(this.province_id).then((response) => {
+          VietNameAddressService.getAllDistrict(this.province_id).then((response) => {
             this.listDistrict = response.data;
             this.district_id = rs.data.districtId;
           });
