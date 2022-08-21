@@ -16,7 +16,7 @@
               <div class="row">
                 <div class="col-5">
                   <span class="label">Công việc<span class="text-danger">*</span></span>
-                  <v-textarea
+                  <!-- <v-textarea
                     label="Công việc mong muốn"
                     v-model="desiredJob"
                     outlined
@@ -26,7 +26,15 @@
                     :rules="desiredJobRules"
                     required
                     background-color="white"
-                  ></v-textarea>
+                  ></v-textarea> -->
+                  <v-text-field
+                    label="Công việc mong muốn"
+                    outlined
+                    dense
+                    v-model="desiredJob"
+                    :rules="desiredJobRules"
+                    required
+                  ></v-text-field>
                   <span class="label">Hình thức<span class="text-danger">*</span></span>
                   <v-select
                     v-model="workingForm_id"
@@ -185,7 +193,7 @@ export default {
         addresssId: this.place.map((rs) => rs.id),
         desiredJobName: this.desiredJob,
         desiredId: this.desiredJob_id,
-        postingCategoryId: 1,     
+        postingCategoryId: 1,
       })
         .then(() => {
           console.log(this.desiredJob_id);

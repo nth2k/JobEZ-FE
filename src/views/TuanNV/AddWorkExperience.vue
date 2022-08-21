@@ -25,7 +25,7 @@
                     </div>
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Nhập chức danh"
                       v-model="position"
                       outlined
@@ -35,7 +35,15 @@
                       :rules="positionRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Nhập chức danh"
+                      outlined
+                      dense
+                      v-model="position"
+                      :rules="positionRules"
+                      required
+                    ></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
@@ -43,7 +51,7 @@
                     <span class="label">Công ty <span class="star">*</span></span>
                   </div>
                   <div>
-                    <v-textarea
+                    <!-- <v-textarea
                       label="Nhập tên công ty"
                       v-model="companyName"
                       outlined
@@ -53,7 +61,15 @@
                       :rules="companyNameRules"
                       required
                       background-color="white"
-                    ></v-textarea>
+                    ></v-textarea> -->
+                    <v-text-field
+                      label="Nhập tên công ty"
+                      outlined
+                      dense
+                      v-model="companyName"
+                      :rules="companyNameRules"
+                      required
+                    ></v-text-field>
                   </div>
                 </div>
                 <div class="col-12">
@@ -222,7 +238,7 @@ export default {
             .catch(() => {
               this.$store.dispatch("setSnackbar", {
                 color: "error",
-                text: "Có lỗi xảy ra vui lòng thử lại",
+                text: "Kinh nghiệm làm việc này đã tồn tại",
               });
             });
         }
