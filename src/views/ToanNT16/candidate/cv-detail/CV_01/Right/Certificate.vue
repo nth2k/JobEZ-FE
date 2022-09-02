@@ -60,7 +60,7 @@
                     contenteditable="true"
                     class="custom-outline"
                   >
-                    {{ item.name }}
+                    {{ item.certificateName }}
                   </div>
                 </div>
               </div>

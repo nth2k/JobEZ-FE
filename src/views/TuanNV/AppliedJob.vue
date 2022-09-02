@@ -45,14 +45,7 @@
                 </td>
 
                 <td>
-                  <div>{{ appliedjob.deadlineForSubmission }}</div>
-                  <div>
-                    <span>{{
-                      countDaysDeadlineForSubmission(
-                        appliedjob.deadlineForSubmission
-                      )
-                    }}</span>
-                  </div>
+                  <div>{{ appliedjob.deadlineForSubmission }}</div>           
                 </td>
                 <td class="column">
                   <div>{{ formatDate(appliedjob.dateSubmission) }}</div>
@@ -163,6 +156,7 @@ export default {
     const theLoggedUser = JSON.parse(window.localStorage.getItem("user"));
     this.userId = theLoggedUser.user.id;
     this.getAppliedJobs();
+    console.log(this.userId);
   },
 };
 </script>

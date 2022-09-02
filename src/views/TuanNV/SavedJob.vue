@@ -36,9 +36,6 @@
                 </td>
                 <td>
                   <div>{{ savedJob.deadlineForSubmission }}</div>
-                  <div>
-                    <span>{{ countDays(savedJob.deadlineForSubmission) }}</span>
-                  </div>
                 </td>
                 <td class="column">
                   <DeleteSavedJobModal

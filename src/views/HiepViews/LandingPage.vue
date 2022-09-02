@@ -371,8 +371,8 @@ export default {
   methods: {
     async getJobs() {
       await LandingPageService.getHomePage().then((res) => {
-        this.attractiveJob = res.data.attractiveJob.slice(1, 10);
-        this.urgentRecruitment = res.data.urgentRecruitment.slice(90, 100);
+        this.attractiveJob = res.data.attractiveJob.slice(res.data.attractiveJob.length - 9, res.data.attractiveJob.length);
+        this.urgentRecruitment = res.data.urgentRecruitment.slice(109, 119);
       });
     },
     getProvince() {

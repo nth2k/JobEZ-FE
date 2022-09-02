@@ -5,7 +5,7 @@
   >
     <div class="row">
       <div class="col-12 col-sm-2">
-        <img src="@/assets/ic_ava1.png" alt="" />
+        <img style="width: 100%;" :src="getCanidate.images" alt="" />
       </div>
       <div class="col-12 col-sm-10 row">
         <div class="col-12 col-sm-8 row">

@@ -279,7 +279,7 @@ export default {
         })
           .then(() => {
             this.$store.dispatch("setSnackbar", {
-              text: "Thêm công việc thành công",
+              text: "Sửa công việc thành công",
             });
             this.$router.push("/recruiterPostedPosting");
           })

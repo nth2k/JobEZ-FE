@@ -313,7 +313,7 @@ export default {
           deadlineForSubmission: this.date,       
         })
           .then(() => {
-            console.log(this.files),
+            console.log(this.date),
             this.$store.dispatch("setSnackbar", {
               text: "Thêm công việc thành công",
             });
